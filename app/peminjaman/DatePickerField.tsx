@@ -33,7 +33,6 @@ export function DatePickerField({ value, onChange, placeholder, minDate, maxDate
   // Handler to set time to 15:00:00 for due date
   function handleSelect(date: Date | undefined) {
     if (!date) return
-    // Set time to 15:00:00
     const d = new Date(date)
     d.setHours(16, 0, 0, 0)
     onChange(d)
