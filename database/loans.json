@@ -248,11 +248,12 @@
     ],
     "borrowDate": "2025-08-09T19:26:24+07:00",
     "dueDate": "2025-08-11T00:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "id": "1754742395228",
     "createdAt": "2025-08-09T12:26:35.228Z",
-    "updatedAt": "2025-08-09T12:26:35.228Z"
+    "updatedAt": "2025-08-10T02:02:37.323Z",
+    "returnDate": "2025-08-10T02:02:25.671Z"
   },
   {
     "borrowerId": "1754741702711",
@@ -276,5 +277,337 @@
     "createdAt": "2025-08-09T12:29:21.346Z",
     "updatedAt": "2025-08-09T12:42:31.329Z",
     "returnDate": "2025-08-09T12:42:20.786Z"
+  },
+  {
+    "borrowerId": 156,
+    "items": [
+      {
+        "itemId": "1754476487988",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-09T20:10:39+07:00",
+    "dueDate": "2025-08-11T00:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754745052014",
+    "createdAt": "2025-08-09T13:10:52.014Z",
+    "updatedAt": "2025-08-10T00:52:02.360Z",
+    "returnDate": "2025-08-10T00:51:50.723Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-09T20:12:51+07:00",
+    "dueDate": "2025-08-10T20:12:39+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754745182356",
+    "createdAt": "2025-08-09T13:13:02.356Z",
+    "updatedAt": "2025-08-10T00:52:00.465Z",
+    "returnDate": "2025-08-10T00:51:48.823Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-09T20:15:07+07:00",
+    "dueDate": "2025-08-10T20:12:52+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754745320562",
+    "createdAt": "2025-08-09T13:15:20.562Z",
+    "updatedAt": "2025-08-10T00:41:40.684Z",
+    "returnDate": "2025-08-10T00:41:29.042Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-09T20:17:55+07:00",
+    "dueDate": "2025-08-10T20:15:11+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754745490115",
+    "createdAt": "2025-08-09T13:18:10.115Z",
+    "updatedAt": "2025-08-10T00:41:59.240Z",
+    "returnDate": "2025-08-10T00:41:47.563Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-09T20:18:32+07:00",
+    "dueDate": "2025-08-10T20:18:02+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754745525405",
+    "createdAt": "2025-08-09T13:18:45.405Z",
+    "updatedAt": "2025-08-10T00:51:58.363Z",
+    "returnDate": "2025-08-10T00:51:46.720Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T07:42:11+07:00",
+    "dueDate": "2025-08-11T07:41:53+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754786543354",
+    "createdAt": "2025-08-10T00:42:23.354Z",
+    "updatedAt": "2025-08-10T00:51:55.187Z",
+    "returnDate": "2025-08-10T00:51:43.457Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476487988",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T07:42:36+07:00",
+    "dueDate": "2025-08-11T07:42:25+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754786568682",
+    "createdAt": "2025-08-10T00:42:48.682Z",
+    "updatedAt": "2025-08-10T00:42:53.509Z",
+    "returnDate": "2025-08-10T00:42:41.841Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T07:49:17+07:00",
+    "dueDate": "2025-08-12T00:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754786969674",
+    "createdAt": "2025-08-10T00:49:29.674Z",
+    "updatedAt": "2025-08-10T00:51:52.724Z",
+    "returnDate": "2025-08-10T00:51:41.002Z"
+  },
+  {
+    "borrowerId": 156,
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754476487988",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T07:55:09+07:00",
+    "dueDate": "2025-08-11T00:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754787321502",
+    "createdAt": "2025-08-10T00:55:21.502Z",
+    "updatedAt": "2025-08-10T00:56:18.112Z",
+    "returnDate": "2025-08-10T00:56:06.391Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T08:08:03+07:00",
+    "dueDate": "2025-08-10T00:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754788095385",
+    "createdAt": "2025-08-10T01:08:15.385Z",
+    "updatedAt": "2025-08-10T02:02:48.047Z",
+    "returnDate": "2025-08-10T02:02:36.377Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "itemId": "1754476487988",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T08:10:01+07:00",
+    "dueDate": "2025-08-11T00:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1754788213846",
+    "createdAt": "2025-08-10T01:10:13.846Z",
+    "updatedAt": "2025-08-10T01:22:12.111Z",
+    "returnDate": "2025-08-10T01:22:00.246Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:18:44+07:00",
+    "dueDate": "2025-08-11T09:02:55+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754792340140",
+    "createdAt": "2025-08-10T02:19:00.140Z",
+    "updatedAt": "2025-08-10T02:19:00.140Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:31:22+07:00",
+    "dueDate": "2025-08-11T09:31:04+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754793093959",
+    "createdAt": "2025-08-10T02:31:33.959Z",
+    "updatedAt": "2025-08-10T02:31:33.959Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:34:43+07:00",
+    "dueDate": "2025-08-11T09:31:22+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754793298783",
+    "createdAt": "2025-08-10T02:34:58.783Z",
+    "updatedAt": "2025-08-10T02:34:58.783Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:43:59+07:00",
+    "dueDate": "2025-08-11T09:43:24+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754793851391",
+    "createdAt": "2025-08-10T02:44:11.391Z",
+    "updatedAt": "2025-08-10T02:44:11.391Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:44:23+07:00",
+    "dueDate": "2025-08-10T00:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754793874938",
+    "createdAt": "2025-08-10T02:44:34.938Z",
+    "updatedAt": "2025-08-10T02:44:34.938Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:45:56+07:00",
+    "dueDate": "2025-08-10T00:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754793968831",
+    "createdAt": "2025-08-10T02:46:08.831Z",
+    "updatedAt": "2025-08-10T02:46:08.831Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476487988",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T09:47:07+07:00",
+    "dueDate": "2025-08-13T00:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1754794038807",
+    "createdAt": "2025-08-10T02:47:18.807Z",
+    "updatedAt": "2025-08-10T02:47:18.807Z"
   }
 ]

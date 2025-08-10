@@ -382,7 +382,7 @@ export default function PengaturanPage() {
                              ...prev,
                              system: {
                                ...prev.system,
-                               defaultLoanDays: Number.parseInt(e.target.value) || 7,
+                               defaultLoanDays: Number.parseInt(e.target.value) || 0,
                              },
                            }))
                          }

@@ -19,18 +19,18 @@
     "icon": "projector",
     "id": "1754476487988",
     "createdAt": "2025-08-06T10:34:47.988Z",
-    "updatedAt": "2025-08-09T12:26:35.690Z"
+    "updatedAt": "2025-08-10T02:47:19.615Z"
   },
   {
     "name": "Terminal",
     "category": "Elektronik",
-    "stock": 66,
+    "stock": 62,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754476539720",
     "createdAt": "2025-08-06T10:35:39.720Z",
-    "updatedAt": "2025-08-09T12:42:32.970Z"
+    "updatedAt": "2025-08-10T02:46:09.937Z"
   },
   {
     "name": "HDMI 5 Meter",

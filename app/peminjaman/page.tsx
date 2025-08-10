@@ -162,8 +162,6 @@ export default function PeminjamanPage() {
       };
 
       const createdLoan = await api.createLoan(loanData);
-      // disini
-      // Kirim data ke API eksternal
       try {
         // Ambil data peminjam
         const borrower = borrowers.find(b => b.id === selectedBorrower);

@@ -188,8 +188,18 @@ export default function RiwayatPage() {
         );
       });
     }
-    if (statusFilter !== "all") {
-      filtered = filtered.filter((loan) => loan.status === statusFilter);
+    // Status filter logic
+    if (statusFilter === "dipinjam") {
+      filtered = filtered.filter((loan) => loan.status === "dipinjam");
+    } else if (statusFilter === "dikembalikan") {
+      filtered = filtered.filter((loan) => loan.status === "dikembalikan");
+    } else if (statusFilter === "overdue") {
+      filtered = filtered.filter((loan) => loan.status === "dipinjam" && isOverdue(loan.dueDate));
+    } else if (statusFilter === "due-soon") {
+      filtered = filtered.filter((loan) => {
+        const days = getDaysUntilDue(loan.dueDate);
+        return loan.status === "dipinjam" && days <= 3 && days >= 0;
+      });
     }
     // Filter by month and year
     if (monthFilter !== "all" || yearFilter !== "all") {
@@ -361,8 +371,9 @@ export default function RiwayatPage() {
               <SelectContent>
                 <SelectItem value="all">Semua Status</SelectItem>
                 <SelectItem value="dipinjam">Dipinjam</SelectItem>
+                <SelectItem value="due-soon">Jatuh Tempo Segera</SelectItem>
+                <SelectItem value="overdue">Terlambat</SelectItem>
                 <SelectItem value="dikembalikan">Dikembalikan</SelectItem>
-                <SelectItem value="terlambat">Terlambat</SelectItem>
               </SelectContent>
             </Select>
 
