@@ -180,7 +180,9 @@ export default function PeminjamanPage() {
           name: borrower?.name || "",
           start_date: toWIBISOString(nowJakarta),
           due_date: toWIBISOString(dueJakarta),
-          items: itemsBody
+          items: itemsBody,
+          purpose: purpose,
+          notes: notes || undefined
         };
         await fetch("https://symmetrical-space-carnival-vrrw9wqvjv93xrv7-3000.app.github.dev/pinjam", {
           method: "POST",

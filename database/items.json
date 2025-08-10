@@ -24,13 +24,13 @@
   {
     "name": "Terminal",
     "category": "Elektronik",
-    "stock": 62,
+    "stock": 61,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754476539720",
     "createdAt": "2025-08-06T10:35:39.720Z",
-    "updatedAt": "2025-08-10T02:46:09.937Z"
+    "updatedAt": "2025-08-10T04:43:03.656Z"
   },
   {
     "name": "HDMI 5 Meter",

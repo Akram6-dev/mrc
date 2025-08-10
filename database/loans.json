@@ -609,5 +609,23 @@
     "id": "1754794038807",
     "createdAt": "2025-08-10T02:47:18.807Z",
     "updatedAt": "2025-08-10T02:47:18.807Z"
+  },
+  {
+    "borrowerId": "1754741702711",
+    "items": [
+      {
+        "itemId": "1754476539720",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-10T11:42:49+07:00",
+    "dueDate": "2025-08-11T11:41:57+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "notes": "tes",
+    "id": "1754800982889",
+    "createdAt": "2025-08-10T04:43:02.889Z",
+    "updatedAt": "2025-08-10T04:43:02.889Z"
   }
 ]

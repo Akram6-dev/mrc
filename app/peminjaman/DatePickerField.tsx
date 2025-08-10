@@ -35,7 +35,7 @@ export function DatePickerField({ value, onChange, placeholder, minDate, maxDate
     if (!date) return
     // Set time to 15:00:00
     const d = new Date(date)
-    d.setHours(0, 0, 0, 0)
+    d.setHours(16, 0, 0, 0)
     onChange(d)
     setOpen(false)
   }
