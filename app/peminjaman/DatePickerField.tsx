@@ -33,9 +33,8 @@ export function DatePickerField({ value, onChange, placeholder, minDate, maxDate
   // Handler to set time to 15:00:00 for due date
   function handleSelect(date: Date | undefined) {
     if (!date) return
-    // Set time to 15:00:00
     const d = new Date(date)
-    d.setHours(0, 0, 0, 0)
+    d.setHours(16, 0, 0, 0)
     onChange(d)
     setOpen(false)
   }
@@ -60,7 +59,7 @@ export function DatePickerField({ value, onChange, placeholder, minDate, maxDate
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <div ref={calendarRef}>
+        <div ref={calendarRef} className="rounded-md transition-colors bg-white dark:bg-gray-800 border dark:border-gray-700 shadow-lg">
           <Calendar
             mode="single"
             selected={value}
@@ -85,7 +84,7 @@ export function DatePickerField({ value, onChange, placeholder, minDate, maxDate
               "weekend outside": "text-red-500 opacity-40",
               outside: "opacity-50",
             }}
-            className="rounded-md transition-colors bg-white dark:bg-gray-800 border dark:border-gray-700 shadow-lg"
+            className="transition-colors bg-white dark:bg-gray-800"
             onDayKeyDown={(day, modifiers, e: React.KeyboardEvent) => {
               if (e.key === "Enter") {
                 e.preventDefault();
@@ -94,6 +93,16 @@ export function DatePickerField({ value, onChange, placeholder, minDate, maxDate
               }
             }}
           />
+          <Button
+            variant="ghost"
+            className="w-full justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+            onClick={() => {
+              const today = new Date()
+              handleSelect(today)
+            }}
+          >
+            Today
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

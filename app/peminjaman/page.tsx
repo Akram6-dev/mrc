@@ -180,9 +180,11 @@ export default function PeminjamanPage() {
           name: borrower?.name || "",
           start_date: toWIBISOString(nowJakarta),
           due_date: toWIBISOString(dueJakarta),
-          items: itemsBody
+          items: itemsBody,
+          purpose: purpose,
+          notes: notes || undefined
         };
-        await fetch("https://symmetrical-space-carnival-vrrw9wqvjv93xrv7-3000.app.github.dev/pinjam", {
+        await fetch("http://145.10.0.6:3000/pinjam", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -497,9 +499,13 @@ export default function PeminjamanPage() {
                     <span className="text-green-700 dark:text-green-400">
                       <strong>NIP:</strong> {selectedBorrowerData.nip}
                     </span>
-                    <span className="text-green-700 dark:text-green-400 col-span-2">
+                    <span className="text-green-700 dark:text-green-400">
                       <strong>ID Pegawai:</strong>{" "}
                       {selectedBorrowerData.officerId}
+                    </span>
+                    <span className="text-green-700 dark:text-green-400">
+                      <strong>No. HP:</strong>{" "}
+                      {selectedBorrowerData.phone}
                     </span>
                   </div>
                 </div>

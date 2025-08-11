@@ -175,7 +175,7 @@ export default function PengembalianPage() {
 
       await api.returnLoan(returningLoan.id)
       try {
-        await fetch("https://symmetrical-space-carnival-vrrw9wqvjv93xrv7-3000.app.github.dev/kembali", {
+        await fetch("http://145.10.0.6:3000/kembali", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

@@ -13,8 +13,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname()
 
-  // Hide sidebar & mobilenav on login or print page
-  if (pathname === "/login" || pathname === "/print") {
+  if (pathname === "/login" || pathname === "/print" || pathname === "/stats") {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {children}

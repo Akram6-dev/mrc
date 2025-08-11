@@ -11,7 +11,7 @@
   },
   "system": {
     "defaultLoanDays": 1,
-    "maxLoanItems": 10,
+    "maxLoanItems": 20,
     "autoReminders": true,
     "requireApproval": false
   }
