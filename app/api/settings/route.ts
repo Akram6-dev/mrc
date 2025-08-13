@@ -20,6 +20,12 @@ const defaultSettings = {
     maxLoanItems: 5,
     returnConfirmation: true,
     borrowConfirmation: false
+  },
+  messages: {
+    aiReply: true,
+    loanMessage: true,
+    returnMessage: true,
+    reminderMessage: true
   }
 };
 
@@ -38,6 +44,10 @@ function mergeSettings(input: any) {
     system: {
       ...defaultSettings.system,
       ...(input.system || {})
+    },
+    messages: {
+      ...defaultSettings.messages,
+      ...(typeof input.messages === "object" ? input.messages : {})
     }
   };
 }

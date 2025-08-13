@@ -14,5 +14,11 @@
     "maxLoanItems": 20,
     "returnConfirmation": true,
     "borrowConfirmation": false
+  },
+  "messages": {
+    "aiReply": true,
+    "loanMessage": true,
+    "returnMessage": true,
+    "reminderMessage": true
   }
 }

@@ -1,10 +1,12 @@
+
 "use client"
+import { useRef } from "react"
 
 import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { User, Bell, Shield, Database, Download, Upload, Save, Trash2 } from "lucide-react"
+import { User, Bell, Shield, MessageSquare, Database, Download, Upload, Save, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
 import { auth } from "@/lib/auth"
@@ -207,8 +209,36 @@ export default function PengaturanPage() {
     { id: "profile", name: "Profil", icon: User },
     { id: "notifications", name: "Notifikasi", icon: Bell },
     { id: "system", name: "Sistem", icon: Shield },
+    { id: "messages", name: "Pesan", icon: MessageSquare },
     { id: "data", name: "Data", icon: Database },
   ]
+  const handleMessagesSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    try {
+      // Save settings to local API
+      const res = await fetch("/api/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(settings)
+      });
+      if (!res.ok) throw new Error("Gagal menyimpan pengaturan pesan");
+
+      // Post aiReply status to external AI endpoint
+      await fetch("http://145.10.0.6:3000/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ active: !!settings?.messages?.aiReply })
+      });
+
+      setSuccess("Pengaturan pesan berhasil disimpan");
+      const newSettings = await fetch("/api/settings").then((r) => r.json());
+      setSettings(newSettings);
+    } catch (err) {
+      setError("Gagal menyimpan pengaturan pesan");
+    }
+  };
 
   useEffect(() => {
     if (error) {
@@ -221,6 +251,24 @@ export default function PengaturanPage() {
       toast.success(success, { duration: 6000, className: "toast-success" })
     }
   }, [success])
+
+  // Poll notifications every 30s, show Sonner toast for new unread
+  const lastNotifIdRef = useRef<number | null>(null);
+  useEffect(() => {
+    const poll = async () => {
+      try {
+        const res = await fetch("/api/notifications");
+        const data = await res.json();
+        if (data.length > 0 && data[0].id !== lastNotifIdRef.current && !data[0].read) {
+          toast.info(data[0].message, { duration: 8000 });
+          lastNotifIdRef.current = data[0].id;
+        }
+      } catch {}
+    };
+    poll();
+    const interval = setInterval(poll, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   if (!auth.isAuthenticated()) return null
 
@@ -503,6 +551,50 @@ export default function PengaturanPage() {
                 </div>
               )}
 
+              {/* Messages Tab */}
+              {activeTab === "messages" && (
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Pengaturan Pesan Otomatis</h2>
+                  <form onSubmit={handleMessagesSubmit} className="space-y-6">
+                    <div className="space-y-4">
+                      {[
+                        { key: "aiReply", label: "Balasan AI", desc: "Aktifkan balasan otomatis dari AI." },
+                        { key: "loanMessage", label: "Kirim Pesan Peminjaman", desc: "Aktifkan pesan saat peminjaman." },
+                        { key: "returnMessage", label: "Kirim Pesan Pengembalian", desc: "Aktifkan pesan saat pengembalian." },
+                        { key: "reminderMessage", label: "Kirim Pesan Pengingat", desc: "Aktifkan tombol pesan pengingat." },
+                      ].map((item) => (
+                        <div key={item.key} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                          <div>
+                            <h3 className="font-medium text-gray-900 dark:text-white">{item.label}</h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
+                          </div>
+                          <label className="relative inline-flex items-center cursor-pointer">
+                            <Input
+                              type="checkbox"
+                              checked={!!settings?.messages?.[item.key]}
+                              onChange={e => setSettings((prev: any) => ({
+                                ...prev,
+                                messages: {
+                                  ...(prev?.messages || {}),
+                                  [item.key]: e.target.checked,
+                                },
+                              }))}
+                              className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent-300 dark:peer-focus:ring-accent-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-accent-600 transition-all"></div>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex justify-end">
+                      <button type="submit" className="btn-primary">
+                        <Save className="w-4 h-4 mr-2" />
+                        Simpan Pengaturan Pesan
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
               {/* Data Tab */}
               {activeTab === "data" && (
                 <div>

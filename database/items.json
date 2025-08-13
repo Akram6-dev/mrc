@@ -2,13 +2,13 @@
   {
     "name": "Lenovo G40",
     "category": "Elektronik",
-    "stock": 35,
+    "stock": 34,
     "condition": "Baik",
     "description": "",
     "icon": "laptop",
     "id": "1754637098494",
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-08-13T03:05:13.961Z"
+    "updatedAt": "2025-08-13T05:44:02.220Z"
   },
   {
     "name": "Proyektor",
@@ -19,7 +19,7 @@
     "icon": "projector",
     "id": "1754696680732",
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-08-13T03:05:13.985Z"
+    "updatedAt": "2025-08-13T06:59:46.732Z"
   },
   {
     "name": "Kabel HDMI 5 Meter",
@@ -35,34 +35,34 @@
   {
     "name": "Terminal 5 Meter",
     "category": "Elektronik",
-    "stock": 6,
+    "stock": 4,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754873198845",
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-08-13T03:05:14.006Z"
+    "updatedAt": "2025-08-13T06:59:46.915Z"
   },
   {
     "name": "Speaker Bluetooth",
     "category": "Elektronik",
-    "stock": 4,
+    "stock": 5,
     "condition": "Baik",
     "description": "Nemesis Odette X70",
     "icon": "speaker",
     "id": "1754890073251",
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-08-13T00:21:01.798Z"
+    "updatedAt": "2025-08-13T06:20:53.227Z"
   },
   {
     "name": "Lenovo TPM Core i3",
     "category": "Elektronik",
-    "stock": 11,
+    "stock": 1,
     "condition": "Baik",
     "description": "Khusus TPM",
     "icon": "laptop",
     "id": "1754983247404",
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2025-08-12T08:20:16.453Z"
+    "updatedAt": "2025-08-13T06:01:34.509Z"
   }
 ]

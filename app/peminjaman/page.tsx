@@ -168,37 +168,40 @@ export default function PeminjamanPage() {
       };
 
       const createdLoan = await api.createLoan(loanData);
-      try {
-        // Ambil data peminjam
-        const borrower = borrowers.find(b => b.id === selectedBorrower);
-        // Format items
-        const itemsBody = validItems.map(item => {
-          const itemData = items.find(i => i.id === item.itemId);
-          return {
-            item_name: itemData?.name || "Barang",
-            qty: item.quantity
+      // Kirim pesan ke endpoint eksternal jika settings.messages.loanMessage true
+      if (settings?.messages?.loanMessage) {
+        try {
+          // Ambil data peminjam
+          const borrower = borrowers.find(b => b.id === selectedBorrower);
+          // Format items
+          const itemsBody = validItems.map(item => {
+            const itemData = items.find(i => i.id === item.itemId);
+            return {
+              item_name: itemData?.name || "Barang",
+              qty: item.quantity
+            };
+          });
+          // Compose body
+          const postBody = {
+            id: createdLoan?.id || "",
+            number: borrower?.phone || "",
+            name: borrower?.name || "",
+            start_date: toWIBISOString(nowJakarta),
+            due_date: toWIBISOString(dueJakarta),
+            items: itemsBody,
+            purpose: purpose,
+            notes: notes || undefined
           };
-        });
-        // Compose body
-        const postBody = {
-          id: createdLoan?.id || "",
-          number: borrower?.phone || "",
-          name: borrower?.name || "",
-          start_date: toWIBISOString(nowJakarta),
-          due_date: toWIBISOString(dueJakarta),
-          items: itemsBody,
-          purpose: purpose,
-          notes: notes || undefined
-        };
-        await fetch("http://145.10.0.6:3000/pinjam", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(postBody)
-        });
-      } catch (err) {
-        console.error("Gagal POST ke API eksternal:", err);
+          await fetch("http://145.10.0.6:3000/pinjam", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(postBody)
+          });
+        } catch (err) {
+          console.error("Gagal POST ke API eksternal:", err);
+        }
       }
 
       // Update item stocks

@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev -p 80",
+    "dev": "node scripts/notificationScheduler.js & next dev -p 80",
     "lint": "next lint",
-    "start": "next start -p 80"
+    "start": "node scripts/notificationScheduler.js & next start -p 80"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
