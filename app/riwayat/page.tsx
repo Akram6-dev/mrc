@@ -9,6 +9,7 @@ import {
   Clock,
   CheckCircle,
   User,
+  Table2,
   Package,
   Filter,
   Laptop,
@@ -281,6 +282,26 @@ export default function RiwayatPage() {
     );
   }
 
+  const handleExportExcel = async () => {
+    const XLSX = await import("xlsx");
+    const excelData = filteredLoans.map((loan) => ({
+      "Nama Peminjam": loan.borrower?.name || "",
+      "NIP": loan.borrower?.nip || "",
+      "ID Pegawai": loan.borrower?.officerId || "",
+      "No HP": loan.borrower?.phone || "",
+      "Tanggal Pinjam": formatDateTime(loan.borrowDate),
+      "Jatuh Tempo": formatDateTime(loan.dueDate),
+      "Tanggal Kembali": loan.returnDate ? formatDateTime(loan.returnDate) : "",
+      "Status": loan.status,
+      "Keperluan": loan.purpose || "",
+      "Catatan": loan.notes || "",
+      "Barang": loan.itemDetails?.map(item => `${item.name} (${item.quantity}x${item.serialNumber ? `, SN: ${item.serialNumber}` : ""})`).join(", ") || ""
+    }));
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Riwayat Peminjaman");
+    XLSX.writeFile(wb, `mrc-peminjaman-${new Date().toISOString().split("T")[0]}.xlsx`);
+  };
 
   return (
     <div className="min-h-screen">
@@ -295,22 +316,31 @@ export default function RiwayatPage() {
               Lihat seluruh riwayat peminjaman barang
             </p>
           </div>
-          <Button
-            onClick={() => {
-              const params = new URLSearchParams({
-                search,
-                status: statusFilter,
-                month: monthFilter,
-                year: yearFilter,
-                sort: sortOrder,
-              });
-              window.open(`/print?${params.toString()}`, '_blank');
-            }}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg shadow-sm"
-          >
-            <PrinterIcon className="w-5 h-5" />
-            Print
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => {
+                const params = new URLSearchParams({
+                  search,
+                  status: statusFilter,
+                  month: monthFilter,
+                  year: yearFilter,
+                  sort: sortOrder,
+                });
+                window.open(`/print?${params.toString()}`, '_blank');
+              }}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg shadow-sm"
+            >
+              <PrinterIcon className="w-5 h-5" />
+              Print
+            </Button>
+            <Button
+              onClick={handleExportExcel}
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg shadow-sm"
+            >
+              <Table2 className="w-5 h-5" />
+              Export Excel
+            </Button>
+          </div>
         </div>
 
         {/* Filters */}

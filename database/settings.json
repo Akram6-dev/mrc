@@ -12,7 +12,7 @@
   "system": {
     "defaultLoanDays": 1,
     "maxLoanItems": 20,
-    "autoReminders": true,
-    "requireApproval": false
+    "returnConfirmation": true,
+    "borrowConfirmation": false
   }
 }

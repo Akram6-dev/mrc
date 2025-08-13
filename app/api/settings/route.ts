@@ -18,8 +18,8 @@ const defaultSettings = {
   system: {
     defaultLoanDays: 7,
     maxLoanItems: 5,
-    autoReminders: true,
-    requireApproval: false
+    returnConfirmation: true,
+    borrowConfirmation: false
   }
 };
 

@@ -45,6 +45,7 @@ export default function PengembalianPage() {
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc") // terbaru default
   const [returningLoan, setReturningLoan] = useState<LoanWithDetails | null>(null)
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const [settings, setSettings] = useState<any>(null)
   const [detailLoan, setDetailLoan] = useState<LoanWithDetails | null>(null)
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const router = useRouter()
@@ -55,7 +56,17 @@ export default function PengembalianPage() {
       return
     }
 
-    loadLoans()
+    // Fetch settings
+    fetch("/api/settings")
+      .then((res) => res.json())
+      .then((settings) => {
+        setSettings(settings)
+        loadLoans()
+      })
+      .catch(() => {
+        setSettings(null)
+        loadLoans()
+      })
   }, [router])
 
   useEffect(() => {
@@ -206,6 +217,19 @@ export default function PengembalianPage() {
     } catch (err) {
       setError("Gagal memproses pengembalian")
       console.error(err)
+    }
+    setIsConfirmOpen(false)
+    setReturningLoan(null)
+  }
+
+  // Handler aksi kembalikan
+  const handleReturnClick = (loan: LoanWithDetails) => {
+    if (settings?.system?.returnConfirmation) {
+      setReturningLoan(loan)
+      setIsConfirmOpen(true)
+    } else {
+      setReturningLoan(loan)
+      handleReturn()
     }
   }
 
@@ -461,8 +485,7 @@ export default function PengembalianPage() {
                       <Button
                         onClick={e => {
                           e.stopPropagation();
-                          setReturningLoan(loan)
-                          setIsConfirmOpen(true)
+                          handleReturnClick(loan)
                         }}
                         className="btn-success"
                       >

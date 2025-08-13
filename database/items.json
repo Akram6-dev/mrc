@@ -2,56 +2,67 @@
   {
     "name": "Lenovo G40",
     "category": "Elektronik",
-    "stock": 20,
+    "stock": 35,
     "condition": "Baik",
     "description": "",
     "icon": "laptop",
     "id": "1754637098494",
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-08-11T08:33:26.429Z"
+    "updatedAt": "2025-08-13T03:05:13.961Z"
   },
   {
     "name": "Proyektor",
     "category": "Elektronik ",
-    "stock": 12,
+    "stock": 4,
     "condition": "Baik",
     "description": "LCD PROYEKTOR EB-X51\nSet (KABEL HDMI, VGA & POWER)",
     "icon": "projector",
     "id": "1754696680732",
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-08-11T08:33:26.489Z"
+    "updatedAt": "2025-08-13T03:05:13.985Z"
   },
   {
     "name": "Kabel HDMI 5 Meter",
     "category": "Elektronik ",
-    "stock": 14,
+    "stock": 15,
     "condition": "Baik",
     "description": "",
     "icon": "hdmi",
     "id": "1754696777625",
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2025-08-11T07:06:10.728Z"
+    "updatedAt": "2025-08-12T15:51:28.232Z"
   },
   {
     "name": "Terminal 5 Meter",
     "category": "Elektronik",
-    "stock": 11,
+    "stock": 6,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754873198845",
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-08-11T08:33:27.499Z"
+    "updatedAt": "2025-08-13T03:05:14.006Z"
   },
   {
     "name": "Speaker Bluetooth",
     "category": "Elektronik",
-    "stock": 5,
+    "stock": 4,
     "condition": "Baik",
     "description": "Nemesis Odette X70",
     "icon": "speaker",
     "id": "1754890073251",
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-08-11T08:13:44.361Z"
+    "updatedAt": "2025-08-13T00:21:01.798Z"
+  },
+  {
+    "name": "Lenovo TPM Core i3",
+    "category": "Elektronik",
+    "stock": 11,
+    "condition": "Baik",
+    "description": "Khusus TPM",
+    "icon": "laptop",
+    "id": "1754983247404",
+    "createdAt": "2025-08-12T07:20:47.404Z",
+    "updatedAt": "2025-08-12T08:20:16.453Z"
   }
 ]

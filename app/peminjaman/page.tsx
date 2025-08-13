@@ -4,6 +4,7 @@ import type React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Search, Package, User, X } from "lucide-react";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import Loading from "@/components/ui/loading";
 import { toast } from "sonner";
 import { Calendar } from "@/components/ui/calendar";
@@ -86,7 +87,7 @@ export default function PeminjamanPage() {
       .then((res) => res.json())
       .then((settings) => {
         setSettings(settings);
-        const days = settings?.system?.defaultLoanDays || 7;
+        const days = settings?.system?.defaultLoanDays || 0;
         const defaultDueDate = new Date();
         defaultDueDate.setDate(defaultDueDate.getDate() + days);
         setDueDate(defaultDueDate);
@@ -95,12 +96,17 @@ export default function PeminjamanPage() {
       .catch(() => {
         setSettings(null);
         const defaultDueDate = new Date();
-        defaultDueDate.setDate(defaultDueDate.getDate() + 7);
+        defaultDueDate.setDate(defaultDueDate.getDate() + 0);
         setDueDate(defaultDueDate);
         loadData();
       });
   }, [router]);
-  const handleSubmit = async (e: React.FormEvent) => {
+  // State untuk alert dialog konfirmasi
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [pendingSubmitEvent, setPendingSubmitEvent] = useState<React.FormEvent | null>(null);
+
+  // Fungsi submit utama
+  const doSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
@@ -134,10 +140,10 @@ export default function PeminjamanPage() {
       );
       const dueJakarta = dueDate
         ? new Date(
-            new Date(dueDate).toLocaleString("en-US", {
-              timeZone: "Asia/Jakarta",
-            })
-          )
+          new Date(dueDate).toLocaleString("en-US", {
+            timeZone: "Asia/Jakarta",
+          })
+        )
         : nowJakarta;
 
       function toWIBISOString(date: Date) {
@@ -230,6 +236,16 @@ export default function PeminjamanPage() {
     }
   };
 
+  // Handler submit form
+  const handleSubmit = (e: React.FormEvent) => {
+    if (settings?.system?.borrowConfirmation) {
+      setPendingSubmitEvent(e);
+      setShowConfirmDialog(true);
+    } else {
+      doSubmit(e);
+    }
+  };
+
   const addLoanItem = () => {
     setLoanItems([...loanItems, { itemId: "", quantity: 1, serialNumber: "" }]);
   };
@@ -254,23 +270,23 @@ export default function PeminjamanPage() {
     borrowerSearch.trim() === ""
       ? borrowers
       : borrowers.filter((borrower) => {
-          const q = borrowerSearch.trim().toLowerCase();
-          const keywords = q.split(/\s+/).filter(Boolean);
-          // Gabungkan semua field jadi satu string, pastikan string
-          const name =
-            typeof borrower.name === "string"
-              ? borrower.name.toLowerCase()
-              : "";
-          const nip =
-            typeof borrower.nip === "string" ? borrower.nip.toLowerCase() : "";
-          const officerId =
-            typeof borrower.officerId === "string"
-              ? borrower.officerId.toLowerCase()
-              : "";
-          const combined = `${name} ${nip} ${officerId}`;
-          // Semua kata kunci harus ada di string gabungan
-          return keywords.every((word) => combined.includes(word));
-        });
+        const q = borrowerSearch.trim().toLowerCase();
+        const keywords = q.split(/\s+/).filter(Boolean);
+        // Gabungkan semua field jadi satu string, pastikan string
+        const name =
+          typeof borrower.name === "string"
+            ? borrower.name.toLowerCase()
+            : "";
+        const nip =
+          typeof borrower.nip === "string" ? borrower.nip.toLowerCase() : "";
+        const officerId =
+          typeof borrower.officerId === "string"
+            ? borrower.officerId.toLowerCase()
+            : "";
+        const combined = `${name} ${nip} ${officerId}`;
+        // Semua kata kunci harus ada di string gabungan
+        return keywords.every((word) => combined.includes(word));
+      });
 
   // For keyboard navigation
   const [activeBorrowerIdx, setActiveBorrowerIdx] = useState(0);
@@ -372,23 +388,23 @@ export default function PeminjamanPage() {
                           q === ""
                             ? borrowers
                             : borrowers.filter((b) => {
-                                const name =
-                                  typeof b.name === "string"
-                                    ? b.name.toLowerCase()
-                                    : "";
-                                const nip =
-                                  typeof b.nip === "string"
-                                    ? b.nip.toLowerCase()
-                                    : "";
-                                const officerId =
-                                  typeof b.officerId === "string"
-                                    ? b.officerId.toLowerCase()
-                                    : "";
-                                const combined = `${name} ${nip} ${officerId}`;
-                                return keywords.every((word) =>
-                                  combined.includes(word)
-                                );
-                              });
+                              const name =
+                                typeof b.name === "string"
+                                  ? b.name.toLowerCase()
+                                  : "";
+                              const nip =
+                                typeof b.nip === "string"
+                                  ? b.nip.toLowerCase()
+                                  : "";
+                              const officerId =
+                                typeof b.officerId === "string"
+                                  ? b.officerId.toLowerCase()
+                                  : "";
+                              const combined = `${name} ${nip} ${officerId}`;
+                              return keywords.every((word) =>
+                                combined.includes(word)
+                              );
+                            });
                         if (filtered.length === 0) return;
                         if (e.key === "ArrowDown") {
                           e.preventDefault();
@@ -419,23 +435,23 @@ export default function PeminjamanPage() {
                           q === ""
                             ? borrowers
                             : borrowers.filter((b) => {
-                                const name =
-                                  typeof b.name === "string"
-                                    ? b.name.toLowerCase()
-                                    : "";
-                                const nip =
-                                  typeof b.nip === "string"
-                                    ? b.nip.toLowerCase()
-                                    : "";
-                                const officerId =
-                                  typeof b.officerId === "string"
-                                    ? b.officerId.toLowerCase()
-                                    : "";
-                                const combined = `${name} ${nip} ${officerId}`;
-                                return keywords.every((word) =>
-                                  combined.includes(word)
-                                );
-                              });
+                              const name =
+                                typeof b.name === "string"
+                                  ? b.name.toLowerCase()
+                                  : "";
+                              const nip =
+                                typeof b.nip === "string"
+                                  ? b.nip.toLowerCase()
+                                  : "";
+                              const officerId =
+                                typeof b.officerId === "string"
+                                  ? b.officerId.toLowerCase()
+                                  : "";
+                              const combined = `${name} ${nip} ${officerId}`;
+                              return keywords.every((word) =>
+                                combined.includes(word)
+                              );
+                            });
                         if (filtered.length === 0) {
                           return (
                             <CommandEmpty>
@@ -475,10 +491,10 @@ export default function PeminjamanPage() {
                                     {borrower?.nip && borrower?.officerId
                                       ? `${borrower.nip} - ${borrower.officerId}`
                                       : borrower?.nip
-                                      ? borrower.nip
-                                      : borrower?.officerId
-                                      ? borrower.officerId
-                                      : null}
+                                        ? borrower.nip
+                                        : borrower?.officerId
+                                          ? borrower.officerId
+                                          : null}
                                   </span>
                                 </div>
                               </CommandItem>
@@ -679,27 +695,89 @@ export default function PeminjamanPage() {
 
             {/* Submit Button */}
             <div className="flex justify-end">
-              <Button
-                type="submit"
-                disabled={
-                  isSubmitting ||
-                  !selectedBorrower ||
-                  loanItems.every((item) => !item.itemId)
-                }
-                className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Memproses...
-                  </>
-                ) : (
-                  <>
-                    <Plus className="w-4 h-4 mr-2" />
-                    Catat Peminjaman
-                  </>
-                )}
-              </Button>
+              {/* AlertDialog konfirmasi jika borrowConfirmation true */}
+              {settings?.system?.borrowConfirmation ? (
+                <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      type="button"
+                      disabled={
+                        isSubmitting ||
+                        !selectedBorrower ||
+                        loanItems.every((item) => !item.itemId)
+                      }
+                      className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
+                      onClick={(e) => {
+                        setPendingSubmitEvent(e);
+                        setShowConfirmDialog(true);
+                      }}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                          Memproses...
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="w-4 h-4 mr-2" />
+                          Catat Peminjaman
+                        </>
+                      )}
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Konfirmasi Peminjaman</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Apakah Anda yakin ingin mencatat peminjaman ini?
+                        Data akan disimpan dan peminjam akan dikirim pesan notifikasi.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel
+                        onClick={() => setShowConfirmDialog(false)}
+                        className="rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors">
+                        Batal
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          setShowConfirmDialog(false);
+                          if (pendingSubmitEvent) {
+                            doSubmit(pendingSubmitEvent);
+                            setPendingSubmitEvent(null);
+                          }
+                        }}
+                        autoFocus
+                        className="rounded-lg font-medium bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-400 transition-colors shadow-sm"
+                      >
+                        Ya, Catat
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={
+                    isSubmitting ||
+                    !selectedBorrower ||
+                    loanItems.every((item) => !item.itemId)
+                  }
+                  className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Memproses...
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Catat Peminjaman
+                    </>
+                  )}
+                </Button>
+              )}
             </div>
           </form>
         </div>

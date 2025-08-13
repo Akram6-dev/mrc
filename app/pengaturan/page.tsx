@@ -152,7 +152,7 @@ export default function PengaturanPage() {
       const url = URL.createObjectURL(blob)
       const a = document.createElement("a")
       a.href = url
-      a.download = `backup-${new Date().toISOString().split("T")[0]}.json`
+      a.download = `mrc-backup-${new Date().toISOString().split("T")[0]}.json`
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
@@ -161,6 +161,45 @@ export default function PengaturanPage() {
       setSuccess("Data berhasil diekspor")
     } catch (err) {
       setError("Gagal mengekspor data")
+    }
+  }
+
+  // Handle import file
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
+    setSuccess("");
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      if (!data.items || !data.borrowers || !data.loans) {
+        setError("Format file tidak valid. Pastikan file backup dari aplikasi ini.");
+        return;
+      }
+      // Overwrite each database using new API endpoints
+      await Promise.all([
+        fetch("/api/import/items", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data.items),
+        }),
+        fetch("/api/import/borrowers", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data.borrowers),
+        }),
+        fetch("/api/import/loans", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data.loans),
+        }),
+      ]);
+      setSuccess("Data berhasil diimpor dan database ditimpa.");
+      // Optionally reload settings or data
+      // window.location.reload();
+    } catch (err) {
+      setError("Gagal mengimpor data. Format file tidak valid atau terjadi kesalahan.");
     }
   }
 
@@ -325,7 +364,7 @@ export default function PengaturanPage() {
                        ]).map((item) => (
                          <div
                            key={item.key}
-                           className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl"
+                           className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl"
                          >
                            <div>
                              <h3 className="font-medium text-gray-900 dark:text-white">{item.label}</h3>
@@ -346,7 +385,7 @@ export default function PengaturanPage() {
                                }
                                className="sr-only peer"
                              />
-                             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent-300 dark:peer-focus:ring-accent-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-accent-600"></div>
+                             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent-300 dark:peer-focus:ring-accent-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-accent-600 transition-all"></div>
                            </label>
                          </div>
                        ))}
@@ -374,7 +413,7 @@ export default function PengaturanPage() {
                         </label>
                        <Input
                          type="number"
-                         min="1"
+                         min="0"
                          max="30"
                          value={settings?.system?.defaultLoanDays ?? ""}
                          onChange={(e) =>
@@ -396,14 +435,14 @@ export default function PengaturanPage() {
                        <Input
                          type="number"
                          min="1"
-                         max="20"
+                         max="50"
                          value={settings?.system?.maxLoanItems ?? ""}
                          onChange={(e) =>
                            setSettings((prev: any) => ({
                              ...prev,
                              system: {
                                ...prev.system,
-                               maxLoanItems: Number.parseInt(e.target.value) || 5,
+                               maxLoanItems: Number.parseInt(e.target.value) || 0,
                              },
                            }))
                          }
@@ -415,19 +454,19 @@ export default function PengaturanPage() {
                     <div className="space-y-4">
                        {[
                          {
-                           key: "autoReminders",
-                           label: "Pengingat Otomatis",
-                           desc: "Kirim pengingat otomatis sebelum jatuh tempo",
+                           key: "borrowConfirmation",
+                           label: "Konfirmasi Peminjaman",
+                           desc: "Peminjaman memerlukan konfirmasi terlebih dahulu",
                          },
                          {
-                           key: "requireApproval",
-                           label: "Konfirmasi Diperlukan",
-                           desc: "Peminjaman memerlukan konfirmasi terlebih dahulu",
+                           key: "returnConfirmation",
+                           label: "Konfirmasi Pengembalian",
+                           desc: "Pengembalian memerlukan konfirmasi terlebih dahulu",
                          },
                        ].map((item) => (
                          <div
                            key={item.key}
-                           className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl"
+                           className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl"
                          >
                            <div>
                              <h3 className="font-medium text-gray-900 dark:text-white">{item.label}</h3>
@@ -448,7 +487,7 @@ export default function PengaturanPage() {
                                }
                                className="sr-only peer"
                              />
-                             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent-300 dark:peer-focus:ring-accent-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-accent-600"></div>
+                             <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent-300 dark:peer-focus:ring-accent-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-accent-600 transition-all"></div>
                            </label>
                          </div>
                        ))}
@@ -485,7 +524,7 @@ export default function PengaturanPage() {
                       <p className="text-sm text-yellow-700 dark:text-yellow-400 mb-4">
                         Impor data dari file backup. Pastikan format file sesuai dengan ekspor aplikasi.
                       </p>
-                      <Input type="file" accept=".json" className="hidden" id="import-file" />
+                      <Input type="file" accept=".json" className="hidden" id="import-file" onChange={handleImportFile} />
                       <label htmlFor="import-file" className="flex w-max items-center px-5 py-2 rounded-lg font-medium bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-2 focus:ring-yellow-400 transition-colors shadow-sm cursor-pointer">
                         <Upload className="w-4 h-4 mr-2" />
                         Pilih File
