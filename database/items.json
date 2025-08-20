@@ -2,24 +2,24 @@
   {
     "name": "Lenovo G40",
     "category": "Elektronik",
-    "stock": 34,
+    "stock": 25,
     "condition": "Baik",
     "description": "",
     "icon": "laptop",
     "id": "1754637098494",
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-08-13T05:44:02.220Z"
+    "updatedAt": "2025-08-20T06:09:53.217Z"
   },
   {
     "name": "Proyektor",
     "category": "Elektronik ",
-    "stock": 4,
+    "stock": 7,
     "condition": "Baik",
     "description": "LCD PROYEKTOR EB-X51\nSet (KABEL HDMI, VGA & POWER)",
     "icon": "projector",
     "id": "1754696680732",
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-08-13T06:59:46.732Z"
+    "updatedAt": "2025-08-20T07:14:19.913Z"
   },
   {
     "name": "Kabel HDMI 5 Meter",
@@ -35,13 +35,13 @@
   {
     "name": "Terminal 5 Meter",
     "category": "Elektronik",
-    "stock": 4,
+    "stock": 7,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754873198845",
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-08-13T06:59:46.915Z"
+    "updatedAt": "2025-08-20T07:14:19.996Z"
   },
   {
     "name": "Speaker Bluetooth",
@@ -57,12 +57,23 @@
   {
     "name": "Lenovo TPM Core i3",
     "category": "Elektronik",
-    "stock": 1,
+    "stock": 6,
     "condition": "Baik",
     "description": "Khusus TPM",
     "icon": "laptop",
     "id": "1754983247404",
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2025-08-13T06:01:34.509Z"
+    "updatedAt": "2025-08-20T01:33:14.348Z"
+  },
+  {
+    "name": "Mouse",
+    "category": "Elektronik",
+    "stock": 5,
+    "condition": "Baik",
+    "description": "",
+    "icon": "mouse",
+    "id": "1755655423398",
+    "createdAt": "2025-08-20T02:03:43.398Z",
+    "updatedAt": "2025-08-20T02:04:40.969Z"
   }
 ]

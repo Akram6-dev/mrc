@@ -24,7 +24,7 @@ const ICON_OPTIONS = [
 import { Package, Users, FileText, AlertTriangle, Clock, CheckCircle } from "lucide-react"
 import Loading from "@/components/ui/loading"
 import Alert from "@/components/ui/alert"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { auth } from "@/lib/auth"
 import api from "@/lib/api"
@@ -42,6 +42,8 @@ import {
   LineChart,
   Line,
   ResponsiveContainer,
+  AreaChart,
+  Area
 } from "recharts"
 
 export default function DashboardPage() {
@@ -120,8 +122,8 @@ export default function DashboardPage() {
 
       // Sort by createdAt descending (newest first)
       const sortedLoans = [...mapped].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-  setRecentLoans(sortedLoans.slice(0, 5))
-  setAllLoans(sortedLoans)
+      setRecentLoans(sortedLoans.slice(0, 5))
+      setAllLoans(sortedLoans)
     } catch (err) {
       setError("Gagal memuat data dashboard")
       console.error(err)
@@ -231,7 +233,7 @@ export default function DashboardPage() {
         )}
       </Card>
 
-  {/* Stats Cards - 2 columns on mobile, 4 on desktop */}
+      {/* Stats Cards - 2 columns on mobile, 4 on desktop */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map((stat, idx) => {
           const Icon = stat.icon
@@ -284,11 +286,10 @@ export default function DashboardPage() {
                 {recentLoans.map((loan) => (
                   <TableRow
                     key={loan.id}
-                    className={`hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors ${
-                      isOverdue(loan.dueDate) && loan.status === "dipinjam"
+                    className={`hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors ${isOverdue(loan.dueDate) && loan.status === "dipinjam"
                       ? "bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-800/20"
                       : ""
-                    } cursor-pointer`}
+                      } cursor-pointer`}
                   >
                     <TableCell className="px-3 py-3">
                       <div className="flex items-center space-x-2">
@@ -361,24 +362,57 @@ export default function DashboardPage() {
         <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl transition-all duration-200" style={{ fontFamily: 'inherit' }}>
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Distribusi Jam Peminjaman per Hari</CardTitle>
-            <CardDescription className="text-xs">Jumlah peminjaman pada setiap jam, dipisah per hari (1 peminjaman dihitung 1)</CardDescription>
+            <CardDescription className="text-xs">Jumlah peminjaman pada setiap jam, dipisah per hari</CardDescription>
           </CardHeader>
           <CardContent className="pt-0">
             <div className="w-full h-72">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={loansByHourWeekday} margin={{ top: 8, right: 16, left: 0, bottom: 8 }} barCategoryGap={2}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis dataKey="hour" tickFormatter={(h) => `${h}:00`} tick={{ fontFamily: 'inherit', fontSize: 12, fill: 'var(--tw-text-gray-500)' }} />
-                  <YAxis allowDecimals={false} tick={{ fontFamily: 'inherit', fontSize: 12, fill: 'var(--tw-text-gray-500)' }} />
-                  <Tooltip
-                    contentStyle={{ background: 'var(--tw-bg-white, #fff)', color: 'var(--tw-text-gray-900, #111)', borderRadius: 12, border: '1px solid #e5e7eb', fontFamily: 'inherit', fontSize: 13, boxShadow: '0 2px 8px #0001', padding: 10 }}
-                    itemStyle={{ fontFamily: 'inherit', fontSize: 13, color: 'var(--tw-text-gray-900, #111)' }}
-                    labelStyle={{ fontWeight: 600, fontFamily: 'inherit', fontSize: 13, color: 'var(--tw-text-gray-900, #111)' }}
-                    wrapperStyle={{ zIndex: 50 }}
+                <BarChart data={loansByHourWeekday} margin={{ top: 8, right: 16, left: 0, bottom: 0 }} barCategoryGap={2}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
+                  <XAxis
+                    dataKey="hour"
+                    tickFormatter={(h) => `${h}:00`}
+                    className="text-gray-500 dark:text-gray-400"
+                    tick={{ fontFamily: 'inherit', fontSize: 12, fill: 'currentColor' }}
                   />
-                  <Legend wrapperStyle={{ fontFamily: 'inherit', fontSize: 13, paddingBottom: 4 }} iconType="circle" />
+                  <YAxis
+                    allowDecimals={false}
+                    className="text-gray-500 dark:text-gray-400"
+                    tick={{ fontFamily: 'inherit', fontSize: 12, fill: 'currentColor' }}
+                  />
+                  <Tooltip
+                    wrapperClassName="z-50"
+                    contentStyle={{ borderRadius: 12, border: '1px solid', fontFamily: 'inherit', fontSize: 13, boxShadow: '0 2px 8px #0001', padding: 10 }}
+                    content={({ active, payload, label }) => {
+                      if (!active || !payload || !payload.length) return null;
+                      return (
+                        <div className="rounded-lg bg-white dark:bg-gray-900/90 border border-gray-200 dark:border-gray-800 px-3 py-2 text-xs shadow-lg">
+                          <div className="font-semibold text-blue-600 dark:text-blue-400">{label}:00</div>
+                          {payload.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2 mt-1">
+                              <span className="w-2 h-2 rounded-full" style={{ background: item.color }} />
+                              <span>{item.name}: <span className="font-bold">{item.value}</span></span>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    }}
+                  />
+                  <Legend wrapperStyle={{ fontFamily: 'inherit', fontSize: 13, paddingBottom: 0 }} iconType="circle" />
                   {weekdayNames.map((wd, i) => (
-                    <Bar key={wd} dataKey={wd} stackId="a" fill={`hsl(${i * 50},70%,60%)`} radius={[6, 6, 0, 0]} />
+                    <Bar
+                      key={wd}
+                      dataKey={wd}
+                      stackId="a"
+                      fill={[
+                        "#2563eb", // Senin - blue
+                        "#22c55e", // Selasa - green
+                        "#eab308", // Rabu - yellow
+                        "#f97316", // Kamis - orange
+                        "#ef4444", // Jumat - red
+                      ][i] || "#64748b"}
+                      radius={i === weekdayNames.length - 1 ? [6, 6, 0, 0] : [0, 0, 0, 0]}
+                    />
                   ))}
                 </BarChart>
               </ResponsiveContainer>
@@ -391,25 +425,105 @@ export default function DashboardPage() {
             <CardTitle className="text-base font-semibold">Jumlah Peminjaman per Tanggal</CardTitle>
             <CardDescription className="text-xs">Setiap peminjaman dihitung 1</CardDescription>
           </CardHeader>
-            <CardContent className="pt-0">
+          <CardContent className="pt-0">
             <div className="w-full h-72">
               <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={loansByDate} margin={{ top: 8, right: 16, left: 0, bottom: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="date" tickFormatter={(d) => d.slice(5)} minTickGap={8} tick={{ fontFamily: 'inherit', fontSize: 12, fill: 'var(--tw-text-gray-500)' }} />
-                <YAxis allowDecimals={false} tick={{ fontFamily: 'inherit', fontSize: 12, fill: 'var(--tw-text-gray-500)' }} />
-                <Tooltip
-                contentStyle={{ background: 'var(--tw-bg-white, #fff)', color: 'var(--tw-text-gray-900, #111)', borderRadius: 12, border: '1px solid #e5e7eb', fontFamily: 'inherit', fontSize: 13, boxShadow: '0 2px 8px #0001', padding: 10 }}
-                itemStyle={{ fontFamily: 'inherit', fontSize: 13, color: 'var(--tw-text-gray-900, #111)' }}
-                labelStyle={{ fontWeight: 600, fontFamily: 'inherit', fontSize: 13, color: 'var(--tw-text-gray-900, #111)' }}
-                wrapperStyle={{ zIndex: 50 }}
-                />
-                <Legend wrapperStyle={{ fontFamily: 'inherit', fontSize: 13, paddingBottom: 4 }} iconType="circle" />
-                <Line type="monotone" dataKey="Peminjaman" stroke="#2563eb" strokeWidth={2} dot={{ r: 2 }} activeDot={{ r: 4, style: { transition: 'all 0.2s' } }} />
-              </LineChart>
+                <AreaChart data={loansByDate} margin={{ left: 12, right: 12 }}>
+                  <defs>
+                    <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#2563eb" stopOpacity={0.4} />
+                      <stop offset="100%" stopColor="#2563eb" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
+                  <XAxis
+                    dataKey="date"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    tickFormatter={(value) => value.slice(5)}
+                    className="text-gray-500 dark:text-gray-400"
+                    tick={{
+                      fontFamily: 'inherit',
+                      fontSize: 12,
+                      fill: 'currentColor',
+                    }}
+                  />
+                  <YAxis
+                    allowDecimals={false}
+                    className="text-gray-500 dark:text-gray-400"
+                    tick={{
+                      fontFamily: 'inherit',
+                      fontSize: 12,
+                      fill: 'currentColor',
+                    }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  {/* Custom Tooltip */}
+                  <Tooltip
+                    cursor={false}
+                    content={({ active, payload, label }) => {
+                      if (!active || !payload || !payload.length) return null;
+                      return (
+                        <div className="rounded-lg bg-white dark:bg-gray-900/90 border border-gray-200 dark:border-gray-800 px-3 py-2 text-xs shadow-lg">
+                          <div className="font-semibold text-blue-600 dark:text-blue-400">{label}</div>
+                          <div className="mt-1">Jumlah: <span className="font-bold">{payload[0].value}</span></div>
+                        </div>
+                      );
+                    }}
+                  />
+                  <Area
+                    dataKey="Peminjaman"
+                    type="natural"
+                    fill="url(#blueGradient)"
+                    fillOpacity={1}
+                    stroke="#2563eb"
+                    strokeWidth={2}
+                  />
+                </AreaChart>
               </ResponsiveContainer>
             </div>
-            </CardContent>
+          </CardContent>
+          <CardFooter>
+            <div className="flex w-full items-start gap-2 text-sm">
+              <div className="grid gap-2">
+                <div className="flex items-center gap-2 leading-none font-medium">
+                  {/* Hitung tren peminjaman per hari */}
+                  {(() => {
+                    if (loansByDate.length < 2) return null;
+                    const last = loansByDate[loansByDate.length - 1];
+                    const prev = loansByDate[loansByDate.length - 2];
+                    const lastCount = typeof last.Peminjaman === "number" ? last.Peminjaman : 0;
+                    const prevCount = typeof prev.Peminjaman === "number" ? prev.Peminjaman : 0;
+                    const percent = prevCount === 0 ? 100 : ((lastCount - prevCount) / prevCount) * 100;
+                    const naik = percent >= 0;
+                    return (
+                      <>
+                        {naik ? "Naik" : "Turun"} {Math.abs(percent).toFixed(1)}% dibanding kemarin
+                        <svg className={`h-4 w-4 ${naik ? "text-green-500" : "text-red-500"}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path d={naik ? "M21 7l-6 6-4-4-8 8" : "M3 7l6 6 4-4 8 8"} />
+                        </svg>
+                      </>
+                    );
+                  })()}
+                </div>
+                <div className="text-muted-foreground flex items-center gap-2 leading-none">
+                  {loansByDate.length > 1 ? (
+                    <>
+                      Kemarin ({loansByDate[loansByDate.length - 2].Peminjaman})
+                      {loansByDate[loansByDate.length - 1].Peminjaman > loansByDate[loansByDate.length - 2].Peminjaman
+                        ? " < "
+                        : loansByDate[loansByDate.length - 1].Peminjaman < loansByDate[loansByDate.length - 2].Peminjaman
+                          ? " > "
+                          : " = "}
+                      ({loansByDate[loansByDate.length - 1].Peminjaman}) Hari ini
+                    </>
+                  ) : ""}
+                </div>
+              </div>
+            </div>
+          </CardFooter>
         </Card>
       </div>
     </div>
