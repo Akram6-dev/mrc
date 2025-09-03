@@ -249,7 +249,7 @@ export default function RiwayatPage() {
       );
     }
     if (loan.status === "dipinjam") {
-      const daysLeft = getDaysUntilDue(loan.dueDate);
+      const daysLeft = getDaysUntilDue(loan.dueDate) - 1;
       if (daysLeft <= 3) {
         return (
           <span className="badge-warning">

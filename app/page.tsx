@@ -163,7 +163,7 @@ export default function DashboardPage() {
       iconBg: "bg-green-600/30",
       iconColor: "text-green-200",
       textColor: "text-green-100",
-      href: "/peminjam",
+      href: "/pengembalian",
     },
     {
       title: "Sedang Dipinjam",

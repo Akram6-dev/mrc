@@ -261,7 +261,7 @@ export default function PengembalianPage() {
 
   const getStatusBadge = (loan: LoanWithDetails) => {
     // Use getDaysUntilDue to avoid timezone issues and for correct badge
-    const daysLeft = getDaysUntilDue(loan.dueDate)
+    const daysLeft = getDaysUntilDue(loan.dueDate) - 1
     if (daysLeft === 0) {
       return (
         <span className="badge-warning">

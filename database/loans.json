@@ -2256,12 +2256,13 @@
     ],
     "borrowDate": "2025-08-20T07:17:09+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "notes": "diambil oleh syahla",
     "id": "1755649029253",
     "createdAt": "2025-08-20T00:17:09.253Z",
-    "updatedAt": "2025-08-20T00:17:09.253Z"
+    "updatedAt": "2025-08-20T08:17:42.536Z",
+    "returnDate": "2025-08-20T08:17:42.456Z"
   },
   {
     "borrowerId": "80",
@@ -2303,12 +2304,13 @@
     ],
     "borrowDate": "2025-08-20T08:33:13+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh zikri",
     "id": "1755653593061",
     "createdAt": "2025-08-20T01:33:13.061Z",
-    "updatedAt": "2025-08-20T01:33:13.061Z"
+    "updatedAt": "2025-08-20T08:16:56.487Z",
+    "returnDate": "2025-08-20T08:16:56.408Z"
   },
   {
     "borrowerId": "34",
@@ -2326,11 +2328,12 @@
     ],
     "borrowDate": "2025-08-20T08:34:44+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1755653684052",
     "createdAt": "2025-08-20T01:34:44.052Z",
-    "updatedAt": "2025-08-20T01:34:44.052Z"
+    "updatedAt": "2025-08-20T08:30:35.901Z",
+    "returnDate": "2025-08-20T08:30:35.807Z"
   },
   {
     "borrowerId": "80",
@@ -2391,11 +2394,12 @@
     ],
     "borrowDate": "2025-08-20T09:04:40+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1755655480505",
     "createdAt": "2025-08-20T02:04:40.506Z",
-    "updatedAt": "2025-08-20T02:04:40.506Z"
+    "updatedAt": "2025-08-20T08:16:52.036Z",
+    "returnDate": "2025-08-20T08:16:51.944Z"
   },
   {
     "borrowerId": "68",
@@ -2461,12 +2465,13 @@
     ],
     "borrowDate": "2025-08-20T12:49:19+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kegiatan",
     "notes": "diambil oleh murid",
     "id": "1755668959524",
     "createdAt": "2025-08-20T05:49:19.524Z",
-    "updatedAt": "2025-08-20T05:49:19.524Z"
+    "updatedAt": "2025-08-20T08:55:36.745Z",
+    "returnDate": "2025-08-20T08:55:36.637Z"
   },
   {
     "borrowerId": "24",
@@ -2484,11 +2489,12 @@
     ],
     "borrowDate": "2025-08-20T12:52:39+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1755669159144",
     "createdAt": "2025-08-20T05:52:39.144Z",
-    "updatedAt": "2025-08-20T05:52:39.144Z"
+    "updatedAt": "2025-08-20T08:29:42.889Z",
+    "returnDate": "2025-08-20T08:29:42.799Z"
   },
   {
     "borrowerId": "48",
@@ -2525,12 +2531,13 @@
     ],
     "borrowDate": "2025-08-20T13:06:57+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "PKBN",
     "notes": "diambil oleh panitia",
     "id": "1755670017154",
     "createdAt": "2025-08-20T06:06:57.154Z",
-    "updatedAt": "2025-08-20T06:06:57.154Z"
+    "updatedAt": "2025-08-20T07:57:40.978Z",
+    "returnDate": "2025-08-20T07:57:40.905Z"
   },
   {
     "borrowerId": "112",
@@ -2543,12 +2550,13 @@
     ],
     "borrowDate": "2025-08-20T13:09:52+07:00",
     "dueDate": "2025-08-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "PKBN",
     "notes": "diambil oleh panitia",
     "id": "1755670192370",
     "createdAt": "2025-08-20T06:09:52.370Z",
-    "updatedAt": "2025-08-20T06:09:52.370Z"
+    "updatedAt": "2025-08-20T07:57:31.856Z",
+    "returnDate": "2025-08-20T07:57:31.778Z"
   },
   {
     "borrowerId": "87",
@@ -2566,11 +2574,2402 @@
     ],
     "borrowDate": "2025-08-20T13:28:35+07:00",
     "dueDate": "2025-08-21T13:09:53+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh siswa",
     "id": "1755671315330",
     "createdAt": "2025-08-20T06:28:35.330Z",
-    "updatedAt": "2025-08-20T06:28:35.330Z"
+    "updatedAt": "2025-08-20T08:37:13.063Z",
+    "returnDate": "2025-08-20T08:37:12.967Z"
+  },
+  {
+    "borrowerId": "42",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-21T07:07:13+07:00",
+    "dueDate": "2025-08-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1755734833519",
+    "createdAt": "2025-08-21T00:07:13.519Z",
+    "updatedAt": "2025-08-21T01:21:57.508Z",
+    "returnDate": "2025-08-21T01:21:57.403Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-21T07:08:54+07:00",
+    "dueDate": "2025-08-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Nurdin",
+    "id": "1755734934990",
+    "createdAt": "2025-08-21T00:08:54.990Z",
+    "updatedAt": "2025-08-21T08:47:50.997Z",
+    "returnDate": "2025-08-21T08:47:50.556Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 2,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-21T09:02:49+07:00",
+    "dueDate": "2025-08-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Acara",
+    "id": "1755741769261",
+    "createdAt": "2025-08-21T02:02:49.261Z",
+    "updatedAt": "2025-08-21T08:16:48.870Z",
+    "returnDate": "2025-08-21T08:16:48.470Z"
+  },
+  {
+    "borrowerId": "70",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-21T12:45:55+07:00",
+    "dueDate": "2025-08-22T09:10:07+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh siswa nono",
+    "id": "1755755156368",
+    "createdAt": "2025-08-21T05:45:56.369Z",
+    "updatedAt": "2025-08-21T08:26:30.431Z",
+    "returnDate": "2025-08-21T08:26:30.077Z"
+  },
+  {
+    "borrowerId": "83",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-21T13:22:24+07:00",
+    "dueDate": "2025-08-22T12:46:10+07:00",
+    "status": "dikembalikan",
+    "purpose": "pkbn",
+    "notes": "di ambil oleh siswa mila",
+    "id": "1755757344435",
+    "createdAt": "2025-08-21T06:22:24.435Z",
+    "updatedAt": "2025-08-21T07:59:30.484Z",
+    "returnDate": "2025-08-21T07:59:30.166Z"
+  },
+  {
+    "borrowerId": "94",
+    "items": [
+      {
+        "itemId": "1754983247404",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T07:00:29+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "keperluan adminitrasi",
+    "id": "1755820829927",
+    "createdAt": "2025-08-22T00:00:29.927Z",
+    "updatedAt": "2025-08-22T01:47:37.704Z",
+    "returnDate": "2025-08-22T01:47:37.421Z"
+  },
+  {
+    "borrowerId": "63",
+    "items": [
+      {
+        "itemId": "1754983247404",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T07:01:12+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara",
+    "id": "1755820873149",
+    "createdAt": "2025-08-22T00:01:13.149Z",
+    "updatedAt": "2025-08-22T00:59:12.473Z",
+    "returnDate": "2025-08-22T00:59:11.545Z"
+  },
+  {
+    "borrowerId": "18",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 2,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T07:07:03+07:00",
+    "dueDate": "2025-08-23T07:06:07+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Syahla",
+    "id": "1755821226848",
+    "createdAt": "2025-08-22T00:07:06.848Z",
+    "updatedAt": "2025-08-22T07:48:48.060Z",
+    "returnDate": "2025-08-22T07:48:47.605Z"
+  },
+  {
+    "borrowerId": "18",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 8,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T07:09:40+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1755821380821",
+    "createdAt": "2025-08-22T00:09:40.821Z",
+    "updatedAt": "2025-08-22T07:54:33.692Z",
+    "returnDate": "2025-08-22T07:54:33.237Z"
+  },
+  {
+    "borrowerId": "21",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T07:14:49+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara",
+    "id": "1755821689796",
+    "createdAt": "2025-08-22T00:14:49.796Z",
+    "updatedAt": "2025-08-22T01:43:48.780Z",
+    "returnDate": "2025-08-22T01:43:48.502Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T08:03:30+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1755824611047",
+    "createdAt": "2025-08-22T01:03:31.047Z",
+    "updatedAt": "2025-08-22T04:04:35.611Z",
+    "returnDate": "2025-08-22T04:04:35.260Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754983247404",
+        "quantity": 7,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 3,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T08:18:55+07:00",
+    "dueDate": "2025-08-23T08:15:02+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1755825536079",
+    "createdAt": "2025-08-22T01:18:56.079Z",
+    "updatedAt": "2025-08-22T03:19:19.703Z",
+    "returnDate": "2025-08-22T03:19:19.376Z"
+  },
+  {
+    "borrowerId": "89",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T08:27:16+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Denis",
+    "id": "1755826036844",
+    "createdAt": "2025-08-22T01:27:16.844Z",
+    "updatedAt": "2025-08-22T02:40:37.960Z",
+    "returnDate": "2025-08-22T02:40:37.659Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T08:28:59+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1755826139797",
+    "createdAt": "2025-08-22T01:28:59.797Z",
+    "updatedAt": "2025-08-22T03:48:35.846Z",
+    "returnDate": "2025-08-22T03:48:35.502Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T08:55:28+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1755827728893",
+    "createdAt": "2025-08-22T01:55:28.893Z",
+    "updatedAt": "2025-08-22T06:03:40.471Z",
+    "returnDate": "2025-08-22T06:03:40.069Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T09:57:09+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "DI AMBIL SAMA SISWA SELA VANESA",
+    "id": "1755831429896",
+    "createdAt": "2025-08-22T02:57:09.896Z",
+    "updatedAt": "2025-08-22T03:48:18.174Z",
+    "returnDate": "2025-08-22T03:48:17.829Z"
+  },
+  {
+    "borrowerId": "12",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T09:59:37+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Zikha",
+    "id": "1755831577515",
+    "createdAt": "2025-08-22T02:59:37.515Z",
+    "updatedAt": "2025-08-22T07:57:18.718Z",
+    "returnDate": "2025-08-22T07:57:18.269Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T10:19:49+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1755832789652",
+    "createdAt": "2025-08-22T03:19:49.652Z",
+    "updatedAt": "2025-08-22T07:54:45.067Z",
+    "returnDate": "2025-08-22T07:54:44.613Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T13:09:58+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "PKBN",
+    "id": "1755842999181",
+    "createdAt": "2025-08-22T06:09:59.181Z",
+    "updatedAt": "2025-08-22T08:08:11.319Z",
+    "returnDate": "2025-08-22T08:08:10.852Z"
+  },
+  {
+    "borrowerId": "9",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T13:13:28+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Adi",
+    "id": "1755843208529",
+    "createdAt": "2025-08-22T06:13:28.529Z",
+    "updatedAt": "2025-08-22T07:44:23.222Z",
+    "returnDate": "2025-08-22T07:44:22.766Z"
+  },
+  {
+    "borrowerId": "89",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-22T13:42:23+07:00",
+    "dueDate": "2025-08-22T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Danu ",
+    "id": "1755844944284",
+    "createdAt": "2025-08-22T06:42:24.284Z",
+    "updatedAt": "2025-08-22T07:50:59.838Z",
+    "returnDate": "2025-08-22T07:50:59.381Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T08:20:17+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756084818730",
+    "createdAt": "2025-08-25T01:20:18.730Z",
+    "updatedAt": "2025-08-25T08:35:18.845Z",
+    "returnDate": "2025-08-25T08:35:17.841Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T08:21:41+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756084902427",
+    "createdAt": "2025-08-25T01:21:42.427Z",
+    "updatedAt": "2025-08-25T03:10:47.573Z",
+    "returnDate": "2025-08-25T03:10:46.760Z"
+  },
+  {
+    "borrowerId": "65",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T08:24:01+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756085042607",
+    "createdAt": "2025-08-25T01:24:02.607Z",
+    "updatedAt": "2025-08-25T07:43:25.974Z",
+    "returnDate": "2025-08-25T07:43:25.013Z"
+  },
+  {
+    "borrowerId": "78",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T08:38:32+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Syahla",
+    "id": "1756085913412",
+    "createdAt": "2025-08-25T01:38:33.412Z",
+    "updatedAt": "2025-08-25T08:18:28.063Z",
+    "returnDate": "2025-08-25T08:18:27.098Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 2,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T10:27:58+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756092478940",
+    "createdAt": "2025-08-25T03:27:58.940Z",
+    "updatedAt": "2025-08-25T04:27:32.972Z",
+    "returnDate": "2025-08-25T04:27:32.122Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T10:41:18+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756093279387",
+    "createdAt": "2025-08-25T03:41:19.387Z",
+    "updatedAt": "2025-08-25T04:27:34.806Z",
+    "returnDate": "2025-08-25T04:27:33.969Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T12:04:40+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "PKBN",
+    "notes": "diambil oleh Rona",
+    "id": "1756098280991",
+    "createdAt": "2025-08-25T05:04:40.991Z",
+    "updatedAt": "2025-08-25T07:52:40.684Z",
+    "returnDate": "2025-08-25T07:52:39.716Z"
+  },
+  {
+    "borrowerId": "80",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T12:47:41+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756100862782",
+    "createdAt": "2025-08-25T05:47:42.782Z",
+    "updatedAt": "2025-08-25T08:49:25.512Z",
+    "returnDate": "2025-08-25T08:49:24.528Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "itemId": "1754696777625",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T12:58:59+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756101540063",
+    "createdAt": "2025-08-25T05:59:00.063Z",
+    "updatedAt": "2025-08-25T07:24:52.426Z",
+    "returnDate": "2025-08-25T07:24:51.478Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-25T14:12:27+07:00",
+    "dueDate": "2025-08-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756105948043",
+    "createdAt": "2025-08-25T07:12:28.044Z",
+    "updatedAt": "2025-08-25T09:00:13.050Z",
+    "returnDate": "2025-08-25T09:00:12.056Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T07:05:29+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756166730166",
+    "createdAt": "2025-08-26T00:05:30.166Z",
+    "updatedAt": "2025-08-26T06:36:14.982Z",
+    "returnDate": "2025-08-26T06:36:14.735Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754983247404",
+        "quantity": 9,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 3,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T07:28:24+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756168105363",
+    "createdAt": "2025-08-26T00:28:25.363Z",
+    "updatedAt": "2025-08-26T03:08:16.333Z",
+    "returnDate": "2025-08-26T03:08:15.262Z"
+  },
+  {
+    "borrowerId": "78",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T07:28:51+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756168132605",
+    "createdAt": "2025-08-26T00:28:52.605Z",
+    "updatedAt": "2025-08-26T08:59:42.003Z",
+    "returnDate": "2025-08-26T08:59:41.738Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T07:29:58+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756168199971",
+    "createdAt": "2025-08-26T00:29:59.971Z",
+    "updatedAt": "2025-08-26T01:37:42.044Z",
+    "returnDate": "2025-08-26T01:37:41.009Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T08:57:49+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756173470958",
+    "createdAt": "2025-08-26T01:57:50.958Z",
+    "updatedAt": "2025-08-26T04:07:43.307Z",
+    "returnDate": "2025-08-26T04:07:42.191Z"
+  },
+  {
+    "borrowerId": "20",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T12:25:42+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756185943471",
+    "createdAt": "2025-08-26T05:25:43.471Z",
+    "updatedAt": "2025-08-26T08:59:34.820Z",
+    "returnDate": "2025-08-26T08:59:34.554Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T12:45:01+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756187102694",
+    "createdAt": "2025-08-26T05:45:02.694Z",
+    "updatedAt": "2025-08-26T09:00:02.253Z",
+    "returnDate": "2025-08-26T09:00:01.986Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754983247404",
+        "quantity": 10,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 3,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T13:36:46+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756190207216",
+    "createdAt": "2025-08-26T06:36:47.216Z",
+    "updatedAt": "2025-08-26T08:59:29.420Z",
+    "returnDate": "2025-08-26T08:59:29.154Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-26T14:16:04+07:00",
+    "dueDate": "2025-08-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756192565137",
+    "createdAt": "2025-08-26T07:16:05.137Z",
+    "updatedAt": "2025-08-26T08:59:25.582Z",
+    "returnDate": "2025-08-26T08:59:25.314Z"
+  },
+  {
+    "borrowerId": "78",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T07:02:36+07:00",
+    "dueDate": "2025-08-28T06:44:22+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh siswi rofa",
+    "id": "1756252957628",
+    "createdAt": "2025-08-27T00:02:37.628Z",
+    "updatedAt": "2025-08-27T08:46:32.277Z",
+    "returnDate": "2025-08-27T08:46:31.804Z"
+  },
+  {
+    "borrowerId": "61",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T07:16:11+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756253772937",
+    "createdAt": "2025-08-27T00:16:12.937Z",
+    "updatedAt": "2025-08-27T04:08:24.670Z",
+    "returnDate": "2025-08-27T04:08:24.292Z"
+  },
+  {
+    "borrowerId": "89",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T07:17:05+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Denis",
+    "id": "1756253826882",
+    "createdAt": "2025-08-27T00:17:06.882Z",
+    "updatedAt": "2025-08-27T01:54:57.371Z",
+    "returnDate": "2025-08-27T01:54:56.158Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T08:54:28+07:00",
+    "dueDate": "2025-08-28T07:51:34+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh vanesha",
+    "id": "1756259682458",
+    "createdAt": "2025-08-27T01:54:42.458Z",
+    "updatedAt": "2025-08-27T06:14:16.241Z",
+    "returnDate": "2025-08-27T06:14:15.828Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "itemId": "1754983247404",
+        "quantity": 5,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 2,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T09:00:18+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756260019924",
+    "createdAt": "2025-08-27T02:00:19.924Z",
+    "updatedAt": "2025-08-27T07:07:57.832Z",
+    "returnDate": "2025-08-27T07:07:57.396Z"
+  },
+  {
+    "borrowerId": "87",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T09:01:17+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Itsna",
+    "id": "1756260078925",
+    "createdAt": "2025-08-27T02:01:18.925Z",
+    "updatedAt": "2025-08-27T08:45:09.067Z",
+    "returnDate": "2025-08-27T08:45:08.580Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 8,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T09:04:10+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "MM 7 & Smartclass 1",
+    "notes": "guru random loba teuing",
+    "id": "1756260251875",
+    "createdAt": "2025-08-27T02:04:11.875Z",
+    "updatedAt": "2025-08-29T08:42:58.033Z",
+    "returnDate": "2025-08-29T08:42:57.597Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1756267124262",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T10:59:02+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "PKBN",
+    "id": "1756267142459",
+    "createdAt": "2025-08-27T03:59:02.459Z",
+    "updatedAt": "2025-08-27T04:36:46.826Z",
+    "returnDate": "2025-08-27T04:36:46.461Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T11:02:18+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756267338974",
+    "createdAt": "2025-08-27T04:02:18.974Z",
+    "updatedAt": "2025-08-27T06:27:25.534Z",
+    "returnDate": "2025-08-27T06:27:25.109Z"
+  },
+  {
+    "borrowerId": "12",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T11:15:17+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Lina",
+    "id": "1756268117923",
+    "createdAt": "2025-08-27T04:15:17.923Z",
+    "updatedAt": "2025-08-27T07:21:35.686Z",
+    "returnDate": "2025-08-27T07:21:35.237Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T12:24:05+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756272245545",
+    "createdAt": "2025-08-27T05:24:05.546Z",
+    "updatedAt": "2025-08-27T07:07:24.075Z",
+    "returnDate": "2025-08-27T07:07:23.628Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T12:55:23+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756274124086",
+    "createdAt": "2025-08-27T05:55:24.086Z",
+    "updatedAt": "2025-08-27T08:13:06.494Z",
+    "returnDate": "2025-08-27T08:13:06.036Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T13:00:20+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756274421394",
+    "createdAt": "2025-08-27T06:00:21.394Z",
+    "updatedAt": "2025-08-27T08:49:23.457Z",
+    "returnDate": "2025-08-27T08:49:22.980Z"
+  },
+  {
+    "borrowerId": "41",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 7,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T13:45:45+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "di ambil oleh siswa adilla 11 mp2",
+    "id": "1756277145903",
+    "createdAt": "2025-08-27T06:45:45.903Z",
+    "updatedAt": "2025-08-27T08:33:55.458Z",
+    "returnDate": "2025-08-27T08:33:54.980Z"
+  },
+  {
+    "borrowerId": "108",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T13:49:05+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Denis",
+    "id": "1756277345566",
+    "createdAt": "2025-08-27T06:49:05.566Z",
+    "updatedAt": "2025-08-27T08:12:14.042Z",
+    "returnDate": "2025-08-27T08:12:13.572Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-27T14:10:00+07:00",
+    "dueDate": "2025-08-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756278601092",
+    "createdAt": "2025-08-27T07:10:01.092Z",
+    "updatedAt": "2025-08-27T08:23:03.657Z",
+    "returnDate": "2025-08-27T08:23:03.180Z"
+  },
+  {
+    "borrowerId": "129",
+    "items": [
+      {
+        "itemId": "1756288012966",
+        "quantity": 1,
+        "serialNumber": "747"
+      }
+    ],
+    "borrowDate": "2025-08-27T16:51:56+07:00",
+    "dueDate": "2025-09-30T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "TU",
+    "notes": "NO. 747",
+    "id": "1756288100244",
+    "createdAt": "2025-08-27T09:48:20.244Z",
+    "updatedAt": "2025-08-27T09:48:20.244Z"
+  },
+  {
+    "borrowerId": "61",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T07:08:48+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756339728806",
+    "createdAt": "2025-08-28T00:08:48.806Z",
+    "updatedAt": "2025-08-28T03:14:12.664Z",
+    "returnDate": "2025-08-28T03:14:12.606Z"
+  },
+  {
+    "borrowerId": "61",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T07:17:23+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756340243065",
+    "createdAt": "2025-08-28T00:17:23.065Z",
+    "updatedAt": "2025-08-28T03:14:07.469Z",
+    "returnDate": "2025-08-28T03:14:07.406Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T07:22:43+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756340562990",
+    "createdAt": "2025-08-28T00:22:42.990Z",
+    "updatedAt": "2025-08-28T01:14:51.562Z",
+    "returnDate": "2025-08-28T01:14:51.680Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 2,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T07:23:13+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Rizki",
+    "id": "1756340593483",
+    "createdAt": "2025-08-28T00:23:13.483Z",
+    "updatedAt": "2025-08-28T08:47:21.823Z",
+    "returnDate": "2025-08-28T08:47:21.660Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "itemId": "1754696777625",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T07:28:00+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756340880387",
+    "createdAt": "2025-08-28T00:28:00.387Z",
+    "updatedAt": "2025-08-28T03:10:20.792Z",
+    "returnDate": "2025-08-28T03:10:20.742Z"
+  },
+  {
+    "borrowerId": "71",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T07:49:10+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756342150460",
+    "createdAt": "2025-08-28T00:49:10.460Z",
+    "updatedAt": "2025-08-28T00:49:10.460Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1756267124262",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T08:14:04+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756343644278",
+    "createdAt": "2025-08-28T01:14:04.278Z",
+    "updatedAt": "2025-08-29T08:30:00.602Z",
+    "returnDate": "2025-08-29T08:30:00.158Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T08:41:17+07:00",
+    "dueDate": "2025-08-29T08:40:14+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756345277678",
+    "createdAt": "2025-08-28T01:41:17.678Z",
+    "updatedAt": "2025-08-28T03:35:01.730Z",
+    "returnDate": "2025-08-28T03:35:01.627Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T10:14:35+07:00",
+    "dueDate": "2025-08-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756350875840",
+    "createdAt": "2025-08-28T03:14:35.840Z",
+    "updatedAt": "2025-08-28T03:55:17.798Z",
+    "returnDate": "2025-08-28T03:55:17.705Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 3,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T12:57:08+07:00",
+    "dueDate": "2025-08-29T12:55:40+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "di ambil oleh siswa rangga",
+    "id": "1756360628571",
+    "createdAt": "2025-08-28T05:57:08.571Z",
+    "updatedAt": "2025-08-28T08:25:31.760Z",
+    "returnDate": "2025-08-28T08:25:31.606Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T13:03:17+07:00",
+    "dueDate": "2025-08-29T13:02:53+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "KBM",
+    "id": "1756360779443",
+    "createdAt": "2025-08-28T05:59:39.443Z",
+    "updatedAt": "2025-08-28T08:32:07.495Z",
+    "returnDate": "2025-08-28T08:35:45.592Z"
+  },
+  {
+    "borrowerId": "155",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-28T15:47:11+07:00",
+    "dueDate": "2025-08-29T15:46:51+07:00",
+    "status": "dipinjam",
+    "purpose": "Ekskul",
+    "notes": "IT Club",
+    "id": "1756370831902",
+    "createdAt": "2025-08-28T08:47:11.902Z",
+    "updatedAt": "2025-08-28T08:47:11.902Z"
+  },
+  {
+    "borrowerId": "78",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T06:47:30+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi XII MP 3",
+    "id": "1756424850424",
+    "createdAt": "2025-08-28T23:47:30.425Z",
+    "updatedAt": "2025-08-29T07:55:45.200Z",
+    "returnDate": "2025-08-29T07:55:44.778Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754890073251",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T07:48:37+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756428517806",
+    "createdAt": "2025-08-29T00:48:37.806Z",
+    "updatedAt": "2025-08-29T06:47:29.467Z",
+    "returnDate": "2025-08-29T06:47:29.086Z"
+  },
+  {
+    "borrowerId": "89",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T07:49:33+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Denis",
+    "id": "1756428573969",
+    "createdAt": "2025-08-29T00:49:33.969Z",
+    "updatedAt": "2025-08-29T02:23:59.956Z",
+    "returnDate": "2025-08-29T02:23:59.708Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T08:01:33+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM (gatau gurunya)",
+    "notes": "diambil oleh Latifah",
+    "id": "1756429293581",
+    "createdAt": "2025-08-29T01:01:33.581Z",
+    "updatedAt": "2025-08-29T01:46:29.694Z",
+    "returnDate": "2025-08-29T01:46:29.479Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T08:04:19+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756429460006",
+    "createdAt": "2025-08-29T01:04:20.006Z",
+    "updatedAt": "2025-08-29T03:50:19.574Z",
+    "returnDate": "2025-08-29T03:50:19.276Z"
+  },
+  {
+    "borrowerId": "65",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T08:09:31+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756429771797",
+    "createdAt": "2025-08-29T01:09:31.797Z",
+    "updatedAt": "2025-08-29T07:44:34.278Z",
+    "returnDate": "2025-08-29T07:44:33.850Z"
+  },
+  {
+    "borrowerId": "16",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T08:47:11+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh latifah",
+    "id": "1756432031490",
+    "createdAt": "2025-08-29T01:47:11.490Z",
+    "updatedAt": "2025-08-29T02:55:17.923Z",
+    "returnDate": "2025-08-29T02:55:17.665Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T09:27:10+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756434430593",
+    "createdAt": "2025-08-29T02:27:10.593Z",
+    "updatedAt": "2025-08-29T03:55:04.144Z",
+    "returnDate": "2025-08-29T03:55:03.860Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T10:54:58+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Dani & Rambo",
+    "id": "1756439698512",
+    "createdAt": "2025-08-29T03:54:58.512Z",
+    "updatedAt": "2025-08-29T08:22:39.895Z",
+    "returnDate": "2025-08-29T08:22:39.454Z"
+  },
+  {
+    "borrowerId": "84",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T13:06:34+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1756447595344",
+    "createdAt": "2025-08-29T06:06:35.344Z",
+    "updatedAt": "2025-08-29T08:02:49.488Z",
+    "returnDate": "2025-08-29T08:02:49.072Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T13:18:37+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Denis",
+    "id": "1756448317643",
+    "createdAt": "2025-08-29T06:18:37.643Z",
+    "updatedAt": "2025-08-29T08:58:09.526Z",
+    "returnDate": "2025-08-29T08:58:09.076Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-08-29T13:21:53+07:00",
+    "dueDate": "2025-08-29T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756448513713",
+    "createdAt": "2025-08-29T06:21:53.713Z",
+    "updatedAt": "2025-08-29T07:39:16.134Z",
+    "returnDate": "2025-08-29T07:39:15.714Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754890073251",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T06:48:46+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1756770527105",
+    "createdAt": "2025-09-01T23:48:47.105Z",
+    "updatedAt": "2025-09-02T08:06:34.215Z",
+    "returnDate": "2025-09-02T08:06:33.399Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754890073251",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T07:00:31+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "pinjam nama untuk mr jack",
+    "id": "1756771231912",
+    "createdAt": "2025-09-02T00:00:31.912Z",
+    "updatedAt": "2025-09-02T08:21:52.167Z",
+    "returnDate": "2025-09-02T08:21:51.342Z"
+  },
+  {
+    "borrowerId": "78",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T08:39:10+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh siswi ",
+    "id": "1756777150691",
+    "createdAt": "2025-09-02T01:39:10.691Z",
+    "updatedAt": "2025-09-02T08:19:29.748Z",
+    "returnDate": "2025-09-02T08:19:28.902Z"
+  },
+  {
+    "borrowerId": "72",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T08:51:04+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh fahru",
+    "id": "1756777865472",
+    "createdAt": "2025-09-02T01:51:05.472Z",
+    "updatedAt": "2025-09-02T05:46:06.522Z",
+    "returnDate": "2025-09-02T05:46:05.777Z"
+  },
+  {
+    "borrowerId": "87",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T08:59:36+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambl oleh aulia",
+    "id": "1756778377152",
+    "createdAt": "2025-09-02T01:59:37.152Z",
+    "updatedAt": "2025-09-02T08:10:50.622Z",
+    "returnDate": "2025-09-02T08:10:49.798Z"
+  },
+  {
+    "borrowerId": "80",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T09:01:07+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh meettuw",
+    "id": "1756778468625",
+    "createdAt": "2025-09-02T02:01:08.625Z",
+    "updatedAt": "2025-09-02T04:49:01.218Z",
+    "returnDate": "2025-09-02T04:49:00.431Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T09:03:23+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm ",
+    "notes": "di ambil wandika",
+    "id": "1756778603985",
+    "createdAt": "2025-09-02T02:03:23.985Z",
+    "updatedAt": "2025-09-02T08:07:13.013Z",
+    "returnDate": "2025-09-02T08:07:12.199Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T09:50:11+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756781412045",
+    "createdAt": "2025-09-02T02:50:12.045Z",
+    "updatedAt": "2025-09-02T07:54:49.612Z",
+    "returnDate": "2025-09-02T07:54:48.784Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T10:10:09+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "tambahan",
+    "id": "1756782609869",
+    "createdAt": "2025-09-02T03:10:09.869Z",
+    "updatedAt": "2025-09-02T07:55:06.631Z",
+    "returnDate": "2025-09-02T07:55:05.815Z"
+  },
+  {
+    "borrowerId": "51",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T10:17:46+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "diambil oleh Zlatan",
+    "id": "1756783067430",
+    "createdAt": "2025-09-02T03:17:47.430Z",
+    "updatedAt": "2025-09-02T03:17:47.430Z"
+  },
+  {
+    "borrowerId": "12",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T10:59:08+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756785549667",
+    "createdAt": "2025-09-02T03:59:09.667Z",
+    "updatedAt": "2025-09-02T06:27:15.885Z",
+    "returnDate": "2025-09-02T06:27:15.110Z"
+  },
+  {
+    "borrowerId": "7",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T12:38:06+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756791487161",
+    "createdAt": "2025-09-02T05:38:07.161Z",
+    "updatedAt": "2025-09-02T08:21:46.416Z",
+    "returnDate": "2025-09-02T08:21:45.590Z"
+  },
+  {
+    "borrowerId": "107",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T12:53:10+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756792390842",
+    "createdAt": "2025-09-02T05:53:10.842Z",
+    "updatedAt": "2025-09-02T08:29:15.365Z",
+    "returnDate": "2025-09-02T08:29:14.533Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 3,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754983247404",
+        "quantity": 11,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T12:55:48+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1756792549104",
+    "createdAt": "2025-09-02T05:55:49.104Z",
+    "updatedAt": "2025-09-02T08:13:16.176Z",
+    "returnDate": "2025-09-02T08:13:15.350Z"
+  },
+  {
+    "borrowerId": "72",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T13:23:44+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Naif",
+    "id": "1756794224827",
+    "createdAt": "2025-09-02T06:23:44.827Z",
+    "updatedAt": "2025-09-02T07:41:12.930Z",
+    "returnDate": "2025-09-02T07:41:12.113Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T13:41:51+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1756795312254",
+    "createdAt": "2025-09-02T06:41:52.254Z",
+    "updatedAt": "2025-09-02T08:48:22.540Z",
+    "returnDate": "2025-09-02T08:48:21.692Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-02T14:24:16+07:00",
+    "dueDate": "2025-09-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "di ambil oleh siswi bernama intan",
+    "id": "1756797857657",
+    "createdAt": "2025-09-02T07:24:17.657Z",
+    "updatedAt": "2025-09-02T08:24:50.588Z",
+    "returnDate": "2025-09-02T08:24:49.757Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T06:55:33+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1756857335232",
+    "createdAt": "2025-09-02T23:55:35.232Z",
+    "updatedAt": "2025-09-02T23:55:35.232Z"
+  },
+  {
+    "borrowerId": "4",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754890073251",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:00:30+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM ",
+    "id": "1756857632301",
+    "createdAt": "2025-09-03T00:00:32.301Z",
+    "updatedAt": "2025-09-03T00:00:32.302Z"
+  },
+  {
+    "borrowerId": "23",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:09:26+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "SISWI",
+    "id": "1756858167808",
+    "createdAt": "2025-09-03T00:09:27.808Z",
+    "updatedAt": "2025-09-03T00:09:27.809Z"
+  },
+  {
+    "borrowerId": "20",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:15:46+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1756858547914",
+    "createdAt": "2025-09-03T00:15:47.914Z",
+    "updatedAt": "2025-09-03T00:15:47.914Z"
+  },
+  {
+    "borrowerId": "61",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754637098494",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:20:21+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "DIAMBIL OLEH SISWA ZIKHA",
+    "id": "1756858822740",
+    "createdAt": "2025-09-03T00:20:22.740Z",
+    "updatedAt": "2025-09-03T00:20:22.740Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:23:48+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "id": "1756859029634",
+    "createdAt": "2025-09-03T00:23:49.634Z",
+    "updatedAt": "2025-09-03T00:23:49.634Z"
+  },
+  {
+    "borrowerId": "117",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "quantity": 10,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:25:09+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa ichan",
+    "id": "1756859111057",
+    "createdAt": "2025-09-03T00:25:11.057Z",
+    "updatedAt": "2025-09-03T00:25:11.057Z"
+  },
+  {
+    "borrowerId": "117",
+    "items": [
+      {
+        "itemId": "1754873198845",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-09-03T07:37:36+07:00",
+    "dueDate": "2025-09-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "notes": "di ambil oleh siswi",
+    "id": "1756859858343",
+    "createdAt": "2025-09-03T00:37:38.343Z",
+    "updatedAt": "2025-09-03T00:37:38.343Z"
   }
 ]
