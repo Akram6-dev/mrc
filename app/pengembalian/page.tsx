@@ -515,7 +515,7 @@ export default function PengembalianPage() {
                         className="btn-success"
                       >
                         <CheckCircle className="w-6 h-6 mr-1" />
-                        Kembalikan
+                        Selesaikan
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -665,7 +665,7 @@ export default function PengembalianPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Konfirmasi Pengembalian</AlertDialogTitle>
             <AlertDialogDescription>
-              Apakah Anda yakin ingin memproses pengembalian barang <span className="font-semibold">{returningLoan?.itemDetails?.map((it) => `"${it.name}" x${it.quantity}`).join(", ")}</span> dari <span className="font-semibold">{returningLoan?.borrower?.name}</span>?
+              Apakah Anda yakin ingin selesaikan peminjaman barang <span className="font-semibold">{returningLoan?.itemDetails?.map((it) => `"${it.name}" x${it.quantity}`).join(", ")}</span> dari <span className="font-semibold">{returningLoan?.borrower?.name}</span>?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -683,7 +683,7 @@ export default function PengembalianPage() {
               className="rounded-lg font-medium bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-400 transition-colors shadow-sm"
               onClick={handleReturn}
             >
-              Ya, Kembalikan
+              Ya, Selesaikan
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

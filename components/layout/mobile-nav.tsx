@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, Package, Users, FileText, RotateCcw, History, Settings, Menu, X, LogOut, Sun, Moon, Bell } from "lucide-react"
+import { Home, Package, Users, FileText, RotateCcw, History, Settings, Menu, X, LogOut, Sun, Moon, Bell, Info } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { auth } from "@/lib/auth"
@@ -21,6 +21,10 @@ const navigation = [
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)
   const [isDark, setIsDark] = useState(false)
+  const [showNotif, setShowNotif] = useState(false)
+  const [notifications, setNotifications] = useState<any[]>([])
+  const [loadingNotif, setLoadingNotif] = useState(false)
+  const [notifUnread, setNotifUnread] = useState(0)
   const router = useRouter()
   const pathname = usePathname()
   const user = auth.getCurrentUser()
@@ -34,6 +38,23 @@ export default function MobileNav() {
       document.documentElement.classList.add("dark")
     }
   }, [])
+
+  useEffect(() => {
+    fetchNotifications()
+  }, [])
+
+  const fetchNotifications = async () => {
+    setLoadingNotif(true)
+    try {
+      const res = await fetch("/api/notifications")
+      const data = await res.json()
+      setNotifications(data)
+      setNotifUnread(data.filter((n: any) => !n.read).length)
+    } catch {
+      setNotifications([])
+    }
+    setLoadingNotif(false)
+  }
 
   const handleLogout = () => {
     auth.logout()
@@ -51,6 +72,19 @@ export default function MobileNav() {
       document.documentElement.classList.remove("dark")
       localStorage.setItem("theme", "light")
     }
+  }
+
+  const handleOpenNotif = async () => {
+    setShowNotif(true)
+    // Mark all as read
+    for (const notif of notifications.filter((n) => !n.read)) {
+      await fetch("/api/notifications", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: notif.id })
+      })
+    }
+    fetchNotifications()
   }
 
   return (
@@ -77,18 +111,36 @@ export default function MobileNav() {
               <button
                 className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative"
                 aria-label="Notifikasi"
+                onClick={handleOpenNotif}
               >
                 <Bell className="w-5 h-5" />
-                {/* <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span> */}
+                  {notifUnread > 0 && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                  )}
               </button>
             </PopoverTrigger>
             <PopoverContent side="bottom" align="end" className="w-64 p-0">
-              <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 font-semibold text-gray-900 dark:text-white">
-                Notifikasi
-              </div>
-              <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">
-                Coming soon
-              </div>
+              <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 font-semibold text-gray-900 dark:text-white flex items-center justify-between">
+                  <span>Notifikasi</span>
+                  <button onClick={fetchNotifications} className="text-xs text-accent-600">Refresh</button>
+                </div>
+                <div className="max-h-80 overflow-y-auto">
+                  {loadingNotif ? (
+                    <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">Memuat...</div>
+                  ) : notifications.length === 0 ? (
+                    <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">Tidak ada notifikasi</div>
+                  ) : (
+                    notifications.map((notif) => (
+                      <div key={notif.id} className={`flex items-start gap-2 px-4 py-3 border-b border-gray-100 dark:border-gray-800 ${notif.read ? "opacity-60" : ""}`}>
+                        <Info className={`w-5 h-5 mt-1 ${notif.read ? "text-gray-400" : "text-accent-600"}`} />
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">{notif.message}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{new Date(notif.timestamp).toLocaleString()}</div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
             </PopoverContent>
           </Popover>
           <button

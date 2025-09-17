@@ -238,19 +238,17 @@ export default function DashboardPage() {
                     </span>
                 </div>
             )}
-            {/* Native animated progress bar */}
-            {/* <div className="w-full sticky top-0 z-30">
-                <div className="w-full h-1 bg-gray-200 dark:bg-gray-800 relative overflow-hidden" style={{ borderRadius: 0 }}>
-                    <div className="absolute left-0 top-0 h-full bg-blue-500 transition-all duration-200" style={{ width: `${progress}%`, borderRadius: 0, transitionProperty: "width" }} />
-                </div>
-            </div> */}
             <div className="flex justify-center mt-5 mb-4">
                 <img src="/mrc.png" alt="Logo MRC" style={{ height: 70, objectFit: 'contain' }} />
             </div>
             <div className="flex justify-center items-start flex-1 py-10">
-                <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8" style={{ maxWidth: '100rem' }}>
-                    {/* Left: Table */}
-                    <div>
+                {/* Responsive layout: portrait (tabel atas, 2 card bawah), landscape (2 kolom) */}
+                <div
+                    className="w-full max-w-5xl flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-8"
+                    style={{ maxWidth: '100rem' }}
+                >
+                    {/* Table always on top in portrait, left in landscape */}
+                    <div className="order-1 md:order-1">
                         <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
                             <TableHeader>
                                 <TableRow className="bg-gray-50 dark:bg-gray-800">
@@ -327,8 +325,8 @@ export default function DashboardPage() {
                             </TableBody>
                         </Table>
                     </div>
-                    {/* Right: Charts stacked */}
-                    <div className="flex flex-col gap-8">
+                    {/* Statistik cards: stacked in portrait, right column in landscape */}
+                    <div className="order-2 md:order-2 flex flex-col gap-8">
                         <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl transition-all duration-200" style={{ fontFamily: 'inherit' }}>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-base font-semibold">Distribusi Jam Peminjaman per Hari</CardTitle>
@@ -487,6 +485,15 @@ export default function DashboardPage() {
                     </div>
                 </div>
             </div>
+            {/* Portrait orientation: force column layout for 1024x1440 and similar (using Tailwind's [@media (orientation:portrait)] and custom breakpoint) */}
+            <style jsx global>{`
+                @media (orientation: portrait) and (min-width: 768px) {
+                    .max-w-5xl.md\:grid.md\:grid-cols-2 {
+                        display: flex !important;
+                        flex-direction: column !important;
+                    }
+                }
+            `}</style>
         </div>
     );
 }
