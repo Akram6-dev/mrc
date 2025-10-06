@@ -15456,12 +15456,13 @@
     ],
     "borrowDate": "2025-10-06T07:50:18+07:00",
     "dueDate": "2025-10-06T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "notes": "diambil oleh zahwa",
     "id": "1759711819067",
     "createdAt": "2025-10-06T00:50:19.067Z",
-    "updatedAt": "2025-10-06T00:50:19.067Z"
+    "updatedAt": "2025-10-06T02:58:21.088Z",
+    "returnDate": "2025-10-06T02:58:20.083Z"
   },
   {
     "borrowerId": "18",
@@ -15519,11 +15520,12 @@
     ],
     "borrowDate": "2025-10-06T07:52:59+07:00",
     "dueDate": "2025-10-06T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "id": "1759711980918",
     "createdAt": "2025-10-06T00:53:00.918Z",
-    "updatedAt": "2025-10-06T00:53:00.918Z"
+    "updatedAt": "2025-10-06T02:58:01.919Z",
+    "returnDate": "2025-10-06T02:58:00.914Z"
   },
   {
     "borrowerId": "48",
@@ -15541,12 +15543,13 @@
     ],
     "borrowDate": "2025-10-06T07:59:38+07:00",
     "dueDate": "2025-10-06T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "notes": "diambil oleh misbah",
     "id": "1759712379553",
     "createdAt": "2025-10-06T00:59:39.553Z",
-    "updatedAt": "2025-10-06T00:59:39.553Z"
+    "updatedAt": "2025-10-06T02:57:54.008Z",
+    "returnDate": "2025-10-06T02:57:52.987Z"
   },
   {
     "borrowerId": "76",
@@ -15587,11 +15590,12 @@
     ],
     "borrowDate": "2025-10-06T08:08:40+07:00",
     "dueDate": "2025-10-06T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1759712921208",
     "createdAt": "2025-10-06T01:08:41.208Z",
-    "updatedAt": "2025-10-06T01:08:41.208Z"
+    "updatedAt": "2025-10-06T02:58:11.292Z",
+    "returnDate": "2025-10-06T02:58:10.283Z"
   },
   {
     "borrowerId": "78",
@@ -15695,12 +15699,13 @@
     ],
     "borrowDate": "2025-10-06T08:26:22+07:00",
     "dueDate": "2025-10-06T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "notes": "diambil oleh azhar",
     "id": "1759713984098",
     "createdAt": "2025-10-06T01:26:24.098Z",
-    "updatedAt": "2025-10-06T01:26:24.098Z"
+    "updatedAt": "2025-10-06T03:11:03.739Z",
+    "returnDate": "2025-10-06T03:11:02.730Z"
   },
   {
     "borrowerId": "122",
@@ -15759,5 +15764,46 @@
     "id": "1759717575220",
     "createdAt": "2025-10-06T02:26:15.220Z",
     "updatedAt": "2025-10-06T02:26:15.220Z"
+  },
+  {
+    "borrowerId": "17",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-10-06T10:04:21+07:00",
+    "dueDate": "2025-10-06T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "diambil oleh Tiara",
+    "id": "1759719863671",
+    "createdAt": "2025-10-06T03:04:23.671Z",
+    "updatedAt": "2025-10-06T03:04:23.671Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "itemId": "1754696680732",
+        "quantity": 1,
+        "serialNumber": ""
+      },
+      {
+        "itemId": "1754873198845",
+        "quantity": 2,
+        "serialNumber": ""
+      }
+    ],
+    "borrowDate": "2025-10-06T10:12:43+07:00",
+    "dueDate": "2025-10-06T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1759720364480",
+    "createdAt": "2025-10-06T03:12:44.480Z",
+    "updatedAt": "2025-10-06T03:12:44.480Z"
   }
 ]

@@ -100,7 +100,7 @@ export default function PrintRiwayatPage() {
     const bTime = new Date(b.createdAt).getTime();
     return sort === "desc" ? bTime - aTime : aTime - bTime;
   });
-  const printLoans = filtered.slice(0, 20);
+  const printLoans = filtered;
   const today = new Date();
   const tanggalCetak = today.toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" }) +
     ' ' + today.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });

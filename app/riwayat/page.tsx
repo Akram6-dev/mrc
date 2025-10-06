@@ -81,6 +81,7 @@ import {
   PaginationLink,
   PaginationPrevious,
   PaginationNext,
+  PaginationEllipsis,
 } from "@/components/ui/pagination";
 import { auth } from "@/lib/auth";
 import api from "@/lib/api";
@@ -451,6 +452,87 @@ export default function RiwayatPage() {
             </div>
           </div>
         </div>
+        {totalPages > 1 && (
+          <div className="flex justify-end my-6">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    aria-disabled={page === 1}
+                  />
+                </PaginationItem>
+                {/* Compact pagination logic */}
+                {(() => {
+                  const items = [];
+                  const maxPagesToShow = 5; // how many pages to show around current
+                  const showEllipsis = totalPages > 7;
+                  if (!showEllipsis) {
+                    for (let i = 1; i <= totalPages; i++) {
+                      items.push(
+                        <PaginationItem key={i}>
+                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                            {i}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    }
+                  } else {
+                    // Always show first page
+                    items.push(
+                      <PaginationItem key={1}>
+                        <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>
+                          1
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                    // Show ellipsis if needed before current
+                    if (page > 3) {
+                      items.push(
+                        <PaginationItem key="start-ellipsis">
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      );
+                    }
+                    // Show pages around current
+                    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
+                      items.push(
+                        <PaginationItem key={i}>
+                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                            {i}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    }
+                    // Show ellipsis if needed after current
+                    if (page < totalPages - 2) {
+                      items.push(
+                        <PaginationItem key="end-ellipsis">
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      );
+                    }
+                    // Always show last page
+                    items.push(
+                      <PaginationItem key={totalPages}>
+                        <PaginationLink isActive={page === totalPages} onClick={() => setPage(totalPages)}>
+                          {totalPages}
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                  }
+                  return items;
+                })()}
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    aria-disabled={page === totalPages}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )}
 
         {/* Loans Table - shadcn/ui Table */}
         <div className="card overflow-hidden">
@@ -720,16 +802,67 @@ export default function RiwayatPage() {
                     aria-disabled={page === 1}
                   />
                 </PaginationItem>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <PaginationItem key={i}>
-                    <PaginationLink
-                      isActive={page === i + 1}
-                      onClick={() => setPage(i + 1)}
-                    >
-                      {i + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
+                {/* Compact pagination logic */}
+                {(() => {
+                  const items = [];
+                  const maxPagesToShow = 5; // how many pages to show around current
+                  const showEllipsis = totalPages > 7;
+                  if (!showEllipsis) {
+                    for (let i = 1; i <= totalPages; i++) {
+                      items.push(
+                        <PaginationItem key={i}>
+                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                            {i}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    }
+                  } else {
+                    // Always show first page
+                    items.push(
+                      <PaginationItem key={1}>
+                        <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>
+                          1
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                    // Show ellipsis if needed before current
+                    if (page > 3) {
+                      items.push(
+                        <PaginationItem key="start-ellipsis">
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      );
+                    }
+                    // Show pages around current
+                    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
+                      items.push(
+                        <PaginationItem key={i}>
+                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                            {i}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    }
+                    // Show ellipsis if needed after current
+                    if (page < totalPages - 2) {
+                      items.push(
+                        <PaginationItem key="end-ellipsis">
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      );
+                    }
+                    // Always show last page
+                    items.push(
+                      <PaginationItem key={totalPages}>
+                        <PaginationLink isActive={page === totalPages} onClick={() => setPage(totalPages)}>
+                          {totalPages}
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                  }
+                  return items;
+                })()}
                 <PaginationItem>
                   <PaginationNext
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}

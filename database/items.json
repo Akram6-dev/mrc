@@ -2,24 +2,24 @@
   {
     "name": "Lenovo G40",
     "category": "Elektronik",
-    "stock": 11,
+    "stock": 15,
     "condition": "Baik",
     "description": "",
     "icon": "laptop",
     "id": "1754637098494",
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-10-06T02:26:18.612Z"
+    "updatedAt": "2025-10-06T02:58:12.266Z"
   },
   {
     "name": "Proyektor",
     "category": "Elektronik",
-    "stock": 2,
+    "stock": 4,
     "condition": "Baik",
     "description": "LCD PROYEKTOR EB-X51\nSet (KABEL HDMI, VGA & POWER)",
     "icon": "projector",
     "id": "1754696680732",
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-10-06T01:26:24.854Z"
+    "updatedAt": "2025-10-06T03:12:45.479Z"
   },
   {
     "name": "Kabel HDMI",
@@ -35,24 +35,24 @@
   {
     "name": "Terminal Listrik",
     "category": "Elektronik",
-    "stock": 3,
+    "stock": 6,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754873198845",
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-10-06T02:26:19.247Z"
+    "updatedAt": "2025-10-06T03:12:45.553Z"
   },
   {
     "name": "Speaker Bluetooth",
     "category": "Elektronik",
-    "stock": 3,
+    "stock": 4,
     "condition": "Baik",
     "description": "Nemesis Odette X70",
     "icon": "speaker",
     "id": "1754890073251",
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-10-06T01:42:09.445Z"
+    "updatedAt": "2025-10-06T02:58:03.961Z"
   },
   {
     "name": "Lenovo TPM Core i3",

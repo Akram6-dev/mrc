@@ -40,22 +40,28 @@ export function getDaysUntilDue(dueDate: string): number {
 }
 
 export function getColorFromName(name: string | undefined) {
-  if (!name) return "bg-gradient-to-br from-accent-500 to-accent-600";
+  if (!name) return "bg-gradient-to-br from-accent-400 to-accent-500";
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   }
   const palette = [
-    "from-blue-500 to-blue-600",
-    "from-green-500 to-green-600",
-    "from-pink-500 to-pink-600",
-    "from-yellow-500 to-yellow-600",
-    "from-purple-500 to-purple-600",
-    "from-orange-500 to-orange-600",
-    "from-teal-500 to-teal-600",
-    "from-indigo-500 to-indigo-600",
-    "from-rose-500 to-rose-600",
-    "from-cyan-500 to-cyan-600"
+    "from-blue-400 to-blue-500",
+    "from-green-400 to-green-500",
+    "from-pink-400 to-pink-500",
+    "from-yellow-400 to-yellow-500",
+    "from-purple-400 to-purple-500",
+    "from-orange-400 to-orange-500",
+    "from-teal-400 to-teal-500",
+    "from-indigo-400 to-indigo-500",
+    "from-rose-400 to-rose-500",
+    "from-cyan-400 to-cyan-500",
+    "from-lime-400 to-lime-500",
+    "from-emerald-400 to-emerald-500",
+    "from-fuchsia-400 to-fuchsia-500",
+    "from-violet-400 to-violet-500",
+    "from-sky-400 to-sky-500",
+    "from-amber-400 to-amber-500",
   ];
   const idx = Math.abs(hash) % palette.length;
   return `bg-gradient-to-br ${palette[idx]}`;
