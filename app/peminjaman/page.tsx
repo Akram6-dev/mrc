@@ -286,7 +286,10 @@ export default function PeminjamanPage() {
           typeof borrower.officerId === "string"
             ? borrower.officerId.toLowerCase()
             : "";
-        const combined = `${name} ${nip} ${officerId}`;
+        const rfid =
+          typeof borrower.rfid === "string" ? borrower.rfid.toLowerCase() : "";
+
+        const combined = `${name} ${nip} ${officerId} ${rfid}`;
         // Semua kata kunci harus ada di string gabungan
         return keywords.every((word) => combined.includes(word));
       });
@@ -403,7 +406,11 @@ export default function PeminjamanPage() {
                                 typeof b.officerId === "string"
                                   ? b.officerId.toLowerCase()
                                   : "";
-                              const combined = `${name} ${nip} ${officerId}`;
+                              const rfid =
+                                typeof b.rfid === "string"
+                                  ? b.rfid.toLowerCase()
+                                  : "";
+                              const combined = `${name} ${nip} ${officerId} ${rfid}`;
                               return keywords.every((word) =>
                                 combined.includes(word)
                               );
@@ -450,7 +457,11 @@ export default function PeminjamanPage() {
                                 typeof b.officerId === "string"
                                   ? b.officerId.toLowerCase()
                                   : "";
-                              const combined = `${name} ${nip} ${officerId}`;
+                              const rfid =
+                                typeof b.rfid === "string"
+                                  ? b.rfid.toLowerCase()
+                                  : "";
+                              const combined = `${name} ${nip} ${officerId} ${rfid}`;
                               return keywords.every((word) =>
                                 combined.includes(word)
                               );

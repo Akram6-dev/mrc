@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { RotateCcw, Search, AlertTriangle, Clock, CheckCircle, User, Package, Filter, Laptop, Cable, Projector, Mouse, Tablet, Printer, Monitor, Keyboard, Speaker, HdmiPort, Plug, Presentation, MicVocal } from "lucide-react"
+import { RotateCcw, Search, AlertTriangle, Clock, CheckCircle, User, Package, Filter, Laptop, Cable, Projector, Mouse, Tablet, Printer, Monitor, Keyboard, Speaker, HdmiPort, Plug, Presentation, MicVocal, X } from "lucide-react"
 
 // Icon options for items, idiomatik seperti barang
 const ICON_OPTIONS = [
@@ -32,7 +32,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { auth } from "@/lib/auth"
 import api from "@/lib/api"
 import type { LoanWithDetails } from "@/lib/types"
-import { formatDate, formatDateTime, isOverdue, getDaysUntilDue } from "@/lib/utils"
+import { formatDate, formatDateTime, isOverdue, getDaysUntilDue, getColorFromName } from "@/lib/utils"
 
 export default function PengembalianPage() {
   const [loans, setLoans] = useState<LoanWithDetails[]>([])
@@ -367,14 +367,24 @@ export default function PengembalianPage() {
         <div className="p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
             <div className="relative md:col-span-3">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
               <Input
                 type="text"
                 placeholder="Cari peminjam atau barang..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="input-field pl-10"
+                className="input-field pl-10 pr-10"
               />
+              {search && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-600 p-1 rounded-full transition-colors"
+                  onClick={() => setSearch("")}
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
             </div>
 
             <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -456,7 +466,7 @@ export default function PengembalianPage() {
                   >
                     <TableCell>
                       <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getColorFromName(loan.borrower?.name)}`}>
                           <span className="text-white text-base font-semibold">
                             {loan.borrower?.name?.charAt(0) || "U"}
                           </span>
@@ -534,7 +544,7 @@ export default function PengembalianPage() {
                         <div className="space-y-6">
                           {/* Borrower Card */}
                           <div className="flex items-center gap-4 p-4 rounded-lg bg-gradient-to-r from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 border border-accent-200 dark:border-accent-700 shadow-sm">
-                            <div className="flex-shrink-0 w-14 h-14 rounded-full bg-accent-500 flex items-center justify-center text-white text-2xl font-bold">
+                            <div className={`flex-shrink-0 w-14 h-14 rounded-full ${getColorFromName(detailLoan.borrower?.name)} flex items-center justify-center text-white text-2xl font-bold`}>
                               <User className="w-8 h-8" />
                             </div>
                             <div className="flex-1 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">

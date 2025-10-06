@@ -15,6 +15,7 @@ export interface Borrower {
   name: string
   nip: string
   officerId: string
+  rfid: string
   phone: string
   gender: "L" | "P"
   createdAt: string

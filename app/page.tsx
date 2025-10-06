@@ -29,7 +29,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { auth } from "@/lib/auth"
 import api from "@/lib/api"
 import type { DashboardStats, LoanWithDetails } from "@/lib/types"
-import { formatDate, isOverdue } from "@/lib/utils"
+import { formatDate, isOverdue, getColorFromName } from "@/lib/utils"
 import { ChartContainer } from "@/components/ui/chart"
 import {
   BarChart,
@@ -293,7 +293,7 @@ export default function DashboardPage() {
                   >
                     <TableCell className="px-3 py-3">
                       <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getColorFromName(loan.borrower?.name)}`}>
                           <span className="text-white text-base font-semibold">
                             {loan.borrower?.name?.charAt(0) || "U"}
                           </span>

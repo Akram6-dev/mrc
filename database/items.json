@@ -2,24 +2,24 @@
   {
     "name": "Lenovo G40",
     "category": "Elektronik",
-    "stock": 45,
+    "stock": 11,
     "condition": "Baik",
     "description": "",
     "icon": "laptop",
     "id": "1754637098494",
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-09-17T00:28:49.235Z"
+    "updatedAt": "2025-10-06T02:26:18.612Z"
   },
   {
     "name": "Proyektor",
     "category": "Elektronik",
-    "stock": 10,
+    "stock": 2,
     "condition": "Baik",
     "description": "LCD PROYEKTOR EB-X51\nSet (KABEL HDMI, VGA & POWER)",
     "icon": "projector",
     "id": "1754696680732",
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-09-17T00:28:49.282Z"
+    "updatedAt": "2025-10-06T01:26:24.854Z"
   },
   {
     "name": "Kabel HDMI",
@@ -30,29 +30,29 @@
     "icon": "hdmi",
     "id": "1754696777625",
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2025-09-15T07:52:35.602Z"
+    "updatedAt": "2025-09-25T08:02:43.423Z"
   },
   {
     "name": "Terminal Listrik",
     "category": "Elektronik",
-    "stock": 13,
+    "stock": 3,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754873198845",
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-09-17T00:48:50.175Z"
+    "updatedAt": "2025-10-06T02:26:19.247Z"
   },
   {
     "name": "Speaker Bluetooth",
     "category": "Elektronik",
-    "stock": 4,
+    "stock": 3,
     "condition": "Baik",
     "description": "Nemesis Odette X70",
     "icon": "speaker",
     "id": "1754890073251",
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-09-15T08:17:13.123Z"
+    "updatedAt": "2025-10-06T01:42:09.445Z"
   },
   {
     "name": "Lenovo TPM Core i3",
@@ -63,7 +63,7 @@
     "icon": "laptop",
     "id": "1754983247404",
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2025-09-15T07:57:33.183Z"
+    "updatedAt": "2025-09-29T08:05:12.296Z"
   },
   {
     "name": "Mouse",
@@ -96,7 +96,7 @@
     "icon": "presentation",
     "id": "1756267124262",
     "createdAt": "2025-08-27T03:58:44.262Z",
-    "updatedAt": "2025-08-29T08:30:00.646Z"
+    "updatedAt": "2025-09-22T07:41:49.811Z"
   },
   {
     "name": "Tablet ADVAN 8001",
@@ -107,7 +107,7 @@
     "icon": "tablet",
     "id": "1756288012966",
     "createdAt": "2025-08-27T09:46:52.966Z",
-    "updatedAt": "2025-08-27T23:49:03.104Z"
+    "updatedAt": "2025-10-06T00:50:28.742Z"
   },
   {
     "name": "Tangga Teleskopik",
@@ -118,7 +118,7 @@
     "icon": "other",
     "id": "1756947064431",
     "createdAt": "2025-09-04T00:51:04.431Z",
-    "updatedAt": "2025-09-04T07:05:41.047Z"
+    "updatedAt": "2025-09-25T03:00:58.020Z"
   },
   {
     "name": "USB to LAN",
@@ -129,10 +129,10 @@
     "icon": "cable",
     "id": "1756969519963",
     "createdAt": "2025-09-04T07:05:19.963Z",
-    "updatedAt": "2025-09-04T08:27:18.910Z"
+    "updatedAt": "2025-09-23T05:18:24.037Z"
   },
   {
-    "name": "Stand HP",
+    "name": "Tripod Stand HP",
     "category": "Alat",
     "stock": 1,
     "condition": "Baik",
@@ -140,6 +140,6 @@
     "icon": "other",
     "id": "1757898556984",
     "createdAt": "2025-09-15T01:09:16.984Z",
-    "updatedAt": "2025-09-15T05:36:37.534Z"
+    "updatedAt": "2025-09-23T00:22:37.354Z"
   }
 ]

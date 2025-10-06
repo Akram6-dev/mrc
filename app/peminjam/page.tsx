@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Search, Edit, Trash2, Users, Mail, Phone } from "lucide-react"
+import { Plus, Search, Edit, Trash2, Users, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
@@ -43,12 +43,14 @@ export default function PeminjamPage() {
     name: string
     nip: string
     officerId: string
+    rfid: string
     phone: string
     gender: "L" | "P"
   }>({
     name: "",
     nip: "",
     officerId: "",
+    rfid: "",
     phone: "",
     gender: "L",
   })
@@ -77,6 +79,7 @@ export default function PeminjamPage() {
         name: b.name,
         nip: b.nip,
         officerId: b.officerId,
+        rfid: b.rfid || "",
         phone: b.phone || "",
         gender: b.gender,
         createdAt: b.createdAt,
@@ -156,6 +159,7 @@ export default function PeminjamPage() {
       name: borrower.name,
       nip: borrower.nip,
       officerId: borrower.officerId,
+      rfid: borrower.rfid || "",
       phone: borrower.phone || "",
       gender: borrower.gender,
     })
@@ -189,6 +193,7 @@ export default function PeminjamPage() {
       name: "",
       nip: "",
       officerId: "",
+      rfid: "",
       phone: "",
       gender: "L",
     })
@@ -303,6 +308,16 @@ export default function PeminjamPage() {
                       />
                     </div>
                   </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">RFID</label>
+                    <Input
+                      type="text"
+                      value={formData.rfid}
+                      onChange={(e) => setFormData({ ...formData, rfid: e.target.value })}
+                      className="input-field max-w-2xl w-full"
+                      placeholder="0123456789"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200 dark:border-gray-700">
@@ -333,14 +348,24 @@ export default function PeminjamPage() {
         {/* Search */}
         <div className="p-6 mb-6">
           <div className="relative max-w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
             <Input
               type="text"
               placeholder="Cari peminjam..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="input-field pl-10 text-sm"
+              className="input-field pl-10 pr-10"
             />
+            {search && (
+              <button
+                type="button"
+                aria-label="Clear search"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-600 p-1 rounded-full transition-colors"
+                onClick={() => setSearch("")}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
           </div>
         </div>
         {totalPages > 1 && (
@@ -400,10 +425,10 @@ export default function PeminjamPage() {
                 </TableRow>
               ) : (
                 paginatedBorrowers.map((borrower) => (
-                    <TableRow
+                  <TableRow
                     key={borrower.id}
                     className={paginatedBorrowers.indexOf(borrower) % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/40" : ""}
-                    >
+                  >
                     <TableCell className="font-medium text-gray-900 dark:text-white">{borrower.name}</TableCell>
                     <TableCell>{borrower.nip}</TableCell>
                     <TableCell>{borrower.officerId}</TableCell>
@@ -412,24 +437,24 @@ export default function PeminjamPage() {
                     <TableCell>{formatDate(borrower.createdAt)}</TableCell>
                     <TableCell>
                       <div className="flex space-x-1">
-                      <button
-                        onClick={() => handleEdit(borrower)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => {
-                        setDeletingBorrower(borrower)
-                        setIsDeleteDialogOpen(true)
-                        }}
-                        className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                        <button
+                          onClick={() => handleEdit(borrower)}
+                          className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setDeletingBorrower(borrower)
+                            setIsDeleteDialogOpen(true)
+                          }}
+                          className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
                     </TableCell>
-                    </TableRow>
+                  </TableRow>
                 ))
               )}
             </TableBody>

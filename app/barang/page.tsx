@@ -21,6 +21,7 @@ import {
   Presentation,
   MicVocal,
   Package,
+  X,
 } from "lucide-react"
 import Loading from "@/components/ui/loading"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog"
@@ -346,14 +347,24 @@ const ICON_OPTIONS = [
         <div className="p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
             <div className="relative md:col-span-3">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
               <Input
                 type="text"
                 placeholder="Cari barang..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="input-field pl-10"
+                className="input-field pl-10 pr-10"
               />
+              {search && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-600 p-1 rounded-full transition-colors"
+                  onClick={() => setSearch("")}
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
             </div>
 
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
