@@ -2,24 +2,24 @@
   {
     "name": "Lenovo G40",
     "category": "Elektronik",
-    "stock": 15,
+    "stock": 8,
     "condition": "Baik",
     "description": "",
     "icon": "laptop",
     "id": "1754637098494",
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-10-06T02:58:12.266Z"
+    "updatedAt": "2025-10-07T05:43:39.164Z"
   },
   {
     "name": "Proyektor",
     "category": "Elektronik",
-    "stock": 4,
+    "stock": 3,
     "condition": "Baik",
     "description": "LCD PROYEKTOR EB-X51\nSet (KABEL HDMI, VGA & POWER)",
     "icon": "projector",
     "id": "1754696680732",
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-10-06T03:12:45.479Z"
+    "updatedAt": "2025-10-07T05:55:01.845Z"
   },
   {
     "name": "Kabel HDMI",
@@ -35,13 +35,13 @@
   {
     "name": "Terminal Listrik",
     "category": "Elektronik",
-    "stock": 6,
+    "stock": 3,
     "condition": "Baik",
     "description": "",
     "icon": "plug",
     "id": "1754873198845",
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-10-06T03:12:45.553Z"
+    "updatedAt": "2025-10-07T05:55:01.972Z"
   },
   {
     "name": "Speaker Bluetooth",
@@ -52,7 +52,7 @@
     "icon": "speaker",
     "id": "1754890073251",
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-10-06T02:58:03.961Z"
+    "updatedAt": "2025-10-07T05:50:13.585Z"
   },
   {
     "name": "Lenovo TPM Core i3",
@@ -141,5 +141,16 @@
     "id": "1757898556984",
     "createdAt": "2025-09-15T01:09:16.984Z",
     "updatedAt": "2025-09-23T00:22:37.354Z"
+  },
+  {
+    "name": "USB-B",
+    "category": "Elektronik",
+    "stock": 1,
+    "condition": "Baik",
+    "description": "",
+    "icon": "cable",
+    "id": "1759728913994",
+    "createdAt": "2025-10-06T05:35:13.994Z",
+    "updatedAt": "2025-10-06T06:12:46.921Z"
   }
 ]
