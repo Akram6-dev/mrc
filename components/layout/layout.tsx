@@ -13,7 +13,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname()
 
-  if (pathname === "/login" || pathname === "/print" || pathname === "/stats") {
+  if (pathname === "/login" || pathname === "/print" || pathname === "/stats" || pathname === "/book") {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {children}

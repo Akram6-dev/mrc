@@ -1,156 +1,970 @@
 [
   {
-    "name": "Lenovo G40",
+    "name": "Lenovo G40-45",
     "category": "Elektronik",
-    "stock": 8,
-    "condition": "Baik",
-    "description": "",
+    "description": "Laptop Umum",
     "icon": "laptop",
     "id": "1754637098494",
+    "items": [
+      {
+        "serialNumber": "448740179",
+        "sn": "PF051WVE",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "150021523",
+        "sn": "PF07VGWV",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1442990964",
+        "sn": "PF052471",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "149927443",
+        "sn": "PF051XSY",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1309464923",
+        "sn": "PF054E1Q",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1311632715",
+        "sn": "PF07Q9MS",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "149960963",
+        "sn": "PF07QKBP",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "2347265994",
+        "sn": "PF054XW8",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "serialNumber": "847522295",
+        "sn": "PF054EA0",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "481096242",
+        "sn": "PF055RA4",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "0855536887",
+        "sn": "PF0540HX",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "122587299",
+        "sn": "PF051XXL",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "177051075",
+        "sn": "PF057WEG",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1382240728",
+        "sn": "PF052SGY",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "149780771",
+        "sn": "PF059HZD",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1444089684",
+        "sn": "PF052RG1",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1452720996",
+        "sn": "PF054JFN",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "149659187",
+        "sn": "PF0525FJ",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1378696616",
+        "sn": "PF0512T1",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "855737827",
+        "sn": "PF050WU3",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1384902120",
+        "sn": "PF07SC0Z",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "602048064",
+        "sn": "PF0512JT",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1448321908",
+        "sn": "PF054XRK",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1451850100",
+        "sn": "PF07SARG",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "441030467",
+        "sn": "PF054WYY",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1388709832",
+        "sn": "PF07S4J1",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "858620167",
+        "sn": "PF052QR6",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "2805597667",
+        "sn": "PF05502Q",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "155485923",
+        "sn": "PF05CF20",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1315056715",
+        "sn": "PF07Q6P2",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "851788775",
+        "sn": "PF076MTE",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-10-07T05:43:39.164Z"
+    "updatedAt": "2025-10-15T04:58:45.485Z",
+    "stock": 31,
+    "serialSearch": "",
+    "image": "/assets/img/1760406973256.jpg"
   },
   {
     "name": "Proyektor",
     "category": "Elektronik",
-    "stock": 3,
-    "condition": "Baik",
-    "description": "LCD PROYEKTOR EB-X51\nSet (KABEL HDMI, VGA & POWER)",
+    "description": "LCD Proyektor EPSON EB-X51\nSet (Kabel HDMI, VGA & Power)",
     "icon": "projector",
     "id": "1754696680732",
+    "items": [
+      {
+        "serialNumber": "0123642947",
+        "sn": "X8A41900578",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1380566968",
+        "sn": "X8A41700568",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760488812206"
+      },
+      {
+        "serialNumber": "2939832620",
+        "sn": "X4GG9201149",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760501354587",
+        "updatedAt": "2025-10-15T02:19:22.163Z"
+      },
+      {
+        "serialNumber": "845694151",
+        "sn": "X4GG9200922",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "0131530707",
+        "sn": "X8A40Z01640",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1320214843",
+        "sn": "X4GG9200970",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "854329079",
+        "sn": "X8A41106180",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1453456180",
+        "sn": "WFEK6200197",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1324439387",
+        "sn": "X8A44X01796",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "1321947195",
+        "sn": "X8A44X01691",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "154334947",
+        "sn": "X8A44X01779",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "0842397383",
+        "sn": "X8A44X01674",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760411655614",
+        "updatedAt": "2025-10-14T03:15:31.998Z"
+      }
+    ],
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-10-07T05:55:01.845Z"
+    "updatedAt": "2025-10-15T04:58:46.204Z",
+    "stock": 12,
+    "serialSearch": "",
+    "image": "/assets/img/1760408189747.jpg"
   },
   {
     "name": "Kabel HDMI",
     "category": "Elektronik",
-    "stock": 15,
-    "condition": "Baik",
-    "description": "",
+    "description": "Vention HDMI 5 meter",
     "icon": "hdmi",
     "id": "1754696777625",
+    "items": [
+      {
+        "serialNumber": "HDMI001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "HDMI014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2025-09-25T08:02:43.423Z"
+    "updatedAt": "2025-10-14T06:01:44.554Z",
+    "image": "/assets/img/1760421697842.png",
+    "serialSearch": "",
+    "stock": 14
   },
   {
     "name": "Terminal Listrik",
     "category": "Elektronik",
-    "stock": 3,
-    "condition": "Baik",
-    "description": "",
+    "description": "Ukuran panjang & pendek",
     "icon": "plug",
     "id": "1754873198845",
+    "items": [
+      {
+        "serialNumber": "TRL001",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760493233219"
+      },
+      {
+        "serialNumber": "TRL002",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760489309747"
+      },
+      {
+        "serialNumber": "TRL003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL004",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760488812206"
+      },
+      {
+        "serialNumber": "TRL005",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760489309747"
+      },
+      {
+        "serialNumber": "TRL006",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760501354587",
+        "updatedAt": "2025-10-15T02:19:17.599Z"
+      },
+      {
+        "serialNumber": "TRL007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-10-07T05:55:01.972Z"
+    "updatedAt": "2025-10-15T04:58:46.275Z",
+    "stock": 14,
+    "serialSearch": "",
+    "image": "/assets/img/1760421889541.webp"
   },
   {
     "name": "Speaker Bluetooth",
     "category": "Elektronik",
-    "stock": 4,
-    "condition": "Baik",
     "description": "Nemesis Odette X70",
     "icon": "speaker",
     "id": "1754890073251",
+    "items": [
+      {
+        "serialNumber": "SPK001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "SPK002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "SPK003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "SPK004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-10-07T05:50:13.585Z"
+    "updatedAt": "2025-10-14T06:07:26.790Z",
+    "image": "/assets/img/1760422046967.jpg",
+    "serialSearch": "",
+    "stock": 4
   },
   {
-    "name": "Lenovo TPM Core i3",
+    "name": "Lenovo Ideapad 320 Core i3",
     "category": "Elektronik",
-    "stock": 14,
-    "condition": "Baik",
     "description": "Khusus TPM",
     "icon": "laptop",
     "id": "1754983247404",
+    "items": [
+      {
+        "serialNumber": "LNVTPM001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LNVTPM014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2025-09-29T08:05:12.296Z"
+    "updatedAt": "2025-10-14T06:10:41.363Z",
+    "image": "/assets/img/1760422192877.webp",
+    "serialSearch": "",
+    "stock": 14
   },
   {
     "name": "Mouse",
     "category": "Elektronik",
-    "stock": 10,
-    "condition": "Baik",
     "description": "",
     "icon": "mouse",
     "id": "1755655423398",
+    "items": [
+      {
+        "serialNumber": "MSE001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "MSE014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-20T02:03:43.398Z",
-    "updatedAt": "2025-09-09T08:08:01.768Z"
+    "updatedAt": "2025-10-14T06:12:37.268Z",
+    "image": "/assets/img/1760422356679.jpg",
+    "serialSearch": "",
+    "stock": 14
   },
   {
     "name": "Kabel UTP",
     "category": "Elektronik",
-    "stock": 5,
-    "condition": "Baik",
     "description": "",
     "icon": "cable",
     "id": "1756101309869",
+    "items": [
+      {
+        "serialNumber": "UTP001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "UTP002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "UTP003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "UTP004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "UTP005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-25T05:55:09.869Z",
-    "updatedAt": "2025-08-25T05:55:09.869Z"
+    "updatedAt": "2025-10-14T06:13:30.512Z",
+    "image": "/assets/img/1760422410717.jpg",
+    "serialSearch": "",
+    "stock": 5
   },
   {
     "name": "Layar Proyektor",
     "category": "Elektronik",
-    "stock": 2,
-    "condition": "Baik",
     "description": "",
     "icon": "presentation",
     "id": "1756267124262",
+    "items": [
+      {
+        "serialNumber": "LYR001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "LYR002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-27T03:58:44.262Z",
-    "updatedAt": "2025-09-22T07:41:49.811Z"
+    "updatedAt": "2025-10-14T06:14:52.739Z",
+    "image": "/assets/img/1760422492923.webp",
+    "serialSearch": "",
+    "stock": 2
   },
   {
     "name": "Tablet ADVAN 8001",
     "category": "Elektronik",
-    "stock": 799,
-    "condition": "Baik",
     "description": "",
     "icon": "tablet",
     "id": "1756288012966",
+    "items": [
+      {
+        "serialNumber": "TAB001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TAB002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TAB003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TAB004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TAB005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-08-27T09:46:52.966Z",
-    "updatedAt": "2025-10-06T00:50:28.742Z"
+    "updatedAt": "2025-10-14T06:17:43.265Z",
+    "image": "/assets/img/1760422663355.jfif",
+    "serialSearch": "",
+    "stock": 5
   },
   {
     "name": "Tangga Teleskopik",
     "category": "Alat",
-    "stock": 1,
-    "condition": "Baik",
     "description": "",
     "icon": "other",
     "id": "1756947064431",
+    "items": [
+      {
+        "serialNumber": "TNG001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-09-04T00:51:04.431Z",
-    "updatedAt": "2025-09-25T03:00:58.020Z"
+    "updatedAt": "2025-10-14T06:21:08.394Z",
+    "image": "/assets/img/1760422868475.png",
+    "serialSearch": "",
+    "stock": 1
   },
   {
     "name": "USB to LAN",
     "category": "Elektronik",
-    "stock": 5,
-    "condition": "Baik",
     "description": "",
     "icon": "cable",
     "id": "1756969519963",
+    "items": [
+      {
+        "serialNumber": "USBLAN001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "USBLAN002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "USBLAN003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-09-04T07:05:19.963Z",
-    "updatedAt": "2025-09-23T05:18:24.037Z"
+    "updatedAt": "2025-10-14T06:21:45.160Z",
+    "image": "/assets/img/1760422905339.jpg",
+    "serialSearch": "",
+    "stock": 3
   },
   {
     "name": "Tripod Stand HP",
     "category": "Alat",
-    "stock": 1,
-    "condition": "Baik",
     "description": "",
     "icon": "other",
     "id": "1757898556984",
+    "items": [
+      {
+        "serialNumber": "TRP001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-09-15T01:09:16.984Z",
-    "updatedAt": "2025-09-23T00:22:37.354Z"
+    "updatedAt": "2025-10-14T06:22:14.930Z",
+    "image": "/assets/img/1760422935106.jpg",
+    "serialSearch": "",
+    "stock": 1
   },
   {
     "name": "USB-B",
     "category": "Elektronik",
-    "stock": 1,
-    "condition": "Baik",
     "description": "",
     "icon": "cable",
     "id": "1759728913994",
+    "items": [
+      {
+        "serialNumber": "USBB001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
     "createdAt": "2025-10-06T05:35:13.994Z",
-    "updatedAt": "2025-10-06T06:12:46.921Z"
+    "updatedAt": "2025-10-14T06:23:39.722Z",
+    "image": "/assets/img/1760423019819.jfif",
+    "serialSearch": "",
+    "stock": 1
   }
 ]

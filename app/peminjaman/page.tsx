@@ -1,9 +1,40 @@
 "use client";
 
-import type React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Search, Package, User, X } from "lucide-react";
+import {
+  Laptop,
+  Cable,
+  Projector,
+  HdmiPort,
+  Plug,
+  Mouse,
+  Tablet,
+  Printer,
+  Monitor,
+  Keyboard,
+  Speaker,
+  Presentation,
+  MicVocal,
+} from "lucide-react";
+
+const ICON_OPTIONS = [
+  { label: "Laptop", value: "laptop", icon: Laptop },
+  { label: "Cable", value: "cable", icon: Cable },
+  { label: "Projector", value: "projector", icon: Projector },
+  { label: "HDMI", value: "hdmi", icon: HdmiPort },
+  { label: "Plug", value: "plug", icon: Plug },
+  { label: "Mouse", value: "mouse", icon: Mouse },
+  { label: "Tablet", value: "tablet", icon: Tablet },
+  { label: "Printer", value: "printer", icon: Printer },
+  { label: "Monitor", value: "monitor", icon: Monitor },
+  { label: "Keyboard", value: "keyboard", icon: Keyboard },
+  { label: "Speaker", value: "speaker", icon: Speaker },
+  { label: "Presentation", value: "presentation", icon: Presentation },
+  { label: "Mic", value: "mic", icon: MicVocal },
+  { label: "Lainnya", value: "other", icon: Package },
+];
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import Loading from "@/components/ui/loading";
 import { toast } from "sonner";
@@ -12,6 +43,7 @@ import { DatePickerField } from "./DatePickerField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import SerialAutocomplete from "./SerialAutocomplete";
 import {
   Select,
   SelectContent,
@@ -36,6 +68,7 @@ import { auth } from "@/lib/auth";
 import api from "@/lib/api";
 import type { Item, Borrower, Loan, LoanItem } from "@/lib/types";
 
+
 export default function PeminjamanPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [borrowers, setBorrowers] = useState<Borrower[]>([]);
@@ -47,8 +80,9 @@ export default function PeminjamanPage() {
 
   // Form state
   const [selectedBorrower, setSelectedBorrower] = useState("");
+  // Loan per serial number
   const [loanItems, setLoanItems] = useState<LoanItem[]>([
-    { itemId: "", quantity: 1, serialNumber: "" },
+    { serialNumber: "", note: "" },
   ]);
   const [dueDate, setDueDate] = useState<Date | undefined>(undefined);
   const [settings, setSettings] = useState<any>(null);
@@ -59,6 +93,11 @@ export default function PeminjamanPage() {
   const [borrowerSearch, setBorrowerSearch] = useState("");
   // Popover state (must be inside component)
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  // Serial popover/search state (move to top-level to avoid Rules of Hooks error)
+  const [isSerialPopoverOpen, setIsSerialPopoverOpen] = useState(false);
+  const [serialSearch, setSerialSearch] = useState("");
+  const [activeSerialIdx, setActiveSerialIdx] = useState(0);
 
   // Define loadData to fetch items and borrowers
   const loadData = async () => {
@@ -113,24 +152,19 @@ export default function PeminjamanPage() {
     setSuccess("");
 
     try {
-      // Validate items
-      const validItems = loanItems.filter(
-        (item) => item.itemId && item.quantity > 0
-      );
+      // Validate serials
+      const validItems = loanItems.filter((item) => item.serialNumber);
       if (validItems.length === 0) {
-        throw new Error("Pilih minimal satu barang untuk dipinjam");
+        throw new Error("Pilih minimal satu serial number untuk dipinjam");
       }
-
-      // Check stock availability
+      // Check serial availability
       for (const loanItem of validItems) {
-        const itemData = items.find((item) => item.id === loanItem.itemId);
-        if (!itemData) {
-          throw new Error("Barang tidak ditemukan");
+        const serial = items.flatMap(i => i.items || []).find(s => s.serialNumber === loanItem.serialNumber);
+        if (!serial) {
+          throw new Error(`Serial number ${loanItem.serialNumber} tidak ditemukan`);
         }
-        if (loanItem.quantity > itemData.stock) {
-          throw new Error(
-            `Stok ${itemData.name} tidak mencukupi (tersedia: ${itemData.stock})`
-          );
+        if (serial.status !== 1) {
+          throw new Error(`Serial number ${loanItem.serialNumber} tidak tersedia untuk dipinjam`);
         }
       }
 
@@ -159,7 +193,7 @@ export default function PeminjamanPage() {
 
       const loanData: Omit<Loan, "id" | "createdAt" | "updatedAt"> = {
         borrowerId: selectedBorrower,
-        items: validItems,
+        items: validItems.map(({ serialNumber, note }) => ({ serialNumber, note })),
         borrowDate: toWIBISOString(nowJakarta),
         dueDate: toWIBISOString(dueJakarta),
         status: "dipinjam",
@@ -174,13 +208,31 @@ export default function PeminjamanPage() {
           // Ambil data peminjam
           const borrower = borrowers.find(b => b.id === selectedBorrower);
           // Format items
-          const itemsBody = validItems.map(item => {
-            const itemData = items.find(i => i.id === item.itemId);
-            return {
-              item_name: itemData?.name || "Barang",
-              qty: item.quantity
-            };
-          });
+            // Gabungkan serial dengan nama barang yang sama
+            const itemsBody = Object.values(
+            validItems.reduce((acc, item) => {
+              // Temukan info barang
+              const found = items.flatMap(i => (i.items || []).map(s => ({
+              itemName: i.name,
+              serialNumber: s.serialNumber,
+              category: i.category,
+              description: i.description
+              }))).find(s => s.serialNumber === item.serialNumber);
+
+              const key = found?.itemName || "Barang";
+              if (!acc[key]) {
+              acc[key] = {
+                item_name: key,
+                qty: 0,
+              };
+              }
+              acc[key].qty += 1;
+              return acc;
+            }, {} as Record<string, { item_name: string; qty: number}>)
+            ).map(group => ({
+            item_name: group.item_name,
+            qty: group.qty,
+            }));
           // Compose body
           const postBody = {
             id: createdLoan?.id || "",
@@ -204,21 +256,28 @@ export default function PeminjamanPage() {
         }
       }
 
-      // Update item stocks
-      for (const loanItem of validItems) {
-        const itemData = items.find((item) => item.id === loanItem.itemId);
-        if (itemData) {
-          await api.updateItem(loanItem.itemId, {
-            stock: itemData.stock - loanItem.quantity,
-          });
-        }
+      // Update semua serial: jika serialNumber dipinjam, set loanId ke createdLoan.id dan status 0, jika tidak, pastikan loanId null/undefined
+      for (const item of items) {
+        if (!item.items) continue;
+        const updatedSerials = item.items.map(s => {
+          const isBorrowed = validItems.some(li => li.serialNumber === s.serialNumber);
+          if (isBorrowed) {
+            return { ...s, status: 0 as 0, loanId: createdLoan.id };
+          } else if (s.loanId === createdLoan.id) {
+            // Serial yang sebelumnya dipinjam loan ini tapi tidak dipilih sekarang, reset loanId
+            return { ...s, loanId: undefined };
+          } else {
+            return s;
+          }
+        });
+        await api.updateItem(item.id, { items: updatedSerials });
       }
 
       setSuccess("Peminjaman berhasil dicatat!");
 
       // Reset form
-      setSelectedBorrower("");
-      setLoanItems([{ itemId: "", quantity: 1, serialNumber: "" }]);
+  setSelectedBorrower("");
+  setLoanItems([{ serialNumber: "", note: "" }]);
       // Gunakan settings yang sudah di-fetch
       const days = settings?.system?.defaultLoanDays || 7;
       const newDueDate = new Date();
@@ -250,7 +309,7 @@ export default function PeminjamanPage() {
   };
 
   const addLoanItem = () => {
-    setLoanItems([...loanItems, { itemId: "", quantity: 1, serialNumber: "" }]);
+    setLoanItems([...loanItems, { serialNumber: "", note: "" }]);
   };
 
   const removeLoanItem = (index: number) => {
@@ -262,7 +321,7 @@ export default function PeminjamanPage() {
   const updateLoanItem = (
     index: number,
     field: keyof LoanItem,
-    value: string | number
+    value: string
   ) => {
     const updatedItems = [...loanItems];
     updatedItems[index] = { ...updatedItems[index], [field]: value };
@@ -544,255 +603,404 @@ export default function PeminjamanPage() {
 
             {/* Items Selection - Compact */}
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Package className="w-4 h-4 text-accent-600 dark:text-accent-400" />
-                  <Label className="text-sm font-medium text-gray-900 dark:text-white">
-                    Daftar Barang
-                  </Label>
-                </div>
-                <button
-                  type="button"
-                  onClick={addLoanItem}
-                  className="btn-outline text-xs"
-                >
-                  <Plus className="w-3 h-3 mr-1" />
-                  Tambah
-                </button>
-              </div>
-
-              <div className="space-y-3">
-                {loanItems.map((loanItem, index) => {
-                  const selectedItem = items.find(
-                    (item) => item.id === loanItem.itemId
-                  );
-                  return (
-                    <div
-                      key={index}
-                      className="p-3 bg-white dark:bg-gray-800 rounded-lg space-y-3 border-l-4 border-accent-600 dark:border-accent-400 pl-4"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="py-1 text-xs font-medium text-gray-700 dark:text-gray-300">
-                          Barang #{index + 1}
-                        </span>
-                        {loanItems.length > 1 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* LEFT: List barang yang dipinjam */}
+                <div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Package className="w-4 h-4 text-accent-600 dark:text-accent-400" />
+                    <Label className="text-sm font-medium text-gray-900 dark:text-white">
+                      Tambah Serial Dipinjam
+                    </Label>
+                  </div>
+                  {/* Serial Search Popover, same as borrower search */}
+                  {(() => {
+                    // Flat list of available serials
+                    const availableSerials = items
+                      .flatMap((item) => (item.items || []).map((serial) => ({
+                        ...serial,
+                        itemName: item.name,
+                        itemId: item.id,
+                        category: item.category,
+                        description: item.description,
+                      })))
+                      .filter((serial) => serial.status === 1 && !loanItems.some(li => li.serialNumber === serial.serialNumber));
+                    // Filter by search
+                    const filtered = serialSearch.trim() === ""
+                      ? availableSerials
+                      : availableSerials.filter((s) => {
+                          const q = serialSearch.trim().toLowerCase();
+                          return (
+                            String(s.serialNumber).toLowerCase().includes(q) ||
+                            (s.itemName || "").toLowerCase().includes(q)
+                          );
+                        });
+                    // Handler
+                    const handleSerialKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+                      if (filtered.length === 0) return;
+                      if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        setActiveSerialIdx((idx) => Math.min(idx + 1, filtered.length - 1));
+                      } else if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        setActiveSerialIdx((idx) => Math.max(idx - 1, 0));
+                      } else if (e.key === "Enter") {
+                        e.preventDefault();
+                        const selected = filtered[activeSerialIdx];
+                        if (selected) {
+                          setLoanItems((prev) => [...prev, { serialNumber: selected.serialNumber, note: "" }]);
+                          setSerialSearch("");
+                          setActiveSerialIdx(0);
+                          setIsSerialPopoverOpen(false);
+                        }
+                      } else if (e.key === "Tab") {
+                        setIsSerialPopoverOpen(false);
+                      }
+                    };
+                    return (
+                      <Popover open={isSerialPopoverOpen} onOpenChange={setIsSerialPopoverOpen}>
+                        <PopoverTrigger asChild>
                           <Button
-                            type="button"
-                            onClick={() => removeLoanItem(index)}
-                            variant="ghost"
-                            size="sm"
-                            className="h-6 w-6 p-0 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={isSerialPopoverOpen}
+                            className="w-full h-9 text-sm justify-between bg-white text-primary-foreground hover:bg-primary/90 dark:bg-gray-700 dark:text-primary-foreground dark:hover:bg-gray-600 border dark:border-gray-600 transition-colors"
+                            onClick={() => setIsSerialPopoverOpen(true)}
                           >
-                            <X className="w-3 h-3" />
+                            {serialSearch ? (
+                              serialSearch
+                            ) : (
+                              <span className="text-gray-400">Cari atau scan serial number...</span>
+                            )}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0 max-h-72 overflow-auto z-50 min-w-[320px]">
+                          <Command shouldFilter={false}>
+                            <CommandInput
+                              placeholder="Cari serial number atau nama barang..."
+                              value={serialSearch}
+                              onValueChange={setSerialSearch}
+                              autoFocus
+                              inputMode="search"
+                              onKeyDown={handleSerialKeyDown}
+                            />
+                            <CommandList className="max-h-60 overflow-auto">
+                              {filtered.length === 0 ? (
+                                <CommandEmpty>Serial tidak ditemukan.</CommandEmpty>
+                              ) : (
+                                <CommandGroup>
+                                  {filtered.map((serial, idx) => (
+                                    <CommandItem
+                                      key={serial.serialNumber}
+                                      value={serial.serialNumber}
+                                      onSelect={() => {
+                                        setLoanItems((prev) => [...prev, { serialNumber: serial.serialNumber, note: "" }]);
+                                        setSerialSearch("");
+                                        setActiveSerialIdx(0);
+                                        setIsSerialPopoverOpen(false);
+                                      }}
+                                      ref={el => {
+                                        if (idx === activeSerialIdx && el) el.scrollIntoView({ block: "nearest" });
+                                      }}
+                                      className={idx === activeSerialIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""}
+                                    >
+                                      <span className="font-medium">{serial.itemName}</span>
+                                      <span className="ml-2 text-xs text-gray-500">{serial.sn} | {serial.serialNumber}</span>
+                                    </CommandItem>
+                                  ))}
+                                </CommandGroup>
+                              )}
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
+                    );
+                  })()}
+                  {/* List of added serials */}
+                  <div className="space-y-3 mt-2">
+                    {loanItems.map((loanItem, index) => {
+                      const serial = items
+                        .flatMap((item) => (item.items || []).map((s) => ({
+                          ...s,
+                          itemName: item.name,
+                          itemId: item.id,
+                          category: item.category,
+                          description: item.description,
+                          image: item.image,
+                          icon: item.icon,
+                        })))
+                        .find((s) => s.serialNumber === loanItem.serialNumber);
+                      if (!serial) return null;
+                      return (
+                        <div
+                          key={index}
+                          className="p-3 bg-white dark:bg-gray-800 rounded-lg border-l-4 border-accent-600 dark:border-accent-400 pl-4"
+                        >
+                          <div className="flex items-center gap-3 justify-between">
+                            <div className="flex items-center gap-3 min-w-0 flex-1">
+                              {/* Item image, fallback to icon */}
+                              {serial.image ? (
+                                <img
+                                  src={serial.image.startsWith("/assets/") ? serial.image : `/assets/img/${serial.image}`}
+                                  alt={serial.itemName}
+                                  className="w-12 h-12 object-cover rounded-md bg-gray-100 dark:bg-gray-900 flex-shrink-0"
+                                />
+                              ) : (
+                                (() => {
+                                  const iconKey = serial.icon || "laptop";
+                                  const IconComponent = ICON_OPTIONS.find(opt => opt.value === iconKey)?.icon || Package;
+                                  return (
+                                    <span className="w-12 h-12 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-900 text-gray-400">
+                                      <IconComponent className="w-6 h-6" />
+                                    </span>
+                                  );
+                                })()
+                              )}
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                                    {serial.itemName}
+                                  </span>
+                                  <span className="text-xs px-2 py-0.5 rounded bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200 ml-1">
+                                    SN: {serial.sn}
+                                  </span>
+                                </div>
+                                {serial.description && (
+                                  <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                                    {serial.description}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            {loanItems.length > 1 && (
+                              <Button
+                                type="button"
+                                onClick={() => removeLoanItem(index)}
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                              >
+                                <X className="w-3 h-3" />
+                              </Button>
+                            )}
+                          </div>
+                          <Input
+                            type="text"
+                            placeholder="Catatan (opsional)"
+                            value={loanItem.note || ""}
+                            onChange={(e) => updateLoanItem(index, "note", e.target.value)}
+                            className="h-9 text-sm bg-gray-50 mt-2"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                {/* RIGHT: Rangkuman peminjaman */}
+                <div>
+                  <div className="relative bg-gradient-to-br from-accent-100/80 via-white/90 to-accent-200/60 dark:from-accent-900/40 dark:via-gray-800 dark:to-accent-900/10 rounded-2xl shadow-lg border border-accent-200 dark:border-accent-700 p-6 sticky top-6 overflow-hidden">
+                    {/* Decorative accent */}
+                    <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent-200 dark:bg-accent-900/30 rounded-full opacity-20 pointer-events-none" />
+                    <div className="flex items-center gap-4 mb-5">
+                      <span className="w-14 h-14 flex items-center justify-center rounded-full text-accent-700 dark:text-accent-200 text-3xl bg-accent-50 dark:bg-slate-700/50 shadow-md">
+                        <User className="w-8 h-8" />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-lg font-bold text-gray-900 dark:text-white truncate">
+                          {selectedBorrowerData?.name || <span className="text-gray-400">Pilih peminjam</span>}
+                        </div>
+                        {/* Fallback logic for NIP/officerId */}
+                        {selectedBorrowerData?.nip ? (
+                          <div className="text-xs text-accent-700 dark:text-accent-200 font-medium mt-0.5">NIP: {selectedBorrowerData.nip}</div>
+                        ) : selectedBorrowerData?.officerId ? (
+                          <div className="text-xs text-accent-700 dark:text-accent-200 font-medium mt-0.5">ID Pegawai: {selectedBorrowerData.officerId}</div>
+                        ) : null}
+                        {selectedBorrowerData?.phone && (
+                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">No. HP: {selectedBorrowerData.phone}</div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="my-3 border-t border-dashed border-accent-200 dark:border-accent-700" />
+                    <div className="mb-2">
+                      <div className="text-xs font-semibold text-accent-700 dark:text-accent-200 mb-1 tracking-wide uppercase">Total Barang Dipinjam</div>
+                      <div className="flex flex-col gap-1">
+                        {(() => {
+                          // Hitung jumlah per nama barang
+                          const countPerItem: Record<string, number> = {};
+                          loanItems.forEach((loanItem) => {
+                            const serial = items
+                              .flatMap((item) => (item.items || []).map((s) => ({
+                                ...s,
+                                itemName: item.name,
+                                icon: item.icon,
+                              })))
+                              .find((s) => s.serialNumber === loanItem.serialNumber);
+                            if (serial && serial.itemName) {
+                              countPerItem[serial.itemName] = (countPerItem[serial.itemName] || 0) + 1;
+                            }
+                          });
+                          const itemNames = Object.keys(countPerItem);
+                          if (itemNames.length === 0) {
+                            return <div className="text-gray-400 text-xs">Belum ada barang dipilih</div>;
+                          }
+                          return itemNames.map((name) => (
+                            <div key={name} className="flex items-center justify-between text-sm py-1 px-2 rounded-lg bg-white/70 dark:bg-gray-900/40 mb-1">
+                              <span className="flex items-center gap-2 min-w-0">
+                                {/* Icon per barang, mapping sesuai data icon */}
+                                {(() => {
+                                  // Cari serial pertama dengan nama barang ini
+                                  const serial = items
+                                    .flatMap((item) => (item.items || []).map((s) => ({
+                                      ...s,
+                                      itemName: item.name,
+                                      icon: item.icon,
+                                    })))
+                                    .find((s) => s.itemName === name);
+                                  const iconKey = serial?.icon || "laptop";
+                                  const Icon = ICON_OPTIONS.find(opt => opt.value === iconKey)?.icon || Package;
+                                  return <Icon className="w-4 h-4 text-accent-600 dark:text-accent-200 flex-shrink-0" />;
+                                })()}
+                                <span className="truncate font-medium text-gray-900 dark:text-white">{name}</span>
+                              </span>
+                                <span
+                                  className="ml-2 px-0 py-1 rounded bg-accent-600 text-white font-bold text-lg shadow leading-none inline-flex justify-center items-center min-w-[36px] w-[36px] text-center"
+                                >
+                                  {countPerItem[name]}
+                                </span>
+                            </div>
+                          ));
+                        })()}
+                      </div>
+                    </div>
+                    {/* Tambahan: input jatuh tempo, keperluan, catatan, tombol submit */}
+                    <div className="mt-6 space-y-3">
+                      <div>
+                        <Label className="text-sm font-medium text-gray-900 dark:text-white">
+                          Jatuh Tempo
+                        </Label>
+                        <DatePickerField
+                          value={dueDate}
+                          onChange={setDueDate}
+                          placeholder="Pilih tanggal jatuh tempo..."
+                          minDate={new Date()}
+                          className="bg-white text-primary-foreground hover:bg-primary/90 dark:bg-gray-700 dark:text-primary-foreground dark:hover:bg-gray-600 border dark:border-gray-600 transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-sm font-medium text-gray-900 dark:text-white">
+                          Keperluan
+                        </Label>
+                        <Input
+                          type="text"
+                          value={purpose}
+                          onChange={(e) => setPurpose(e.target.value)}
+                          placeholder="KBM"
+                          className="h-9 text-sm mt-1"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-sm font-medium text-gray-900 dark:text-white">
+                          Catatan
+                        </Label>
+                        <Input
+                          type="text"
+                          value={notes}
+                          onChange={(e) => setNotes(e.target.value)}
+                          placeholder="Catatan tambahan..."
+                          className="h-9 text-sm mt-1"
+                        />
+                      </div>
+                      <div className="flex justify-end pt-2">
+                        {/* Submit Button */}
+                        {settings?.system?.borrowConfirmation ? (
+                          <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+                            <AlertDialogTrigger asChild>
+                              <Button
+                                type="button"
+                                disabled={
+                                  isSubmitting ||
+                                  !selectedBorrower ||
+                                  loanItems.every((item) => !item.serialNumber)
+                                }
+                                className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
+                                onClick={(e) => {
+                                  setPendingSubmitEvent(e);
+                                  setShowConfirmDialog(true);
+                                }}
+                              >
+                                {isSubmitting ? (
+                                  <>
+                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                    Memproses...
+                                  </>
+                                ) : (
+                                  <>
+                                    <Plus className="w-4 h-4 mr-2" />
+                                    Catat Peminjaman
+                                  </>
+                                )}
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Konfirmasi Peminjaman</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  Apakah Anda yakin ingin mencatat peminjaman ini?
+                                  Data akan disimpan dan peminjam akan dikirim pesan notifikasi.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel
+                                  onClick={() => setShowConfirmDialog(false)}
+                                  className="rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors">
+                                  Batal
+                                </AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => {
+                                    setShowConfirmDialog(false);
+                                    if (pendingSubmitEvent) {
+                                      doSubmit(pendingSubmitEvent);
+                                      setPendingSubmitEvent(null);
+                                    }
+                                  }}
+                                  autoFocus
+                                  className="rounded-lg font-medium bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-400 transition-colors shadow-sm"
+                                >
+                                  Ya, Catat
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        ) : (
+                          <Button
+                            type="submit"
+                            disabled={
+                              isSubmitting ||
+                              !selectedBorrower ||
+                              loanItems.every((item) => !item.serialNumber)
+                            }
+                            className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
+                          >
+                            {isSubmitting ? (
+                              <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                                Memproses...
+                              </>
+                            ) : (
+                              <>
+                                <Plus className="w-4 h-4 mr-2" />
+                                Catat Peminjaman
+                              </>
+                            )}
                           </Button>
                         )}
                       </div>
-
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-                        <Select
-                          value={loanItem.itemId}
-                          onValueChange={(value) =>
-                            updateLoanItem(index, "itemId", value)
-                          }
-                          required
-                        >
-                          <SelectTrigger className="h-9 text-sm bg-gray-50">
-                            <SelectValue placeholder="-- Pilih barang --" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {items.map((item) => (
-                              <SelectItem key={item.id} value={item.id}>
-                                {item.name} (Stok: {item.stock})
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-
-                        <Input
-                          type="number"
-                          min="0"
-                          max={(() => {
-                            const stock = selectedItem?.stock || 1;
-                            const maxLoan = settings?.system?.maxLoanItems;
-                            return Math.min(stock, maxLoan);
-                          })()}
-                          value={loanItem.quantity === 0 ? "" : loanItem.quantity.toString()}
-                          onChange={(e) => {
-                            const val = e.target.value;
-                            // Allow empty string (user clears input)
-                            if (val === "") {
-                              updateLoanItem(index, "quantity", 0);
-                            } else {
-                              const num = Number.parseInt(val);
-                              updateLoanItem(index, "quantity", isNaN(num) ? 0 : num);
-                            }
-                          }}
-                          placeholder="Jumlah"
-                          className="h-9 text-sm bg-gray-50"
-                          required
-                        />
-
-                        <Input
-                          type="text"
-                          placeholder="No. Seri (opsional)"
-                          value={loanItem.serialNumber || ""}
-                          onChange={(e) =>
-                            updateLoanItem(
-                              index,
-                              "serialNumber",
-                              e.target.value
-                            )
-                          }
-                          className="h-9 text-sm bg-gray-50"
-                        />
-                      </div>
-
-                      {selectedItem && (
-                        <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded text-xs">
-                          <span className="text-blue-700 dark:text-blue-400">
-                            Kategori: {selectedItem.category} - Stok:{" "}
-                            {selectedItem.stock}{" "}
-                            {selectedItem.description
-                              ? `| ${selectedItem.description}`
-                              : ""}
-                          </span>
-                        </div>
-                      )}
                     </div>
-                  );
-                })}
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Due Date, Purpose, Notes - Compact Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <div>
-                <Label className="text-sm font-medium text-gray-900 dark:text-white">
-                  Jatuh Tempo
-                </Label>
-                <DatePickerField
-                  value={dueDate}
-                  onChange={setDueDate}
-                  placeholder="Pilih tanggal jatuh tempo..."
-                  minDate={new Date()}
-                  className="bg-white text-primary-foreground hover:bg-primary/90 dark:bg-gray-700 dark:text-primary-foreground dark:hover:bg-gray-600 border dark:border-gray-600 transition-colors"
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium text-gray-900 dark:text-white">
-                  Keperluan
-                </Label>
-                <Input
-                  type="text"
-                  value={purpose}
-                  onChange={(e) => setPurpose(e.target.value)}
-                  placeholder="KBM"
-                  className="h-9 text-sm mt-1"
-                  required
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium text-gray-900 dark:text-white">
-                  Catatan
-                </Label>
-                <Input
-                  type="text"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Catatan tambahan..."
-                  className="h-9 text-sm mt-1"
-                />
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <div className="flex justify-end">
-              {/* AlertDialog konfirmasi jika borrowConfirmation true */}
-              {settings?.system?.borrowConfirmation ? (
-                <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      type="button"
-                      disabled={
-                        isSubmitting ||
-                        !selectedBorrower ||
-                        loanItems.every((item) => !item.itemId)
-                      }
-                      className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
-                      onClick={(e) => {
-                        setPendingSubmitEvent(e);
-                        setShowConfirmDialog(true);
-                      }}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          Memproses...
-                        </>
-                      ) : (
-                        <>
-                          <Plus className="w-4 h-4 mr-2" />
-                          Catat Peminjaman
-                        </>
-                      )}
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Konfirmasi Peminjaman</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Apakah Anda yakin ingin mencatat peminjaman ini?
-                        Data akan disimpan dan peminjam akan dikirim pesan notifikasi.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel
-                        onClick={() => setShowConfirmDialog(false)}
-                        className="rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors">
-                        Batal
-                      </AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => {
-                          setShowConfirmDialog(false);
-                          if (pendingSubmitEvent) {
-                            doSubmit(pendingSubmitEvent);
-                            setPendingSubmitEvent(null);
-                          }
-                        }}
-                        autoFocus
-                        className="rounded-lg font-medium bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-400 transition-colors shadow-sm"
-                      >
-                        Ya, Catat
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              ) : (
-                <Button
-                  type="submit"
-                  disabled={
-                    isSubmitting ||
-                    !selectedBorrower ||
-                    loanItems.every((item) => !item.itemId)
-                  }
-                  className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Memproses...
-                    </>
-                  ) : (
-                    <>
-                      <Plus className="w-4 h-4 mr-2" />
-                      Catat Peminjaman
-                    </>
-                  )}
-                </Button>
-              )}
-            </div>
           </form>
         </div>
       </div>

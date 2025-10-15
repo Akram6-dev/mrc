@@ -26,15 +26,18 @@ import { toast } from "sonner"
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 import { auth } from "@/lib/auth"
 import api from "@/lib/api"
-import type { LoanWithDetails } from "@/lib/types"
+import type { LoanWithDetails, Item, ItemSerial } from "@/lib/types"
 import { formatDate, formatDateTime, isOverdue, getDaysUntilDue, getColorFromName } from "@/lib/utils"
 
 export default function PengembalianPage() {
+  // Untuk tracking serial yang sudah dicentang untuk dikembalikan (per loanId)
+  const [returningSerials, setReturningSerials] = useState<Record<string, Set<string>>>({});
   const [loans, setLoans] = useState<LoanWithDetails[]>([])
   const [filteredLoans, setFilteredLoans] = useState<LoanWithDetails[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -71,76 +74,8 @@ export default function PengembalianPage() {
       })
   }, [router])
 
-  useEffect(() => {
-    filterLoans()
-  }, [loans, search, statusFilter, sortOrder])
-
-  // Show toast for error
-  useEffect(() => {
-    if (error) {
-      toast.error(error, { duration: 6000, className: "toast-error" })
-    }
-  }, [error])
-
-  // Show toast for success
-  useEffect(() => {
-    if (success) {
-      toast.success(success, { duration: 6000, className: "toast-success" })
-    }
-  }, [success])
-
-  const loadLoans = async () => {
-    try {
-      setIsLoading(true)
-      // Fetch all loans, items, and borrowers (like riwayat)
-      const [loansData, items, borrowers] = await Promise.all([
-        api.getLoans(),
-        api.getItems(),
-        api.getBorrowers(),
-      ])
-
-      // Index borrowers and items by id for fast lookup
-      const borrowerMap = Object.fromEntries(
-        (borrowers || []).map((b) => [b.id?.toString(), b])
-      )
-      const itemMap = Object.fromEntries(
-        (items || []).map((item) => [item.id?.toString(), item])
-      )
-
-      // Gabungkan semua data ke satu array
-      const mapped: LoanWithDetails[] = (loansData || []).map((loan) => {
-        // Ambil borrower lengkap dari borrowerId
-        const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? null : null
-
-        // Ambil itemDetails lengkap dari loan.items
-        let itemDetails: any[] = []
-        if (Array.isArray(loan.items)) {
-          itemDetails = loan.items.map((item) => {
-            const base = itemMap[item.itemId?.toString()] ?? {}
-            return {
-              ...base,
-              quantity: item.quantity ?? 1,
-              serialNumber: item.serialNumber,
-            }
-          })
-        }
-
-        return {
-          ...loan,
-          borrower,
-          itemDetails,
-        } as LoanWithDetails
-      })
-      setLoans(mapped.filter((loan) => loan.status === "dipinjam"))
-    } catch (err) {
-      setError("Gagal memuat data peminjaman")
-      console.error(err)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const filterLoans = () => {
+  // Move filterLoans above its first usage so it is defined before useEffect
+  function filterLoans() {
     let filtered = loans
 
     if (search && search.trim() !== "") {
@@ -179,6 +114,91 @@ export default function PengembalianPage() {
     setFilteredLoans(filtered)
   }
 
+  useEffect(() => {
+    filterLoans()
+  }, [loans, search, statusFilter, sortOrder])
+
+  // Show toast for error
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { duration: 6000, className: "toast-error" })
+    }
+  }, [error])
+
+  // Show toast for success
+  useEffect(() => {
+    if (success) {
+      toast.success(success, { duration: 6000, className: "toast-success" })
+    }
+  }, [success])
+
+  const loadLoans = async () => {
+    try {
+      setIsLoading(true)
+      // Fetch all loans, items, and borrowers (like riwayat)
+      const [loansData, items, borrowers] = await Promise.all([
+        api.getLoans(),
+        api.getItems(),
+        api.getBorrowers(),
+      ])
+
+      // Index borrowers and items by id for fast lookup
+      const borrowerMap = Object.fromEntries(borrowers.map((b: any) => [b.id?.toString(), b]));
+      const itemMap = Object.fromEntries(items.map((i: any) => [i.id?.toString(), i]));
+
+      // Gabungkan semua data ke satu array
+      const mapped: LoanWithDetails[] = (loansData || []).map((loan) => {
+        const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? null : null;
+        // itemDetails: tampilkan semua serial yang pernah dipinjam pada loan ini
+        let itemDetails: (Item & ItemSerial & { note?: string; quantity: number })[] = [];
+        if (Array.isArray(loan.items)) {
+          itemDetails = loan.items.map((loanItem) => {
+            let foundBase: Item | undefined = undefined;
+            let foundSerial: ItemSerial | undefined = undefined;
+            for (const item of Object.values(itemMap) as Item[]) {
+              if (item.items && Array.isArray(item.items)) {
+                // Cari serial apapun, baik status 0/1, loanId sama atau tidak
+                const serial = item.items.find((s) => s.serialNumber === loanItem.serialNumber);
+                if (serial) {
+                  foundBase = item;
+                  foundSerial = serial;
+                  break;
+                }
+              }
+            }
+            if (!foundBase || !foundSerial) return undefined;
+            // Jika loanId serial sekarang tidak sama dengan loan.id, berarti sudah dikembalikan (status 1)
+            const isReturned = foundSerial.loanId !== loan.id;
+            return {
+              ...(foundBase as Item),
+              ...(foundSerial as ItemSerial),
+              note: loanItem.note,
+              quantity: 1,
+              status: isReturned ? 1 : foundSerial.status,
+            } as Item & ItemSerial & { note?: string; quantity: number };
+          }).filter(Boolean) as (Item & ItemSerial & { note?: string; quantity: number })[];
+        }
+        // Status loan otomatis: semua serial status 1 = dikembalikan, ada status 0 & loanId = loan.id = dipinjam
+        let autoStatus: "dikembalikan" | "dipinjam" = "dikembalikan";
+        if (itemDetails.some((d) => d.status === 0 && d.loanId === loan.id)) {
+          autoStatus = "dipinjam";
+        }
+        return {
+          ...loan,
+          status: autoStatus,
+          borrower,
+          itemDetails,
+        };
+      });
+      setLoans(mapped.filter((loan) => loan.status === "dipinjam"));
+    } catch (err) {
+      setError("Gagal memuat data peminjaman")
+      console.error(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const handleReturn = async () => {
     if (!returningLoan) return
 
@@ -187,44 +207,76 @@ export default function PengembalianPage() {
       setSuccess("")
 
       await api.returnLoan(returningLoan.id)
-      // Kirim pesan pengembalian ke endpoint eksternal jika settings.messages.returnMessage true
-      if (settings?.messages?.returnMessage) {
-        try {
-          await fetch("http://145.10.0.6:3000/kembali", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ id: returningLoan.id })
-          })
-        } catch (err) {
-          console.error("Gagal POST ke API eksternal /kembali:", err)
-        }
-      }
-
-      // Update stock for all items in the loan
-      const allItems = await api.getItems()
-      if (returningLoan.items && Array.isArray(returningLoan.items)) {
-        for (const loanedItem of returningLoan.items) {
-          const item = allItems.find((i) => i.id === loanedItem.itemId)
-          if (item) {
-            await api.updateItem(loanedItem.itemId, {
-              stock: item.stock + loanedItem.quantity,
-            })
-          }
-        }
-      }
-
-      setSuccess(
-        `Barang (${returningLoan.itemDetails?.map((it) => `\"${it.name}\" x${it.quantity}`).join(", ")}) berhasil dikembalikan oleh ${returningLoan.borrower?.name}`
-      )
-      loadLoans()
+      // Tidak perlu update stock manual, status serial akan diupdate otomatis oleh backend jika diperlukan
     } catch (err) {
       setError("Gagal memproses pengembalian")
       console.error(err)
     }
     setIsConfirmOpen(false)
     setReturningLoan(null)
+    // Cek serial mana saja yang sudah dicentang untuk dikembalikan
+    const checkedSerials = returningSerials[returningLoan.id] || new Set<string>();
+    // Update status serial di items.json (API)
+    const items = await api.getItems();
+    for (const detail of returningLoan.itemDetails) {
+      // detail.serialNumber is always string (see types)
+      if (detail.serialNumber && checkedSerials.has(detail.serialNumber) && detail.status !== 1) {
+        // Update status serial menjadi 1 (dikembalikan)
+        const item = items.find((i: Item) => i.id === detail.id);
+        if (item && item.items) {
+          const updatedSerials = item.items.map((s: ItemSerial) =>
+            s.serialNumber === detail.serialNumber ? { ...s, status: 1 as 1 } : s
+          );
+          await api.updateItem(item.id, { items: updatedSerials });
+        }
+      }
+    }
+    // Ambil hanya serial yang benar-benar diupdate (status sebelumnya bukan 1, sekarang diubah ke 1)
+    const updatedSerialsList = returningLoan.itemDetails
+      .filter(
+        (detail) =>
+          detail.serialNumber &&
+          checkedSerials.has(detail.serialNumber) &&
+          detail.status !== 1
+      )
+      .map((it) => `"${it.name}" (${it.serialNumber})`);
+
+    if (updatedSerialsList.length > 0) {
+      setSuccess(
+        `Status barang ${updatedSerialsList.join(", ")} untuk peminjam ${returningLoan.borrower?.name} berhasil diperbarui.`
+      );
+    } else {
+      setSuccess(
+        `Tidak ada barang yang perlu diperbarui untuk peminjam ${returningLoan.borrower?.name}.`
+      );
+    }
+    // Setelah update, cek apakah SEMUA serial pada loan ini sudah status 1 (dikembalikan)
+    // Jika ya, baru kirim notifikasi eksternal
+    const refreshedItems = await api.getItems();
+    // Ambil ulang detail serial untuk loan ini
+    const allSerialsReturned = returningLoan.itemDetails.every((detail) => {
+      if (!detail.serialNumber) return true;
+      // Cari serial di items
+      const item = refreshedItems.find((i: Item) => i.id === detail.id);
+      if (!item || !item.items) return false;
+      const serial = item.items.find((s: ItemSerial) => s.serialNumber === detail.serialNumber);
+      // Jika loanId serial sekarang tidak sama dengan loan.id, berarti sudah dikembalikan (apapun statusnya)
+      return serial && serial.loanId !== returningLoan.id ? true : (serial && serial.status === 1);
+    });
+    if (allSerialsReturned && settings?.messages?.returnMessage) {
+      try {
+        await fetch("http://145.10.0.6:3000/kembali", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ id: returningLoan.id })
+        })
+      } catch (err) {
+        console.error("Gagal POST ke API eksternal /kembali:", err)
+      }
+    }
+    loadLoans();
   }
 
   // Handler aksi kembalikan
@@ -443,7 +495,7 @@ export default function PengembalianPage() {
               {filteredLoans.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-12">
-                    <RotateCcw className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-500 dark:text-gray-400">
                       {search || statusFilter
                         ? "Tidak ada data yang sesuai dengan filter"
@@ -488,18 +540,27 @@ export default function PengembalianPage() {
                     <TableCell>
                       <div className="flex flex-col gap-2">
                         {loan.itemDetails && loan.itemDetails.length > 0 ? (
-                          loan.itemDetails.map((item) => (
-                            <div key={item.id} className="flex items-center space-x-3">
+                          // Group by item name, sum quantity
+                          Object.entries(
+                            loan.itemDetails.reduce((acc, item) => {
+                              const key = item.name || "Barang";
+                              acc[key] = (acc[key] || 0) + (item.quantity || 1);
+                              return acc;
+                            }, {} as Record<string, number>)
+                          ).map(([name, total], idx) => (
+                            <div key={name + idx} className="flex items-center space-x-3">
                               <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
                                 {(() => {
-                                  const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
+                                  // Ambil icon dari salah satu item dengan nama yang sama
+                                  const found = loan.itemDetails.find(i => i.name === name);
+                                  const Icon = ICON_OPTIONS.find(opt => opt.value === (found?.icon || "laptop"))?.icon || Laptop;
                                   return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
                                 })()}
                               </div>
                               <div>
-                                <div className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</div>
+                                <div className="text-sm font-medium text-gray-900 dark:text-white">{name}</div>
                                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-semibold">{item.quantity}</span>x
+                                  <span className="font-semibold">{total}</span>x
                                 </div>
                               </div>
                             </div>
@@ -520,12 +581,22 @@ export default function PengembalianPage() {
                       <Button
                         onClick={e => {
                           e.stopPropagation();
-                          handleReturnClick(loan)
+                          setReturningLoan(loan);
+                          setIsConfirmOpen(true);
+                          // Inisialisasi serial yang sudah dikembalikan
+                          setReturningSerials((prev) => ({
+                            ...prev,
+                            [loan.id]: new Set(
+                              loan.itemDetails
+                                .filter((d: any) => d.status === 1 && typeof d.serialNumber === "string")
+                                .map((d: any) => d.serialNumber as string)
+                            ),
+                          }));
                         }}
                         className="btn-success"
                       >
                         <CheckCircle className="w-6 h-6 mr-1" />
-                        Selesaikan
+                        Tandai Pengembalian
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -590,9 +661,9 @@ export default function PengembalianPage() {
                           </div>
                           {/* Items Card */}
                           <div className="rounded-lg bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 p-4 shadow-sm">
-                            <div className="font-semibold mb-2">Daftar Barang</div>
-                            <ul className="divide-y divide-gray-100 dark:divide-gray-800">
-                              {detailLoan.itemDetails.map((item, idx) => (
+                            <div className="font-semibold mb-2">Daftar Barang ({detailLoan.itemDetails.length})</div>
+                            <ul className="divide-y divide-gray-100 dark:divide-gray-800 max-h-72 overflow-y-auto">
+                              {(detailLoan.itemDetails as (Item & ItemSerial & { note?: string; quantity: number })[]).map((item, idx) => (
                                 <li key={item.id} className="flex items-center gap-3 py-2">
                                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
                                     {(() => {
@@ -602,8 +673,20 @@ export default function PengembalianPage() {
                                   </span>
                                   <div className="flex-1">
                                     <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                    <div className="text-xs text-gray-500 dark:text-gray-400">Jumlah: <span className="font-semibold">{item.quantity}</span>{item.serialNumber ? ` | Nomor Seri: ${item.serialNumber}` : ""}</div>
+                                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                                      {item.sn ? `${item.sn}` : ""}
+                                      {item.note ? ` | Catatan: ${item.note}` : ""}
+                                    </div>
                                   </div>
+                                  {item.status === 1 && (
+                                    <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sudah dikembalikan</span>
+                                  )}
+                                  {item.status === 0 && item.loanId === detailLoan.id && (
+                                    <span className="ml-2 px-2 py-0.5 rounded text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Masih dipinjam</span>
+                                  )}
+                                  {item.status === 0 && item.loanId !== detailLoan.id && (
+                                    <span className="ml-2 px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400">Dipinjam orang lain</span>
+                                  )}
                                 </li>
                               ))}
                             </ul>
@@ -675,9 +758,84 @@ export default function PengembalianPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Konfirmasi Pengembalian</AlertDialogTitle>
             <AlertDialogDescription>
-              Apakah Anda yakin ingin selesaikan peminjaman barang <span className="font-semibold">{returningLoan?.itemDetails?.map((it) => `"${it.name}" x${it.quantity}`).join(", ")}</span> dari <span className="font-semibold">{returningLoan?.borrower?.name}</span>?
+              Selesaikan <span className="font-semibold">{returningLoan?.itemDetails?.length || 0} barang</span> peminjaman dari <span className="font-semibold">{returningLoan?.borrower?.name}</span>?
             </AlertDialogDescription>
           </AlertDialogHeader>
+          {returningLoan && (
+            <div className="space-y-4 mt-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-semibold">Pilih serial yang sudah dikembalikan:</span>
+                <label className="flex items-center gap-2 select-none cursor-pointer">
+                  <Checkbox
+                    checked={(() => {
+                      // Hitung serial yang bisa dipilih (status !== 1)
+                      const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.serialNumber === "string");
+                      if (eligible.length === 0) return false;
+                      const selected = eligible.filter(item =>
+                        typeof item.serialNumber === "string" && returningSerials[returningLoan.id]?.has(item.serialNumber)
+                      );
+                      return selected.length === eligible.length;
+                    })()}
+                    ref={el => {
+                      if (el && "indeterminate" in el) {
+                        const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.serialNumber === "string");
+                        const selected = eligible.filter(item =>
+                          typeof item.serialNumber === "string" && returningSerials[returningLoan.id]?.has(item.serialNumber)
+                        );
+                        (el as HTMLInputElement).indeterminate = selected.length > 0 && selected.length < eligible.length;
+                      }
+                    }}
+                    onCheckedChange={checked => {
+                      setReturningSerials(prev => {
+                        const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.serialNumber === "string");
+                        const set = new Set(prev[returningLoan.id] || []);
+                        if (checked) {
+                          eligible.forEach(item => {
+                            if (typeof item.serialNumber === "string") set.add(item.serialNumber);
+                          });
+                        } else {
+                          eligible.forEach(item => {
+                            if (typeof item.serialNumber === "string") set.delete(item.serialNumber);
+                          });
+                        }
+                        return { ...prev, [returningLoan.id]: set };
+                      });
+                    }}
+                    className="h-5 w-5 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-700 active:ring-2 active:ring-blue-300 dark:active:ring-blue-700 transition-all"
+                    aria-label="Toggle semua serial"
+                  />
+                  <span className="text-xs font-medium text-gray-700 dark:text-gray-200">Pilih Semua</span>
+                </label>
+              </div>
+              <ul className="divide-y divide-gray-100 dark:divide-gray-800">
+                {returningLoan.itemDetails.map((item, idx) => (
+                  <li key={item.serialNumber} className="flex items-center gap-3 py-2">
+                    <label className="flex items-center gap-3 w-full cursor-pointer select-none">
+                      <Checkbox
+                        checked={typeof item.serialNumber === "string" ? !!returningSerials[returningLoan.id]?.has(item.serialNumber) : false}
+                        disabled={item.status === 1}
+                        onCheckedChange={checked => {
+                          setReturningSerials(prev => {
+                            const set = new Set(prev[returningLoan.id] || []);
+                            if (typeof item.serialNumber === "string") {
+                              if (checked) set.add(item.serialNumber);
+                              else set.delete(item.serialNumber);
+                            }
+                            return { ...prev, [returningLoan.id]: set };
+                          });
+                        }}
+                        className="h-5 w-5 text-green-600 bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-700 active:ring-2 active:ring-gray-300 dark:active:ring-gray-700 transition-all"
+                        aria-label={`Pilih serial ${item.serialNumber}`}
+                      />
+                      <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">{item.sn}</span>
+                      {item.status === 1 && <span className="text-green-600 text-xs ml-2">Sudah dikembalikan</span>}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <AlertDialogFooter>
             <AlertDialogCancel
               onClick={() => {

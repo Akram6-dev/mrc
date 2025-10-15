@@ -1,13 +1,35 @@
+
+export interface ItemSerialDetail {
+  id: string;
+  name: string;
+  icon?: string;
+  serialNumber: string;
+  sn?: string;
+  status: 0 | 1 | 2;
+  loanId: string;
+  condition?: string;
+  note?: string;
+  quantity: number;
+}
+
+export interface ItemSerial {
+  serialNumber: string;
+  sn: string;
+  condition: -1 | 0 | 1;
+  status: 0 | 1 | 2; // 0: tersedia, 1: dipinjam, 2: dibooking
+  loanId?: string; // id loan yang sedang meminjam serial ini, jika ada
+}
+
 export interface Item {
-  id: string
-  name: string
-  category: string
-  stock: number
-  condition: "Baik" | "Rusak" | "Hilang"
-  description?: string
-  createdAt: string
-  updatedAt: string
-  icon?: string
+  id: string;
+  name: string;
+  category: string;
+  description?: string;
+  createdAt: string;
+  updatedAt: string;
+  icon?: string;
+  items?: ItemSerial[];
+  image?: string;
 }
 
 export interface Borrower {
@@ -22,29 +44,31 @@ export interface Borrower {
   updatedAt: string
 }
 
+
+// Now loan is per serial number, not per item+quantity
 export interface LoanItem {
-  itemId: string
-  quantity: number
-  serialNumber?: string
+  serialNumber: string;
+  note?: string;
 }
 
+
 export interface Loan {
-  id: string
-  borrowerId: string
-  items: LoanItem[]
-  borrowDate: string
-  returnDate?: string
-  dueDate: string
-  status: "dipinjam" | "dikembalikan" | "terlambat"
-  purpose?: string
-  notes?: string
-  createdAt: string
-  updatedAt: string
+  id: string;
+  borrowerId: string;
+  items: LoanItem[];
+  borrowDate: string;
+  returnDate?: string;
+  dueDate: string;
+  status: "dipinjam" | "dikembalikan" | "terlambat";
+  purpose?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface LoanWithDetails extends Loan {
   borrower: Borrower
-  itemDetails: (Item & { quantity: number; serialNumber?: string })[]
+  itemDetails: (Item & { quantity: number; serialNumber?: string; sn?: string; status: 0 | 1 | 2 })[]
 }
 
 export interface DashboardStats {

@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Search, Edit, Trash2, Filter } from "lucide-react"
+import { Plus, Search, Edit, Trash2, Filter, Image as ImageIcon } from "lucide-react"
 // Icon components mapping (lucide-react)
 import {
   Laptop,
@@ -22,6 +22,7 @@ import {
   MicVocal,
   Package,
   X,
+  Image,
 } from "lucide-react"
 import Loading from "@/components/ui/loading"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog"
@@ -40,8 +41,9 @@ import "@/app/globals.css"
 
 
 export default function BarangPage() {
-  const [items, setItems] = useState<Item[]>([])
-  const [filteredItems, setFilteredItems] = useState<Item[]>([])
+  // Items with serials: each item has an array of serials (with status)
+  const [items, setItems] = useState<any[]>([])
+  const [filteredItems, setFilteredItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
 // Remove local error/success state, use toast instead
 const [search, setSearch] = useState("")
@@ -77,11 +79,14 @@ const ICON_OPTIONS = [
   const [formData, setFormData] = useState({
     name: "",
     category: "",
-    stock: 0,
-    condition: "Baik" as "Baik" | "Rusak" | "Hilang",
     description: "",
     icon: "laptop", // default icon
+    image: "", // path to uploaded image (relative to /public)
+    items: [{ serialNumber: "", sn: "", status: 1, condition: 1 }], // for editing serials
+    serialSearch: "", // for filtering serial numbers in the form
   })
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string>("")
 
   const router = useRouter()
 
@@ -101,7 +106,20 @@ const ICON_OPTIONS = [
     try {
       setIsLoading(true)
       const data = await api.getItems()
-      setItems(data)
+      // Map: stock = jumlah seluruh serials (items array), items = array serials (for form/UI)
+      const mapped = data.map((item: any) => ({
+        ...item,
+        stock: Array.isArray(item.items) ? item.items.length : 0,
+        items: Array.isArray(item.items)
+          ? item.items.map((s: any) => ({
+              serialNumber: s.serialNumber,
+              sn: s.sn,
+              status: s.status,
+              condition: typeof s.condition === "number" ? s.condition : 1,
+            }))
+          : [{ serialNumber: '', status: 1, condition: 1 }],
+      }))
+      setItems(mapped)
     } catch (err) {
       toast.error("Gagal memuat data barang", { className: "toast-error", duration: 6000 })
     } finally {
@@ -125,7 +143,14 @@ const ICON_OPTIONS = [
     }
 
     if (conditionFilter !== "all") {
-      filtered = filtered.filter((item) => item.condition === conditionFilter)
+      // Tampilkan barang jika ada minimal satu serial dengan kondisi sesuai filter
+      let targetCondition = 1;
+      if (conditionFilter === "Baik") targetCondition = 1;
+      else if (conditionFilter === "Rusak") targetCondition = 0;
+      else if (conditionFilter === "Hilang") targetCondition = -1;
+      filtered = filtered.filter((item) =>
+        Array.isArray(item.items) && item.items.some((s: { condition: number }) => s.condition === targetCondition)
+      );
     }
 
     setFilteredItems(filtered)
@@ -134,17 +159,53 @@ const ICON_OPTIONS = [
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      // Handle image upload if any
+      let imagePath = formData.image || ""
+      if (imageFile) {
+        const epoch = Date.now()
+        const ext = imageFile.name.split('.').pop() || 'png'
+        const fileName = `${epoch}.${ext}`
+        const destPath = `/assets/img/${fileName}`
+        // Save file to public/assets/img/ (client-side, use API route or fallback to window.fs if available)
+        // For now, try to use fetch to a local API route (must be implemented in /pages/api/upload.js)
+        const form = new FormData()
+        form.append('file', imageFile, fileName)
+        const res = await fetch('/api/upload', { method: 'POST', body: form })
+        if (res.ok) {
+          imagePath = destPath
+        } else {
+          toast.error('Gagal upload gambar, lanjut tanpa gambar', { className: 'toast-error', duration: 6000 })
+        }
+      }
+      // Calculate stock from total serials
+      const serials = formData.items || []
+      const stock = serials.length
+      const now = new Date().toISOString()
+      const payload = {
+        ...formData,
+        image: imagePath,
+        stock,
+        items: serials.map((s: any, idx: number) => ({
+          serialNumber: s.serialNumber,
+          sn: s.sn,
+          status: typeof s.status === "number" ? s.status : 1,
+          condition: typeof s.condition === "number" ? s.condition : 1,
+          loanId: s.loanId || null,
+        })),
+      }
       if (editingItem) {
-        await api.updateItem(editingItem.id, formData)
+        await api.updateItem(editingItem.id, payload)
         toast.success("Barang berhasil diperbarui", { className: "toast-success", duration: 6000 })
       } else {
-        await api.createItem(formData)
+        await api.createItem(payload)
         toast.success("Barang berhasil ditambahkan", { className: "toast-success", duration: 6000 })
       }
 
       setIsDialogOpen(false)
       setEditingItem(null)
       resetForm()
+      setImageFile(null)
+      setImagePreview("")
       loadItems()
     } catch (err) {
       toast.error("Gagal menyimpan data barang", { className: "toast-error", duration: 6000 })
@@ -156,11 +217,21 @@ const ICON_OPTIONS = [
     setFormData({
       name: item.name,
       category: item.category,
-      stock: item.stock,
-      condition: item.condition,
       description: item.description || "",
       icon: item.icon || "laptop",
+      image: item.image || "",
+      items: item.items && Array.isArray(item.items) && item.items.length > 0
+        ? item.items.map((s: any) => ({
+            serialNumber: s.serialNumber,
+            sn: s.sn,
+            status: s.status,
+            condition: typeof s.condition === "number" ? s.condition : 1,
+          }))
+        : [{ serialNumber: "", sn: "", status: 1, condition: 1 }],
+      serialSearch: "",
     })
+    setImageFile(null)
+    setImagePreview(item.image ? item.image : "")
     setIsDialogOpen(true)
   }
 
@@ -180,11 +251,14 @@ const ICON_OPTIONS = [
     setFormData({
       name: "",
       category: "",
-      stock: 0,
-      condition: "Baik",
       description: "",
       icon: "laptop",
+      image: "",
+      items: [{ serialNumber: "", sn: "", status: 1, condition: 1 }],
+      serialSearch: "",
     })
+    setImageFile(null)
+    setImagePreview("")
   }
 
   const openAddDialog = () => {
@@ -242,6 +316,50 @@ const ICON_OPTIONS = [
                   </div>
                   {/* Grid 2 kolom untuk input lainnya */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Upload Gambar */}
+                    <div className="md:col-span-2">
+                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Gambar (opsional)</Label>
+                      <div className="flex items-center gap-4">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={e => {
+                            const file = e.target.files?.[0] || null
+                            setImageFile(file)
+                            if (file) {
+                              const reader = new FileReader()
+                              reader.onload = ev => setImagePreview(ev.target?.result as string)
+                              reader.readAsDataURL(file)
+                            } else {
+                              setImagePreview("")
+                            }
+                          }}
+                          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent-50 file:text-accent-700 hover:file:bg-accent-100 dark:file:bg-gray-800 dark:file:text-gray-200 dark:hover:file:bg-gray-700 transition-colors"
+                        />
+                        {(imagePreview || formData.image) && (
+                          <div className="relative w-20 h-20 border rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                            <img
+                              src={imagePreview || formData.image}
+                              alt="Preview"
+                              className="object-contain w-full h-full"
+                            />
+                            <button
+                              type="button"
+                              className="absolute top-1 right-1 bg-white/80 rounded-full p-1 text-gray-500 hover:text-red-600"
+                              onClick={() => {
+                                setImageFile(null)
+                                setImagePreview("")
+                                setFormData(f => ({ ...f, image: "" }))
+                              }}
+                              aria-label="Hapus gambar"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">Ukuran maksimal 2MB. Format: jpg, png, webp, dll.</div>
+                    </div>
                     <div>
                       <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Icon Barang *</Label>
                       <Select
@@ -277,33 +395,127 @@ const ICON_OPTIONS = [
                         required
                       />
                     </div>
-                    <div>
-                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Stok *</Label>
-                      <Input
-                        type="number"
-                        min="0"
-                        value={formData.stock}
-                        onChange={(e) => setFormData({ ...formData, stock: Number.parseInt(e.target.value) || 0 })}
-                        className="input-field"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kondisi *</Label>
-                      <Select
-                        value={formData.condition}
-                        onValueChange={(val) => setFormData({ ...formData, condition: val as 'Baik' | 'Rusak' | 'Hilang' })}
-                        required
-                      >
-                        <SelectTrigger className="input-field">
-                          <SelectValue placeholder="Pilih kondisi" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Baik">Baik</SelectItem>
-                          <SelectItem value="Rusak">Rusak</SelectItem>
-                          <SelectItem value="Hilang">Hilang</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <div className="md:col-span-2">
+                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Serial Number</Label>
+                      <div>
+                        <div className="p-2 flex flex-col gap-2">
+                          <div className="flex items-center gap-2 w-full">
+                            <div className="relative flex-1">
+                              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+                              <Input
+                                type="text"
+                                placeholder="Cari serial number..."
+                                value={formData.serialSearch || ""}
+                                onChange={e => setFormData({ ...formData, serialSearch: e.target.value })}
+                                className="input-field pl-10 pr-10 w-full"
+                              />
+                              {formData.serialSearch && (
+                                <button
+                                  type="button"
+                                  aria-label="Clear serial search"
+                                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-600 p-1 rounded-full transition-colors"
+                                  onClick={() => setFormData({ ...formData, serialSearch: "" })}
+                                >
+                                  <X className="h-5 w-5" />
+                                </button>
+                              )}
+                            </div>
+                            <button
+                              className="btn-outline flex-shrink-0"
+                              type="button"
+                              onClick={() => setFormData({ ...formData, items: [...formData.items, { serialNumber: "", sn: "", status: 1, condition: 1 }] })}
+                            >
+                              <Plus className="w-4 h-4 mr-1" />
+                              Tambah Item
+                            </button>
+                          </div>
+                        </div>
+                        <div className="max-h-56 overflow-y-auto">
+                            {(formData.items && formData.items
+                            .filter(s =>
+                              !formData.serialSearch ||
+                              (s.serialNumber || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase()) ||
+                              (s.sn || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase())
+                            )
+                            ).map((s, idx) => (
+                            <div key={idx} className="flex gap-2 items-center py-2 px-2 border-b border-gray-100 dark:border-gray-800 last:border-b-0">
+                              <span className="flex-shrink-0 font-mono text-gray-500">{idx + 1}.</span>
+                              <Input
+                              type="text"
+                              placeholder="RFID"
+                              value={s.serialNumber}
+                              onChange={e => {
+                                const items = [...formData.items]
+                                items[idx].serialNumber = e.target.value
+                                setFormData({ ...formData, items })
+                              }}
+                              className="input-field w-full"
+                              required
+                              />
+                              <Input
+                              type="text"
+                              placeholder="Serial Number"
+                              value={s.sn}
+                              onChange={e => {
+                                const items = [...formData.items]
+                                items[idx].sn = e.target.value
+                                setFormData({ ...formData, items })
+                              }}
+                              className="input-field w-full"
+                              />
+                              {/* Status badge only, not editable */}
+                              <span
+                                className={`inline-block px-2 py-1 rounded text-xs font-semibold
+                                  ${s.status === 1
+                                    ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                                    : s.status === 2
+                                    ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                                    : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"}
+                                `}
+                              >
+                                {s.status === 1
+                                  ? "Tersedia"
+                                  : s.status === 2
+                                  ? "Dibooking"
+                                  : "Dipinjam"}
+                              </span>
+                              {/* Condition editable */}
+                              <Select
+                              value={typeof s.condition === "number" ? String(s.condition) : "1"}
+                              onValueChange={val => {
+                                const items = [...formData.items]
+                                items[idx].condition = Number(val)
+                                setFormData({ ...formData, items })
+                              }}
+                              >
+                              <SelectTrigger className="input-field w-28">
+                                <SelectValue placeholder="Kondisi" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="1">Baik</SelectItem>
+                                <SelectItem value="0">Rusak</SelectItem>
+                                <SelectItem value="-1">Hilang</SelectItem>
+                              </SelectContent>
+                              </Select>
+                              <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="ml-1 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 w-16"
+                              onClick={() => {
+                                const items = formData.items.filter((_, i) => i !== idx)
+                                setFormData({ ...formData, items })
+                              }}
+                              disabled={formData.items.length === 1}
+                              aria-label="Hapus Serial"
+                              >
+                              <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                            ))}
+                        </div>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">Jumlah barang dihitung dari jumlah serial number.</div>
                     </div>
                   </div>
                   {/* Deskripsi tetap full width di bawah */}
@@ -424,12 +636,26 @@ const ICON_OPTIONS = [
           ) : (
             filteredItems.map((item) => (
               <div key={item.id} className="card-hover p-6 flex flex-col h-full">
-                <div className="flex items-center space-x-4 mb-4">
+                <div className="flex items-center gap-4 mb-4">
+                  {/* Icon barang di kiri */}
                   <div className="w-14 h-14 flex items-center justify-center bg-accent-100 dark:bg-accent-900 rounded-xl">
                     {(() => {
                       const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop
                       return <Icon className="w-8 h-8 text-accent-600 dark:text-accent-400" />
                     })()}
+                  </div>
+                  {/* Gambar barang di kanan icon, lebih besar */}
+                  <div className="relative w-20 h-20 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover rounded-xl"
+                        onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ) : (
+                      <ImageIcon className="w-10 h-10 text-gray-400" />
+                    )}
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900 dark:text-white text-lg">{item.name}</h3>
@@ -443,7 +669,22 @@ const ICON_OPTIONS = [
                   <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.description}</div>
                 )}
                 <div className="flex flex-wrap gap-3 text-sm mb-4">
-                  <span className={`badge ${item.condition === "Baik" ? "badge-success" : item.condition === "Rusak" ? "badge-warning" : "badge-danger"}`}>{item.condition}</span>
+                  {(() => {
+                    const baik = item.items?.filter((s: any) => s.condition === 1).length || 0;
+                    const rusak = item.items?.filter((s: any) => s.condition === 0).length || 0;
+                    const hilang = item.items?.filter((s: any) => s.condition === -1).length || 0;
+                    return <>
+                      {baik > 0 && (
+                        <span className="badge badge-success">{baik} Baik</span>
+                      )}
+                      {rusak > 0 && (
+                        <span className="badge badge-warning">{rusak} Rusak</span>
+                      )}
+                      {hilang > 0 && (
+                        <span className="badge badge-danger">{hilang} Hilang</span>
+                      )}
+                    </>;
+                  })()}
                 </div>
                 <div className="flex items-center mt-auto">
                   <span className="text-sm text-gray-600 dark:text-gray-400">{formatDate(item.updatedAt)}</span>

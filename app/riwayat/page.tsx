@@ -85,7 +85,7 @@ import {
 } from "@/components/ui/pagination";
 import { auth } from "@/lib/auth";
 import api from "@/lib/api";
-import type { LoanWithDetails } from "@/lib/types";
+import type { LoanWithDetails, ItemSerialDetail } from "@/lib/types";
 import {
   formatDate,
   formatDateTime,
@@ -141,26 +141,50 @@ export default function RiwayatPage() {
         (items || []).map((item: any) => [item.id?.toString(), item])
       );
 
-      // Gabungkan semua data ke satu array
+      // Gabungkan semua data ke satu array, tampilkan semua serial yang pernah dipinjam pada loan ini
       const mapped: LoanWithDetails[] = (loansData || []).map((loan: any) => {
-        // Ambil borrower lengkap dari borrowerId
         const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {};
 
-        // Ambil itemDetails lengkap dari loan.items
-        let itemDetails: any[] = [];
+        let itemDetails: ItemSerialDetail[] = [];
         if (Array.isArray(loan.items)) {
-          itemDetails = loan.items.map((item: any) => {
-            const base = itemMap[item.itemId?.toString()] ?? {};
+          itemDetails = loan.items.map((loanItem: any) => {
+            let foundBase: any = undefined;
+            let foundSerial: any = undefined;
+            for (const itemUnknown of Object.values(itemMap)) {
+              const item = itemUnknown as any;
+              if (item.items && Array.isArray(item.items)) {
+                const serial = item.items.find((s: any) => s.serialNumber === loanItem.serialNumber);
+                if (serial) {
+                  foundBase = item;
+                  foundSerial = serial;
+                  break;
+                }
+              }
+            }
+            if (!foundBase || !foundSerial) return undefined;
+            // Make sure all required fields for ItemSerialDetail are present
             return {
-              ...base,
-              quantity: item.quantity ?? 1,
-              serialNumber: item.serialNumber,
-            };
-          });
+              id: foundBase.id,
+              name: foundBase.name,
+              icon: foundBase.icon,
+              serialNumber: foundSerial.serialNumber,
+              sn: foundSerial.sn,
+              status: foundSerial.loanId !== loan.id ? 1 : foundSerial.status,
+              loanId: foundSerial.loanId ?? "",
+              condition: foundSerial.condition,
+              note: loanItem.note,
+              quantity: 1,
+            } satisfies ItemSerialDetail;
+          }).filter(Boolean) as ItemSerialDetail[];
         }
-
+        // Status loan otomatis: semua serial status 1 = dikembalikan, ada status 0 & loanId = loan.id = dipinjam
+        let autoStatus: "dikembalikan" | "dipinjam" = "dikembalikan";
+        if (itemDetails.some((d) => d.status === 0 && d.loanId === loan.id)) {
+          autoStatus = "dipinjam";
+        }
         return {
           ...loan,
+          status: autoStatus,
           borrower,
           itemDetails,
         };
@@ -560,87 +584,86 @@ export default function RiwayatPage() {
                 </TableRow>
               ) : (
                 paginatedLoans.map((loan) => (
-                    <TableRow
+                  <TableRow
                     key={loan.id}
-                    className={`hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors ${
-                      isOverdue(loan.dueDate) && loan.status === "dipinjam"
+                    className={`hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors ${isOverdue(loan.dueDate) && loan.status === "dipinjam"
                       ? "bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-800/20"
                       : ""
-                    } cursor-pointer`}
+                      } cursor-pointer`}
                     onClick={() => {
                       setDetailLoan(loan);
                       setIsDetailOpen(true);
                     }}
-                    >
+                  >
                     <TableCell>
                       <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getColorFromName(loan.borrower?.name)}`}>
-                        <span className="text-white text-base font-semibold">
-                        {loan.borrower?.name?.charAt(0) || "U"}
-                        </span>
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900 dark:text-white">
-                        {loan.borrower?.name}
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getColorFromName(loan.borrower?.name)}`}>
+                          <span className="text-white text-base font-semibold">
+                            {loan.borrower?.name?.charAt(0) || "U"}
+                          </span>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {loan.borrower?.nip && loan.borrower?.officerId
-                          ? `${loan.borrower.nip} - ${loan.borrower.officerId}`
-                          : loan.borrower?.nip
-                          ? loan.borrower.nip
-                          : loan.borrower?.officerId
-                          ? loan.borrower.officerId
-                          : null}
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-white">
+                            {loan.borrower?.name}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {loan.borrower?.nip && loan.borrower?.officerId
+                              ? `${loan.borrower.nip} - ${loan.borrower.officerId}`
+                              : loan.borrower?.nip
+                                ? loan.borrower.nip
+                                : loan.borrower?.officerId
+                                  ? loan.borrower.officerId
+                                  : null}
+                          </div>
                         </div>
-                      </div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-col gap-2">
-                      {loan.itemDetails && loan.itemDetails.length > 0 ? (
-                        loan.itemDetails.map((item) => (
-                        <div
-                          key={item.id}
-                          className="flex items-center space-x-3"
-                        >
-                          <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                          {(() => {
-                            const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
-                            return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
-                          })()}
-                          </div>
-                          <div>
-                          <div className="font-medium text-gray-900 dark:text-white">
-                            {item.name}
-                          </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">
-                            {item.quantity}
-                            </span>
-                            x
-                          </div>
-                          </div>
-                        </div>
-                        ))
-                      ) : (
-                        <span className="text-gray-400 text-sm">-</span>
-                      )}
+                        {loan.itemDetails && loan.itemDetails.length > 0 ? (
+                          // Group by item name, sum quantity
+                          Object.entries(
+                            loan.itemDetails.reduce((acc, item) => {
+                              const key = item.name || "Barang";
+                              acc[key] = (acc[key] || 0) + (item.quantity || 1);
+                              return acc;
+                            }, {} as Record<string, number>)
+                          ).map(([name, total], idx) => (
+                            <div key={name + idx} className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                                {(() => {
+                                  // Ambil icon dari salah satu item dengan nama yang sama
+                                  const found = loan.itemDetails.find(i => i.name === name);
+                                  const Icon = ICON_OPTIONS.find(opt => opt.value === (found?.icon || "laptop"))?.icon || Laptop;
+                                  return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
+                                })()}
+                              </div>
+                              <div>
+                                <div className="text-sm font-medium text-gray-900 dark:text-white">{name}</div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400">
+                                  <span className="font-semibold">{total}</span>x
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <span className="text-gray-400 text-sm">-</span>
+                        )}
                       </div>
                     </TableCell>
                     <TableCell className="font-medium">
                       {formatDate(loan.borrowDate)}
                     </TableCell>
                     <TableCell
-                      className={`font-medium ${
-                        isOverdue(loan.dueDate) && loan.status !== "dikembalikan"
-                          ? "text-red-600 dark:text-red-400"
-                          : ""
-                      }`}
+                      className={`font-medium ${isOverdue(loan.dueDate) && loan.status !== "dikembalikan"
+                        ? "text-red-600 dark:text-red-400"
+                        : ""
+                        }`}
                     >
                       {formatDate(loan.dueDate)}
                     </TableCell>
                     <TableCell>{getStatusBadge(loan)}</TableCell>
-                    </TableRow>
+                  </TableRow>
                 ))
               )}
               {/* Detail Dialog */}
@@ -731,40 +754,59 @@ export default function RiwayatPage() {
                               </div>
                             </div>
                           </div>
-                          {/* Items Card */}
+                          {/* Detail per-serial, mirip pengembalian, read-only */}
                           <div className="rounded-xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 p-4 shadow-sm">
-                            <div className="font-semibold mb-2">
-                              Daftar Barang
-                            </div>
-                            <ul className="divide-y divide-gray-100 dark:divide-gray-800">
+                            <div className="font-semibold mb-2">Daftar Barang ({detailLoan.itemDetails.length})</div>
+                            <ul className="divide-y divide-gray-100 dark:divide-gray-800 max-h-72 overflow-y-auto">
                               {detailLoan.itemDetails && detailLoan.itemDetails.length > 0 ? (
-                                detailLoan.itemDetails.map((item, idx) => (
-                                  <li
-                                    key={item.id}
-                                    className="flex items-center gap-3 py-2"
-                                  >
-                                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
-                                      {(() => {
-                                        const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
-                                        return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
-                                      })()}
-                                    </span>
-                                    <div className="flex-1">
-                                      <div className="font-medium text-gray-900 dark:text-white">
-                                        {item.name}
-                                      </div>
-                                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                                        Jumlah: {" "}
-                                        <span className="font-semibold">
-                                          {item.quantity}
+                                detailLoan.itemDetails.map((item: any, idx: number) => {
+                                  // If already correct shape, use as is
+                                  if (
+                                    typeof item.loanId === 'string' &&
+                                    typeof item.serialNumber === 'string' &&
+                                    typeof item.status !== 'undefined'
+                                  ) {
+                                    return (
+                                      <li key={item.serialNumber} className="flex items-center gap-3 py-2">
+                                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
+                                          {(() => {
+                                            const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
+                                            return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
+                                          })()}
                                         </span>
-                                        {item.serialNumber
-                                          ? ` | Nomor Seri: ${item.serialNumber}`
-                                          : ""}
+                                        <div className="flex-1">
+                                          <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
+                                          <div className="text-xs text-gray-500 dark:text-gray-400">{item.sn}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
+                                        </div>
+                                        {item.status === 1 && (
+                                          <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sudah dikembalikan</span>
+                                        )}
+                                        {item.status === 0 && item.loanId === detailLoan.id && (
+                                          <span className="ml-2 px-2 py-0.5 rounded text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Masih dipinjam</span>
+                                        )}
+                                        {item.status === 0 && item.loanId !== detailLoan.id && (
+                                          <span className="ml-2 px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400">Dipinjam orang lain</span>
+                                        )}
+                                      </li>
+                                    );
+                                  }
+                                  // Fallback: legacy shape, try to map to ItemSerialDetail
+                                  return (
+                                    <li key={item.serialNumber || idx} className="flex items-center gap-3 py-2">
+                                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
+                                        {(() => {
+                                          const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
+                                          return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
+                                        })()}
+                                      </span>
+                                      <div className="flex-1">
+                                        <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
+                                        <div className="text-xs text-gray-500 dark:text-gray-400">{item.serialNumber || '-'}</div>
                                       </div>
-                                    </div>
-                                  </li>
-                                ))
+                                      <span className="ml-2 px-2 py-0.5 rounded bg-gray-200 text-gray-700 text-xs font-semibold">Data tidak lengkap</span>
+                                    </li>
+                                  );
+                                })
                               ) : (
                                 <li className="text-gray-400 text-sm py-2">Tidak ada barang</li>
                               )}

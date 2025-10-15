@@ -28,7 +28,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { auth } from "@/lib/auth"
 import api from "@/lib/api"
-import type { DashboardStats, LoanWithDetails } from "@/lib/types"
+import type { DashboardStats, LoanWithDetails, ItemSerialDetail } from "@/lib/types"
 import { formatDate, isOverdue, getColorFromName } from "@/lib/utils"
 import { ChartContainer } from "@/components/ui/chart"
 import {
@@ -88,28 +88,51 @@ export default function DashboardPage() {
 
       // Gabungkan semua data ke satu array
       const mapped: LoanWithDetails[] = (loansData || []).map((loan: any) => {
-        // Ambil borrower lengkap dari borrowerId
-        const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {}
-
-        // Ambil itemDetails lengkap dari loan.items
-        let itemDetails: any[] = []
-        if (Array.isArray(loan.items)) {
-          itemDetails = loan.items.map((item: any) => {
-            const base = itemMap[item.itemId?.toString()] ?? {}
-            return {
-              ...base,
-              quantity: item.quantity ?? 1,
-              serialNumber: item.serialNumber,
-            }
-          })
-        }
-
-        return {
-          ...loan,
-          borrower,
-          itemDetails,
-        }
-      })
+              const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {};
+      
+              let itemDetails: ItemSerialDetail[] = [];
+              if (Array.isArray(loan.items)) {
+                itemDetails = loan.items.map((loanItem: any) => {
+                  let foundBase: any = undefined;
+                  let foundSerial: any = undefined;
+                  for (const itemUnknown of Object.values(itemMap)) {
+                    const item = itemUnknown as any;
+                    if (item.items && Array.isArray(item.items)) {
+                      const serial = item.items.find((s: any) => s.serialNumber === loanItem.serialNumber);
+                      if (serial) {
+                        foundBase = item;
+                        foundSerial = serial;
+                        break;
+                      }
+                    }
+                  }
+                  if (!foundBase || !foundSerial) return undefined;
+                  // Make sure all required fields for ItemSerialDetail are present
+                  return {
+                    id: foundBase.id,
+                    name: foundBase.name,
+                    icon: foundBase.icon,
+                    serialNumber: foundSerial.serialNumber,
+                    status: foundSerial.loanId !== loan.id ? 1 : foundSerial.status,
+                    loanId: foundSerial.loanId ?? "",
+                    condition: foundSerial.condition,
+                    note: loanItem.note,
+                    quantity: 1,
+                  } satisfies ItemSerialDetail;
+                }).filter(Boolean) as ItemSerialDetail[];
+              }
+              // Status loan otomatis: semua serial status 1 = dikembalikan, ada status 0 & loanId = loan.id = dipinjam
+              let autoStatus: "dikembalikan" | "dipinjam" = "dikembalikan";
+              if (itemDetails.some((d) => d.status === 0 && d.loanId === loan.id)) {
+                autoStatus = "dipinjam";
+              }
+              return {
+                ...loan,
+                status: autoStatus,
+                borrower,
+                itemDetails,
+              };
+            });
 
       // Calculate active borrowers
       const unique = new Set<string>()
@@ -306,24 +329,33 @@ export default function DashboardPage() {
                     <TableCell className="px-3 py-3">
                       <div className="flex flex-col gap-1">
                         {loan.itemDetails && loan.itemDetails.length > 0 ? (
-                          loan.itemDetails.map((item) => (
-                            <div key={item.id} className="flex items-center space-x-2">
-                              <div className="w-7 h-7 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                          // Group by item name, sum quantity
+                          Object.entries(
+                            loan.itemDetails.reduce((acc, item) => {
+                              const key = item.name || "Barang";
+                              acc[key] = (acc[key] || 0) + (item.quantity || 1);
+                              return acc;
+                            }, {} as Record<string, number>)
+                          ).map(([name, total], idx) => (
+                            <div key={name + idx} className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
                                 {(() => {
-                                  const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
-                                  return <Icon className="w-4 h-4 text-gray-600 dark:text-gray-400" />;
+                                  // Ambil icon dari salah satu item dengan nama yang sama
+                                  const found = loan.itemDetails.find(i => i.name === name);
+                                  const Icon = ICON_OPTIONS.find(opt => opt.value === (found?.icon || "laptop"))?.icon || Laptop;
+                                  return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
                                 })()}
                               </div>
                               <div>
-                                <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
+                                <div className="text-sm font-medium text-gray-900 dark:text-white">{name}</div>
                                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-semibold">{item.quantity}</span>x
+                                  <span className="font-semibold">{total}</span>x
                                 </div>
                               </div>
                             </div>
                           ))
                         ) : (
-                          <span className="text-gray-400 text-xs">-</span>
+                          <span className="text-gray-400 text-sm">-</span>
                         )}
                       </div>
                     </TableCell>

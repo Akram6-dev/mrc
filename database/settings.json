@@ -3,7 +3,7 @@
   "theme": "light",
   "admin": {
     "username": "admin",
-    "password": "admin123"
+    "password": "nesas1965!"
   },
   "notifications": {
     "overdueReminders": true,
@@ -16,7 +16,7 @@
     "borrowConfirmation": false
   },
   "messages": {
-    "aiReply": false,
+    "aiReply": true,
     "loanMessage": true,
     "returnMessage": true,
     "reminderMessage": true

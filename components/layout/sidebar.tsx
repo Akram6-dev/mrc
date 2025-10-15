@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn } from "lucide-react"
+import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { auth } from "@/lib/auth"
@@ -12,6 +12,7 @@ const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
   { name: "Peminjaman", href: "/peminjaman", icon: FileText },
   { name: "Pengembalian", href: "/pengembalian", icon: RotateCcw },
+  { name: "Booking", href: "/booking", icon: NotebookPen },
   { name: "Riwayat", href: "/riwayat", icon: History },
   { name: "Analisis", href: "/analisis", icon: ChartColumn },
   { name: "Barang", href: "/barang", icon: Package },
@@ -91,39 +92,48 @@ export default function Sidebar() {
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       <div className="flex flex-col flex-grow bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-6 py-1 border-b border-gray-200 dark:border-gray-700">
-        <img
-          src="/mrc.png"
-          alt="MRC"
-          className="h-14 object-contain p-4 mx-auto"
-        />
+          <img
+            src="/mrc.png"
+            alt="MRC"
+            className="h-14 object-contain p-4 mx-auto"
+          />
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 px-4 py-4 space-y-1">
-          {navigation.map((item) => {
+          {navigation.map((item, idx) => {
             const Icon = item.icon
             const isActive = pathname === item.href
+            // Tambahkan divider setelah Analisis
+            const showDivider = item.name === "Analisis" || item.name === "Booking"
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
+                <>
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
                   "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
                   isActive
                     ? "bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-md"
                     : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800",
-                )}
-              >
-                <Icon
+                  )}
+                >
+                  <Icon
                   className={cn(
                     "mr-3 flex-shrink-0 h-5 w-5",
                     isActive
-                      ? "text-white"
-                      : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300",
+                    ? "text-white"
+                    : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300",
                   )}
-                />
-                {item.name}
-              </Link>
+                  />
+                  {item.name}
+                </Link>
+                {showDivider && (
+                  <div className="py-2">
+                    <div className="border-t border-gray-200 dark:border-gray-700" />
+                  </div>
+                )}
+                </>
             )
           })}
         </nav>
@@ -131,7 +141,7 @@ export default function Sidebar() {
         {/* Bottom section */}
         <div className="flex-shrink-0 border-t border-gray-200 dark:border-gray-700 p-4 space-y-3">
           {/* Theme toggle and notifications */}
-            <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -176,7 +186,7 @@ export default function Sidebar() {
                 </div>
               </PopoverContent>
             </Popover>
-            </div>
+          </div>
 
           {/* User info */}
           <div className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">

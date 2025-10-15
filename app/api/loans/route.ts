@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   const loans = await readLoans()
   const newLoan: Loan = {
     ...body,
-    id: Date.now().toString(),
+    id: body.id == null ? Date.now().toString() : body.id,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
