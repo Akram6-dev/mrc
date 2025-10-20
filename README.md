@@ -1,7 +1,7 @@
 <div align="center">
   <img src="public/mrc.png" alt="MRC Logo" width="200"/>
   
-  # MRC - Material Resource Center
+  # MRC - Maintenance Repair Calibration
   ### Sistem Manajemen Peminjaman Barang Sekolah
   ### SMKN 1 Subang
   
@@ -20,17 +20,6 @@
 - [Persyaratan Sistem](#-persyaratan-sistem)
 - [Instalasi](#-instalasi)
 - [Cara Penggunaan](#-cara-penggunaan)
-  - [Login](#1-login)
-  - [Dashboard](#2-dashboard)
-  - [Manajemen Barang](#3-manajemen-barang)
-  - [Manajemen Peminjam](#4-manajemen-peminjam)
-  - [Peminjaman](#5-peminjaman)
-  - [Pengembalian](#6-pengembalian)
-  - [Riwayat](#7-riwayat)
-  - [Booking/Reservasi](#8-bookingreservasi)
-  - [Analisis](#9-analisis)
-  - [Stats (Tampilan Monitor)](#10-stats-tampilan-monitor)
-  - [Pengaturan](#11-pengaturan)
 - [Notifikasi Otomatis](#-notifikasi-otomatis)
 - [Struktur Database](#-struktur-database)
 - [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
@@ -42,7 +31,7 @@
 
 ## 🎯 Tentang MRC
 
-**MRC (Material Resource Center)** adalah aplikasi web modern untuk mengelola peminjaman barang-barang sekolah seperti laptop, proyektor, kabel HDMI, speaker, dan peralatan lainnya. Aplikasi ini dirancang khusus untuk SMKN 1 Subang dengan fitur lengkap dan antarmuka yang mudah digunakan.
+**MRC (Maintenance Repair Calibration) Dashboard** adalah aplikasi web modern untuk mengelola peminjaman barang-barang sekolah seperti laptop, proyektor, kabel HDMI, speaker, dan peralatan lainnya. Aplikasi ini dirancang khusus untuk SMKN 1 Subang dengan fitur lengkap dan antarmuka yang mudah digunakan.
 
 ### Kenapa Menggunakan MRC?
 
@@ -262,8 +251,8 @@ npm start
 ---
 
 ## 📖 Cara Penggunaan
-
-### 1. Login
+<details>
+<summary>1. Login</summary>
 
 1. Buka browser dan akses `http://localhost:80` atau alamat server Anda
 2. Halaman login akan muncul dengan logo MRC
@@ -274,10 +263,9 @@ npm start
 5. Anda akan diarahkan ke Dashboard
 
 **💡 Tips**: Segera ubah password default di menu Pengaturan setelah login pertama kali.
-
----
-
-### 2. Dashboard
+</details>
+<details>
+<summary>2. Dashboard</summary>
 
 Dashboard adalah halaman utama yang menampilkan ringkasan aktivitas peminjaman.
 
@@ -307,16 +295,15 @@ Dashboard adalah halaman utama yang menampilkan ringkasan aktivitas peminjaman.
 - Area chart per tanggal
 - Menampilkan tren naik/turun
 - Perbandingan dengan hari sebelumnya
-
----
-
-### 3. Manajemen Barang
+</details>
+<details>
+<summary>3. Manajemen Barang</summary>
 
 Kelola semua barang yang dapat dipinjam.
 
 #### Menambah Barang Baru:
 
-1. Klik tombol **"+ Tambah Barang"** (hijau) di pojok kanan atas
+1. Klik tombol **"+ Tambah Barang"** di pojok kanan atas
 2. Dialog form akan terbuka dengan field:
    - **Nama Barang** (wajib): Contoh "Laptop Asus"
    - **Kategori**: Contoh "Elektronik"
@@ -364,10 +351,9 @@ Kelola semua barang yang dapat dipinjam.
 - **Filter Kategori**: Pilih kategori tertentu atau "Semua"
 - **Filter Kondisi**: Pilih kondisi atau "Semua"
 - Kombinasi filter akan otomatis menyaring data
-
----
-
-### 4. Manajemen Peminjam
+</details>
+<details>
+<summary>4. Manajemen Peminjam</summary>
 
 Kelola data peminjam (guru dan staff).
 
@@ -408,10 +394,9 @@ Kelola data peminjam (guru dan staff).
 - **Search**: Real-time search by nama, NIP, atau ID
 - **Avatar**: Inisial nama dengan warna unik
 - **Statistik**: Lihat total peminjaman per orang
-
----
-
-### 5. Peminjaman
+</details>
+<details>
+<summary>5. Peminjaman</summary>
 
 Catat peminjaman barang baru.
 
@@ -475,10 +460,9 @@ Catat peminjaman barang baru.
 - Gunakan RFID scanner untuk input lebih cepat
 - Beri catatan detail untuk setiap item
 - Pastikan tanggal jatuh tempo sesuai kebutuhan
-
----
-
-### 6. Pengembalian
+</details>
+<details>
+<summary>6. Pengembalian</summary>
 
 Proses pengembalian barang yang dipinjam.
 
@@ -539,10 +523,9 @@ Setiap baris peminjaman menampilkan:
 - Periksa filter "Terlambat" setiap hari
 - Gunakan filter "Akan Jatuh Tempo" untuk reminder
 - Partial return: Bisa kembalikan sebagian item dulu
-
----
-
-### 7. Riwayat
+</details>
+<details>
+<summary>7. Riwayat</summary>
 
 Lihat catatan lengkap semua transaksi peminjaman.
 
@@ -607,10 +590,9 @@ Klik baris peminjaman untuk melihat detail lengkap:
 - Export PDF untuk arsip bulanan
 - Gunakan filter bulan/tahun untuk laporan periodik
 - Kombinasi filter untuk analisis spesifik
-
----
-
-### 8. Booking/Reservasi
+</details>
+<details>
+<summary>8. Booking/Reservasi</summary>
 
 Kelola reservasi peminjaman dari pengguna.
 
@@ -662,10 +644,9 @@ Kelola reservasi peminjaman dari pengguna.
 - Cek halaman booking secara berkala untuk pending requests
 - Periksa ketersediaan barang sebelum menerima
 - Beri catatan jika menolak untuk komunikasi lebih baik
-
----
-
-### 9. Analisis
+</details>
+<details>
+<summary>9. Analisis</summary>
 
 Lihat analisis mendalam tentang pola peminjaman.
 
@@ -739,10 +720,9 @@ Lihat analisis mendalam tentang pola peminjaman.
 - Review analisis setiap bulan
 - Export data untuk presentasi
 - Gunakan untuk laporan management
-
----
-
-### 10. Stats (Tampilan Monitor)
+</details>
+<details>
+<summary>10. Stats (Tampilan Monitor)</summary>
 
 Mode fullscreen untuk display/TV di ruangan.
 
@@ -778,10 +758,9 @@ Mode fullscreen untuk display/TV di ruangan.
 - Gunakan di ruang staff atau lobby
 - Pajang di layar TV untuk transparency
 - Refresh browser jika perlu manual update
-
----
-
-### 11. Pengaturan
+</details>
+<details>
+<summary>11. Pengaturan</summary>
 
 Konfigurasi aplikasi dan preferences.
 
@@ -859,6 +838,7 @@ Konfigurasi aplikasi dan preferences.
 - Backup file `settings.json` secara berkala
 - Jangan lupa password admin
 - Atur notifikasi sesuai kebutuhan
+</details>
 
 ---
 
@@ -941,13 +921,14 @@ Database menggunakan file JSON di folder `database/`.
 ```
 
 **Status**:
-- `0` = Tersedia
-- `1` = Dipinjam
+- `0` = Dipinjam
+- `1` = Tersedia
+- `2` = Dibooking
 
 **Condition**:
+- `-1` = Hilang
+- `0` = Rusak
 - `1` = Baik
-- `2` = Rusak Ringan
-- `3` = Rusak Berat
 
 ### 2. borrowers.json
 
@@ -1067,7 +1048,8 @@ Lihat bagian [Instalasi - Langkah 4](#langkah-4-konfigurasi-opsional)
 
 ## ❓ Troubleshooting
 
-### 1. Port 80 sudah digunakan
+<details>
+<summary>1. Port 80 sudah digunakan</summary>
 
 **Problem**: Error "Port 80 is already in use"
 
@@ -1083,8 +1065,9 @@ taskkill /PID <PID> /F
 # Option 3: Kill process (Linux/Mac)
 lsof -ti:80 | xargs kill -9
 ```
-
-### 2. NPM Install Error
+</details>
+<details>
+<summary>2. NPM Install Error</summary>
 
 **Problem**: Gagal install dependencies
 
@@ -1099,8 +1082,9 @@ rm -rf node_modules package-lock.json
 # Install ulang
 npm install
 ```
-
-### 3. Database File Corrupt
+</details>
+<details>
+<summary>3. Database File Corrupt</summary>
 
 **Problem**: Error reading JSON files
 
@@ -1115,8 +1099,9 @@ node -e "console.log(JSON.parse(require('fs').readFileSync('database/items.json'
 
 # Fix format jika perlu
 ```
-
-### 4. Notifikasi Tidak Muncul
+</details>
+<details>
+<summary>4. Notifikasi Tidak Muncul</summary>
 
 **Problem**: Background service tidak berjalan
 
@@ -1129,8 +1114,9 @@ node -e "console.log(JSON.parse(require('fs').readFileSync('database/items.json'
 # Test manual
 node scripts/notificationScheduler.js
 ```
-
-### 5. RFID Scanner Tidak Terdeteksi
+</details>
+<details>
+<summary>5. RFID Scanner Tidak Terdeteksi</summary>
 
 **Problem**: Input dari scanner tidak masuk
 
@@ -1139,8 +1125,9 @@ node scripts/notificationScheduler.js
 2. Test scanner di notepad/text editor
 3. Cek apakah ada karakter tambahan (Enter, Tab) yang perlu difilter
 4. Scanner harus mengakhiri input dengan Enter
-
-### 6. Gambar Upload Tidak Muncul
+</details>
+<details>
+<summary>6. Gambar Upload Tidak Muncul</summary>
 
 **Problem**: Gambar tidak tampil setelah upload
 
@@ -1155,8 +1142,9 @@ chmod 755 public/uploads
 # Cek path di database/items.json
 # Harus relatif: "/uploads/filename.jpg"
 ```
-
-### 7. Build Error
+</details>
+<details>
+<summary>7. Build Error</summary>
 
 **Problem**: `npm run build` gagal
 
@@ -1171,8 +1159,9 @@ npm run build
 # Cek TypeScript errors
 npm run lint
 ```
-
-### 8. Data Hilang Setelah Restart
+</details>
+<details>
+<summary>8. Data Hilang Setelah Restart</summary>
 
 **Problem**: Data tidak tersimpan
 
@@ -1181,6 +1170,7 @@ npm run lint
 2. Cek log error di console
 3. Pastikan aplikasi memiliki write permission
 4. Backup database secara berkala
+</details>
 
 ---
 
@@ -1233,11 +1223,11 @@ A: Ganti file `public/mrc.png` dan `public/mrc-icon.png` dengan logo Anda.
 ## 👥 Kontributor
 
 ### Developer:
-- **Development Team** - SMKN 1 Subang
+- **Abdi Putrana Radian** - Siswa Jurusan TKJ SMKN 1 Subang Periode 2023-2026
 
 ### Special Thanks:
+- Tim MRC
 - Guru dan Staff SMKN 1 Subang
-- Tim Manajemen Sekolah
 - Beta Testers
 
 ---
@@ -1247,26 +1237,24 @@ A: Ganti file `public/mrc.png` dan `public/mrc-icon.png` dengan logo Anda.
 Untuk pertanyaan, bug report, atau feature request:
 
 - **GitHub Issues**: [https://github.com/abdipr/mrc/issues](https://github.com/abdipr/mrc/issues)
-- **Email**: admin@smkn1subang.sch.id
-- **Website**: [SMKN 1 Subang](https://smkn1subang.sch.id)
+- **Email**: me@abdi.es
+- **Website**: [abdi.es](https://abdi.es)
 
 ---
 
 ## 📄 Lisensi
 
-Aplikasi ini adalah properti SMKN 1 Subang dan untuk penggunaan internal sekolah.
-
----
-
-## 🎓 Tentang SMKN 1 Subang
-
-SMKN 1 Subang adalah Sekolah Menengah Kejuruan yang berkomitmen dalam menghasilkan lulusan berkualitas dengan keterampilan teknis dan profesional yang tinggi. MRC adalah salah satu inovasi dalam digitalisasi manajemen sekolah.
+Aplikasi ini adalah properti MRC di SMKN 1 Subang dan untuk penggunaan internal sekolah.
 
 ---
 
 <div align="center">
-  <p>Dibuat dengan ❤️ untuk SMKN 1 Subang</p>
-  <p>© 2025 SMKN 1 Subang - Material Resource Center</p>
-  
-  <img src="public/mrc-icon.png" alt="MRC Icon" width="80"/>
+  <p>Dibuat dengan ❤️ untuk MRC SMKN 1 Subang</p>
+  <p>© 2025 Maintenance Repair Calibration - SMKN 1 Subang</p>
+
+  <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+    <img src="public/mrc.png" alt="MRC Icon" height="40"/>
+    <img src="https://abdi.es/assets/abdi.png" alt="Abdi Icon" height="40"/>
+  </div>
 </div>
+
