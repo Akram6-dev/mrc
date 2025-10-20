@@ -4,6 +4,8 @@ import fs from "fs/promises";
 import path from "path";
 
 const BOOKINGS_PATH = path.join(process.cwd(), "database", "bookings.json");
+const NOTIFICATIONS_PATH = path.join(process.cwd(), "database", "notifications.json");
+const BORROWERS_PATH = path.join(process.cwd(), "database", "borrowers.json");
 
 export async function GET() {
   try {
@@ -23,6 +25,24 @@ export async function POST(req: NextRequest) {
     const newBooking = { ...body, id: Date.now().toString(), createdAt: new Date().toISOString() };
     bookings.push(newBooking);
     await fs.writeFile(BOOKINGS_PATH, JSON.stringify(bookings, null, 2));
+    // Also add a realtime notification so clients can pick it up
+    try {
+      // read borrowers to get borrower name
+      const borrowersRaw = await fs.readFile(BORROWERS_PATH, "utf-8").catch(() => "[]");
+      const borrowers = JSON.parse(borrowersRaw || "[]");
+      const borrower = borrowers.find((b: any) => String(b.id) === String(newBooking.borrowerId));
+      const borrowerName = borrower?.name ?? newBooking.borrowerName ?? `ID ${newBooking.borrowerId}`;
+
+      const notifRaw = await fs.readFile(NOTIFICATIONS_PATH, "utf-8").catch(() => "[]");
+      const notifs = JSON.parse(notifRaw || "[]");
+      const itemsLabel = newBooking.items ? (Array.isArray(newBooking.items) ? `${newBooking.items.length} item` : '') : '';
+      const message = `Booking baru: ${borrowerName} - ${itemsLabel}`.trim();
+      notifs.unshift({ id: Date.now(), message, type: 'booking', read: false, timestamp: new Date().toISOString() });
+      await fs.writeFile(NOTIFICATIONS_PATH, JSON.stringify(notifs, null, 2));
+    } catch (e) {
+      // ignore notification failure
+      console.error('Failed to write notification', e);
+    }
     return NextResponse.json(newBooking, { status: 201 });
   } catch (err) {
     return NextResponse.json({ error: "Gagal menyimpan booking" }, { status: 500 });

@@ -9,9 +9,9 @@
       {
         "serialNumber": "448740179",
         "sn": "PF051WVE",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760933641170"
       },
       {
         "serialNumber": "150021523",
@@ -44,12 +44,12 @@
       {
         "serialNumber": "1311632715",
         "sn": "PF07Q9MS",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760941600815"
       },
       {
-        "serialNumber": "149960963",
+        "serialNumber": "0149960963",
         "sn": "PF07QKBP",
         "status": 1,
         "condition": 1,
@@ -222,11 +222,18 @@
         "status": 1,
         "condition": 1,
         "loanId": null
+      },
+      {
+        "serialNumber": "1234",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
       }
     ],
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-10-15T04:58:45.485Z",
-    "stock": 31,
+    "updatedAt": "2025-10-20T07:12:25.983Z",
+    "stock": 32,
     "serialSearch": "",
     "image": "/assets/img/1760406973256.jpg"
   },
@@ -238,54 +245,53 @@
     "id": "1754696680732",
     "items": [
       {
-        "serialNumber": "0123642947",
+        "serialNumber": "0154334948",
         "sn": "X8A41900578",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760686678398"
       },
       {
         "serialNumber": "1380566968",
         "sn": "X8A41700568",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760488812206"
+        "loanId": "1760931867257"
       },
       {
         "serialNumber": "2939832620",
         "sn": "X4GG9201149",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760501354587",
-        "updatedAt": "2025-10-15T02:19:22.163Z"
+        "loanId": "1760923523213"
       },
       {
         "serialNumber": "845694151",
         "sn": "X4GG9200922",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760943256435"
       },
       {
         "serialNumber": "0131530707",
         "sn": "X8A40Z01640",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760944344732"
       },
       {
         "serialNumber": "1320214843",
         "sn": "X4GG9200970",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760943198437"
       },
       {
-        "serialNumber": "854329079",
+        "serialNumber": "0854329079",
         "sn": "X8A41106180",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760941600815"
       },
       {
         "serialNumber": "1453456180",
@@ -309,7 +315,7 @@
         "loanId": null
       },
       {
-        "serialNumber": "154334947",
+        "serialNumber": "0154334947",
         "sn": "X8A44X01779",
         "status": 1,
         "condition": 1,
@@ -320,13 +326,26 @@
         "sn": "X8A44X01674",
         "status": 1,
         "condition": 1,
-        "loanId": "1760411655614",
-        "updatedAt": "2025-10-14T03:15:31.998Z"
+        "loanId": null
+      },
+      {
+        "serialNumber": "12345678",
+        "sn": "X8A44X01680",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "2939832620",
+        "sn": "X",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1760923523213"
       }
     ],
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-10-15T04:58:46.204Z",
-    "stock": 12,
+    "updatedAt": "2025-10-20T07:12:27.684Z",
+    "stock": 14,
     "serialSearch": "",
     "image": "/assets/img/1760408189747.jpg"
   },
@@ -423,7 +442,7 @@
       }
     ],
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2025-10-14T06:01:44.554Z",
+    "updatedAt": "2025-10-20T07:12:28.011Z",
     "image": "/assets/img/1760421697842.png",
     "serialSearch": "",
     "stock": 14
@@ -437,58 +456,57 @@
     "items": [
       {
         "serialNumber": "TRL001",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760493233219"
+        "loanId": "1760925211759"
       },
       {
         "serialNumber": "TRL002",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760489309747"
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "TRL003",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "TRL004",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760488812206"
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "TRL005",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760489309747"
+        "loanId": "1760931867257"
       },
       {
         "serialNumber": "TRL006",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": "1760501354587",
-        "updatedAt": "2025-10-15T02:19:17.599Z"
+        "loanId": "1760938019968"
       },
       {
         "serialNumber": "TRL007",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760941600815"
       },
       {
         "serialNumber": "TRL008",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760943256435"
       },
       {
         "serialNumber": "TRL009",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760944344732"
       },
       {
         "serialNumber": "TRL010",
@@ -519,11 +537,88 @@
         "status": 1,
         "condition": 1,
         "loanId": null
+      },
+      {
+        "serialNumber": "TRL015",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL016",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL017",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL018",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL019",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL020",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL021",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL022",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL023",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL024",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "serialNumber": "TRL025",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
       }
     ],
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-10-15T04:58:46.275Z",
-    "stock": 14,
+    "updatedAt": "2025-10-20T07:12:28.878Z",
+    "stock": 25,
     "serialSearch": "",
     "image": "/assets/img/1760421889541.webp"
   },
@@ -560,7 +655,7 @@
       }
     ],
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-10-14T06:07:26.790Z",
+    "updatedAt": "2025-10-20T07:12:29.436Z",
     "image": "/assets/img/1760422046967.jpg",
     "serialSearch": "",
     "stock": 4
@@ -574,63 +669,63 @@
     "items": [
       {
         "serialNumber": "LNVTPM001",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM002",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM003",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM004",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM005",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM006",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM007",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM008",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM009",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM010",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760931683990"
       },
       {
         "serialNumber": "LNVTPM011",
@@ -658,7 +753,7 @@
       }
     ],
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2025-10-14T06:10:41.363Z",
+    "updatedAt": "2025-10-20T07:12:29.701Z",
     "image": "/assets/img/1760422192877.webp",
     "serialSearch": "",
     "stock": 14
@@ -756,7 +851,7 @@
       }
     ],
     "createdAt": "2025-08-20T02:03:43.398Z",
-    "updatedAt": "2025-10-14T06:12:37.268Z",
+    "updatedAt": "2025-10-20T07:12:30.458Z",
     "image": "/assets/img/1760422356679.jpg",
     "serialSearch": "",
     "stock": 14
@@ -800,7 +895,7 @@
       }
     ],
     "createdAt": "2025-08-25T05:55:09.869Z",
-    "updatedAt": "2025-10-14T06:13:30.512Z",
+    "updatedAt": "2025-10-20T07:12:30.964Z",
     "image": "/assets/img/1760422410717.jpg",
     "serialSearch": "",
     "stock": 5
@@ -826,7 +921,7 @@
       }
     ],
     "createdAt": "2025-08-27T03:58:44.262Z",
-    "updatedAt": "2025-10-14T06:14:52.739Z",
+    "updatedAt": "2025-10-20T07:12:31.179Z",
     "image": "/assets/img/1760422492923.webp",
     "serialSearch": "",
     "stock": 2
@@ -840,9 +935,10 @@
     "items": [
       {
         "serialNumber": "TAB001",
-        "status": 1,
+        "sn": "747",
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1756288100244"
       },
       {
         "serialNumber": "TAB002",
@@ -870,7 +966,7 @@
       }
     ],
     "createdAt": "2025-08-27T09:46:52.966Z",
-    "updatedAt": "2025-10-14T06:17:43.265Z",
+    "updatedAt": "2025-10-20T07:12:32.112Z",
     "image": "/assets/img/1760422663355.jfif",
     "serialSearch": "",
     "stock": 5
@@ -890,7 +986,7 @@
       }
     ],
     "createdAt": "2025-09-04T00:51:04.431Z",
-    "updatedAt": "2025-10-14T06:21:08.394Z",
+    "updatedAt": "2025-10-20T07:12:32.699Z",
     "image": "/assets/img/1760422868475.png",
     "serialSearch": "",
     "stock": 1
@@ -906,26 +1002,33 @@
         "serialNumber": "USBLAN001",
         "status": 1,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760597065644"
       },
       {
         "serialNumber": "USBLAN002",
         "status": 1,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760597065644"
       },
       {
         "serialNumber": "USBLAN003",
         "status": 1,
         "condition": 1,
-        "loanId": null
+        "loanId": "1760597065644"
+      },
+      {
+        "serialNumber": "USBLAN004",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": "1760597065644"
       }
     ],
     "createdAt": "2025-09-04T07:05:19.963Z",
-    "updatedAt": "2025-10-14T06:21:45.160Z",
+    "updatedAt": "2025-10-20T07:12:32.952Z",
     "image": "/assets/img/1760422905339.jpg",
     "serialSearch": "",
-    "stock": 3
+    "stock": 4
   },
   {
     "name": "Tripod Stand HP",
@@ -942,7 +1045,7 @@
       }
     ],
     "createdAt": "2025-09-15T01:09:16.984Z",
-    "updatedAt": "2025-10-14T06:22:14.930Z",
+    "updatedAt": "2025-10-20T07:12:33.773Z",
     "image": "/assets/img/1760422935106.jpg",
     "serialSearch": "",
     "stock": 1
@@ -962,7 +1065,7 @@
       }
     ],
     "createdAt": "2025-10-06T05:35:13.994Z",
-    "updatedAt": "2025-10-14T06:23:39.722Z",
+    "updatedAt": "2025-10-20T07:12:34.590Z",
     "image": "/assets/img/1760423019819.jfif",
     "serialSearch": "",
     "stock": 1

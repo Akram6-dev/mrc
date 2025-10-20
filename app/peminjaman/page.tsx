@@ -67,6 +67,7 @@ import {
 import { auth } from "@/lib/auth";
 import api from "@/lib/api";
 import type { Item, Borrower, Loan, LoanItem } from "@/lib/types";
+import { getColorFromName } from "@/lib/utils";
 
 
 export default function PeminjamanPage() {
@@ -208,31 +209,31 @@ export default function PeminjamanPage() {
           // Ambil data peminjam
           const borrower = borrowers.find(b => b.id === selectedBorrower);
           // Format items
-            // Gabungkan serial dengan nama barang yang sama
-            const itemsBody = Object.values(
+          // Gabungkan serial dengan nama barang yang sama
+          const itemsBody = Object.values(
             validItems.reduce((acc, item) => {
               // Temukan info barang
               const found = items.flatMap(i => (i.items || []).map(s => ({
-              itemName: i.name,
-              serialNumber: s.serialNumber,
-              category: i.category,
-              description: i.description
+                itemName: i.name,
+                serialNumber: s.serialNumber,
+                category: i.category,
+                description: i.description
               }))).find(s => s.serialNumber === item.serialNumber);
 
               const key = found?.itemName || "Barang";
               if (!acc[key]) {
-              acc[key] = {
-                item_name: key,
-                qty: 0,
-              };
+                acc[key] = {
+                  item_name: key,
+                  qty: 0,
+                };
               }
               acc[key].qty += 1;
               return acc;
-            }, {} as Record<string, { item_name: string; qty: number}>)
-            ).map(group => ({
+            }, {} as Record<string, { item_name: string; qty: number }>)
+          ).map(group => ({
             item_name: group.item_name,
             qty: group.qty,
-            }));
+          }));
           // Compose body
           const postBody = {
             id: createdLoan?.id || "",
@@ -276,8 +277,8 @@ export default function PeminjamanPage() {
       setSuccess("Peminjaman berhasil dicatat!");
 
       // Reset form
-  setSelectedBorrower("");
-  setLoanItems([{ serialNumber: "", note: "" }]);
+      setSelectedBorrower("");
+      setLoanItems([{ serialNumber: "", note: "" }]);
       // Gunakan settings yang sudah di-fetch
       const days = settings?.system?.defaultLoanDays || 7;
       const newDueDate = new Date();
@@ -628,12 +629,12 @@ export default function PeminjamanPage() {
                     const filtered = serialSearch.trim() === ""
                       ? availableSerials
                       : availableSerials.filter((s) => {
-                          const q = serialSearch.trim().toLowerCase();
-                          return (
-                            String(s.serialNumber).toLowerCase().includes(q) ||
-                            (s.itemName || "").toLowerCase().includes(q)
-                          );
-                        });
+                        const q = serialSearch.trim().toLowerCase();
+                        return (
+                          String(s.serialNumber).toLowerCase().includes(q) ||
+                          (s.itemName || "").toLowerCase().includes(q)
+                        );
+                      });
                     // Handler
                     const handleSerialKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
                       if (filtered.length === 0) return;
@@ -801,9 +802,9 @@ export default function PeminjamanPage() {
                     {/* Decorative accent */}
                     <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent-200 dark:bg-accent-900/30 rounded-full opacity-20 pointer-events-none" />
                     <div className="flex items-center gap-4 mb-5">
-                      <span className="w-14 h-14 flex items-center justify-center rounded-full text-accent-700 dark:text-accent-200 text-3xl bg-accent-50 dark:bg-slate-700/50 shadow-md">
+                      <div className={`flex-shrink-0 w-14 h-14 rounded-full ${getColorFromName(selectedBorrowerData?.name)} flex items-center justify-center text-white text-2xl font-bold`}>
                         <User className="w-8 h-8" />
-                      </span>
+                      </div>
                       <div className="min-w-0">
                         <div className="text-lg font-bold text-gray-900 dark:text-white truncate">
                           {selectedBorrowerData?.name || <span className="text-gray-400">Pilih peminjam</span>}
@@ -861,11 +862,11 @@ export default function PeminjamanPage() {
                                 })()}
                                 <span className="truncate font-medium text-gray-900 dark:text-white">{name}</span>
                               </span>
-                                <span
-                                  className="ml-2 px-0 py-1 rounded bg-accent-600 text-white font-bold text-lg shadow leading-none inline-flex justify-center items-center min-w-[36px] w-[36px] text-center"
-                                >
-                                  {countPerItem[name]}
-                                </span>
+                              <span
+                                className="ml-2 px-0 py-1 rounded bg-accent-600 text-white font-bold text-lg shadow leading-none inline-flex justify-center items-center min-w-[36px] w-[36px] text-center"
+                              >
+                                {countPerItem[name]}
+                              </span>
                             </div>
                           ));
                         })()}

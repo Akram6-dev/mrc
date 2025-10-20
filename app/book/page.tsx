@@ -147,6 +147,31 @@ export default function BookPublicPage() {
         }
     };
 
+    // Try closing the window. On some platforms (like Windows PWAs or certain browsers)
+    // window.close() may be blocked if the window wasn't opened by script. In that case
+    // we fallback to closing the success dialog and clearing the form state so user sees
+    // the successful result without leaving a stale UI.
+    async function closeOrFallback() {
+        try {
+            // Try to close the window
+            window.close();
+        } catch (err) {
+            // ignore
+        }
+        // Wait a tick to see if window closed (can't detect reliably), then do fallback clear
+        setTimeout(() => {
+            // If still on the page (we assume window.close didn't work), clear UI
+            setShowSuccessDialog(false);
+            setSelectedBorrower("");
+            setBookingItems(items.map((item: any) => ({ itemId: item.id, name: item.name, qty: 0, max: (item.items?.filter((s: any) => s.status === 1).length || 0) })));
+            setStartDate(undefined);
+            setDuration(1);
+            setNotes("");
+            setPurpose("");
+            setPickupTime("");
+        }, 200);
+    }
+
     return (
         <main className="min-h-screen bg-gradient-to-br from-blue-50 to-accent-100 dark:from-gray-900 dark:to-accent-900 p-0 m-0 flex flex-col select-none user-select-none">
             <div className="flex flex-col items-center pt-8 pb-2">
@@ -465,7 +490,7 @@ export default function BookPublicPage() {
                             <Button
                                 type="button"
                                 className="w-full mt-2 bg-accent-600 hover:bg-accent-700 text-white font-semibold rounded-lg shadow"
-                                onClick={() => window.close()}
+                                onClick={() => closeOrFallback()}
                             >
                                 Tutup Halaman
                             </Button>

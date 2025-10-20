@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Plus, Search, Edit, Trash2, Filter, Image as ImageIcon } from "lucide-react"
 // Icon components mapping (lucide-react)
@@ -45,29 +45,29 @@ export default function BarangPage() {
   const [items, setItems] = useState<any[]>([])
   const [filteredItems, setFilteredItems] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
-// Remove local error/success state, use toast instead
-const [search, setSearch] = useState("")
-const [categoryFilter, setCategoryFilter] = useState("all")
-const [conditionFilter, setConditionFilter] = useState("all")
+  // Remove local error/success state, use toast instead
+  const [search, setSearch] = useState("")
+  const [categoryFilter, setCategoryFilter] = useState("all")
+  const [conditionFilter, setConditionFilter] = useState("all")
 
 
-// Icon options for devices, simpan komponen icon langsung
-const ICON_OPTIONS = [
-  { label: "Laptop", value: "laptop", icon: Laptop },
-  { label: "Cable", value: "cable", icon: Cable },
-  { label: "Projector", value: "projector", icon: Projector },
-  { label: "HDMI", value: "hdmi", icon: HdmiPort },
-  { label: "Plug", value: "plug", icon: Plug },
-  { label: "Mouse", value: "mouse", icon: Mouse },
-  { label: "Tablet", value: "tablet", icon: Tablet },
-  { label: "Printer", value: "printer", icon: Printer },
-  { label: "Monitor", value: "monitor", icon: Monitor },
-  { label: "Keyboard", value: "keyboard", icon: Keyboard },
-  { label: "Speaker", value: "speaker", icon: Speaker },
-  { label: "Presentation", value: "presentation", icon: Presentation },
-  { label: "Mic", value: "mic", icon: MicVocal },
-  { label: "Lainnya", value: "other", icon: Package },
-]
+  // Icon options for devices, simpan komponen icon langsung
+  const ICON_OPTIONS = [
+    { label: "Laptop", value: "laptop", icon: Laptop },
+    { label: "Cable", value: "cable", icon: Cable },
+    { label: "Projector", value: "projector", icon: Projector },
+    { label: "HDMI", value: "hdmi", icon: HdmiPort },
+    { label: "Plug", value: "plug", icon: Plug },
+    { label: "Mouse", value: "mouse", icon: Mouse },
+    { label: "Tablet", value: "tablet", icon: Tablet },
+    { label: "Printer", value: "printer", icon: Printer },
+    { label: "Monitor", value: "monitor", icon: Monitor },
+    { label: "Keyboard", value: "keyboard", icon: Keyboard },
+    { label: "Speaker", value: "speaker", icon: Speaker },
+    { label: "Presentation", value: "presentation", icon: Presentation },
+    { label: "Mic", value: "mic", icon: MicVocal },
+    { label: "Lainnya", value: "other", icon: Package },
+  ]
 
   // Modal states
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -89,6 +89,34 @@ const ICON_OPTIONS = [
   const [imagePreview, setImagePreview] = useState<string>("")
 
   const router = useRouter()
+
+  // Refs to RFID inputs so we can focus newly added rows
+  const serialRefs = useRef<Array<HTMLInputElement | null>>([])
+
+  const addNewSerial = () => {
+    const newIndex = formData.items.length
+    const newItem = { serialNumber: "", sn: "", status: 1, condition: 1 }
+    setFormData(prev => ({ ...prev, items: [...prev.items, newItem] }))
+    // Focus the new input on next tick after DOM updates
+    setTimeout(() => {
+      serialRefs.current[newIndex]?.focus()
+    }, 0)
+  }
+
+  const handleSerialKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      e.stopPropagation()
+      // If we're on the last row, add a new one and focus it
+      if (idx === formData.items.length - 1) {
+        addNewSerial()
+      } else {
+        // Otherwise focus next row's RFID input
+        const next = serialRefs.current[idx + 1]
+        if (next) next.focus()
+      }
+    }
+  }
 
   useEffect(() => {
     if (!auth.isAuthenticated()) {
@@ -112,12 +140,13 @@ const ICON_OPTIONS = [
         stock: Array.isArray(item.items) ? item.items.length : 0,
         items: Array.isArray(item.items)
           ? item.items.map((s: any) => ({
-              serialNumber: s.serialNumber,
-              sn: s.sn,
-              status: s.status,
-              condition: typeof s.condition === "number" ? s.condition : 1,
-            }))
-          : [{ serialNumber: '', status: 1, condition: 1 }],
+            serialNumber: s.serialNumber,
+            sn: s.sn,
+            status: s.status,
+            condition: typeof s.condition === "number" ? s.condition : 1,
+            loanId: s.loanId || null,
+          }))
+          : [{ serialNumber: '', sn: '', status: 1, condition: 1, loanId: null }],
       }))
       setItems(mapped)
     } catch (err) {
@@ -222,12 +251,13 @@ const ICON_OPTIONS = [
       image: item.image || "",
       items: item.items && Array.isArray(item.items) && item.items.length > 0
         ? item.items.map((s: any) => ({
-            serialNumber: s.serialNumber,
-            sn: s.sn,
-            status: s.status,
-            condition: typeof s.condition === "number" ? s.condition : 1,
-          }))
-        : [{ serialNumber: "", sn: "", status: 1, condition: 1 }],
+          serialNumber: s.serialNumber,
+          sn: s.sn,
+          status: s.status,
+          condition: typeof s.condition === "number" ? s.condition : 1,
+          loanId: s.loanId || null,
+        }))
+        : [{ serialNumber: "", sn: "", status: 1, condition: 1, loanId: null }],
       serialSearch: "",
     })
     setImageFile(null)
@@ -374,10 +404,10 @@ const ICON_OPTIONS = [
                           {ICON_OPTIONS.map((opt) => (
                             <SelectItem key={opt.value} value={opt.value} className="flex items-center gap-2">
                               <span className="inline-flex items-center gap-2">
-                          {(() => {
-                            const Icon = opt.icon
-                            return <Icon className="w-6 h-6 text-accent-600 dark:text-accent-400" />
-                          })()}
+                                {(() => {
+                                  const Icon = opt.icon
+                                  return <Icon className="w-6 h-6 text-accent-600 dark:text-accent-400" />
+                                })()}
                                 {opt.label}
                               </span>
                             </SelectItem>
@@ -407,6 +437,12 @@ const ICON_OPTIONS = [
                                 placeholder="Cari serial number..."
                                 value={formData.serialSearch || ""}
                                 onChange={e => setFormData({ ...formData, serialSearch: e.target.value })}
+                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                  if (e.key === 'Enter') {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                  }
+                                }}
                                 className="input-field pl-10 pr-10 w-full"
                               />
                               {formData.serialSearch && (
@@ -431,37 +467,40 @@ const ICON_OPTIONS = [
                           </div>
                         </div>
                         <div className="max-h-56 overflow-y-auto">
-                            {(formData.items && formData.items
+                          {(formData.items && formData.items
                             .filter(s =>
                               !formData.serialSearch ||
                               (s.serialNumber || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase()) ||
                               (s.sn || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase())
                             )
-                            ).map((s, idx) => (
+                          ).map((s, idx) => (
                             <div key={idx} className="flex gap-2 items-center py-2 px-2 border-b border-gray-100 dark:border-gray-800 last:border-b-0">
                               <span className="flex-shrink-0 font-mono text-gray-500">{idx + 1}.</span>
                               <Input
-                              type="text"
-                              placeholder="RFID"
-                              value={s.serialNumber}
-                              onChange={e => {
-                                const items = [...formData.items]
-                                items[idx].serialNumber = e.target.value
-                                setFormData({ ...formData, items })
-                              }}
-                              className="input-field w-full"
-                              required
+                                type="text"
+                                placeholder="RFID"
+                                value={s.serialNumber}
+                                ref={(el: HTMLInputElement | null) => { serialRefs.current[idx] = el }}
+                                onChange={e => {
+                                  const items = [...formData.items]
+                                  items[idx].serialNumber = e.target.value
+                                  setFormData({ ...formData, items })
+                                }}
+                                onKeyDown={(e) => handleSerialKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>, idx)}
+                                className="input-field w-full"
+                                required
                               />
                               <Input
-                              type="text"
-                              placeholder="Serial Number"
-                              value={s.sn}
-                              onChange={e => {
-                                const items = [...formData.items]
-                                items[idx].sn = e.target.value
-                                setFormData({ ...formData, items })
-                              }}
-                              className="input-field w-full"
+                                type="text"
+                                placeholder="Serial Number"
+                                value={s.sn}
+                                onChange={e => {
+                                  const items = [...formData.items]
+                                  items[idx].sn = e.target.value
+                                  setFormData({ ...formData, items })
+                                }}
+                                onKeyDown={(e) => handleSerialKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>, idx)}
+                                className="input-field w-full"
                               />
                               {/* Status badge only, not editable */}
                               <span
@@ -469,50 +508,50 @@ const ICON_OPTIONS = [
                                   ${s.status === 1
                                     ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
                                     : s.status === 2
-                                    ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
-                                    : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"}
+                                      ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                                      : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"}
                                 `}
                               >
                                 {s.status === 1
                                   ? "Tersedia"
                                   : s.status === 2
-                                  ? "Dibooking"
-                                  : "Dipinjam"}
+                                    ? "Dibooking"
+                                    : "Dipinjam"}
                               </span>
                               {/* Condition editable */}
                               <Select
-                              value={typeof s.condition === "number" ? String(s.condition) : "1"}
-                              onValueChange={val => {
-                                const items = [...formData.items]
-                                items[idx].condition = Number(val)
-                                setFormData({ ...formData, items })
-                              }}
+                                value={typeof s.condition === "number" ? String(s.condition) : "1"}
+                                onValueChange={val => {
+                                  const items = [...formData.items]
+                                  items[idx].condition = Number(val)
+                                  setFormData({ ...formData, items })
+                                }}
                               >
-                              <SelectTrigger className="input-field w-28">
-                                <SelectValue placeholder="Kondisi" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="1">Baik</SelectItem>
-                                <SelectItem value="0">Rusak</SelectItem>
-                                <SelectItem value="-1">Hilang</SelectItem>
-                              </SelectContent>
+                                <SelectTrigger className="input-field w-28">
+                                  <SelectValue placeholder="Kondisi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="1">Baik</SelectItem>
+                                  <SelectItem value="0">Rusak</SelectItem>
+                                  <SelectItem value="-1">Hilang</SelectItem>
+                                </SelectContent>
                               </Select>
                               <Button
-                              type="button"
-                              variant="ghost"
-                              size="icon"
-                              className="ml-1 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 w-16"
-                              onClick={() => {
-                                const items = formData.items.filter((_, i) => i !== idx)
-                                setFormData({ ...formData, items })
-                              }}
-                              disabled={formData.items.length === 1}
-                              aria-label="Hapus Serial"
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                className="ml-1 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 w-16"
+                                onClick={() => {
+                                  const items = formData.items.filter((_, i) => i !== idx)
+                                  setFormData({ ...formData, items })
+                                }}
+                                disabled={formData.items.length === 1}
+                                aria-label="Hapus Serial"
                               >
-                              <Trash2 className="w-4 h-4" />
+                                <Trash2 className="w-4 h-4" />
                               </Button>
                             </div>
-                            ))}
+                          ))}
                         </div>
                       </div>
                       <div className="text-xs text-gray-500 mt-1">Jumlah barang dihitung dari jumlah serial number.</div>
@@ -662,27 +701,46 @@ const ICON_OPTIONS = [
                     <div className="text-sm text-gray-500 dark:text-gray-400">{item.category}</div>
                   </div>
                   <div className="flex-shrink-0">
-                  <span className={`font-semibold text-2xl ${item.stock === 0 ? "text-red-600 dark:text-red-400" : item.stock < 5 ? "text-yellow-600 dark:text-yellow-400" : "text-green-600 dark:text-green-400"}`}>{item.stock}</span><span className="text-lg text-gray-500 dark:text-gray-400 font-semibold">x</span>
+                    <span className={`font-semibold text-2xl ${item.stock === 0 ? "text-red-600 dark:text-red-400" : item.stock < 5 ? "text-yellow-600 dark:text-yellow-400" : "text-accent-600 dark:text-accent-400"}`}>{item.stock}</span><span className="text-lg text-gray-500 dark:text-gray-400 font-semibold">x</span>
                   </div>
                 </div>
                 {item.description && (
                   <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.description}</div>
                 )}
-                <div className="flex flex-wrap gap-3 text-sm mb-4">
+                <div className="flex flex-col gap-2 text-sm">
                   {(() => {
                     const baik = item.items?.filter((s: any) => s.condition === 1).length || 0;
                     const rusak = item.items?.filter((s: any) => s.condition === 0).length || 0;
                     const hilang = item.items?.filter((s: any) => s.condition === -1).length || 0;
+                    // Status counts
+                    const tersedia = item.items?.filter((s: any) => s.status === 1).length || 0;
+                    const dipinjam = item.items?.filter((s: any) => s.status === 0).length || 0;
+                    const dibooking = item.items?.filter((s: any) => s.status === 2).length || 0;
                     return <>
-                      {baik > 0 && (
-                        <span className="badge badge-success">{baik} Baik</span>
-                      )}
-                      {rusak > 0 && (
-                        <span className="badge badge-warning">{rusak} Rusak</span>
-                      )}
-                      {hilang > 0 && (
-                        <span className="badge badge-danger">{hilang} Hilang</span>
-                      )}
+                      {/* Condition badges (atas) */}
+                      <div className="flex items-center gap-2">
+                        {baik > 0 && (
+                          <span className="badge badge-success">{baik} Baik</span>
+                        )}
+                        {rusak > 0 && (
+                          <span className="badge badge-warning">{rusak} Rusak</span>
+                        )}
+                        {hilang > 0 && (
+                          <span className="badge badge-danger">{hilang} Hilang</span>
+                        )}
+                      </div>
+                      {/* Status count badges (bawah) */}
+                      <div className="flex items-center gap-2">
+                        {tersedia > 0 && (
+                          <span className="px-2 py-1 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">{tersedia} Tersedia</span>
+                        )}
+                        {dipinjam > 0 && (
+                          <span className="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">{dipinjam} Dipinjam</span>
+                        )}
+                        {dibooking > 0 && (
+                          <span className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">{dibooking} Dibooking</span>
+                        )}
+                      </div>
                     </>;
                   })()}
                 </div>

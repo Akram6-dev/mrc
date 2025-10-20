@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "itemId": "1754637098494",
+        "qty": 7
+      },
+      {
+        "itemId": "1754873198845",
+        "qty": 2
+      }
+    ],
+    "startDate": "2025-10-17T05:30:00.000Z",
+    "duration": 1,
+    "purpose": "KBM",
+    "notes": "",
+    "status": "accepted",
+    "id": "1760589643425",
+    "createdAt": "2025-10-16T04:40:43.426Z",
+    "updatedAt": "2025-10-17T05:54:08.286Z"
+  }
+]

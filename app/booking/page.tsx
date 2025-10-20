@@ -482,13 +482,13 @@ export default function BookingAdminPage() {
                                             <TableCell>{formatDate(b.startDate)}</TableCell>
                                             <TableCell>
                                                 {b.status === 'pending' && (
-                                                    <Badge className="bg-yellow-400 text-yellow-900">Pending</Badge>
+                                                    <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Pending</Badge>
                                                 )}
                                                 {b.status === 'accepted' && (
-                                                    <Badge className="bg-green-500 text-white">Diterima</Badge>
+                                                    <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Diterima</Badge>
                                                 )}
                                                 {b.status === 'rejected' && (
-                                                    <Badge className="bg-red-500 text-white">Ditolak</Badge>
+                                                    <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Ditolak</Badge>
                                                 )}
                                             </TableCell>
                                             <TableCell>
@@ -581,11 +581,11 @@ export default function BookingAdminPage() {
                                                 <div className="flex items-center gap-2">
                                                     <span className="font-semibold">Status:</span>
                                                     {selectedBooking.status === 'pending' ? (
-                                                        <Badge className="bg-yellow-400 text-yellow-900">Pending</Badge>
+                                                        <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Pending</Badge>
                                                     ) : selectedBooking.status === 'accepted' ? (
-                                                        <Badge className="bg-green-500 text-white">Diterima</Badge>
+                                                        <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Diterima</Badge>
                                                     ) : (
-                                                        <Badge className="bg-red-500 text-white">Ditolak</Badge>
+                                                        <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Ditolak</Badge>
                                                     )}
                                                 </div>
                                                 <div>

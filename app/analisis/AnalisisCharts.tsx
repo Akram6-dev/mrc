@@ -45,6 +45,7 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useMemo } from "react";
+import itemsDB from '../../database/items.json';
 
 
 
@@ -122,13 +123,31 @@ export default function AnalisisCharts({
                         }
                     }
                 }
-                // Rata-rata jumlah barang per transaksi
+
                 if (Array.isArray(l.items)) {
                     let qty = 0;
                     l.items.forEach((itemObj: any) => {
-                        if (typeof itemObj === 'string') qty += 1;
-                        else if (itemObj && itemObj.quantity) qty += itemObj.quantity;
-                        else qty += 1;
+                        try {
+                            if (typeof itemObj === 'number') {
+                                qty += itemObj;
+                            } else if (typeof itemObj === 'string') {
+                                qty += 1;
+                            } else if (itemObj && typeof itemObj === 'object') {
+                                if (typeof itemObj.quantity === 'number') {
+                                    qty += itemObj.quantity;
+                                } else if (Array.isArray(itemObj.serials)) {
+                                    qty += itemObj.serials.length;
+                                } else if (itemObj.count && typeof itemObj.count === 'number') {
+                                    qty += itemObj.count;
+                                } else {
+                                    qty += 1;
+                                }
+                            } else {
+                                qty += 1;
+                            }
+                        } catch (e) {
+                            qty += 1;
+                        }
                     });
                     totalItems += qty;
                     countItems++;
@@ -551,51 +570,176 @@ export default function AnalisisCharts({
                     </CardContent>
                 </Card>
             </div>
-            {/* Top Items Leaderboard */}
-            <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl mb-4">
-                <CardHeader className="pb-1 pt-3">
-                    <CardTitle className="text-base font-semibold">10 Barang Paling Sering Dipinjam</CardTitle>
-                    <CardDescription className="text-xs">Urutan berdasarkan total jumlah dipinjam terbanyak</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                    <div className="overflow-x-auto">
-                        <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
-                            <TableHeader>
-                                <TableRow className="bg-gray-50 dark:bg-gray-800">
-                                    <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100 w-10 text-center">#</TableHead>
-                                    <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Barang</TableHead>
-                                    <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Kategori</TableHead>
-                                    <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Kondisi</TableHead>
-                                    <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100 text-center">Total Dipinjam</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {topItems.map((i: any, idx: number) => {
-                                    const Icon = ICON_OPTIONS.find(opt => opt.value === (i.icon || "laptop"))?.icon || Laptop;
-                                    return (
-                                        <TableRow key={i.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors">
-                                            <TableCell className="px-3 py-2 text-center font-bold">{idx + 1}</TableCell>
-                                            <TableCell className="px-3 py-2 flex items-center gap-3">
-                                                <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent-100 dark:bg-accent-900 mr-2">
-                                                    <Icon className="w-6 h-6 text-accent-600 dark:text-accent-400" />
-                                                </span>
-                                                <span className="font-medium text-gray-900 dark:text-white truncate">{i.name}</span>
-                                            </TableCell>
-                                            <TableCell className="px-3 py-2">
-                                                <span className="inline-block px-2 py-0.5 text-xs rounded bg-primary/10 text-primary font-semibold truncate">{i.category}</span>
-                                            </TableCell>
-                                            <TableCell className="px-3 py-2">
-                                                <span className={`badge ${i.condition === "Baik" ? "badge-success" : i.condition === "Rusak" ? "badge-warning" : "badge-danger"}`}>{i.condition}</span>
-                                            </TableCell>
-                                            <TableCell className="px-3 py-2 text-center text-xl font-extrabold text-primary">{i.count}</TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            </TableBody>
-                        </Table>
-                    </div>
-                </CardContent>
-            </Card>
+            {/* Top Items Leaderboard - split into two: jenis barang (left) and per-serial (right) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                {/* Left: 10 jenis barang yang sering dipinjam */}
+                <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
+                    <CardHeader className="pb-1 pt-3">
+                        <CardTitle className="text-base font-semibold">10 Jenis Barang Paling Sering Dipinjam</CardTitle>
+                        <CardDescription className="text-xs">Urutan berdasarkan total jumlah dipinjam terbanyak (per jenis)</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                        <div className="overflow-x-auto">
+                            <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
+                                <TableHeader>
+                                    <TableRow className="bg-gray-50 dark:bg-gray-800">
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100 w-10 text-center">#</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Barang</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Kategori</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100 text-center">Total Dipinjam</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {topItems.map((i: any, idx: number) => {
+                                        const Icon = ICON_OPTIONS.find(opt => opt.value === (i.icon || "laptop"))?.icon || Laptop;
+
+                                        // Resolve item id (support new "id" and older "itemId")
+                                        const itemId = i.id ?? i.itemId ?? i._id ?? i.id;
+
+                                        // Compute total borrowed count: prefer provided count, else aggregate from allLoans
+                                        let totalCount = typeof i.count === 'number' ? i.count : (typeof i.totalBorrowed === 'number' ? i.totalBorrowed : 0);
+                                        if ((!totalCount || totalCount === 0) && Array.isArray(allLoans)) {
+                                            try {
+                                                allLoans.forEach((l: any) => {
+                                                    if (!Array.isArray(l.items)) return;
+                                                    l.items.forEach((it: any) => {
+                                                        // item entry in loan may be string id or object with itemId
+                                                        const loanItemId = typeof it === 'string' ? it : (it && (it.itemId ?? it.id ?? it.item)) ?? null;
+                                                        if (loanItemId == null) return;
+                                                        if (String(loanItemId) === String(itemId)) {
+                                                            if (typeof it.quantity === 'number') totalCount += it.quantity;
+                                                            else totalCount += 1;
+                                                        }
+                                                    });
+                                                });
+                                            } catch (e) {
+                                                // ignore and keep fallback totalCount
+                                            }
+                                        }
+
+                                        // Try to find image from local itemsDB when topItems doesn't include it
+                                        const dbItem = Array.isArray(itemsDB) ? (itemsDB as any).find((x: any) => String(x.id) === String(itemId)) : null;
+                                        const imgUrl = i.image ?? dbItem?.image ?? null;
+
+                                        return (
+                                            <TableRow key={itemId ?? idx} className="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors">
+                                                <TableCell className="px-3 py-2 text-center font-bold">{idx + 1}</TableCell>
+                                                <TableCell className="px-3 py-2 flex items-center gap-3">
+                                                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent-100 dark:bg-accent-900 mr-2 overflow-hidden">
+                                                        {imgUrl ? (
+                                                            <img src={imgUrl} alt={i.name ?? i.title ?? 'item'} className="w-9 h-9 object-cover" />
+                                                        ) : (
+                                                            <Icon className="w-6 h-6 text-accent-600 dark:text-accent-400" />
+                                                        )}
+                                                    </span>
+                                                    <span className="font-medium text-gray-900 dark:text-white truncate">{i.name ?? i.title ?? '-'}</span>
+                                                </TableCell>
+                                                <TableCell className="px-3 py-2">
+                                                    <span className="inline-block px-2 py-0.5 text-xs rounded bg-primary/10 text-primary font-semibold truncate">{i.category ?? '-'}</span>
+                                                </TableCell>
+                                                <TableCell className="px-3 py-2 text-center text-xl font-extrabold text-primary">{totalCount}</TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Right: Top 10 per-serial */}
+                <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
+                    <CardHeader className="pb-1 pt-3">
+                        <CardTitle className="text-base font-semibold">10 Serial Paling Sering Dipinjam</CardTitle>
+                        <CardDescription className="text-xs">Top 10 berdasarkan serial number — menunjukkan serial individual yang paling sering dipinjam</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                        <div className="overflow-x-auto">
+                            <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
+                                <TableHeader>
+                                    <TableRow className="bg-gray-50 dark:bg-gray-800">
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100 w-10 text-center">#</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Serial</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Barang</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100">Kategori</TableHead>
+                                        <TableHead className="px-3 py-2 text-gray-900 dark:text-gray-100 text-center">Total Dipinjam</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {/** build topSerials from loans and itemsDB */}
+                                    {(() => {
+                                        // compute serial -> parent item map from itemsDB
+                                        const serialToItem: Record<string, any> = {};
+                                        try {
+                                            if (Array.isArray((itemsDB as any))) {
+                                                (itemsDB as any).forEach((it: any) => {
+                                                    if (!Array.isArray(it.items)) return;
+                                                    it.items.forEach((s: any) => {
+                                                        // prefer serialNumber as key but capture 'sn' when present
+                                                        const key = s && (s.serialNumber ?? s.sn);
+                                                        if (key) {
+                                                            serialToItem[String(key)] = {
+                                                                name: it.name,
+                                                                category: it.category,
+                                                                icon: it.icon,
+                                                                itemId: it.id,
+                                                                image: it.image ?? null,
+                                                                sn: s.sn ?? s.serialNumber ?? String(key),
+                                                            };
+                                                        }
+                                                    });
+                                                });
+                                            }
+                                        } catch (e) {
+                                            // ignore
+                                        }
+
+                                        const serialCounts: Record<string, number> = {};
+                                        if (Array.isArray(allLoans)) {
+                                            allLoans.forEach((l: any) => {
+                                                if (!Array.isArray(l.items)) return;
+                                                l.items.forEach((it: any) => {
+                                                    // prefer explicit serialNumber in loan item
+                                                    const s = it && (it.serialNumber ?? it.sn ?? it.serial);
+                                                    if (s) {
+                                                        const key = String(s);
+                                                        serialCounts[key] = (serialCounts[key] || 0) + 1;
+                                                    }
+                                                });
+                                            });
+                                        }
+
+                                        const serialArr = Object.keys(serialCounts).map(k => ({ serial: k, sn: serialToItem[k]?.sn ?? k, count: serialCounts[k], item: serialToItem[k] || null }));
+                                        serialArr.sort((a, b) => b.count - a.count);
+                                        const topSerials = serialArr.slice(0, 10);
+
+                                        return topSerials.map((s: any, idx: number) => (
+                                            <TableRow key={s.serial} className="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors">
+                                                <TableCell className="px-3 py-2 text-center font-bold">{idx + 1}</TableCell>
+                                                <TableCell className="px-3 py-2">{s.sn}</TableCell>
+                                                <TableCell className="px-3 py-2 flex items-center gap-3">
+                                                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent-100 dark:bg-accent-900 mr-2 overflow-hidden">
+                                                        {s.item?.image ? (
+                                                            <img src={s.item.image} alt={s.item.name} className="w-9 h-9 object-cover" />
+                                                        ) : (
+                                                            <svg className="w-6 h-6 text-accent-600 dark:text-accent-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                                            </svg>
+                                                        )}
+                                                    </span>
+                                                    <span className="font-medium text-gray-900 dark:text-white truncate">{s.item?.name ?? '-'}</span>
+                                                </TableCell>
+                                                <TableCell className="px-3 py-2">{s.item?.category ?? '-'}</TableCell>
+                                                <TableCell className="px-3 py-2 text-center text-xl font-extrabold text-primary">{s.count}</TableCell>
+                                            </TableRow>
+                                        ));
+                                    })()}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </>
     );
 }

@@ -17,7 +17,7 @@ export interface ItemSerial {
   sn: string;
   condition: -1 | 0 | 1;
   status: 0 | 1 | 2; // 0: tersedia, 1: dipinjam, 2: dibooking
-  loanId?: string; // id loan yang sedang meminjam serial ini, jika ada
+  loanId?: string | null; // id loan yang sedang meminjam serial ini, jika ada
 }
 
 export interface Item {

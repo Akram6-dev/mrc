@@ -36,24 +36,67 @@ export default function PrintRiwayatPage() {
           (items || []).map((item) => [item.id?.toString(), item])
         );
 
+        // Build a lookup from serial (serialNumber or sn) -> parent item name
+        const serialLookup: Record<string, string> = {};
+        (items || []).forEach((parent: any) => {
+          if (Array.isArray(parent.items)) {
+            parent.items.forEach((s: any) => {
+              if (s.serialNumber) serialLookup[String(s.serialNumber)] = parent.name;
+              if (s.sn) serialLookup[String(s.sn)] = parent.name;
+            });
+          }
+        });
+
         // Gabungkan semua data ke satu array
         const mapped = (loansData || []).map((loan: any) => {
           const borrower: any = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {};
-          let itemDetails: any[] = [];
-          if (Array.isArray(loan.items)) {
-            itemDetails = loan.items.map((item: any) => {
-              const base = itemMap[item.itemId?.toString()] ?? {};
-              return {
-                ...base,
-                quantity: item.quantity ?? 1,
-                serialNumber: item.serialNumber,
-              };
-            });
-          }
+          // Build itemDetails using latest shapes and fallbacks for legacy shapes
+          let rawItems: any[] = Array.isArray(loan.items) ? loan.items : [];
+
+          // Normalize each raw item into { name, quantity }
+          const normalized: Array<{ name: string; quantity: number }> = rawItems.map((it: any) => {
+            // Prefer resolving by serial (serialNumber or sn) using serialLookup
+            if (it.serialNumber && serialLookup[String(it.serialNumber)]) {
+              return { name: serialLookup[String(it.serialNumber)], quantity: Number(it.quantity ?? it.qty ?? 1) };
+            }
+            if (it.sn && serialLookup[String(it.sn)]) {
+              return { name: serialLookup[String(it.sn)], quantity: Number(it.quantity ?? it.qty ?? 1) };
+            }
+
+            // Latest shape: item has itemId which is id string and we look up itemMap
+            if (it.itemId && typeof it.itemId === 'string') {
+              const base = itemMap[it.itemId.toString()] ?? {};
+              return { name: base.name || (base as any).itemName || it.name || it.itemName || 'Unknown', quantity: Number(it.quantity ?? it.qty ?? 1) };
+            }
+            // Newer: itemId might be an object with id
+            if (it.itemId && typeof it.itemId === 'object') {
+              const base = itemMap[it.itemId.id?.toString()] ?? {};
+              return { name: base.name || (base as any).itemName || it.name || it.itemName || 'Unknown', quantity: Number(it.quantity ?? it.qty ?? 1) };
+            }
+            // Legacy: item has name and quantity fields directly
+            const name = it.name || it.itemName || (itemMap[it.itemId?.toString()] && itemMap[it.itemId?.toString()].name) || 'Unknown';
+            const qty = Number(it.quantity ?? it.qty ?? 1);
+            return { name, quantity: qty };
+          });
+
+          // Aggregate by name
+          const aggMap: Record<string, number> = {};
+          normalized.forEach(n => {
+            const key = (n.name || 'Unknown').trim();
+            if (!key) return;
+            aggMap[key] = (aggMap[key] || 0) + (Number.isFinite(n.quantity) ? n.quantity : 1);
+          });
+
+          const aggregatedItems = Object.keys(aggMap).map(name => ({ name, quantity: aggMap[name] }));
+
+          // Keep itemDetails for backwards compatibility in case other code expects it
+          const itemDetails = normalized.map(n => ({ name: n.name, quantity: n.quantity }));
+
           return {
             ...loan,
             borrower,
             itemDetails,
+            aggregatedItems,
           };
         });
         setLoans(mapped as any);
@@ -152,19 +195,19 @@ export default function PrintRiwayatPage() {
                   <tr key={loan.id}>
                     <td>{idx + 1}</td>
                     <td style={{ textAlign: 'left' }}>
-                      <div style={{ fontWeight: 600, color: '#111' }}>{loan.borrower?.name}</div>
+                      <div style={{ fontWeight: 600, color: '#111' }}>{(typeof loan.borrower?.name === 'string' && loan.borrower.name.trim()) ? loan.borrower.name : 'Peminjam'}</div>
                       <div style={{ fontSize: 12, color: '#666' }}>{loan.borrower?.nip && loan.borrower?.officerId
-                          ? `${loan.borrower.nip} - ${loan.borrower.officerId}`
-                          : loan.borrower?.nip
+                        ? `${loan.borrower.nip} - ${loan.borrower.officerId}`
+                        : loan.borrower?.nip
                           ? loan.borrower.nip
                           : loan.borrower?.officerId
-                          ? loan.borrower.officerId
-                          : null}</div>
+                            ? loan.borrower.officerId
+                            : null}</div>
                     </td>
                     <td>
                       <ul style={{ margin: 0, paddingLeft: 18 }}>
-                        {loan.itemDetails?.map((item) => (
-                          <li key={item.id} style={{ color: '#222' }}>{item.name} <span style={{ color: '#888' }}>{item.quantity}x</span></li>
+                        {(((loan as any).aggregatedItems || (loan as any).itemDetails || []) as any[]).map((item: any, i: number) => (
+                          <li key={item.id ?? item.name ?? i} style={{ color: '#222' }}>{item.name} <span style={{ color: '#888' }}>{item.quantity ?? item.qty ?? 1}x</span></li>
                         ))}
                       </ul>
                     </td>
@@ -174,8 +217,8 @@ export default function PrintRiwayatPage() {
                       {loan.status === "dikembalikan"
                         ? "Dikembalikan"
                         : isOverdue(loan.dueDate)
-                        ? "Terlambat"
-                        : "Dipinjam"}
+                          ? "Terlambat"
+                          : "Dipinjam"}
                     </td>
                   </tr>
                 ))

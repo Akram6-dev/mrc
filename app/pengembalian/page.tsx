@@ -218,17 +218,24 @@ export default function PengembalianPage() {
     const checkedSerials = returningSerials[returningLoan.id] || new Set<string>();
     // Update status serial di items.json (API)
     const items = await api.getItems();
+    // Group serial numbers by the item id so we update each item only once
+    const updatesByItemId: Record<string, Set<string>> = {};
     for (const detail of returningLoan.itemDetails) {
-      // detail.serialNumber is always string (see types)
-      if (detail.serialNumber && checkedSerials.has(detail.serialNumber) && detail.status !== 1) {
-        // Update status serial menjadi 1 (dikembalikan)
-        const item = items.find((i: Item) => i.id === detail.id);
-        if (item && item.items) {
-          const updatedSerials = item.items.map((s: ItemSerial) =>
-            s.serialNumber === detail.serialNumber ? { ...s, status: 1 as 1 } : s
-          );
-          await api.updateItem(item.id, { items: updatedSerials });
-        }
+      const sn = detail.serialNumber;
+      if (sn && checkedSerials.has(sn) && detail.status !== 1) {
+        const key = String(detail.id ?? "");
+        if (!updatesByItemId[key]) updatesByItemId[key] = new Set<string>();
+        updatesByItemId[key].add(sn);
+      }
+    }
+    // Apply updates per item (one API call per item)
+    for (const [itemId, serialSet] of Object.entries(updatesByItemId)) {
+      const item = items.find((i: Item) => String(i.id) === itemId);
+      if (item && item.items) {
+        const updatedSerials = item.items.map((s: ItemSerial) =>
+          serialSet.has(s.serialNumber) ? { ...s, status: 1 as 1, loanId: null } : s
+        );
+        await api.updateItem(item.id, { items: updatedSerials });
       }
     }
     // Ambil hanya serial yang benar-benar diupdate (status sebelumnya bukan 1, sekarang diubah ke 1)
@@ -583,12 +590,12 @@ export default function PengembalianPage() {
                           e.stopPropagation();
                           setReturningLoan(loan);
                           setIsConfirmOpen(true);
-                          // Inisialisasi serial yang sudah dikembalikan
+                          // Inisialisasi serial yang sudah dikembalikan (gunakan serialNumber || sn)
                           setReturningSerials((prev) => ({
                             ...prev,
                             [loan.id]: new Set(
                               loan.itemDetails
-                                .filter((d: any) => d.status === 1 && typeof d.serialNumber === "string")
+                                .filter((d: any) => d.status === 1 && typeof d.serialNumber === 'string')
                                 .map((d: any) => d.serialNumber as string)
                             ),
                           }));
@@ -674,7 +681,7 @@ export default function PengembalianPage() {
                                   <div className="flex-1">
                                     <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
                                     <div className="text-xs text-gray-500 dark:text-gray-400">
-                                      {item.sn ? `${item.sn}` : ""}
+                                      {item.sn || item.serialNumber || '-'}
                                       {item.note ? ` | Catatan: ${item.note}` : ""}
                                     </div>
                                   </div>
@@ -808,31 +815,34 @@ export default function PengembalianPage() {
                 </label>
               </div>
               <ul className="divide-y divide-gray-100 dark:divide-gray-800">
-                {returningLoan.itemDetails.map((item, idx) => (
-                  <li key={item.serialNumber} className="flex items-center gap-3 py-2">
-                    <label className="flex items-center gap-3 w-full cursor-pointer select-none">
-                      <Checkbox
-                        checked={typeof item.serialNumber === "string" ? !!returningSerials[returningLoan.id]?.has(item.serialNumber) : false}
-                        disabled={item.status === 1}
-                        onCheckedChange={checked => {
-                          setReturningSerials(prev => {
-                            const set = new Set(prev[returningLoan.id] || []);
-                            if (typeof item.serialNumber === "string") {
-                              if (checked) set.add(item.serialNumber);
-                              else set.delete(item.serialNumber);
-                            }
-                            return { ...prev, [returningLoan.id]: set };
-                          });
-                        }}
-                        className="h-5 w-5 text-green-600 bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-700 active:ring-2 active:ring-gray-300 dark:active:ring-gray-700 transition-all"
-                        aria-label={`Pilih serial ${item.serialNumber}`}
-                      />
-                      <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">{item.sn}</span>
-                      {item.status === 1 && <span className="text-green-600 text-xs ml-2">Sudah dikembalikan</span>}
-                    </label>
-                  </li>
-                ))}
+                {returningLoan.itemDetails.map((item, idx) => {
+                  const sn = typeof item.serialNumber === 'string' ? item.serialNumber as string : undefined;
+                  return (
+                    <li key={sn || idx} className="flex items-center gap-3 py-2">
+                      <label className="flex items-center gap-3 w-full cursor-pointer select-none">
+                        <Checkbox
+                          checked={sn ? !!returningSerials[returningLoan.id]?.has(sn) : false}
+                          disabled={item.status === 1}
+                          onCheckedChange={checked => {
+                            setReturningSerials(prev => {
+                              const set = new Set(prev[returningLoan.id] || []);
+                              if (sn) {
+                                if (checked) set.add(sn);
+                                else set.delete(sn);
+                              }
+                              return { ...prev, [returningLoan.id]: set };
+                            });
+                          }}
+                          className="h-5 w-5 text-green-600 bg-gray-100 border-gray-300 dark:bg-gray-800 dark:border-gray-700 active:ring-2 active:ring-gray-300 dark:active:ring-gray-700 transition-all"
+                          aria-label={`Pilih serial ${sn ?? idx}`}
+                        />
+                        <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">{sn || ""}</span>
+                        {item.status === 1 && <span className="text-green-600 text-xs ml-2">Sudah dikembalikan</span>}
+                      </label>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           )}

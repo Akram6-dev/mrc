@@ -140,42 +140,109 @@ export default function RiwayatPage() {
       const itemMap = Object.fromEntries(
         (items || []).map((item: any) => [item.id?.toString(), item])
       );
+      // Build serial lookup for fast serial -> parent item resolution
+      const serialLookup: Record<string, { parent: any; serial: any }> = {};
+      (items || []).forEach((parent: any) => {
+        if (Array.isArray(parent.items)) {
+          parent.items.forEach((s: any) => {
+            if (s.serialNumber) serialLookup[String(s.serialNumber)] = { parent, serial: s };
+            if (s.sn) serialLookup[String(s.sn)] = { parent, serial: s };
+          });
+        }
+      });
 
       // Gabungkan semua data ke satu array, tampilkan semua serial yang pernah dipinjam pada loan ini
       const mapped: LoanWithDetails[] = (loansData || []).map((loan: any) => {
         const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {};
-
         let itemDetails: ItemSerialDetail[] = [];
         if (Array.isArray(loan.items)) {
-          itemDetails = loan.items.map((loanItem: any) => {
-            let foundBase: any = undefined;
-            let foundSerial: any = undefined;
-            for (const itemUnknown of Object.values(itemMap)) {
-              const item = itemUnknown as any;
-              if (item.items && Array.isArray(item.items)) {
-                const serial = item.items.find((s: any) => s.serialNumber === loanItem.serialNumber);
-                if (serial) {
-                  foundBase = item;
-                  foundSerial = serial;
-                  break;
-                }
-              }
+          const details: ItemSerialDetail[] = [];
+          for (const loanItem of loan.items) {
+            // Try resolve by serial via serialLookup
+            if (loanItem.serialNumber && serialLookup[String(loanItem.serialNumber)]) {
+              const { parent, serial } = serialLookup[String(loanItem.serialNumber)];
+              details.push({
+                id: parent.id,
+                name: parent.name,
+                icon: parent.icon,
+                serialNumber: serial.serialNumber,
+                sn: serial.sn,
+                status: serial.loanId !== loan.id ? 1 : serial.status,
+                loanId: serial.loanId ?? "",
+                condition: serial.condition,
+                note: loanItem.note,
+                quantity: 1,
+              } as unknown as ItemSerialDetail);
+              continue;
             }
-            if (!foundBase || !foundSerial) return undefined;
-            // Make sure all required fields for ItemSerialDetail are present
-            return {
-              id: foundBase.id,
-              name: foundBase.name,
-              icon: foundBase.icon,
-              serialNumber: foundSerial.serialNumber,
-              sn: foundSerial.sn,
-              status: foundSerial.loanId !== loan.id ? 1 : foundSerial.status,
-              loanId: foundSerial.loanId ?? "",
-              condition: foundSerial.condition,
+            if (loanItem.sn && serialLookup[String(loanItem.sn)]) {
+              const { parent, serial } = serialLookup[String(loanItem.sn)];
+              details.push({
+                id: parent.id,
+                name: parent.name,
+                icon: parent.icon,
+                serialNumber: serial.serialNumber,
+                sn: serial.sn,
+                status: serial.loanId !== loan.id ? 1 : serial.status,
+                loanId: serial.loanId ?? "",
+                condition: serial.condition,
+                note: loanItem.note,
+                quantity: 1,
+              } as unknown as ItemSerialDetail);
+              continue;
+            }
+
+            // Fallback: resolve by itemId (string or object)
+            if (loanItem.itemId) {
+              const idStr = typeof loanItem.itemId === 'string' ? loanItem.itemId : loanItem.itemId?.id;
+              const base = idStr ? itemMap[idStr?.toString()] ?? null : null;
+              details.push({
+                id: base?.id ?? '',
+                name: base?.name ?? loanItem.name ?? loanItem.itemName ?? 'Unknown',
+                icon: base?.icon ?? '',
+                serialNumber: '',
+                sn: '',
+                status: 1,
+                loanId: '',
+                condition: 1,
+                note: loanItem.note,
+                quantity: Number(loanItem.quantity ?? loanItem.qty ?? 1),
+              } as unknown as ItemSerialDetail);
+              continue;
+            }
+
+            // Legacy fallback: item entry directly contains name/quantity
+            if (loanItem.name || loanItem.itemName) {
+              details.push({
+                id: '',
+                name: loanItem.name ?? loanItem.itemName ?? 'Unknown',
+                icon: '',
+                serialNumber: '',
+                sn: '',
+                status: 1,
+                loanId: '',
+                condition: 1,
+                note: loanItem.note,
+                quantity: Number(loanItem.quantity ?? loanItem.qty ?? 1),
+              } as unknown as ItemSerialDetail);
+              continue;
+            }
+
+            // If nothing matched, add a minimal Unknown entry
+            details.push({
+              id: '',
+              name: 'Unknown',
+              icon: '',
+              serialNumber: loanItem.serialNumber ?? '',
+              sn: loanItem.sn ?? '',
+              status: 1,
+              loanId: '',
+              condition: 1,
               note: loanItem.note,
-              quantity: 1,
-            } satisfies ItemSerialDetail;
-          }).filter(Boolean) as ItemSerialDetail[];
+              quantity: Number(loanItem.quantity ?? loanItem.qty ?? 1),
+            } as unknown as ItemSerialDetail);
+          }
+          itemDetails = details;
         }
         // Status loan otomatis: semua serial status 1 = dikembalikan, ada status 0 & loanId = loan.id = dipinjam
         let autoStatus: "dikembalikan" | "dipinjam" = "dikembalikan";
@@ -776,7 +843,7 @@ export default function RiwayatPage() {
                                         </span>
                                         <div className="flex-1">
                                           <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                          <div className="text-xs text-gray-500 dark:text-gray-400">{item.sn}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
+                                          <div className="text-xs text-gray-500 dark:text-gray-400">{item.sn || item.serialNumber || '-'}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
                                         </div>
                                         {item.status === 1 && (
                                           <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sudah dikembalikan</span>

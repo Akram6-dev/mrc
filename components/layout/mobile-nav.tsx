@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, Package, Users, FileText, RotateCcw, History, Settings, Menu, X, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen } from "lucide-react"
+import { Home, Package, Users, FileText, RotateCcw, History, Settings, Menu, X, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen, AlertTriangle } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { auth } from "@/lib/auth"
@@ -95,10 +95,10 @@ export default function MobileNav() {
       <div className="sticky top-0 z-40 flex items-center justify-between h-16 px-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50">
         <div className="flex items-center space-x-3">
           <img
-          src="/mrc.png"
-          alt="MRC"
-          className="h-14 w-full object-contain p-4"
-        />
+            src="/mrc.png"
+            alt="MRC"
+            className="h-14 w-full object-contain p-4"
+          />
         </div>
 
         <div className="flex items-center space-x-2">
@@ -116,33 +116,49 @@ export default function MobileNav() {
                 onClick={handleOpenNotif}
               >
                 <Bell className="w-5 h-5" />
-                  {notifUnread > 0 && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
-                  )}
+                {notifUnread > 0 && (
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                )}
               </button>
             </PopoverTrigger>
             <PopoverContent side="bottom" align="end" className="w-64 p-0">
               <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 font-semibold text-gray-900 dark:text-white flex items-center justify-between">
-                  <span>Notifikasi</span>
-                  <button onClick={fetchNotifications} className="text-xs text-accent-600">Refresh</button>
-                </div>
-                <div className="max-h-80 overflow-y-auto">
-                  {loadingNotif ? (
-                    <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">Memuat...</div>
-                  ) : notifications.length === 0 ? (
-                    <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">Tidak ada notifikasi</div>
-                  ) : (
-                    notifications.map((notif) => (
-                      <div key={notif.id} className={`flex items-start gap-2 px-4 py-3 border-b border-gray-100 dark:border-gray-800 ${notif.read ? "opacity-60" : ""}`}>
-                        <Info className={`w-5 h-5 mt-1 ${notif.read ? "text-gray-400" : "text-accent-600"}`} />
-                        <div className="flex-1">
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">{notif.message}</div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">{new Date(notif.timestamp).toLocaleString()}</div>
-                        </div>
+                <span>Notifikasi</span>
+                <button onClick={fetchNotifications} className="text-xs text-accent-600">Refresh</button>
+              </div>
+              <div className="max-h-80 overflow-y-auto">
+                {loadingNotif ? (
+                  <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">Memuat...</div>
+                ) : notifications.length === 0 ? (
+                  <div className="px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">Tidak ada notifikasi</div>
+                ) : (
+                  notifications.map((notif) => (
+                    <div key={notif.id} className={`flex items-start gap-2 px-4 py-3 border-b border-gray-100 dark:border-gray-800 ${notif.read ? "opacity-60" : ""}`}>
+                      {(() => {
+                        const iconMap: Record<string, any> = {
+                          booking: NotebookPen,
+                          return: RotateCcw,
+                          overdue: AlertTriangle,
+                          info: Info,
+                        };
+                        const colorMap: Record<string, string> = {
+                          booking: notif.read ? "text-gray-400" : "text-accent-600",
+                          return: notif.read ? "text-gray-400" : "text-green-600",
+                          overdue: notif.read ? "text-gray-400" : "text-red-600",
+                          info: notif.read ? "text-gray-400" : "text-accent-600",
+                        };
+                        const Icon = iconMap[notif.type] || Info;
+                        const colorClass = colorMap[notif.type] || (notif.read ? "text-gray-400" : "text-accent-600");
+                        return <Icon className={`w-5 h-5 mt-1 ${colorClass}`} />;
+                      })()}
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">{notif.message}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">{new Date(notif.timestamp).toLocaleString()}</div>
                       </div>
-                    ))
-                  )}
-                </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </PopoverContent>
           </Popover>
           <button

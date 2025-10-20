@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen } from "lucide-react"
+import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen, AlertTriangle } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { auth } from "@/lib/auth"
@@ -107,24 +107,24 @@ export default function Sidebar() {
             // Tambahkan divider setelah Analisis
             const showDivider = item.name === "Analisis" || item.name === "Booking"
             return (
-                <>
+              <>
                 <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
-                  "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
-                  isActive
-                    ? "bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-md"
-                    : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800",
+                    "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
+                    isActive
+                      ? "bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-md"
+                      : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800",
                   )}
                 >
                   <Icon
-                  className={cn(
-                    "mr-3 flex-shrink-0 h-5 w-5",
-                    isActive
-                    ? "text-white"
-                    : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300",
-                  )}
+                    className={cn(
+                      "mr-3 flex-shrink-0 h-5 w-5",
+                      isActive
+                        ? "text-white"
+                        : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300",
+                    )}
                   />
                   {item.name}
                 </Link>
@@ -133,7 +133,7 @@ export default function Sidebar() {
                     <div className="border-t border-gray-200 dark:border-gray-700" />
                   </div>
                 )}
-                </>
+              </>
             )
           })}
         </nav>
@@ -175,7 +175,23 @@ export default function Sidebar() {
                   ) : (
                     notifications.map((notif) => (
                       <div key={notif.id} className={`flex items-start gap-2 px-4 py-3 border-b border-gray-100 dark:border-gray-800 ${notif.read ? "opacity-60" : ""}`}>
-                        <Info className={`w-5 h-5 mt-1 ${notif.read ? "text-gray-400" : "text-accent-600"}`} />
+                        {(() => {
+                          const iconMap: Record<string, any> = {
+                            booking: NotebookPen,
+                            return: RotateCcw,
+                            overdue: AlertTriangle,
+                            info: Info,
+                          };
+                          const colorMap: Record<string, string> = {
+                            booking: notif.read ? "text-gray-400" : "text-accent-600",
+                            return: notif.read ? "text-gray-400" : "text-green-600",
+                            overdue: notif.read ? "text-gray-400" : "text-red-600",
+                            info: notif.read ? "text-gray-400" : "text-accent-600",
+                          };
+                          const Icon = iconMap[notif.type] || Info;
+                          const colorClass = colorMap[notif.type] || (notif.read ? "text-gray-400" : "text-accent-600");
+                          return <Icon className={`w-5 h-5 mt-1 ${colorClass}`} />;
+                        })()}
                         <div className="flex-1">
                           <div className="text-sm font-medium text-gray-900 dark:text-white">{notif.message}</div>
                           <div className="text-xs text-gray-500 dark:text-gray-400">{new Date(notif.timestamp).toLocaleString()}</div>
