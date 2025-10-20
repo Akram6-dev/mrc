@@ -83,7 +83,7 @@ export default function PeminjamanPage() {
   const [selectedBorrower, setSelectedBorrower] = useState("");
   // Loan per serial number
   const [loanItems, setLoanItems] = useState<LoanItem[]>([
-    { serialNumber: "", note: "" },
+    { rfidCode: "", note: "" },
   ]);
   const [dueDate, setDueDate] = useState<Date | undefined>(undefined);
   const [settings, setSettings] = useState<any>(null);
@@ -154,18 +154,18 @@ export default function PeminjamanPage() {
 
     try {
       // Validate serials
-      const validItems = loanItems.filter((item) => item.serialNumber);
+      const validItems = loanItems.filter((item) => item.rfidCode);
       if (validItems.length === 0) {
         throw new Error("Pilih minimal satu serial number untuk dipinjam");
       }
       // Check serial availability
       for (const loanItem of validItems) {
-        const serial = items.flatMap(i => i.items || []).find(s => s.serialNumber === loanItem.serialNumber);
+        const serial = items.flatMap(i => i.items || []).find(s => s.rfidCode === loanItem.rfidCode);
         if (!serial) {
-          throw new Error(`Serial number ${loanItem.serialNumber} tidak ditemukan`);
+          throw new Error(`Serial number ${loanItem.rfidCode} tidak ditemukan`);
         }
         if (serial.status !== 1) {
-          throw new Error(`Serial number ${loanItem.serialNumber} tidak tersedia untuk dipinjam`);
+          throw new Error(`Serial number ${loanItem.rfidCode} tidak tersedia untuk dipinjam`);
         }
       }
 
@@ -194,7 +194,7 @@ export default function PeminjamanPage() {
 
       const loanData: Omit<Loan, "id" | "createdAt" | "updatedAt"> = {
         borrowerId: selectedBorrower,
-        items: validItems.map(({ serialNumber, note }) => ({ serialNumber, note })),
+        items: validItems.map(({ rfidCode, note }) => ({ rfidCode, note })),
         borrowDate: toWIBISOString(nowJakarta),
         dueDate: toWIBISOString(dueJakarta),
         status: "dipinjam",
@@ -215,10 +215,10 @@ export default function PeminjamanPage() {
               // Temukan info barang
               const found = items.flatMap(i => (i.items || []).map(s => ({
                 itemName: i.name,
-                serialNumber: s.serialNumber,
+                rfidCode: s.rfidCode,
                 category: i.category,
                 description: i.description
-              }))).find(s => s.serialNumber === item.serialNumber);
+              }))).find(s => s.rfidCode === item.rfidCode);
 
               const key = found?.itemName || "Barang";
               if (!acc[key]) {
@@ -257,11 +257,11 @@ export default function PeminjamanPage() {
         }
       }
 
-      // Update semua serial: jika serialNumber dipinjam, set loanId ke createdLoan.id dan status 0, jika tidak, pastikan loanId null/undefined
+      // Update semua serial: jika rfidCode dipinjam, set loanId ke createdLoan.id dan status 0, jika tidak, pastikan loanId null/undefined
       for (const item of items) {
         if (!item.items) continue;
         const updatedSerials = item.items.map(s => {
-          const isBorrowed = validItems.some(li => li.serialNumber === s.serialNumber);
+          const isBorrowed = validItems.some(li => li.rfidCode === s.rfidCode);
           if (isBorrowed) {
             return { ...s, status: 0 as 0, loanId: createdLoan.id };
           } else if (s.loanId === createdLoan.id) {
@@ -278,7 +278,7 @@ export default function PeminjamanPage() {
 
       // Reset form
       setSelectedBorrower("");
-      setLoanItems([{ serialNumber: "", note: "" }]);
+      setLoanItems([{ rfidCode: "", note: "" }]);
       // Gunakan settings yang sudah di-fetch
       const days = settings?.system?.defaultLoanDays || 7;
       const newDueDate = new Date();
@@ -310,7 +310,7 @@ export default function PeminjamanPage() {
   };
 
   const addLoanItem = () => {
-    setLoanItems([...loanItems, { serialNumber: "", note: "" }]);
+    setLoanItems([...loanItems, { rfidCode: "", note: "" }]);
   };
 
   const removeLoanItem = (index: number) => {
@@ -624,14 +624,14 @@ export default function PeminjamanPage() {
                         category: item.category,
                         description: item.description,
                       })))
-                      .filter((serial) => serial.status === 1 && !loanItems.some(li => li.serialNumber === serial.serialNumber));
+                      .filter((serial) => serial.status === 1 && !loanItems.some(li => li.rfidCode === serial.rfidCode));
                     // Filter by search
                     const filtered = serialSearch.trim() === ""
                       ? availableSerials
                       : availableSerials.filter((s) => {
                         const q = serialSearch.trim().toLowerCase();
                         return (
-                          String(s.serialNumber).toLowerCase().includes(q) ||
+                          String(s.rfidCode).toLowerCase().includes(q) ||
                           (s.itemName || "").toLowerCase().includes(q)
                         );
                       });
@@ -648,7 +648,7 @@ export default function PeminjamanPage() {
                         e.preventDefault();
                         const selected = filtered[activeSerialIdx];
                         if (selected) {
-                          setLoanItems((prev) => [...prev, { serialNumber: selected.serialNumber, note: "" }]);
+                          setLoanItems((prev) => [...prev, { rfidCode: selected.rfidCode, note: "" }]);
                           setSerialSearch("");
                           setActiveSerialIdx(0);
                           setIsSerialPopoverOpen(false);
@@ -691,10 +691,10 @@ export default function PeminjamanPage() {
                                 <CommandGroup>
                                   {filtered.map((serial, idx) => (
                                     <CommandItem
-                                      key={serial.serialNumber}
-                                      value={serial.serialNumber}
+                                      key={serial.rfidCode}
+                                      value={serial.rfidCode}
                                       onSelect={() => {
-                                        setLoanItems((prev) => [...prev, { serialNumber: serial.serialNumber, note: "" }]);
+                                        setLoanItems((prev) => [...prev, { rfidCode: serial.rfidCode, note: "" }]);
                                         setSerialSearch("");
                                         setActiveSerialIdx(0);
                                         setIsSerialPopoverOpen(false);
@@ -705,7 +705,7 @@ export default function PeminjamanPage() {
                                       className={idx === activeSerialIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""}
                                     >
                                       <span className="font-medium">{serial.itemName}</span>
-                                      <span className="ml-2 text-xs text-gray-500">{serial.sn} | {serial.serialNumber}</span>
+                                      <span className="ml-2 text-xs text-gray-500">{serial.sn} | {serial.rfidCode}</span>
                                     </CommandItem>
                                   ))}
                                 </CommandGroup>
@@ -729,7 +729,7 @@ export default function PeminjamanPage() {
                           image: item.image,
                           icon: item.icon,
                         })))
-                        .find((s) => s.serialNumber === loanItem.serialNumber);
+                        .find((s) => s.rfidCode === loanItem.rfidCode);
                       if (!serial) return null;
                       return (
                         <div
@@ -834,7 +834,7 @@ export default function PeminjamanPage() {
                                 itemName: item.name,
                                 icon: item.icon,
                               })))
-                              .find((s) => s.serialNumber === loanItem.serialNumber);
+                              .find((s) => s.rfidCode === loanItem.rfidCode);
                             if (serial && serial.itemName) {
                               countPerItem[serial.itemName] = (countPerItem[serial.itemName] || 0) + 1;
                             }
@@ -921,7 +921,7 @@ export default function PeminjamanPage() {
                                 disabled={
                                   isSubmitting ||
                                   !selectedBorrower ||
-                                  loanItems.every((item) => !item.serialNumber)
+                                  loanItems.every((item) => !item.rfidCode)
                                 }
                                 className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
                                 onClick={(e) => {
@@ -978,7 +978,7 @@ export default function PeminjamanPage() {
                             disabled={
                               isSubmitting ||
                               !selectedBorrower ||
-                              loanItems.every((item) => !item.serialNumber)
+                              loanItems.every((item) => !item.rfidCode)
                             }
                             className="w-max items-center px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm"
                           >

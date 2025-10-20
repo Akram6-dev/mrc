@@ -98,7 +98,7 @@ export default function DashboardPage() {
                   for (const itemUnknown of Object.values(itemMap)) {
                     const item = itemUnknown as any;
                     if (item.items && Array.isArray(item.items)) {
-                      const serial = item.items.find((s: any) => s.serialNumber === loanItem.serialNumber);
+                      const serial = item.items.find((s: any) => s.rfidCode === loanItem.rfidCode);
                       if (serial) {
                         foundBase = item;
                         foundSerial = serial;
@@ -112,7 +112,7 @@ export default function DashboardPage() {
                     id: foundBase.id,
                     name: foundBase.name,
                     icon: foundBase.icon,
-                    serialNumber: foundSerial.serialNumber,
+                    rfidCode: foundSerial.rfidCode,
                     status: foundSerial.loanId !== loan.id ? 1 : foundSerial.status,
                     loanId: foundSerial.loanId ?? "",
                     condition: foundSerial.condition,

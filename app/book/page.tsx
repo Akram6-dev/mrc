@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
 import { DatePickerField } from "../peminjaman/DatePickerField";
 
 export default function BookPublicPage() {
@@ -21,8 +19,7 @@ export default function BookPublicPage() {
     // Borrower selection
     const [selectedBorrower, setSelectedBorrower] = useState("");
     const [borrowerSearch, setBorrowerSearch] = useState("");
-    const [isBorrowerPopoverOpen, setIsBorrowerPopoverOpen] = useState(false);
-    const [activeBorrowerIdx, setActiveBorrowerIdx] = useState(0);
+    const [borrowerValidationMsg, setBorrowerValidationMsg] = useState<string | null>(null);
 
     // Booking items: [{ itemId, name, qty }]
     const [bookingItems, setBookingItems] = useState<{ itemId: string; name: string; qty: number; max: number }[]>([]);
@@ -75,9 +72,6 @@ export default function BookPublicPage() {
             if (totalMinutes < 390 || totalMinutes > 960) {
                 throw new Error("Jam pengambilan hanya boleh antara 06:30 dan 16:00");
             }
-            // Gabungkan tanggal dari startDate dan waktu dari pickupTime, dalam zona Asia/Jakarta
-            // startDate: Date (local or UTC), pickupTime: "HH:mm"
-            // Gunakan Intl.DateTimeFormat untuk dapatkan tanggal di Asia/Jakarta
             const tz = "Asia/Jakarta";
             const y = startDate.getFullYear();
             const mo = startDate.getMonth();
@@ -87,7 +81,7 @@ export default function BookPublicPage() {
             // Tapi supaya benar, kita buat string ISO lokal Jakarta, lalu parse ke UTC
             // Format: "YYYY-MM-DDTHH:mm:00.000+07:00"
             const pad = (n: number) => n.toString().padStart(2, "0");
-            const jakartaDateStr = `${y}-${pad(mo+1)}-${pad(d)}T${pad(h)}:${pad(m)}:00.000+07:00`;
+            const jakartaDateStr = `${y}-${pad(mo + 1)}-${pad(d)}T${pad(h)}:${pad(m)}:00.000+07:00`;
             // Parse ke Date, lalu toISOString agar UTC
             const jakartaDate = new Date(jakartaDateStr);
             // Cek stok
@@ -114,21 +108,29 @@ export default function BookPublicPage() {
             for (const it of bookingItems.filter((it) => it.qty > 0)) {
                 const item = items.find((i: any) => i.id === it.itemId);
                 if (!item || !Array.isArray(item.items)) continue;
-                // Ambil N pertama yang status 1
-                let n = it.qty;
-                let updatedSerials = [...item.items];
+                // Ambil N pertama yang status 1 dan condition 1
+                const n = it.qty;
+                const updatedSerials = [...item.items];
+
+                const isEligible = (s: any) => s && s.status === 1 && (s.condition === 1 || String(s.condition) === "1");
+                const eligibleIndices = item.items
+                    .map((s: any, idx: number) => (isEligible(s) ? idx : -1))
+                    .filter((idx: number) => idx !== -1)
+                    .slice(0, n);
+
                 let changed = 0;
-                for (let i = 0; i < updatedSerials.length && changed < n; i++) {
-                    if (updatedSerials[i].status === 1) {
-                        updatedSerials[i] = { ...updatedSerials[i], status: 2, loanId: booking.id };
-                        changed++;
-                    }
+                for (const idx of eligibleIndices) {
+                    updatedSerials[idx] = { ...updatedSerials[idx], status: 2, loanId: booking.id };
+                    changed++;
                 }
-                await fetch("/api/items", {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...item, items: updatedSerials }),
-                });
+
+                if (changed > 0) {
+                    await fetch("/api/items", {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ ...item, items: updatedSerials }),
+                    });
+                }
             }
             setSuccess("Booking berhasil dikirim! Admin akan memproses permintaan Anda.");
             setShowSuccessDialog(true);
@@ -141,28 +143,21 @@ export default function BookPublicPage() {
             setPickupTime("");
         } catch (err: any) {
             toast.error(err.message || "Gagal mencatat booking", { duration: 4000, className: "toast-error" });
-            // setError(err.message || "Gagal mencatat booking");
         } finally {
             setIsSubmitting(false);
         }
     };
 
-    // Try closing the window. On some platforms (like Windows PWAs or certain browsers)
-    // window.close() may be blocked if the window wasn't opened by script. In that case
-    // we fallback to closing the success dialog and clearing the form state so user sees
-    // the successful result without leaving a stale UI.
     async function closeOrFallback() {
         try {
-            // Try to close the window
             window.close();
         } catch (err) {
-            // ignore
         }
-        // Wait a tick to see if window closed (can't detect reliably), then do fallback clear
         setTimeout(() => {
-            // If still on the page (we assume window.close didn't work), clear UI
             setShowSuccessDialog(false);
             setSelectedBorrower("");
+            setBorrowerSearch("");
+            setBorrowerValidationMsg(null);
             setBookingItems(items.map((item: any) => ({ itemId: item.id, name: item.name, qty: 0, max: (item.items?.filter((s: any) => s.status === 1).length || 0) })));
             setStartDate(undefined);
             setDuration(1);
@@ -186,87 +181,48 @@ export default function BookPublicPage() {
             </div>
             <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto px-4 pb-8 space-y-5 sm:space-y-6 flex flex-col flex-1">
                 <div>
-                    <Label className="block text-base font-semibold mb-2">Nama Peminjam <span className="text-red-500">*</span></Label>
-                    <Popover open={isBorrowerPopoverOpen} onOpenChange={setIsBorrowerPopoverOpen}>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant="outline"
-                                role="combobox"
-                                aria-expanded={isBorrowerPopoverOpen}
-                                className="w-full h-10 text-sm justify-between bg-white text-primary-foreground hover:bg-primary/90 dark:bg-gray-700 dark:text-primary-foreground dark:hover:bg-gray-600 border dark:border-gray-600 transition-colors rounded-lg"
-                                onClick={() => setIsBorrowerPopoverOpen(true)}
-                            >
-                                {selectedBorrower
-                                    ? borrowers.find((b: any) => b.id === selectedBorrower)?.name
-                                    : <span className="text-gray-400">Cari atau pilih peminjam...</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="p-0 max-h-72 overflow-auto z-50 min-w-[90vw] max-w-md">
-                            <Command shouldFilter={false}>
-                                <CommandInput
-                                    placeholder="Cari nama atau NIP..."
-                                    value={borrowerSearch}
-                                    onValueChange={setBorrowerSearch}
-                                    autoFocus
-                                    inputMode="search"
-                                    onKeyDown={(e) => {
-                                        const filtered = filteredBorrowers;
-                                        if (filtered.length === 0) return;
-                                        if (e.key === "ArrowDown") {
-                                            e.preventDefault();
-                                            setActiveBorrowerIdx((idx) => Math.min(idx + 1, filtered.length - 1));
-                                        } else if (e.key === "ArrowUp") {
-                                            e.preventDefault();
-                                            setActiveBorrowerIdx((idx) => Math.max(idx - 1, 0));
-                                        } else if (e.key === "Enter") {
-                                            e.preventDefault();
-                                            const selected = filtered[activeBorrowerIdx];
-                                            if (selected) {
-                                                setSelectedBorrower(selected.id);
-                                                setIsBorrowerPopoverOpen(false);
-                                                setBorrowerSearch("");
-                                            }
-                                        } else if (e.key === "Tab") {
-                                            setIsBorrowerPopoverOpen(false);
-                                        }
-                                    }}
-                                />
-                                <CommandList className="max-h-60 overflow-auto">
-                                    {filteredBorrowers.length === 0 ? (
-                                        <CommandEmpty>Peminjam tidak ditemukan.</CommandEmpty>
-                                    ) : (
-                                        <CommandGroup>
-                                            {filteredBorrowers.map((borrower, idx) => (
-                                                <CommandItem
-                                                    key={borrower.id}
-                                                    value={borrower.id}
-                                                    onSelect={() => {
-                                                        setSelectedBorrower(borrower.id);
-                                                        setIsBorrowerPopoverOpen(false);
-                                                        setBorrowerSearch("");
-                                                    }}
-                                                    className={idx === activeBorrowerIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""}
-                                                >
-                                                    <div className="flex flex-col text-left">
-                                                        <span className="font-medium">{borrower.name || "-"}</span>
-                                                        <span className="text-xs text-gray-500">
-                                                            {borrower?.nip && borrower?.officerId
-                                                                ? `${borrower.nip} - ${borrower.officerId}`
-                                                                : borrower?.nip
-                                                                    ? borrower.nip
-                                                                    : borrower?.officerId
-                                                                        ? borrower.officerId
-                                                                        : null}
-                                                        </span>
-                                                    </div>
-                                                </CommandItem>
-                                            ))}
-                                        </CommandGroup>
-                                    )}
-                                </CommandList>
-                            </Command>
-                        </PopoverContent>
-                    </Popover>
+                    <Label className="block text-base font-semibold mb-2">Nama Peminjam (NIP / ID Pegawai) <span className="text-red-500">*</span></Label>
+                    <Input
+                        placeholder="Masukkan NIP atau ID Pegawai..."
+                        value={borrowerSearch}
+                        onChange={(e) => {
+                            const v = String(e.target.value || "");
+                            setBorrowerSearch(v);
+                            const q = v.trim();
+                            if (q === "") {
+                                setBorrowerValidationMsg(null);
+                                setSelectedBorrower("");
+                                return;
+                            }
+                            const byNip = borrowers.find((b: any) => b.nip && String(b.nip).trim() === q);
+                            if (byNip) {
+                                setSelectedBorrower(byNip.id);
+                                setBorrowerValidationMsg(byNip.name);
+                                return;
+                            }
+                            const byOfficer = borrowers.find((b: any) => b.officerId && String(b.officerId).trim() === q);
+                            if (byOfficer) {
+                                setSelectedBorrower(byOfficer.id);
+                                setBorrowerValidationMsg(byOfficer.name);
+                                return;
+                            }
+                            setSelectedBorrower("");
+                            setBorrowerValidationMsg("Tidak ditemukan peminjam dengan pencarian tersebut");
+                        }}
+                        className="w-full rounded-lg"
+                        inputMode="text"
+                    />
+                    {borrowerValidationMsg ? (
+                        <div className={`mt-1 text-sm ${selectedBorrower ? 'text-green-600' : 'text-red-600'}`}>
+                            {selectedBorrower ? (
+                                <>Ditemukan: <strong>{borrowerValidationMsg}</strong></>
+                            ) : (
+                                borrowerValidationMsg
+                            )}
+                        </div>
+                    ) : (
+                        <div className="mt-1 text-sm text-gray-500">Masukkan NIP atau ID pegawai untuk memilih peminjam.</div>
+                    )}
                 </div>
                 <div>
                     <Label className="block text-base font-semibold mb-2">Barang <span className="text-red-500">*</span></Label>

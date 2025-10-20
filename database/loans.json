@@ -3862,7 +3862,7 @@
     "borrowerId": "129",
     "items": [
       {
-        "serialNumber": "TAB001",
+        "rfidCode": "TAB001",
         "note": ""
       }
     ],
@@ -17002,11 +17002,11 @@
     "borrowerId": "104",
     "items": [
       {
-        "serialNumber": "0154334947",
+        "rfidCode": "0154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL001",
+        "rfidCode": "TRL001",
         "note": ""
       }
     ],
@@ -17023,11 +17023,11 @@
     "borrowerId": "39",
     "items": [
       {
-        "serialNumber": "0842397383",
+        "rfidCode": "0842397383",
         "note": ""
       },
       {
-        "serialNumber": "TRL003",
+        "rfidCode": "TRL003",
         "note": ""
       }
     ],
@@ -17045,31 +17045,31 @@
     "borrowerId": "27",
     "items": [
       {
-        "serialNumber": "LNVTPM001",
+        "rfidCode": "LNVTPM001",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM002",
+        "rfidCode": "LNVTPM002",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM003",
+        "rfidCode": "LNVTPM003",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM004",
+        "rfidCode": "LNVTPM004",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM005",
+        "rfidCode": "LNVTPM005",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM006",
+        "rfidCode": "LNVTPM006",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM007",
+        "rfidCode": "LNVTPM007",
         "note": ""
       }
     ],
@@ -17087,11 +17087,11 @@
     "borrowerId": "80",
     "items": [
       {
-        "serialNumber": "845694151",
+        "rfidCode": "845694151",
         "note": ""
       },
       {
-        "serialNumber": "TRL004",
+        "rfidCode": "TRL004",
         "note": ""
       }
     ],
@@ -17109,11 +17109,11 @@
     "borrowerId": "66",
     "items": [
       {
-        "serialNumber": "TRL005",
+        "rfidCode": "TRL005",
         "note": ""
       },
       {
-        "serialNumber": "2939832620",
+        "rfidCode": "2939832620",
         "note": ""
       }
     ],
@@ -17131,11 +17131,11 @@
     "borrowerId": "68",
     "items": [
       {
-        "serialNumber": "1320214843",
+        "rfidCode": "1320214843",
         "note": ""
       },
       {
-        "serialNumber": "TRL006",
+        "rfidCode": "TRL006",
         "note": ""
       }
     ],
@@ -17153,11 +17153,11 @@
     "borrowerId": "105",
     "items": [
       {
-        "serialNumber": "0854329079",
+        "rfidCode": "0854329079",
         "note": ""
       },
       {
-        "serialNumber": "TRL007",
+        "rfidCode": "TRL007",
         "note": ""
       }
     ],
@@ -17175,11 +17175,11 @@
     "borrowerId": "108",
     "items": [
       {
-        "serialNumber": "12345678",
+        "rfidCode": "12345678",
         "note": ""
       },
       {
-        "serialNumber": "TRL008",
+        "rfidCode": "TRL008",
         "note": ""
       }
     ],
@@ -17197,11 +17197,11 @@
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       },
       {
-        "serialNumber": "TRL009",
+        "rfidCode": "TRL009",
         "note": ""
       }
     ],
@@ -17218,7 +17218,7 @@
     "borrowerId": "86",
     "items": [
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       }
     ],
@@ -17235,31 +17235,31 @@
     "borrowerId": "37",
     "items": [
       {
-        "serialNumber": "0149960963",
+        "rfidCode": "0149960963",
         "note": ""
       },
       {
-        "serialNumber": "150021523",
+        "rfidCode": "150021523",
         "note": ""
       },
       {
-        "serialNumber": "1442990964",
+        "rfidCode": "1442990964",
         "note": ""
       },
       {
-        "serialNumber": "149927443",
+        "rfidCode": "149927443",
         "note": ""
       },
       {
-        "serialNumber": "1309464923",
+        "rfidCode": "1309464923",
         "note": ""
       },
       {
-        "serialNumber": "TRL009",
+        "rfidCode": "TRL009",
         "note": ""
       },
       {
-        "serialNumber": "TRL010",
+        "rfidCode": "TRL010",
         "note": ""
       }
     ],
@@ -17277,35 +17277,35 @@
     "borrowerId": "42",
     "items": [
       {
-        "serialNumber": "1311632715",
+        "rfidCode": "1311632715",
         "note": ""
       },
       {
-        "serialNumber": "2347265994",
+        "rfidCode": "2347265994",
         "note": ""
       },
       {
-        "serialNumber": "847522295",
+        "rfidCode": "847522295",
         "note": ""
       },
       {
-        "serialNumber": "481096242",
+        "rfidCode": "481096242",
         "note": ""
       },
       {
-        "serialNumber": "0855536887",
+        "rfidCode": "0855536887",
         "note": ""
       },
       {
-        "serialNumber": "122587299",
+        "rfidCode": "122587299",
         "note": ""
       },
       {
-        "serialNumber": "177051075",
+        "rfidCode": "0177051075",
         "note": ""
       },
       {
-        "serialNumber": "TRL011",
+        "rfidCode": "TRL011",
         "note": ""
       }
     ],
@@ -17322,15 +17322,15 @@
     "borrowerId": "24",
     "items": [
       {
-        "serialNumber": "1453456180",
+        "rfidCode": "1453456180",
         "note": ""
       },
       {
-        "serialNumber": "TRL001",
+        "rfidCode": "TRL001",
         "note": ""
       },
       {
-        "serialNumber": "SPK001",
+        "rfidCode": "SPK001",
         "note": ""
       }
     ],
@@ -17347,11 +17347,11 @@
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "1320214843",
+        "rfidCode": "1320214843",
         "note": ""
       },
       {
-        "serialNumber": "TRL003",
+        "rfidCode": "TRL003",
         "note": ""
       }
     ],
@@ -17369,7 +17369,7 @@
     "borrowerId": "25",
     "items": [
       {
-        "serialNumber": "TRL004",
+        "rfidCode": "TRL004",
         "note": ""
       }
     ],
@@ -17387,11 +17387,11 @@
     "borrowerId": "110",
     "items": [
       {
-        "serialNumber": "1384902120",
+        "rfidCode": "1384902120",
         "note": ""
       },
       {
-        "serialNumber": "602048064",
+        "rfidCode": "602048064",
         "note": ""
       }
     ],
@@ -17409,31 +17409,31 @@
     "borrowerId": "110",
     "items": [
       {
-        "serialNumber": "TRL003",
+        "rfidCode": "TRL003",
         "note": ""
       },
       {
-        "serialNumber": "TRL006",
+        "rfidCode": "TRL006",
         "note": ""
       },
       {
-        "serialNumber": "150021523",
+        "rfidCode": "150021523",
         "note": ""
       },
       {
-        "serialNumber": "1442990964",
+        "rfidCode": "1442990964",
         "note": ""
       },
       {
-        "serialNumber": "149927443",
+        "rfidCode": "149927443",
         "note": ""
       },
       {
-        "serialNumber": "1309464923",
+        "rfidCode": "1309464923",
         "note": ""
       },
       {
-        "serialNumber": "0149960963",
+        "rfidCode": "0149960963",
         "note": ""
       }
     ],
@@ -17451,11 +17451,11 @@
     "borrowerId": "70",
     "items": [
       {
-        "serialNumber": "1320214843",
+        "rfidCode": "1320214843",
         "note": ""
       },
       {
-        "serialNumber": "TRL007",
+        "rfidCode": "TRL007",
         "note": ""
       }
     ],
@@ -17473,11 +17473,11 @@
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "1324439387",
+        "rfidCode": "1324439387",
         "note": ""
       },
       {
-        "serialNumber": "TRL008",
+        "rfidCode": "TRL008",
         "note": ""
       }
     ],
@@ -17495,11 +17495,11 @@
     "borrowerId": "79",
     "items": [
       {
-        "serialNumber": "1321947195",
+        "rfidCode": "1321947195",
         "note": ""
       },
       {
-        "serialNumber": "TRL009",
+        "rfidCode": "TRL009",
         "note": ""
       }
     ],
@@ -17517,15 +17517,15 @@
     "borrowerId": "97",
     "items": [
       {
-        "serialNumber": "1448321908",
+        "rfidCode": "1448321908",
         "note": ""
       },
       {
-        "serialNumber": "441030467",
+        "rfidCode": "441030467",
         "note": ""
       },
       {
-        "serialNumber": "1451850100",
+        "rfidCode": "1451850100",
         "note": ""
       }
     ],
@@ -17542,7 +17542,7 @@
     "borrowerId": "97",
     "items": [
       {
-        "serialNumber": "TRL010",
+        "rfidCode": "TRL010",
         "note": ""
       }
     ],
@@ -17560,11 +17560,11 @@
     "borrowerId": "104",
     "items": [
       {
-        "serialNumber": "154334947",
+        "rfidCode": "154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL012",
+        "rfidCode": "TRL012",
         "note": ""
       }
     ],
@@ -17582,11 +17582,11 @@
     "borrowerId": "51",
     "items": [
       {
-        "serialNumber": "12345678",
+        "rfidCode": "12345678",
         "note": ""
       },
       {
-        "serialNumber": "TRL013",
+        "rfidCode": "TRL013",
         "note": ""
       }
     ],
@@ -17603,19 +17603,19 @@
     "borrowerId": "97",
     "items": [
       {
-        "serialNumber": "1388709832",
+        "rfidCode": "1388709832",
         "note": ""
       },
       {
-        "serialNumber": "858620167",
+        "rfidCode": "858620167",
         "note": ""
       },
       {
-        "serialNumber": "2805597667",
+        "rfidCode": "2805597667",
         "note": ""
       },
       {
-        "serialNumber": "155485923",
+        "rfidCode": "155485923",
         "note": ""
       }
     ],
@@ -17632,19 +17632,19 @@
     "borrowerId": "70",
     "items": [
       {
-        "serialNumber": "USBLAN001",
+        "rfidCode": "USBLAN001",
         "note": ""
       },
       {
-        "serialNumber": "USBLAN002",
+        "rfidCode": "USBLAN002",
         "note": ""
       },
       {
-        "serialNumber": "USBLAN003",
+        "rfidCode": "USBLAN003",
         "note": ""
       },
       {
-        "serialNumber": "USBLAN004",
+        "rfidCode": "USBLAN004",
         "note": ""
       }
     ],
@@ -17662,11 +17662,11 @@
     "borrowerId": "84",
     "items": [
       {
-        "serialNumber": "TRL008",
+        "rfidCode": "TRL008",
         "note": ""
       },
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       }
     ],
@@ -17684,15 +17684,15 @@
     "borrowerId": "24",
     "items": [
       {
-        "serialNumber": "0154334947",
+        "rfidCode": "0154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL001",
+        "rfidCode": "TRL001",
         "note": ""
       },
       {
-        "serialNumber": "SPK001",
+        "rfidCode": "SPK001",
         "note": ""
       }
     ],
@@ -17709,11 +17709,11 @@
     "borrowerId": "108",
     "items": [
       {
-        "serialNumber": "154334947",
+        "rfidCode": "154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL003",
+        "rfidCode": "TRL003",
         "note": ""
       }
     ],
@@ -17731,43 +17731,43 @@
     "borrowerId": "37",
     "items": [
       {
-        "serialNumber": "845694151",
+        "rfidCode": "845694151",
         "note": ""
       },
       {
-        "serialNumber": "150021523",
+        "rfidCode": "150021523",
         "note": ""
       },
       {
-        "serialNumber": "1442990964",
+        "rfidCode": "1442990964",
         "note": ""
       },
       {
-        "serialNumber": "149927443",
+        "rfidCode": "149927443",
         "note": ""
       },
       {
-        "serialNumber": "1309464923",
+        "rfidCode": "1309464923",
         "note": ""
       },
       {
-        "serialNumber": "1311632715",
+        "rfidCode": "1311632715",
         "note": ""
       },
       {
-        "serialNumber": "0149960963",
+        "rfidCode": "0149960963",
         "note": ""
       },
       {
-        "serialNumber": "2347265994",
+        "rfidCode": "2347265994",
         "note": ""
       },
       {
-        "serialNumber": "TRL006",
+        "rfidCode": "TRL006",
         "note": ""
       },
       {
-        "serialNumber": "TRL007",
+        "rfidCode": "TRL007",
         "note": ""
       }
     ],
@@ -17785,11 +17785,11 @@
     "borrowerId": "68",
     "items": [
       {
-        "serialNumber": "2939832620",
+        "rfidCode": "2939832620",
         "note": ""
       },
       {
-        "serialNumber": "TRL008",
+        "rfidCode": "TRL008",
         "note": ""
       }
     ],
@@ -17807,11 +17807,11 @@
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "TRL009",
+        "rfidCode": "TRL009",
         "note": ""
       },
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       }
     ],
@@ -17829,15 +17829,15 @@
     "borrowerId": "61",
     "items": [
       {
-        "serialNumber": "1320214843",
+        "rfidCode": "1320214843",
         "note": ""
       },
       {
-        "serialNumber": "847522295",
+        "rfidCode": "847522295",
         "note": ""
       },
       {
-        "serialNumber": "TRL010",
+        "rfidCode": "TRL010",
         "note": ""
       }
     ],
@@ -17855,19 +17855,19 @@
     "borrowerId": "28",
     "items": [
       {
-        "serialNumber": "481096242",
+        "rfidCode": "481096242",
         "note": ""
       },
       {
-        "serialNumber": "0855536887",
+        "rfidCode": "0855536887",
         "note": ""
       },
       {
-        "serialNumber": "122587299",
+        "rfidCode": "122587299",
         "note": ""
       },
       {
-        "serialNumber": "177051075",
+        "rfidCode": "0177051075",
         "note": ""
       }
     ],
@@ -17885,15 +17885,15 @@
     "borrowerId": "87",
     "items": [
       {
-        "serialNumber": "1453456180",
+        "rfidCode": "1453456180",
         "note": ""
       },
       {
-        "serialNumber": "1384902120",
+        "rfidCode": "1384902120",
         "note": ""
       },
       {
-        "serialNumber": "602048064",
+        "rfidCode": "602048064",
         "note": ""
       }
     ],
@@ -17911,67 +17911,67 @@
     "borrowerId": "48",
     "items": [
       {
-        "serialNumber": "LNVTPM001",
+        "rfidCode": "LNVTPM001",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM002",
+        "rfidCode": "LNVTPM002",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM003",
+        "rfidCode": "LNVTPM003",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM004",
+        "rfidCode": "LNVTPM004",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM005",
+        "rfidCode": "LNVTPM005",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM006",
+        "rfidCode": "LNVTPM006",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM007",
+        "rfidCode": "LNVTPM007",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM008",
+        "rfidCode": "LNVTPM008",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM009",
+        "rfidCode": "LNVTPM009",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM010",
+        "rfidCode": "LNVTPM010",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM011",
+        "rfidCode": "LNVTPM011",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM012",
+        "rfidCode": "LNVTPM012",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM013",
+        "rfidCode": "LNVTPM013",
         "note": ""
       },
       {
-        "serialNumber": "TRL011",
+        "rfidCode": "TRL011",
         "note": ""
       },
       {
-        "serialNumber": "TRL012",
+        "rfidCode": "TRL012",
         "note": ""
       },
       {
-        "serialNumber": "0854329079",
+        "rfidCode": "0854329079",
         "note": ""
       }
     ],
@@ -17989,11 +17989,11 @@
     "borrowerId": "13",
     "items": [
       {
-        "serialNumber": "1448321908",
+        "rfidCode": "1448321908",
         "note": ""
       },
       {
-        "serialNumber": "1451850100",
+        "rfidCode": "1451850100",
         "note": ""
       }
     ],
@@ -18011,7 +18011,7 @@
     "borrowerId": "28",
     "items": [
       {
-        "serialNumber": "TRL013",
+        "rfidCode": "TRL013",
         "note": ""
       }
     ],
@@ -18028,7 +18028,7 @@
     "borrowerId": "13",
     "items": [
       {
-        "serialNumber": "TRL014",
+        "rfidCode": "TRL014",
         "note": ""
       }
     ],
@@ -18045,11 +18045,11 @@
     "borrowerId": "123",
     "items": [
       {
-        "serialNumber": "TRL015",
+        "rfidCode": "TRL015",
         "note": ""
       },
       {
-        "serialNumber": "HDMI001",
+        "rfidCode": "HDMI001",
         "note": ""
       }
     ],
@@ -18067,7 +18067,7 @@
     "borrowerId": "28",
     "items": [
       {
-        "serialNumber": "TRL016",
+        "rfidCode": "TRL016",
         "note": ""
       }
     ],
@@ -18085,7 +18085,7 @@
     "borrowerId": "28",
     "items": [
       {
-        "serialNumber": "441030467",
+        "rfidCode": "441030467",
         "note": ""
       }
     ],
@@ -18103,35 +18103,35 @@
     "borrowerId": "42",
     "items": [
       {
-        "serialNumber": "1388709832",
+        "rfidCode": "1388709832",
         "note": ""
       },
       {
-        "serialNumber": "858620167",
+        "rfidCode": "858620167",
         "note": ""
       },
       {
-        "serialNumber": "2805597667",
+        "rfidCode": "2805597667",
         "note": ""
       },
       {
-        "serialNumber": "155485923",
+        "rfidCode": "155485923",
         "note": ""
       },
       {
-        "serialNumber": "1315056715",
+        "rfidCode": "1315056715",
         "note": ""
       },
       {
-        "serialNumber": "851788775",
+        "rfidCode": "851788775",
         "note": ""
       },
       {
-        "serialNumber": "1234",
+        "rfidCode": "1234",
         "note": ""
       },
       {
-        "serialNumber": "TRL017",
+        "rfidCode": "TRL017",
         "note": ""
       }
     ],
@@ -18148,11 +18148,11 @@
     "borrowerId": "77",
     "items": [
       {
-        "serialNumber": "TRL018",
+        "rfidCode": "TRL018",
         "note": ""
       },
       {
-        "serialNumber": "2939832620",
+        "rfidCode": "2939832620",
         "note": ""
       }
     ],
@@ -18170,11 +18170,11 @@
     "borrowerId": "70",
     "items": [
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       },
       {
-        "serialNumber": "TRL020",
+        "rfidCode": "TRL020",
         "note": ""
       }
     ],
@@ -18192,11 +18192,11 @@
     "borrowerId": "79",
     "items": [
       {
-        "serialNumber": "TRL021",
+        "rfidCode": "TRL021",
         "note": ""
       },
       {
-        "serialNumber": "1321947195",
+        "rfidCode": "1321947195",
         "note": ""
       }
     ],
@@ -18214,11 +18214,11 @@
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "154334947",
+        "rfidCode": "154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL022",
+        "rfidCode": "TRL022",
         "note": ""
       }
     ],
@@ -18236,11 +18236,11 @@
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "1324439387",
+        "rfidCode": "1324439387",
         "note": ""
       },
       {
-        "serialNumber": "TRL016",
+        "rfidCode": "TRL016",
         "note": ""
       }
     ],
@@ -18257,11 +18257,11 @@
     "borrowerId": "84",
     "items": [
       {
-        "serialNumber": "0842397383",
+        "rfidCode": "0842397383",
         "note": ""
       },
       {
-        "serialNumber": "TRL019",
+        "rfidCode": "TRL019",
         "note": ""
       }
     ],
@@ -18280,31 +18280,31 @@
     "borrowerId": "50",
     "items": [
       {
-        "serialNumber": "1382240728"
+        "rfidCode": "1382240728"
       },
       {
-        "serialNumber": "149780771"
+        "rfidCode": "149780771"
       },
       {
-        "serialNumber": "1444089684"
+        "rfidCode": "1444089684"
       },
       {
-        "serialNumber": "1452720996"
+        "rfidCode": "1452720996"
       },
       {
-        "serialNumber": "149659187"
+        "rfidCode": "149659187"
       },
       {
-        "serialNumber": "1378696616"
+        "rfidCode": "1378696616"
       },
       {
-        "serialNumber": "855737827"
+        "rfidCode": "855737827"
       },
       {
-        "serialNumber": "TRL002"
+        "rfidCode": "TRL002"
       },
       {
-        "serialNumber": "TRL004"
+        "rfidCode": "TRL004"
       }
     ],
     "borrowDate": "2025-10-17T05:30:00.000Z",
@@ -18320,35 +18320,35 @@
     "borrowerId": "94",
     "items": [
       {
-        "serialNumber": "150021523",
+        "rfidCode": "150021523",
         "note": ""
       },
       {
-        "serialNumber": "1442990964",
+        "rfidCode": "1442990964",
         "note": ""
       },
       {
-        "serialNumber": "149927443",
+        "rfidCode": "149927443",
         "note": ""
       },
       {
-        "serialNumber": "1309464923",
+        "rfidCode": "1309464923",
         "note": ""
       },
       {
-        "serialNumber": "1311632715",
+        "rfidCode": "1311632715",
         "note": ""
       },
       {
-        "serialNumber": "0149960963",
+        "rfidCode": "0149960963",
         "note": ""
       },
       {
-        "serialNumber": "2347265994",
+        "rfidCode": "2347265994",
         "note": ""
       },
       {
-        "serialNumber": "TRL023",
+        "rfidCode": "TRL023",
         "note": ""
       }
     ],
@@ -18365,11 +18365,11 @@
     "borrowerId": "118",
     "items": [
       {
-        "serialNumber": "12345678",
+        "rfidCode": "12345678",
         "note": ""
       },
       {
-        "serialNumber": "TRL024",
+        "rfidCode": "TRL024",
         "note": ""
       }
     ],
@@ -18387,11 +18387,11 @@
     "borrowerId": "155",
     "items": [
       {
-        "serialNumber": "0154334947",
+        "rfidCode": "0154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL001",
+        "rfidCode": "TRL001",
         "note": ""
       }
     ],
@@ -18409,15 +18409,15 @@
     "borrowerId": "24",
     "items": [
       {
-        "serialNumber": "SPK001",
+        "rfidCode": "SPK001",
         "note": ""
       },
       {
-        "serialNumber": "1380566968",
+        "rfidCode": "1380566968",
         "note": ""
       },
       {
-        "serialNumber": "TRL002",
+        "rfidCode": "TRL002",
         "note": ""
       }
     ],
@@ -18434,11 +18434,11 @@
     "borrowerId": "43",
     "items": [
       {
-        "serialNumber": "TRL003",
+        "rfidCode": "TRL003",
         "note": ""
       },
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       }
     ],
@@ -18456,11 +18456,11 @@
     "borrowerId": "68",
     "items": [
       {
-        "serialNumber": "0854329079",
+        "rfidCode": "0854329079",
         "note": ""
       },
       {
-        "serialNumber": "TRL004",
+        "rfidCode": "TRL004",
         "note": ""
       }
     ],
@@ -18478,59 +18478,59 @@
     "borrowerId": "48",
     "items": [
       {
-        "serialNumber": "LNVTPM001",
+        "rfidCode": "LNVTPM001",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM002",
+        "rfidCode": "LNVTPM002",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM003",
+        "rfidCode": "LNVTPM003",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM004",
+        "rfidCode": "LNVTPM004",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM005",
+        "rfidCode": "LNVTPM005",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM006",
+        "rfidCode": "LNVTPM006",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM007",
+        "rfidCode": "LNVTPM007",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM008",
+        "rfidCode": "LNVTPM008",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM009",
+        "rfidCode": "LNVTPM009",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM010",
+        "rfidCode": "LNVTPM010",
         "note": ""
       },
       {
-        "serialNumber": "1320214843",
+        "rfidCode": "1320214843",
         "note": ""
       },
       {
-        "serialNumber": "TRL005",
+        "rfidCode": "TRL005",
         "note": ""
       },
       {
-        "serialNumber": "TRL006",
+        "rfidCode": "TRL006",
         "note": ""
       },
       {
-        "serialNumber": "TRL007",
+        "rfidCode": "TRL007",
         "note": ""
       }
     ],
@@ -18548,11 +18548,11 @@
     "borrowerId": "37",
     "items": [
       {
-        "serialNumber": "0154334947",
+        "rfidCode": "0154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL008",
+        "rfidCode": "TRL008",
         "note": ""
       }
     ],
@@ -18570,39 +18570,39 @@
     "borrowerId": "50",
     "items": [
       {
-        "serialNumber": "448740179",
+        "rfidCode": "448740179",
         "note": ""
       },
       {
-        "serialNumber": "150021523",
+        "rfidCode": "150021523",
         "note": ""
       },
       {
-        "serialNumber": "1442990964",
+        "rfidCode": "1442990964",
         "note": ""
       },
       {
-        "serialNumber": "149927443",
+        "rfidCode": "149927443",
         "note": ""
       },
       {
-        "serialNumber": "1309464923",
+        "rfidCode": "1309464923",
         "note": ""
       },
       {
-        "serialNumber": "1311632715",
+        "rfidCode": "1311632715",
         "note": ""
       },
       {
-        "serialNumber": "0149960963",
+        "rfidCode": "0149960963",
         "note": ""
       },
       {
-        "serialNumber": "TRL009",
+        "rfidCode": "TRL009",
         "note": ""
       },
       {
-        "serialNumber": "TRL010",
+        "rfidCode": "TRL010",
         "note": ""
       }
     ],
@@ -18619,109 +18619,112 @@
     "borrowerId": "67",
     "items": [
       {
-        "serialNumber": "2939832620",
+        "rfidCode": "2939832620",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T08:25:23+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1760923523213",
     "createdAt": "2025-10-20T01:25:23.213Z",
-    "updatedAt": "2025-10-20T01:25:23.213Z"
+    "updatedAt": "2025-10-20T08:08:29.169Z",
+    "returnDate": "2025-10-20T08:08:29.250Z"
   },
   {
     "borrowerId": "71",
     "items": [
       {
-        "serialNumber": "TRL001",
+        "rfidCode": "TRL001",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T08:53:32+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh siswa",
     "id": "1760925211759",
     "createdAt": "2025-10-20T01:53:31.759Z",
-    "updatedAt": "2025-10-20T01:53:31.759Z"
+    "updatedAt": "2025-10-20T08:07:55.872Z",
+    "returnDate": "2025-10-20T08:07:55.955Z"
   },
   {
     "borrowerId": "27",
     "items": [
       {
-        "serialNumber": "LNVTPM001",
+        "rfidCode": "LNVTPM001",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM002",
+        "rfidCode": "LNVTPM002",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM003",
+        "rfidCode": "LNVTPM003",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM004",
+        "rfidCode": "LNVTPM004",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM005",
+        "rfidCode": "LNVTPM005",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM006",
+        "rfidCode": "LNVTPM006",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM007",
+        "rfidCode": "LNVTPM007",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM008",
+        "rfidCode": "LNVTPM008",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM009",
+        "rfidCode": "LNVTPM009",
         "note": ""
       },
       {
-        "serialNumber": "LNVTPM010",
+        "rfidCode": "LNVTPM010",
         "note": ""
       },
       {
-        "serialNumber": "TRL002",
+        "rfidCode": "TRL002",
         "note": ""
       },
       {
-        "serialNumber": "TRL003",
+        "rfidCode": "TRL003",
         "note": ""
       },
       {
-        "serialNumber": "TRL004",
+        "rfidCode": "TRL004",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T10:41:24+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh Guntur",
     "id": "1760931683990",
     "createdAt": "2025-10-20T03:41:23.990Z",
-    "updatedAt": "2025-10-20T03:41:23.990Z"
+    "updatedAt": "2025-10-20T08:03:15.503Z",
+    "returnDate": "2025-10-20T08:03:15.587Z"
   },
   {
     "borrowerId": "123",
     "items": [
       {
-        "serialNumber": "1380566968",
+        "rfidCode": "1380566968",
         "note": ""
       },
       {
-        "serialNumber": "TRL005",
+        "rfidCode": "TRL005",
         "note": ""
       }
     ],
@@ -18732,35 +18735,36 @@
     "notes": "diambil oleh siswi",
     "id": "1760931867257",
     "createdAt": "2025-10-20T03:44:27.257Z",
-    "updatedAt": "2025-10-20T06:48:28.609Z",
-    "returnDate": "2025-10-20T06:48:28.728Z"
+    "updatedAt": "2025-10-20T08:50:10.765Z",
+    "returnDate": "2025-10-20T08:50:10.824Z"
   },
   {
     "borrowerId": "78",
     "items": [
       {
-        "serialNumber": "448740179",
+        "rfidCode": "448740179",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T11:14:01+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh siswi",
     "id": "1760933641170",
     "createdAt": "2025-10-20T04:14:01.171Z",
-    "updatedAt": "2025-10-20T04:14:01.171Z"
+    "updatedAt": "2025-10-20T08:13:52.987Z",
+    "returnDate": "2025-10-20T08:13:53.066Z"
   },
   {
     "borrowerId": "19",
     "items": [
       {
-        "serialNumber": "0154334947",
+        "rfidCode": "0154334947",
         "note": ""
       },
       {
-        "serialNumber": "TRL006",
+        "rfidCode": "TRL006",
         "note": ""
       }
     ],
@@ -18771,90 +18775,94 @@
     "notes": "diambil oleh tio",
     "id": "1760938019968",
     "createdAt": "2025-10-20T05:26:59.968Z",
-    "updatedAt": "2025-10-20T06:48:41.173Z",
-    "returnDate": "2025-10-20T06:48:41.296Z"
+    "updatedAt": "2025-10-20T07:32:33.890Z",
+    "returnDate": "2025-10-20T07:32:33.982Z"
   },
   {
     "borrowerId": "98",
     "items": [
       {
-        "serialNumber": "0854329079",
+        "rfidCode": "0854329079",
         "note": ""
       },
       {
-        "serialNumber": "TRL007",
+        "rfidCode": "TRL007",
         "note": ""
       },
       {
-        "serialNumber": "1311632715",
+        "rfidCode": "1311632715",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T13:26:40+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh siswi",
     "id": "1760941600815",
     "createdAt": "2025-10-20T06:26:40.815Z",
-    "updatedAt": "2025-10-20T06:26:40.815Z"
+    "updatedAt": "2025-10-20T08:07:30.571Z",
+    "returnDate": "2025-10-20T08:07:30.650Z"
   },
   {
     "borrowerId": "102",
     "items": [
       {
-        "serialNumber": "1320214843",
+        "rfidCode": "1320214843",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T13:53:18+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1760943198437",
     "createdAt": "2025-10-20T06:53:18.437Z",
-    "updatedAt": "2025-10-20T06:53:18.437Z"
+    "updatedAt": "2025-10-20T09:04:25.850Z",
+    "returnDate": "2025-10-20T09:04:25.863Z"
   },
   {
     "borrowerId": "40",
     "items": [
       {
-        "serialNumber": "845694151",
+        "rfidCode": "845694151",
         "note": ""
       },
       {
-        "serialNumber": "TRL008",
+        "rfidCode": "TRL008",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T13:54:16+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "notes": "diambil oleh Wulan",
     "id": "1760943256435",
     "createdAt": "2025-10-20T06:54:16.435Z",
-    "updatedAt": "2025-10-20T06:54:16.435Z"
+    "updatedAt": "2025-10-20T07:57:00.446Z",
+    "returnDate": "2025-10-20T07:57:00.531Z"
   },
   {
     "borrowerId": "105",
     "items": [
       {
-        "serialNumber": "0131530707",
+        "rfidCode": "0131530707",
         "note": ""
       },
       {
-        "serialNumber": "TRL009",
+        "rfidCode": "TRL009",
         "note": ""
       }
     ],
     "borrowDate": "2025-10-20T14:12:24+07:00",
     "dueDate": "2025-10-20T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "notes": "diambil oleh raisa",
     "id": "1760944344732",
     "createdAt": "2025-10-20T07:12:24.732Z",
-    "updatedAt": "2025-10-20T07:12:24.732Z"
+    "updatedAt": "2025-10-20T08:02:39.860Z",
+    "returnDate": "2025-10-20T08:02:39.940Z"
   }
 ]

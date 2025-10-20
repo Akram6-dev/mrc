@@ -36,12 +36,12 @@ export default function PrintRiwayatPage() {
           (items || []).map((item) => [item.id?.toString(), item])
         );
 
-        // Build a lookup from serial (serialNumber or sn) -> parent item name
+        // Build a lookup from serial (rfidCode or sn) -> parent item name
         const serialLookup: Record<string, string> = {};
         (items || []).forEach((parent: any) => {
           if (Array.isArray(parent.items)) {
             parent.items.forEach((s: any) => {
-              if (s.serialNumber) serialLookup[String(s.serialNumber)] = parent.name;
+              if (s.rfidCode) serialLookup[String(s.rfidCode)] = parent.name;
               if (s.sn) serialLookup[String(s.sn)] = parent.name;
             });
           }
@@ -55,9 +55,9 @@ export default function PrintRiwayatPage() {
 
           // Normalize each raw item into { name, quantity }
           const normalized: Array<{ name: string; quantity: number }> = rawItems.map((it: any) => {
-            // Prefer resolving by serial (serialNumber or sn) using serialLookup
-            if (it.serialNumber && serialLookup[String(it.serialNumber)]) {
-              return { name: serialLookup[String(it.serialNumber)], quantity: Number(it.quantity ?? it.qty ?? 1) };
+            // Prefer resolving by serial (rfidCode or sn) using serialLookup
+            if (it.rfidCode && serialLookup[String(it.rfidCode)]) {
+              return { name: serialLookup[String(it.rfidCode)], quantity: Number(it.quantity ?? it.qty ?? 1) };
             }
             if (it.sn && serialLookup[String(it.sn)]) {
               return { name: serialLookup[String(it.sn)], quantity: Number(it.quantity ?? it.qty ?? 1) };

@@ -82,7 +82,7 @@ export default function BarangPage() {
     description: "",
     icon: "laptop", // default icon
     image: "", // path to uploaded image (relative to /public)
-    items: [{ serialNumber: "", sn: "", status: 1, condition: 1 }], // for editing serials
+    items: [{ rfidCode: "", sn: "", status: 1, condition: 1 }], // for editing serials
     serialSearch: "", // for filtering serial numbers in the form
   })
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -95,7 +95,7 @@ export default function BarangPage() {
 
   const addNewSerial = () => {
     const newIndex = formData.items.length
-    const newItem = { serialNumber: "", sn: "", status: 1, condition: 1 }
+    const newItem = { rfidCode: "", sn: "", status: 1, condition: 1 }
     setFormData(prev => ({ ...prev, items: [...prev.items, newItem] }))
     // Focus the new input on next tick after DOM updates
     setTimeout(() => {
@@ -140,13 +140,13 @@ export default function BarangPage() {
         stock: Array.isArray(item.items) ? item.items.length : 0,
         items: Array.isArray(item.items)
           ? item.items.map((s: any) => ({
-            serialNumber: s.serialNumber,
+            rfidCode: s.rfidCode,
             sn: s.sn,
             status: s.status,
             condition: typeof s.condition === "number" ? s.condition : 1,
             loanId: s.loanId || null,
           }))
-          : [{ serialNumber: '', sn: '', status: 1, condition: 1, loanId: null }],
+          : [{ rfidCode: '', sn: '', status: 1, condition: 1, loanId: null }],
       }))
       setItems(mapped)
     } catch (err) {
@@ -215,7 +215,7 @@ export default function BarangPage() {
         image: imagePath,
         stock,
         items: serials.map((s: any, idx: number) => ({
-          serialNumber: s.serialNumber,
+          rfidCode: s.rfidCode,
           sn: s.sn,
           status: typeof s.status === "number" ? s.status : 1,
           condition: typeof s.condition === "number" ? s.condition : 1,
@@ -251,13 +251,13 @@ export default function BarangPage() {
       image: item.image || "",
       items: item.items && Array.isArray(item.items) && item.items.length > 0
         ? item.items.map((s: any) => ({
-          serialNumber: s.serialNumber,
+          rfidCode: s.rfidCode,
           sn: s.sn,
           status: s.status,
           condition: typeof s.condition === "number" ? s.condition : 1,
           loanId: s.loanId || null,
         }))
-        : [{ serialNumber: "", sn: "", status: 1, condition: 1, loanId: null }],
+        : [{ rfidCode: "", sn: "", status: 1, condition: 1, loanId: null }],
       serialSearch: "",
     })
     setImageFile(null)
@@ -284,7 +284,7 @@ export default function BarangPage() {
       description: "",
       icon: "laptop",
       image: "",
-      items: [{ serialNumber: "", sn: "", status: 1, condition: 1 }],
+      items: [{ rfidCode: "", sn: "", status: 1, condition: 1 }],
       serialSearch: "",
     })
     setImageFile(null)
@@ -315,281 +315,290 @@ export default function BarangPage() {
     <div className="min-h-screen gradient-bg">
       <div className="max-w-[90rem] mx-auto py-8 px-4 sm:px-6 lg:px-8 animate-fade-in duration-200">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 md:mb-8">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Manajemen Barang</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400">Kelola data barang yang tersedia untuk dipinjam</p>
           </div>
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <button onClick={openAddDialog} className="btn-outline">
-                <Plus className="w-5 h-5 mr-2" />
-                Tambah Barang
-              </button>
-            </DialogTrigger>
-            <DialogContent className="max-w-2xl w-full bg-gray-50 dark:bg-gray-900 dark:border dark:border-gray-700 rounded-lg">
-              <DialogHeader>
-                <DialogTitle>{editingItem ? "Edit Barang" : "Tambah Barang Baru"}</DialogTitle>
-              </DialogHeader>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-6">
-                  {/* Nama Barang full width */}
-                  <div>
-                    <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Barang *</Label>
-                    <Input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="input-field max-w-2xl w-full"
-                      required
-                    />
-                  </div>
-                  {/* Grid 2 kolom untuk input lainnya */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Upload Gambar */}
-                    <div className="md:col-span-2">
-                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Gambar (opsional)</Label>
-                      <div className="flex items-center gap-4">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={e => {
-                            const file = e.target.files?.[0] || null
-                            setImageFile(file)
-                            if (file) {
-                              const reader = new FileReader()
-                              reader.onload = ev => setImagePreview(ev.target?.result as string)
-                              reader.readAsDataURL(file)
-                            } else {
-                              setImagePreview("")
-                            }
-                          }}
-                          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent-50 file:text-accent-700 hover:file:bg-accent-100 dark:file:bg-gray-800 dark:file:text-gray-200 dark:hover:file:bg-gray-700 transition-colors"
-                        />
-                        {(imagePreview || formData.image) && (
-                          <div className="relative w-20 h-20 border rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                            <img
-                              src={imagePreview || formData.image}
-                              alt="Preview"
-                              className="object-contain w-full h-full"
-                            />
-                            <button
-                              type="button"
-                              className="absolute top-1 right-1 bg-white/80 rounded-full p-1 text-gray-500 hover:text-red-600"
-                              onClick={() => {
-                                setImageFile(null)
-                                setImagePreview("")
-                                setFormData(f => ({ ...f, image: "" }))
-                              }}
-                              aria-label="Hapus gambar"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">Ukuran maksimal 2MB. Format: jpg, png, webp, dll.</div>
-                    </div>
+          <div className="flex items-center gap-3 mt-4 md:mt-0">
+            <button
+              onClick={() => router.push('/barang/detail')}
+              className="bg-accent-500 hover:bg-accent-600 text-white text-sm font-medium px-3 py-2 rounded-lg transition-all shadow-soft hover:shadow-medium transform hover:scale-[1.02] active:scale-[0.98] flex items-center duration-300 select-none cursor-pointer"
+            >
+              <Search className="w-5 h-5 mr-2" />
+              Cek Serial Number
+            </button>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <button onClick={openAddDialog} className="btn-outline">
+                  <Plus className="w-5 h-5 mr-2" />
+                  Tambah Barang
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl w-full bg-gray-50 dark:bg-gray-900 dark:border dark:border-gray-700 rounded-lg">
+                <DialogHeader>
+                  <DialogTitle>{editingItem ? "Edit Barang" : "Tambah Barang Baru"}</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-6">
+                    {/* Nama Barang full width */}
                     <div>
-                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Icon Barang *</Label>
-                      <Select
-                        value={formData.icon}
-                        onValueChange={(val) => setFormData({ ...formData, icon: val })}
-                        required
-                      >
-                        <SelectTrigger className="input-field">
-                          <SelectValue placeholder="Pilih icon" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {ICON_OPTIONS.map((opt) => (
-                            <SelectItem key={opt.value} value={opt.value} className="flex items-center gap-2">
-                              <span className="inline-flex items-center gap-2">
-                                {(() => {
-                                  const Icon = opt.icon
-                                  return <Icon className="w-6 h-6 text-accent-600 dark:text-accent-400" />
-                                })()}
-                                {opt.label}
-                              </span>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kategori *</Label>
+                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Barang *</Label>
                       <Input
                         type="text"
-                        value={formData.category}
-                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                        className="input-field"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="input-field max-w-2xl w-full"
                         required
                       />
                     </div>
-                    <div className="md:col-span-2">
-                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Serial Number</Label>
-                      <div>
-                        <div className="p-2 flex flex-col gap-2">
-                          <div className="flex items-center gap-2 w-full">
-                            <div className="relative flex-1">
-                              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
-                              <Input
-                                type="text"
-                                placeholder="Cari serial number..."
-                                value={formData.serialSearch || ""}
-                                onChange={e => setFormData({ ...formData, serialSearch: e.target.value })}
-                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                                  if (e.key === 'Enter') {
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                  }
-                                }}
-                                className="input-field pl-10 pr-10 w-full"
+                    {/* Grid 2 kolom untuk input lainnya */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Upload Gambar */}
+                      <div className="md:col-span-2">
+                        <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Gambar (opsional)</Label>
+                        <div className="flex items-center gap-4">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={e => {
+                              const file = e.target.files?.[0] || null
+                              setImageFile(file)
+                              if (file) {
+                                const reader = new FileReader()
+                                reader.onload = ev => setImagePreview(ev.target?.result as string)
+                                reader.readAsDataURL(file)
+                              } else {
+                                setImagePreview("")
+                              }
+                            }}
+                            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent-50 file:text-accent-700 hover:file:bg-accent-100 dark:file:bg-gray-800 dark:file:text-gray-200 dark:hover:file:bg-gray-700 transition-colors"
+                          />
+                          {(imagePreview || formData.image) && (
+                            <div className="relative w-20 h-20 border rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                              <img
+                                src={imagePreview || formData.image}
+                                alt="Preview"
+                                className="object-contain w-full h-full"
                               />
-                              {formData.serialSearch && (
-                                <button
-                                  type="button"
-                                  aria-label="Clear serial search"
-                                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-600 p-1 rounded-full transition-colors"
-                                  onClick={() => setFormData({ ...formData, serialSearch: "" })}
-                                >
-                                  <X className="h-5 w-5" />
-                                </button>
-                              )}
+                              <button
+                                type="button"
+                                className="absolute top-1 right-1 bg-white/80 rounded-full p-1 text-gray-500 hover:text-red-600"
+                                onClick={() => {
+                                  setImageFile(null)
+                                  setImagePreview("")
+                                  setFormData(f => ({ ...f, image: "" }))
+                                }}
+                                aria-label="Hapus gambar"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
                             </div>
-                            <button
-                              className="btn-outline flex-shrink-0"
-                              type="button"
-                              onClick={() => setFormData({ ...formData, items: [...formData.items, { serialNumber: "", sn: "", status: 1, condition: 1 }] })}
-                            >
-                              <Plus className="w-4 h-4 mr-1" />
-                              Tambah Item
-                            </button>
+                          )}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">Ukuran maksimal 2MB. Format: jpg, png, webp, dll.</div>
+                      </div>
+                      <div>
+                        <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Icon Barang *</Label>
+                        <Select
+                          value={formData.icon}
+                          onValueChange={(val) => setFormData({ ...formData, icon: val })}
+                          required
+                        >
+                          <SelectTrigger className="input-field">
+                            <SelectValue placeholder="Pilih icon" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {ICON_OPTIONS.map((opt) => (
+                              <SelectItem key={opt.value} value={opt.value} className="flex items-center gap-2">
+                                <span className="inline-flex items-center gap-2">
+                                  {(() => {
+                                    const Icon = opt.icon
+                                    return <Icon className="w-6 h-6 text-accent-600 dark:text-accent-400" />
+                                  })()}
+                                  {opt.label}
+                                </span>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kategori *</Label>
+                        <Input
+                          type="text"
+                          value={formData.category}
+                          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                          className="input-field"
+                          required
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Serial Number</Label>
+                        <div>
+                          <div className="p-2 flex flex-col gap-2">
+                            <div className="flex items-center gap-2 w-full">
+                              <div className="relative flex-1">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+                                <Input
+                                  type="text"
+                                  placeholder="Cari serial number..."
+                                  value={formData.serialSearch || ""}
+                                  onChange={e => setFormData({ ...formData, serialSearch: e.target.value })}
+                                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                    if (e.key === 'Enter') {
+                                      e.preventDefault()
+                                      e.stopPropagation()
+                                    }
+                                  }}
+                                  className="input-field pl-10 pr-10 w-full"
+                                />
+                                {formData.serialSearch && (
+                                  <button
+                                    type="button"
+                                    aria-label="Clear serial search"
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-600 p-1 rounded-full transition-colors"
+                                    onClick={() => setFormData({ ...formData, serialSearch: "" })}
+                                  >
+                                    <X className="h-5 w-5" />
+                                  </button>
+                                )}
+                              </div>
+                              <button
+                                className="btn-outline flex-shrink-0"
+                                type="button"
+                                onClick={() => setFormData({ ...formData, items: [...formData.items, { rfidCode: "", sn: "", status: 1, condition: 1 }] })}
+                              >
+                                <Plus className="w-4 h-4 mr-1" />
+                                Tambah Item
+                              </button>
+                            </div>
+                          </div>
+                          <div className="max-h-56 overflow-y-auto">
+                            {(formData.items && formData.items
+                              .filter(s =>
+                                !formData.serialSearch ||
+                                (s.rfidCode || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase()) ||
+                                (s.sn || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase())
+                              )
+                            ).map((s, idx) => (
+                              <div key={idx} className="flex gap-2 items-center py-2 px-2 border-b border-gray-100 dark:border-gray-800 last:border-b-0">
+                                <span className="flex-shrink-0 font-mono text-gray-500">{idx + 1}.</span>
+                                <Input
+                                  type="text"
+                                  placeholder="RFID"
+                                  value={s.rfidCode}
+                                  ref={(el: HTMLInputElement | null) => { serialRefs.current[idx] = el }}
+                                  onChange={e => {
+                                    const items = [...formData.items]
+                                    items[idx].rfidCode = e.target.value
+                                    setFormData({ ...formData, items })
+                                  }}
+                                  onKeyDown={(e) => handleSerialKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>, idx)}
+                                  className="input-field w-full"
+                                  required
+                                />
+                                <Input
+                                  type="text"
+                                  placeholder="Serial Number"
+                                  value={s.sn}
+                                  onChange={e => {
+                                    const items = [...formData.items]
+                                    items[idx].sn = e.target.value
+                                    setFormData({ ...formData, items })
+                                  }}
+                                  onKeyDown={(e) => handleSerialKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>, idx)}
+                                  className="input-field w-full"
+                                />
+                                {/* Status badge only, not editable */}
+                                <span
+                                  className={`inline-block px-2 py-1 rounded text-xs font-semibold
+                                  ${s.status === 1
+                                      ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                                      : s.status === 2
+                                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                                        : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"}
+                                `}
+                                >
+                                  {s.status === 1
+                                    ? "Tersedia"
+                                    : s.status === 2
+                                      ? "Dibooking"
+                                      : "Dipinjam"}
+                                </span>
+                                {/* Condition editable */}
+                                <Select
+                                  value={typeof s.condition === "number" ? String(s.condition) : "1"}
+                                  onValueChange={val => {
+                                    const items = [...formData.items]
+                                    items[idx].condition = Number(val)
+                                    setFormData({ ...formData, items })
+                                  }}
+                                >
+                                  <SelectTrigger className="input-field w-28">
+                                    <SelectValue placeholder="Kondisi" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="1">Baik</SelectItem>
+                                    <SelectItem value="0">Rusak</SelectItem>
+                                    <SelectItem value="-1">Hilang</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                                <Button
+                                  type="button"
+                                  variant="ghost"
+                                  size="icon"
+                                  className="ml-1 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 w-16"
+                                  onClick={() => {
+                                    const items = formData.items.filter((_, i) => i !== idx)
+                                    setFormData({ ...formData, items })
+                                  }}
+                                  disabled={formData.items.length === 1}
+                                  aria-label="Hapus Serial"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            ))}
                           </div>
                         </div>
-                        <div className="max-h-56 overflow-y-auto">
-                          {(formData.items && formData.items
-                            .filter(s =>
-                              !formData.serialSearch ||
-                              (s.serialNumber || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase()) ||
-                              (s.sn || "").toLowerCase().includes((formData.serialSearch || "").toLowerCase())
-                            )
-                          ).map((s, idx) => (
-                            <div key={idx} className="flex gap-2 items-center py-2 px-2 border-b border-gray-100 dark:border-gray-800 last:border-b-0">
-                              <span className="flex-shrink-0 font-mono text-gray-500">{idx + 1}.</span>
-                              <Input
-                                type="text"
-                                placeholder="RFID"
-                                value={s.serialNumber}
-                                ref={(el: HTMLInputElement | null) => { serialRefs.current[idx] = el }}
-                                onChange={e => {
-                                  const items = [...formData.items]
-                                  items[idx].serialNumber = e.target.value
-                                  setFormData({ ...formData, items })
-                                }}
-                                onKeyDown={(e) => handleSerialKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>, idx)}
-                                className="input-field w-full"
-                                required
-                              />
-                              <Input
-                                type="text"
-                                placeholder="Serial Number"
-                                value={s.sn}
-                                onChange={e => {
-                                  const items = [...formData.items]
-                                  items[idx].sn = e.target.value
-                                  setFormData({ ...formData, items })
-                                }}
-                                onKeyDown={(e) => handleSerialKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>, idx)}
-                                className="input-field w-full"
-                              />
-                              {/* Status badge only, not editable */}
-                              <span
-                                className={`inline-block px-2 py-1 rounded text-xs font-semibold
-                                  ${s.status === 1
-                                    ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                                    : s.status === 2
-                                      ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
-                                      : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"}
-                                `}
-                              >
-                                {s.status === 1
-                                  ? "Tersedia"
-                                  : s.status === 2
-                                    ? "Dibooking"
-                                    : "Dipinjam"}
-                              </span>
-                              {/* Condition editable */}
-                              <Select
-                                value={typeof s.condition === "number" ? String(s.condition) : "1"}
-                                onValueChange={val => {
-                                  const items = [...formData.items]
-                                  items[idx].condition = Number(val)
-                                  setFormData({ ...formData, items })
-                                }}
-                              >
-                                <SelectTrigger className="input-field w-28">
-                                  <SelectValue placeholder="Kondisi" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="1">Baik</SelectItem>
-                                  <SelectItem value="0">Rusak</SelectItem>
-                                  <SelectItem value="-1">Hilang</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="icon"
-                                className="ml-1 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 w-16"
-                                onClick={() => {
-                                  const items = formData.items.filter((_, i) => i !== idx)
-                                  setFormData({ ...formData, items })
-                                }}
-                                disabled={formData.items.length === 1}
-                                aria-label="Hapus Serial"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          ))}
-                        </div>
+                        <div className="text-xs text-gray-500 mt-1">Jumlah barang dihitung dari jumlah serial number.</div>
                       </div>
-                      <div className="text-xs text-gray-500 mt-1">Jumlah barang dihitung dari jumlah serial number.</div>
+                    </div>
+                    {/* Deskripsi tetap full width di bawah */}
+                    <div>
+                      <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Deskripsi</Label>
+                      <Textarea
+                        value={formData.description}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        rows={3}
+                        className="input-field"
+                        placeholder="Deskripsi tambahan (opsional)"
+                      />
                     </div>
                   </div>
-                  {/* Deskripsi tetap full width di bawah */}
-                  <div>
-                    <Label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Deskripsi</Label>
-                    <Textarea
-                      value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      rows={3}
-                      className="input-field"
-                      placeholder="Deskripsi tambahan (opsional)"
-                    />
-                  </div>
-                </div>
 
-                <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200 dark:border-gray-700">
-                  <DialogClose asChild>
-                    <Button
-                      onClick={() => {
-                        setIsDialogOpen(false)
-                        setEditingItem(null)
-                        resetForm()
-                      }}
-                      className="px-5 py-2 rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors"
-                    >
-                      Batal
+                  <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <DialogClose asChild>
+                      <Button
+                        onClick={() => {
+                          setIsDialogOpen(false)
+                          setEditingItem(null)
+                          resetForm()
+                        }}
+                        className="px-5 py-2 rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors"
+                      >
+                        Batal
+                      </Button>
+                    </DialogClose>
+                    <Button type="submit" className="px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm">
+                      {editingItem ? "Perbarui" : "Tambahkan"}
                     </Button>
-                  </DialogClose>
-                  <Button type="submit" className="px-5 py-2 rounded-lg font-medium bg-accent-600 text-white hover:bg-accent-700 focus:ring-2 focus:ring-accent-400 transition-colors shadow-sm">
-                    {editingItem ? "Perbarui" : "Tambahkan"}
-                  </Button>
-                </div>
-              </form>
-            </DialogContent>
-          </Dialog>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
 
         {/* Alerts replaced by toast notifications */}

@@ -6,7 +6,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-// Props: items (array of Item), onAddSerial (serial object), disabledSerials (array of serialNumbers)
+// Props: items (array of Item), onAddSerial (serial object)
 interface SerialAutocompleteProps {
   items: Item[];
   onAddSerial: (serial: any) => void;
@@ -28,7 +28,7 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
       category: item.category,
       description: item.description,
     })))
-    .filter((serial) => serial.status === 1 && !disabledSerials.includes(serial.serialNumber));
+    .filter((serial) => serial.status === 1 && !disabledSerials.includes(serial.rfidCode));
 
   // Filter by search (serial number or item name)
   const filtered = search.trim() === ""
@@ -36,7 +36,7 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
     : availableSerials.filter((s) => {
         const q = search.trim().toLowerCase();
         return (
-          s.serialNumber.toLowerCase().includes(q) ||
+          s.rfidCode.toLowerCase().includes(q) ||
           (s.itemName || "").toLowerCase().includes(q)
         );
       });
@@ -61,7 +61,7 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
       // Only add if exact match or user selects from list
       const exact = filtered.find(
         (s, idx) =>
-          s.serialNumber.toLowerCase() === search.trim().toLowerCase() || idx === activeIdx
+          s.rfidCode.toLowerCase() === search.trim().toLowerCase() || idx === activeIdx
       );
       if (exact) {
         onAddSerial(exact);
@@ -113,8 +113,8 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
               <CommandGroup>
                 {filtered.map((serial, idx) => (
                   <CommandItem
-                    key={serial.serialNumber}
-                    value={serial.serialNumber}
+                    key={serial.rfidCode}
+                    value={serial.rfidCode}
                     onSelect={() => {
                       onAddSerial(serial);
                       setSearch("");
@@ -129,7 +129,7 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
                     className={idx === activeIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""}
                   >
                     <span className="font-medium">{serial.itemName}</span>
-                    <span className="ml-2 text-xs text-gray-500">SN: {serial.serialNumber} | {serial.category}{serial.description ? ` | ${serial.description}` : ""}</span>
+                    <span className="ml-2 text-xs text-gray-500">SN: {serial.rfidCode} | {serial.category}{serial.description ? ` | ${serial.description}` : ""}</span>
                   </CommandItem>
                 ))}
               </CommandGroup>

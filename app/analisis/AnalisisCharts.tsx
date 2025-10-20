@@ -675,8 +675,8 @@ export default function AnalisisCharts({
                                                 (itemsDB as any).forEach((it: any) => {
                                                     if (!Array.isArray(it.items)) return;
                                                     it.items.forEach((s: any) => {
-                                                        // prefer serialNumber as key but capture 'sn' when present
-                                                        const key = s && (s.serialNumber ?? s.sn);
+                                                        // prefer rfidCode as key but capture 'sn' when present
+                                                        const key = s && (s.rfidCode ?? s.sn);
                                                         if (key) {
                                                             serialToItem[String(key)] = {
                                                                 name: it.name,
@@ -684,7 +684,7 @@ export default function AnalisisCharts({
                                                                 icon: it.icon,
                                                                 itemId: it.id,
                                                                 image: it.image ?? null,
-                                                                sn: s.sn ?? s.serialNumber ?? String(key),
+                                                                sn: s.sn ?? s.rfidCode ?? String(key),
                                                             };
                                                         }
                                                     });
@@ -699,8 +699,8 @@ export default function AnalisisCharts({
                                             allLoans.forEach((l: any) => {
                                                 if (!Array.isArray(l.items)) return;
                                                 l.items.forEach((it: any) => {
-                                                    // prefer explicit serialNumber in loan item
-                                                    const s = it && (it.serialNumber ?? it.sn ?? it.serial);
+                                                    // prefer explicit rfidCode in loan item
+                                                    const s = it && (it.rfidCode ?? it.sn ?? it.serial);
                                                     if (s) {
                                                         const key = String(s);
                                                         serialCounts[key] = (serialCounts[key] || 0) + 1;

@@ -3,7 +3,7 @@ export interface ItemSerialDetail {
   id: string;
   name: string;
   icon?: string;
-  serialNumber: string;
+  rfidCode: string;
   sn?: string;
   status: 0 | 1 | 2;
   loanId: string;
@@ -13,7 +13,7 @@ export interface ItemSerialDetail {
 }
 
 export interface ItemSerial {
-  serialNumber: string;
+  rfidCode: string;
   sn: string;
   condition: -1 | 0 | 1;
   status: 0 | 1 | 2; // 0: tersedia, 1: dipinjam, 2: dibooking
@@ -47,7 +47,7 @@ export interface Borrower {
 
 // Now loan is per serial number, not per item+quantity
 export interface LoanItem {
-  serialNumber: string;
+  rfidCode: string;
   note?: string;
 }
 
@@ -68,7 +68,7 @@ export interface Loan {
 
 export interface LoanWithDetails extends Loan {
   borrower: Borrower
-  itemDetails: (Item & { quantity: number; serialNumber?: string; sn?: string; status: 0 | 1 | 2 })[]
+  itemDetails: (Item & { quantity: number; rfidCode?: string; sn?: string; status: 0 | 1 | 2 })[]
 }
 
 export interface DashboardStats {

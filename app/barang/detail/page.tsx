@@ -54,8 +54,10 @@ export default function ItemDetailPage() {
 
     async function handleSearch(e?: React.FormEvent) {
         if (e) e.preventDefault()
-        const q = String(serialQuery || "").trim()
-        if (!q) return toast.error("Masukkan serial number terlebih dahulu", { className: 'toast-error' })
+        const qRaw = String(serialQuery || "")
+        const normalize = (s: any) => (s === undefined || s === null) ? "" : String(s).trim().toLowerCase()
+        const qNorm = normalize(qRaw)
+        if (!qNorm) return toast.error("Masukkan serial number terlebih dahulu", { className: 'toast-error' })
         setSearching(true)
         setIsLoading(true)
         try {
@@ -66,21 +68,21 @@ export default function ItemDetailPage() {
             let foundItem: Item | null = null
             let foundSerial: any = null
             for (const it of items) {
-                // check item-level legacy sn/serialNumber first (prefer sn)
-                if ((it as any).sn !== undefined && String((it as any).sn).trim() === q) {
+                // check item-level legacy sn/rfidCode first (prefer sn)
+                if ((it as any).sn !== undefined && normalize((it as any).sn) === qNorm) {
                     foundItem = it
                     foundSerial = { sn: (it as any).sn }
                     break
                 }
-                if ((it as any).serialNumber !== undefined && String((it as any).serialNumber).trim() === q) {
+                if ((it as any).rfidCode !== undefined && normalize((it as any).rfidCode) === qNorm) {
                     foundItem = it
-                    foundSerial = { serialNumber: (it as any).serialNumber }
+                    foundSerial = { rfidCode: (it as any).rfidCode }
                     break
                 }
                 if (Array.isArray(it.items)) {
                     const s = it.items.find((x: any) => {
-                        if (x.sn !== undefined && String(x.sn).trim() === q) return true
-                        if (x.serialNumber !== undefined && String(x.serialNumber).trim() === q) return true
+                        if (x.sn !== undefined && normalize(x.sn) === qNorm) return true
+                        if (x.rfidCode !== undefined && normalize(x.rfidCode) === qNorm) return true
                         return false
                     })
                     if (s) {
@@ -103,21 +105,35 @@ export default function ItemDetailPage() {
 
             // build history: loans where loan.items includes this serial
             const itemHasPerSerial = Array.isArray(foundItem.items) && foundItem.items.length > 0
+
+            // gather all possible serial identifiers to match against loan records (normalized lower-case)
+            const serialCandidates = new Set<string>()
+            if (qNorm) serialCandidates.add(qNorm)
+            // from the found serial object
+            if (foundSerial) {
+                const s1 = normalize(foundSerial.sn)
+                const s2 = normalize(foundSerial.rfidCode)
+                if (s1) serialCandidates.add(s1)
+                if (s2) serialCandidates.add(s2)
+            }
+            // also include any legacy fields on the item itself
+            const itemSn = normalize((foundItem as any).sn)
+            const itemRfid = normalize((foundItem as any).rfidCode)
+            if (itemSn) serialCandidates.add(itemSn)
+            if (itemRfid) serialCandidates.add(itemRfid)
+
             const history = (loans || []).filter((ln) => {
                 if (!Array.isArray(ln.items)) return false
                 return ln.items.some((li: any) => {
-                    // direct serial match (prefer sn, then serialNumber) - exact trimmed
-                    if (li.sn !== undefined && String(li.sn).trim() === q) return true
-                    if (li.serialNumber !== undefined && String(li.serialNumber).trim() === q) return true
+                    if (li.sn !== undefined && serialCandidates.has(normalize(li.sn))) return true
+                    if (li.rfidCode !== undefined && serialCandidates.has(normalize(li.rfidCode))) return true
 
-                    // legacy inline item object: allow if it contains matching serial or matches item id
                     if (li.item) {
-                        if (li.item.sn !== undefined && String(li.item.sn).trim() === q) return true
-                        if (li.item.serialNumber !== undefined && String(li.item.serialNumber).trim() === q) return true
+                        if (li.item.sn !== undefined && serialCandidates.has(normalize(li.item.sn))) return true
+                        if (li.item.rfidCode !== undefined && serialCandidates.has(normalize(li.item.rfidCode))) return true
                         if (!itemHasPerSerial && String(li.item.id) === String(foundItem.id)) return true
                     }
 
-                    // itemId references (string or object): only consider when the item has NO per-serial entries
                     if (!itemHasPerSerial && li.itemId) {
                         if (String(li.itemId) === String(foundItem.id)) return true
                         if (li.itemId.id && String(li.itemId.id) === String(foundItem.id)) return true
@@ -197,12 +213,12 @@ export default function ItemDetailPage() {
 
     const serialDisplay = (() => {
         if (!item) return '-'
-        const s = serialInfo?.sn ?? serialInfo?.serialNumber
+        const s = serialInfo?.sn ?? serialInfo?.rfidCode
         if (s) return s
-        const legacySn = (item as any).sn ?? (item as any).serialNumber
+        const legacySn = (item as any).sn ?? (item as any).rfidCode
         if (legacySn) return legacySn
         if (Array.isArray(item.items) && item.items.length) {
-            return item.items.map((it: any) => it.sn ?? it.serialNumber ?? '').filter(Boolean).join(', ')
+            return item.items.map((it: any) => it.sn ?? it.rfidCode ?? '').filter(Boolean).join(', ')
         }
         return '-'
     })()
@@ -353,10 +369,24 @@ export default function ItemDetailPage() {
                                     <Button onClick={() => {
                                         const now = new Date()
                                         const prev = new Date()
+                                        prev.setDate(prev.getDate() - 7)
+                                        setFromDate(prev)
+                                        setToDate(now)
+                                    }} className="btn-outline w-full">7 hari terakhir</Button>
+                                    <Button onClick={() => {
+                                        const now = new Date()
+                                        const prev = new Date()
+                                        prev.setDate(prev.getDate() - 14)
+                                        setFromDate(prev)
+                                        setToDate(now)
+                                    }} className="btn-outline w-full">14 hari terakhir</Button>
+                                    <Button onClick={() => {
+                                        const now = new Date()
+                                        const prev = new Date()
                                         prev.setDate(prev.getDate() - 30)
                                         setFromDate(prev)
                                         setToDate(now)
-                                    }} className="btn-outline w-full">1 bulan terakhir</Button>
+                                    }} className="btn-outline w-full">30 hari terakhir</Button>
                                     <Button onClick={() => {
                                         const now = new Date()
                                         const prev = new Date()
@@ -477,7 +507,7 @@ export default function ItemDetailPage() {
                         <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl mt-6">
                             <CardHeader>
                                 <CardTitle className="text-sm font-medium">Riwayat Peminjaman</CardTitle>
-                                <CardDescription className="text-xs">Serial: {serialQuery}</CardDescription>
+                                <CardDescription className="text-xs">Serial: {serialDisplay}</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {filteredLoans.length === 0 ? (

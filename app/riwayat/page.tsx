@@ -145,7 +145,7 @@ export default function RiwayatPage() {
       (items || []).forEach((parent: any) => {
         if (Array.isArray(parent.items)) {
           parent.items.forEach((s: any) => {
-            if (s.serialNumber) serialLookup[String(s.serialNumber)] = { parent, serial: s };
+            if (s.rfidCode) serialLookup[String(s.rfidCode)] = { parent, serial: s };
             if (s.sn) serialLookup[String(s.sn)] = { parent, serial: s };
           });
         }
@@ -159,13 +159,13 @@ export default function RiwayatPage() {
           const details: ItemSerialDetail[] = [];
           for (const loanItem of loan.items) {
             // Try resolve by serial via serialLookup
-            if (loanItem.serialNumber && serialLookup[String(loanItem.serialNumber)]) {
-              const { parent, serial } = serialLookup[String(loanItem.serialNumber)];
+            if (loanItem.rfidCode && serialLookup[String(loanItem.rfidCode)]) {
+              const { parent, serial } = serialLookup[String(loanItem.rfidCode)];
               details.push({
                 id: parent.id,
                 name: parent.name,
                 icon: parent.icon,
-                serialNumber: serial.serialNumber,
+                rfidCode: serial.rfidCode,
                 sn: serial.sn,
                 status: serial.loanId !== loan.id ? 1 : serial.status,
                 loanId: serial.loanId ?? "",
@@ -181,7 +181,7 @@ export default function RiwayatPage() {
                 id: parent.id,
                 name: parent.name,
                 icon: parent.icon,
-                serialNumber: serial.serialNumber,
+                rfidCode: serial.rfidCode,
                 sn: serial.sn,
                 status: serial.loanId !== loan.id ? 1 : serial.status,
                 loanId: serial.loanId ?? "",
@@ -200,7 +200,7 @@ export default function RiwayatPage() {
                 id: base?.id ?? '',
                 name: base?.name ?? loanItem.name ?? loanItem.itemName ?? 'Unknown',
                 icon: base?.icon ?? '',
-                serialNumber: '',
+                rfidCode: '',
                 sn: '',
                 status: 1,
                 loanId: '',
@@ -217,7 +217,7 @@ export default function RiwayatPage() {
                 id: '',
                 name: loanItem.name ?? loanItem.itemName ?? 'Unknown',
                 icon: '',
-                serialNumber: '',
+                rfidCode: '',
                 sn: '',
                 status: 1,
                 loanId: '',
@@ -233,7 +233,7 @@ export default function RiwayatPage() {
               id: '',
               name: 'Unknown',
               icon: '',
-              serialNumber: loanItem.serialNumber ?? '',
+              rfidCode: loanItem.rfidCode ?? '',
               sn: loanItem.sn ?? '',
               status: 1,
               loanId: '',
@@ -389,7 +389,7 @@ export default function RiwayatPage() {
       "Status": loan.status,
       "Keperluan": loan.purpose || "",
       "Catatan": loan.notes || "",
-      "Barang": loan.itemDetails?.map(item => `${item.name} (${item.quantity}x${item.serialNumber ? `, SN: ${item.serialNumber}` : ""})`).join(", ") || ""
+      "Barang": loan.itemDetails?.map(item => `${item.name} (${item.quantity}x${item.rfidCode ? `, SN: ${item.rfidCode}` : ""})`).join(", ") || ""
     }));
     const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = XLSX.utils.book_new();
@@ -830,11 +830,11 @@ export default function RiwayatPage() {
                                   // If already correct shape, use as is
                                   if (
                                     typeof item.loanId === 'string' &&
-                                    typeof item.serialNumber === 'string' &&
+                                    typeof item.rfidCode === 'string' &&
                                     typeof item.status !== 'undefined'
                                   ) {
                                     return (
-                                      <li key={item.serialNumber} className="flex items-center gap-3 py-2">
+                                      <li key={item.rfidCode} className="flex items-center gap-3 py-2">
                                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
                                           {(() => {
                                             const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
@@ -843,7 +843,7 @@ export default function RiwayatPage() {
                                         </span>
                                         <div className="flex-1">
                                           <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                          <div className="text-xs text-gray-500 dark:text-gray-400">{item.sn || item.serialNumber || '-'}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
+                                          <div className="text-xs text-gray-500 dark:text-gray-400">{item.sn || item.rfidCode || '-'}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
                                         </div>
                                         {item.status === 1 && (
                                           <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sudah dikembalikan</span>
@@ -859,7 +859,7 @@ export default function RiwayatPage() {
                                   }
                                   // Fallback: legacy shape, try to map to ItemSerialDetail
                                   return (
-                                    <li key={item.serialNumber || idx} className="flex items-center gap-3 py-2">
+                                    <li key={item.rfidCode || idx} className="flex items-center gap-3 py-2">
                                       <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
                                         {(() => {
                                           const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
@@ -868,7 +868,7 @@ export default function RiwayatPage() {
                                       </span>
                                       <div className="flex-1">
                                         <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">{item.serialNumber || '-'}</div>
+                                        <div className="text-xs text-gray-500 dark:text-gray-400">{item.rfidCode || '-'}</div>
                                       </div>
                                       <span className="ml-2 px-2 py-0.5 rounded bg-gray-200 text-gray-700 text-xs font-semibold">Data tidak lengkap</span>
                                     </li>

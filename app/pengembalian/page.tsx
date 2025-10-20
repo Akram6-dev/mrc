@@ -158,7 +158,7 @@ export default function PengembalianPage() {
             for (const item of Object.values(itemMap) as Item[]) {
               if (item.items && Array.isArray(item.items)) {
                 // Cari serial apapun, baik status 0/1, loanId sama atau tidak
-                const serial = item.items.find((s) => s.serialNumber === loanItem.serialNumber);
+                const serial = item.items.find((s) => s.rfidCode === loanItem.rfidCode);
                 if (serial) {
                   foundBase = item;
                   foundSerial = serial;
@@ -221,7 +221,7 @@ export default function PengembalianPage() {
     // Group serial numbers by the item id so we update each item only once
     const updatesByItemId: Record<string, Set<string>> = {};
     for (const detail of returningLoan.itemDetails) {
-      const sn = detail.serialNumber;
+      const sn = detail.rfidCode;
       if (sn && checkedSerials.has(sn) && detail.status !== 1) {
         const key = String(detail.id ?? "");
         if (!updatesByItemId[key]) updatesByItemId[key] = new Set<string>();
@@ -233,7 +233,7 @@ export default function PengembalianPage() {
       const item = items.find((i: Item) => String(i.id) === itemId);
       if (item && item.items) {
         const updatedSerials = item.items.map((s: ItemSerial) =>
-          serialSet.has(s.serialNumber) ? { ...s, status: 1 as 1, loanId: null } : s
+          serialSet.has(s.rfidCode) ? { ...s, status: 1 as 1, loanId: null } : s
         );
         await api.updateItem(item.id, { items: updatedSerials });
       }
@@ -242,11 +242,11 @@ export default function PengembalianPage() {
     const updatedSerialsList = returningLoan.itemDetails
       .filter(
         (detail) =>
-          detail.serialNumber &&
-          checkedSerials.has(detail.serialNumber) &&
+          detail.rfidCode &&
+          checkedSerials.has(detail.rfidCode) &&
           detail.status !== 1
       )
-      .map((it) => `"${it.name}" (${it.serialNumber})`);
+      .map((it) => `"${it.name}" (${it.rfidCode})`);
 
     if (updatedSerialsList.length > 0) {
       setSuccess(
@@ -262,11 +262,11 @@ export default function PengembalianPage() {
     const refreshedItems = await api.getItems();
     // Ambil ulang detail serial untuk loan ini
     const allSerialsReturned = returningLoan.itemDetails.every((detail) => {
-      if (!detail.serialNumber) return true;
+      if (!detail.rfidCode) return true;
       // Cari serial di items
       const item = refreshedItems.find((i: Item) => i.id === detail.id);
       if (!item || !item.items) return false;
-      const serial = item.items.find((s: ItemSerial) => s.serialNumber === detail.serialNumber);
+      const serial = item.items.find((s: ItemSerial) => s.rfidCode === detail.rfidCode);
       // Jika loanId serial sekarang tidak sama dengan loan.id, berarti sudah dikembalikan (apapun statusnya)
       return serial && serial.loanId !== returningLoan.id ? true : (serial && serial.status === 1);
     });
@@ -590,13 +590,13 @@ export default function PengembalianPage() {
                           e.stopPropagation();
                           setReturningLoan(loan);
                           setIsConfirmOpen(true);
-                          // Inisialisasi serial yang sudah dikembalikan (gunakan serialNumber || sn)
+                          // Inisialisasi serial yang sudah dikembalikan (gunakan rfidCode || sn)
                           setReturningSerials((prev) => ({
                             ...prev,
                             [loan.id]: new Set(
                               loan.itemDetails
-                                .filter((d: any) => d.status === 1 && typeof d.serialNumber === 'string')
-                                .map((d: any) => d.serialNumber as string)
+                                .filter((d: any) => d.status === 1 && typeof d.rfidCode === 'string')
+                                .map((d: any) => d.rfidCode as string)
                             ),
                           }));
                         }}
@@ -681,7 +681,7 @@ export default function PengembalianPage() {
                                   <div className="flex-1">
                                     <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
                                     <div className="text-xs text-gray-500 dark:text-gray-400">
-                                      {item.sn || item.serialNumber || '-'}
+                                      {item.sn || item.rfidCode || '-'}
                                       {item.note ? ` | Catatan: ${item.note}` : ""}
                                     </div>
                                   </div>
@@ -776,33 +776,33 @@ export default function PengembalianPage() {
                   <Checkbox
                     checked={(() => {
                       // Hitung serial yang bisa dipilih (status !== 1)
-                      const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.serialNumber === "string");
+                      const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.rfidCode === "string");
                       if (eligible.length === 0) return false;
                       const selected = eligible.filter(item =>
-                        typeof item.serialNumber === "string" && returningSerials[returningLoan.id]?.has(item.serialNumber)
+                        typeof item.rfidCode === "string" && returningSerials[returningLoan.id]?.has(item.rfidCode)
                       );
                       return selected.length === eligible.length;
                     })()}
                     ref={el => {
                       if (el && "indeterminate" in el) {
-                        const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.serialNumber === "string");
+                        const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.rfidCode === "string");
                         const selected = eligible.filter(item =>
-                          typeof item.serialNumber === "string" && returningSerials[returningLoan.id]?.has(item.serialNumber)
+                          typeof item.rfidCode === "string" && returningSerials[returningLoan.id]?.has(item.rfidCode)
                         );
                         (el as HTMLInputElement).indeterminate = selected.length > 0 && selected.length < eligible.length;
                       }
                     }}
                     onCheckedChange={checked => {
                       setReturningSerials(prev => {
-                        const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.serialNumber === "string");
+                        const eligible = returningLoan.itemDetails.filter(item => item.status !== 1 && typeof item.rfidCode === "string");
                         const set = new Set(prev[returningLoan.id] || []);
                         if (checked) {
                           eligible.forEach(item => {
-                            if (typeof item.serialNumber === "string") set.add(item.serialNumber);
+                            if (typeof item.rfidCode === "string") set.add(item.rfidCode);
                           });
                         } else {
                           eligible.forEach(item => {
-                            if (typeof item.serialNumber === "string") set.delete(item.serialNumber);
+                            if (typeof item.rfidCode === "string") set.delete(item.rfidCode);
                           });
                         }
                         return { ...prev, [returningLoan.id]: set };
@@ -816,7 +816,7 @@ export default function PengembalianPage() {
               </div>
               <ul className="divide-y divide-gray-100 dark:divide-gray-800">
                 {returningLoan.itemDetails.map((item, idx) => {
-                  const sn = typeof item.serialNumber === 'string' ? item.serialNumber as string : undefined;
+                  const sn = typeof item.rfidCode === 'string' ? item.rfidCode as string : undefined;
                   return (
                     <li key={sn || idx} className="flex items-center gap-3 py-2">
                       <label className="flex items-center gap-3 w-full cursor-pointer select-none">

@@ -177,7 +177,7 @@ export default function BookingAdminPage() {
                 if (!item || !Array.isArray(item.items)) continue;
                 const serials = item.items.filter((s: any) => s.loanId === booking.id && s.status === 0).slice(0, it.qty);
                 for (const s of serials) {
-                    loanSerials.push({ serialNumber: s.serialNumber, note: undefined });
+                    loanSerials.push({ rfidCode: s.rfidCode, note: undefined });
                 }
             }
             const loanData = {
@@ -624,7 +624,7 @@ export default function BookingAdminPage() {
                                                                 serialList.push({
                                                                     name: it.name || itemDetail.name || '-',
                                                                     icon,
-                                                                    serialNumber: undefined,
+                                                                    rfidCode: undefined,
                                                                     status: undefined,
                                                                     qty: it.qty || 1,
                                                                 });
@@ -636,18 +636,18 @@ export default function BookingAdminPage() {
                                                             // Bentuk baru: serial lengkap
                                                             if (
                                                                 typeof item.loanId === 'string' &&
-                                                                typeof item.serialNumber === 'string' &&
+                                                                typeof item.rfidCode === 'string' &&
                                                                 typeof item.status !== 'undefined'
                                                             ) {
                                                                 const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
                                                                 return (
-                                                                    <li key={item.serialNumber} className="flex items-center gap-3 py-2">
+                                                                    <li key={item.rfidCode} className="flex items-center gap-3 py-2">
                                                                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
                                                                             <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                                                                         </span>
                                                                         <div className="flex-1">
                                                                             <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                                                            <div className="text-xs text-gray-500 dark:text-gray-400">{item.serialNumber}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
+                                                                            <div className="text-xs text-gray-500 dark:text-gray-400">{item.rfidCode}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
                                                                         </div>
                                                                         {item.status === 1 && (
                                                                             <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sudah dikembalikan</span>
@@ -667,7 +667,7 @@ export default function BookingAdminPage() {
                                                             // Fallback: legacy shape
                                                             const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
                                                             return (
-                                                                <li key={item.serialNumber || idx} className="flex items-center gap-3 py-2">
+                                                                <li key={item.rfidCode || idx} className="flex items-center gap-3 py-2">
                                                                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
                                                                         <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                                                                     </span>

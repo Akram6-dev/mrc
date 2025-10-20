@@ -1,12 +1,5 @@
 [
   {
-    "id": 1760926899142,
-    "message": "Booking baru: Abdi Putrana Radian - 2 item",
-    "type": "booking",
-    "read": true,
-    "timestamp": "2025-10-20T02:21:39.142Z"
-  },
-  {
     "message": "Check out another repository on GitHub @abdipr",
     "type": "info",
     "id": 1755068990421,
