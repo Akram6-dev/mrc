@@ -222,18 +222,11 @@
         "status": 1,
         "condition": 1,
         "loanId": null
-      },
-      {
-        "rfidCode": "1234",
-        "sn": "",
-        "status": 1,
-        "condition": 1,
-        "loanId": null
       }
     ],
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2025-10-20T08:13:53.912Z",
-    "stock": 32,
+    "updatedAt": "2025-10-31T06:05:20.181Z",
+    "stock": 31,
     "serialSearch": "",
     "image": "/assets/img/1760406973256.jpg"
   },
@@ -247,9 +240,9 @@
       {
         "rfidCode": "0154334948",
         "sn": "X8A41900578",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1760686678398"
+        "loanId": null
       },
       {
         "rfidCode": "1380566968",
@@ -266,7 +259,7 @@
         "loanId": null
       },
       {
-        "rfidCode": "845694151",
+        "rfidCode": "0845694151",
         "sn": "X4GG9200922",
         "status": 1,
         "condition": 1,
@@ -334,18 +327,11 @@
         "status": 1,
         "condition": 1,
         "loanId": null
-      },
-      {
-        "rfidCode": "2939832620",
-        "sn": "X",
-        "status": 1,
-        "condition": 1,
-        "loanId": null
       }
     ],
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2025-10-20T09:04:26.833Z",
-    "stock": 14,
+    "updatedAt": "2025-10-31T08:00:47.293Z",
+    "stock": 13,
     "serialSearch": "",
     "image": "/assets/img/1760408189747.jpg"
   },
@@ -442,7 +428,7 @@
       }
     ],
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2025-10-20T07:12:28.011Z",
+    "updatedAt": "2025-10-31T06:05:20.240Z",
     "image": "/assets/img/1760421697842.png",
     "serialSearch": "",
     "stock": 14
@@ -617,7 +603,7 @@
       }
     ],
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2025-10-20T08:50:14.353Z",
+    "updatedAt": "2025-10-31T08:00:47.265Z",
     "stock": 25,
     "serialSearch": "",
     "image": "/assets/img/1760421889541.webp"
@@ -655,7 +641,7 @@
       }
     ],
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2025-10-20T07:12:29.436Z",
+    "updatedAt": "2025-10-31T06:05:20.289Z",
     "image": "/assets/img/1760422046967.jpg",
     "serialSearch": "",
     "stock": 4
@@ -753,7 +739,7 @@
       }
     ],
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2025-10-20T08:03:16.504Z",
+    "updatedAt": "2025-10-31T06:05:20.315Z",
     "image": "/assets/img/1760422192877.webp",
     "serialSearch": "",
     "stock": 14
@@ -851,7 +837,7 @@
       }
     ],
     "createdAt": "2025-08-20T02:03:43.398Z",
-    "updatedAt": "2025-10-20T07:12:30.458Z",
+    "updatedAt": "2025-10-31T06:05:20.340Z",
     "image": "/assets/img/1760422356679.jpg",
     "serialSearch": "",
     "stock": 14
@@ -895,7 +881,7 @@
       }
     ],
     "createdAt": "2025-08-25T05:55:09.869Z",
-    "updatedAt": "2025-10-20T07:12:30.964Z",
+    "updatedAt": "2025-10-31T06:05:20.364Z",
     "image": "/assets/img/1760422410717.jpg",
     "serialSearch": "",
     "stock": 5
@@ -921,7 +907,7 @@
       }
     ],
     "createdAt": "2025-08-27T03:58:44.262Z",
-    "updatedAt": "2025-10-20T07:12:31.179Z",
+    "updatedAt": "2025-10-31T06:05:20.389Z",
     "image": "/assets/img/1760422492923.webp",
     "serialSearch": "",
     "stock": 2
@@ -942,9 +928,9 @@
       },
       {
         "rfidCode": "TAB002",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1761883144315"
       },
       {
         "rfidCode": "TAB003",
@@ -966,7 +952,7 @@
       }
     ],
     "createdAt": "2025-08-27T09:46:52.966Z",
-    "updatedAt": "2025-10-20T07:12:32.112Z",
+    "updatedAt": "2025-10-31T06:05:20.413Z",
     "image": "/assets/img/1760422663355.jfif",
     "serialSearch": "",
     "stock": 5
@@ -986,7 +972,7 @@
       }
     ],
     "createdAt": "2025-09-04T00:51:04.431Z",
-    "updatedAt": "2025-10-20T07:12:32.699Z",
+    "updatedAt": "2025-10-31T06:05:20.438Z",
     "image": "/assets/img/1760422868475.png",
     "serialSearch": "",
     "stock": 1
@@ -1025,7 +1011,7 @@
       }
     ],
     "createdAt": "2025-09-04T07:05:19.963Z",
-    "updatedAt": "2025-10-20T07:12:32.952Z",
+    "updatedAt": "2025-10-31T06:05:20.463Z",
     "image": "/assets/img/1760422905339.jpg",
     "serialSearch": "",
     "stock": 4
@@ -1045,7 +1031,7 @@
       }
     ],
     "createdAt": "2025-09-15T01:09:16.984Z",
-    "updatedAt": "2025-10-20T07:12:33.773Z",
+    "updatedAt": "2025-10-31T08:00:50.735Z",
     "image": "/assets/img/1760422935106.jpg",
     "serialSearch": "",
     "stock": 1
@@ -1065,9 +1051,51 @@
       }
     ],
     "createdAt": "2025-10-06T05:35:13.994Z",
-    "updatedAt": "2025-10-20T07:12:34.590Z",
+    "updatedAt": "2025-10-31T06:05:20.514Z",
     "image": "/assets/img/1760423019819.jfif",
     "serialSearch": "",
     "stock": 1
+  },
+  {
+    "name": "HDMI to VGA",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "cable",
+    "image": "/assets/img/1761622152293.jpg",
+    "items": [
+      {
+        "rfidCode": "HDMIVGA001",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "serialSearch": "",
+    "stock": 1,
+    "id": "1761621927855",
+    "createdAt": "2025-10-28T03:25:27.855Z",
+    "updatedAt": "2025-10-31T06:05:20.538Z"
+  },
+  {
+    "name": "Lenovo V310",
+    "category": "Laptop",
+    "description": "",
+    "icon": "laptop",
+    "image": "",
+    "items": [
+      {
+        "rfidCode": "012345678",
+        "sn": "012345678",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1761883091447"
+      }
+    ],
+    "serialSearch": "",
+    "stock": 1,
+    "id": "1761882488737",
+    "createdAt": "2025-10-31T03:48:08.737Z",
+    "updatedAt": "2025-10-31T06:05:20.563Z"
   }
 ]

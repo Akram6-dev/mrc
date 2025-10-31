@@ -389,7 +389,7 @@ export default function RiwayatPage() {
       "Status": loan.status,
       "Keperluan": loan.purpose || "",
       "Catatan": loan.notes || "",
-      "Barang": loan.itemDetails?.map(item => `${item.name} (${item.quantity}x${item.rfidCode ? `, SN: ${item.rfidCode}` : ""})`).join(", ") || ""
+      "Barang": loan.itemDetails?.map(item => `${item.name} (${item.quantity}x${item.sn ? `, SN: ${item.sn}` : `, SN: ${item.rfidCode}`})`).join(", ") || ""
     }));
     const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = XLSX.utils.book_new();

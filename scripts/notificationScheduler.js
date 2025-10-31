@@ -28,6 +28,8 @@ function addNotification(message, type, slot = null) {
 
 function runScheduler() {
   const now = new Date();
+  // track last weekend skip date to avoid logging spam when scheduler runs every minute
+  if (typeof runScheduler._lastWeekendSkipDate === 'undefined') runScheduler._lastWeekendSkipDate = null
   const loans = readJSON(loansPath);
   const today = now.toISOString().split("T")[0];
   // Normalize today's string (YYYY-MM-DD)
@@ -41,9 +43,25 @@ function runScheduler() {
     return dt.toISOString().split("T")[0];
   }
 
+  // Helper to determine if a loan is already returned.
+  // Treat as returned if `returnDate` is present OR `status` indicates returned (e.g. 'dikembalikan').
+  function isReturned(l) {
+    if (!l) return false;
+    if (l.returnDate) return true;
+    if (l.status) {
+      try {
+        const s = String(l.status).trim().toLowerCase();
+        if (s === 'dikembalikan') return true;
+      } catch (e) {
+        // ignore and continue
+      }
+    }
+    return false;
+  }
+
   // Overdue: dueDate before today and not yet returned
   const overdue = loans.filter(l => {
-    if (l.returnDate) return false; // already returned
+    if (isReturned(l)) return false; // already returned
     const ds = dueDateStr(l.dueDate);
     if (!ds) return false;
     return ds < todayStr;
@@ -51,7 +69,7 @@ function runScheduler() {
 
   // Due today (needs return today) and not yet returned
   const dueToday = loans.filter(l => {
-    if (l.returnDate) return false;
+    if (isReturned(l)) return false; // already returned
     const ds = dueDateStr(l.dueDate);
     if (!ds) return false;
     return ds === todayStr;
@@ -63,6 +81,17 @@ function runScheduler() {
   // Scheduled triggers: overdue at 07:00 and 15:00, dueToday at 11:00
   const hour = now.getHours();
   const minute = now.getMinutes();
+
+  // Only send notifications on weekdays (Mon-Fri). Skip on Saturday(6) and Sunday(0).
+  const day = now.getDay(); // 0 = Sunday, 6 = Saturday
+  if (day === 0 || day === 6) {
+    // Avoid spamming the console every minute on weekends; only log once per weekend day
+    if (runScheduler._lastWeekendSkipDate !== today) {
+      console.log('Today is weekend, skipping scheduled notifications.');
+      runScheduler._lastWeekendSkipDate = today;
+    }
+    return;
+  }
 
   // Helper to check if a slot notification already exists today
   function slotExists(type, slotId) {
@@ -105,11 +134,17 @@ function runScheduler() {
 // Single-run invocation
 runScheduler();
 
-// If SCHEDULER_INTERVAL_MS is set, run repeatedly
-const intervalMs = parseInt(process.env.SCHEDULER_INTERVAL_MS || "0", 10);
+// Repeating mode: default to 1 hour if SCHEDULER_INTERVAL_MS not provided or <= 0
+let intervalMs = parseInt(process.env.SCHEDULER_INTERVAL_MS || "0", 10);
+if (!intervalMs || intervalMs <= 0) intervalMs = 60 * 60 * 1000; // 1 hour default
 let intervalId = null;
-if (intervalMs > 0) {
-  console.log(`Starting scheduler loop, interval ${intervalMs}ms`);
+// Align the repeating timer to the top of the next hour so checks that depend on minute===0 behave reliably
+const _now = new Date();
+const nextHour = new Date(_now);
+nextHour.setHours(_now.getHours() + 1, 0, 0, 0);
+const msUntilNextHour = nextHour.getTime() - _now.getTime();
+console.log(`Starting scheduler loop, interval ${intervalMs}ms; first repeat in ${msUntilNextHour}ms`);
+setTimeout(() => {
   intervalId = setInterval(() => {
     try {
       runScheduler();
@@ -117,7 +152,7 @@ if (intervalMs > 0) {
       console.error('Scheduler iteration failed', e);
     }
   }, intervalMs);
-}
+}, Math.max(0, msUntilNextHour));
 
 // Graceful shutdown
 function shutdown() {
