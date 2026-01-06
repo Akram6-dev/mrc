@@ -220,7 +220,7 @@ export default function BookingAdminPage() {
                     purpose: booking.purpose || "",
                     notes: booking.notes || undefined
                 };
-                await fetch("http://145.10.0.6:3000/pinjam", {
+                await fetch("/external/pinjam", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

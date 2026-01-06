@@ -271,8 +271,8 @@ export default function PengembalianPage() {
       return serial && serial.loanId !== returningLoan.id ? true : (serial && serial.status === 1);
     });
     if (allSerialsReturned && settings?.messages?.returnMessage) {
-      try {
-        await fetch("http://145.10.0.6:3000/kembali", {
+        try {
+        await fetch("/external/kembali", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -300,7 +300,7 @@ export default function PengembalianPage() {
   const handleSendReminder = async () => {
     if (!detailLoan) return;
     try {
-      const res = await fetch("http://145.10.0.6:3000/pengingat", {
+      const res = await fetch("/external/pengingat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

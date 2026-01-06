@@ -226,7 +226,7 @@ export default function PengaturanPage() {
       if (!res.ok) throw new Error("Gagal menyimpan pengaturan pesan");
 
       // Post aiReply status to external AI endpoint
-      await fetch("http://145.10.0.6:3000/ai", {
+      await fetch("/external/ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ active: !!settings?.messages?.aiReply })

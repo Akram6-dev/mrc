@@ -20775,5 +20775,6450 @@
     "createdAt": "2025-10-31T06:05:19.839Z",
     "updatedAt": "2025-10-31T06:52:30.082Z",
     "returnDate": "2025-10-31T06:52:30.129Z"
+  },
+  {
+    "borrowerId": "121",
+    "items": [
+      {
+        "rfidCode": "LNVTPM001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-01T09:14:55+07:00",
+    "dueDate": "2025-11-03T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "PPG",
+    "id": "1761963297369",
+    "createdAt": "2025-11-01T02:14:57.369Z",
+    "updatedAt": "2025-11-01T02:14:57.369Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T07:21:12+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762734072374",
+    "createdAt": "2025-11-10T00:21:12.374Z",
+    "updatedAt": "2025-11-10T06:48:58.644Z",
+    "returnDate": "2025-11-10T06:48:58.598Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T07:22:34+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762734154195",
+    "createdAt": "2025-11-10T00:22:34.195Z",
+    "updatedAt": "2025-11-10T07:28:41.511Z",
+    "returnDate": "2025-11-10T07:28:41.451Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T07:33:57+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762734837062",
+    "createdAt": "2025-11-10T00:33:57.062Z",
+    "updatedAt": "2025-11-10T03:05:16.472Z",
+    "returnDate": "2025-11-10T03:05:16.530Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T07:51:12+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762735872793",
+    "createdAt": "2025-11-10T00:51:12.793Z",
+    "updatedAt": "2025-11-10T02:11:50.494Z",
+    "returnDate": "2025-11-10T02:11:50.590Z"
+  },
+  {
+    "borrowerId": "1758511853576",
+    "items": [
+      {
+        "rfidCode": "1380566968",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T08:16:33+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762737393545",
+    "createdAt": "2025-11-10T01:16:33.546Z",
+    "updatedAt": "2025-11-10T06:53:28.301Z",
+    "returnDate": "2025-11-10T06:53:28.254Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T08:37:36+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762738655908",
+    "createdAt": "2025-11-10T01:37:35.908Z",
+    "updatedAt": "2025-11-10T08:11:38.758Z",
+    "returnDate": "2025-11-10T08:11:38.671Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T08:55:06+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762739706124",
+    "createdAt": "2025-11-10T01:55:06.125Z",
+    "updatedAt": "2025-11-10T03:06:43.413Z",
+    "returnDate": "2025-11-10T03:06:43.472Z"
+  },
+  {
+    "borrowerId": "86",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T10:17:19+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762744639636",
+    "createdAt": "2025-11-10T03:17:19.636Z",
+    "updatedAt": "2025-11-10T08:16:08.308Z",
+    "returnDate": "2025-11-10T08:16:08.222Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T10:47:31+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762746451880",
+    "createdAt": "2025-11-10T03:47:31.880Z",
+    "updatedAt": "2025-11-10T07:54:24.638Z",
+    "returnDate": "2025-11-10T07:54:24.561Z"
+  },
+  {
+    "borrowerId": "79",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T12:21:02+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762752062653",
+    "createdAt": "2025-11-10T05:21:02.653Z",
+    "updatedAt": "2025-11-10T07:23:08.594Z",
+    "returnDate": "2025-11-10T07:23:08.540Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "1380566968",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T13:54:30+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762757671007",
+    "createdAt": "2025-11-10T06:54:31.007Z",
+    "updatedAt": "2025-11-10T07:49:21.839Z",
+    "returnDate": "2025-11-10T07:49:21.761Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T14:02:00+07:00",
+    "dueDate": "2025-11-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762758121012",
+    "createdAt": "2025-11-10T07:02:01.012Z",
+    "updatedAt": "2025-11-10T08:13:08.885Z",
+    "returnDate": "2025-11-10T08:13:08.807Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T14:05:49+07:00",
+    "dueDate": "2025-11-11T14:02:03+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762758349285",
+    "createdAt": "2025-11-10T07:05:49.285Z",
+    "updatedAt": "2025-11-10T08:00:38.466Z",
+    "returnDate": "2025-11-10T08:00:38.384Z"
+  },
+  {
+    "borrowerId": "117",
+    "items": [
+      {
+        "rfidCode": "LNVTPM002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T15:47:12+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "pribadi ",
+    "id": "1762764432804",
+    "createdAt": "2025-11-10T08:47:12.804Z",
+    "updatedAt": "2025-11-10T08:47:12.804Z"
+  },
+  {
+    "borrowerId": "102",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-10T16:13:08+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara",
+    "id": "1762765988307",
+    "createdAt": "2025-11-10T09:13:08.307Z",
+    "updatedAt": "2025-11-14T11:07:41.847Z",
+    "returnDate": "2025-11-14T11:07:41.685Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T07:27:27+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "diambil oleh robin kls 10 tm 2,di pinjem selama 3 jam pelajaran ",
+    "id": "1762820848247",
+    "createdAt": "2025-11-11T00:27:28.247Z",
+    "updatedAt": "2025-11-11T01:37:45.481Z",
+    "returnDate": "2025-11-11T01:37:44.873Z"
+  },
+  {
+    "borrowerId": "1758511853576",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T07:29:46+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762820987074",
+    "createdAt": "2025-11-11T00:29:47.074Z",
+    "updatedAt": "2025-11-11T04:26:59.437Z",
+    "returnDate": "2025-11-11T04:26:58.747Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "HDMI001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T07:34:24+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762821265367",
+    "createdAt": "2025-11-11T00:34:25.367Z",
+    "updatedAt": "2025-11-11T03:01:14.827Z",
+    "returnDate": "2025-11-11T03:01:14.178Z"
+  },
+  {
+    "borrowerId": "104",
+    "items": [
+      {
+        "rfidCode": "1380566968",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T07:37:13+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm1453456180",
+    "id": "1762821434081",
+    "createdAt": "2025-11-11T00:37:14.081Z",
+    "updatedAt": "2025-11-11T08:12:18.254Z",
+    "returnDate": "2025-11-11T08:12:17.454Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T07:46:09+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762821969665",
+    "createdAt": "2025-11-11T00:46:09.665Z",
+    "updatedAt": "2025-11-11T01:37:37.357Z",
+    "returnDate": "2025-11-11T01:37:36.745Z"
+  },
+  {
+    "borrowerId": "98",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T08:19:43+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi mp",
+    "id": "1762823983916",
+    "createdAt": "2025-11-11T01:19:43.916Z",
+    "updatedAt": "2025-11-11T05:11:45.538Z",
+    "returnDate": "2025-11-11T05:11:44.816Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      },
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "08765",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T08:50:59+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762825860325",
+    "createdAt": "2025-11-11T01:51:00.325Z",
+    "updatedAt": "2025-11-11T08:08:18.672Z",
+    "returnDate": "2025-11-11T08:08:17.857Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T12:38:50+07:00",
+    "dueDate": "2025-11-12T12:37:41+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762839531168",
+    "createdAt": "2025-11-11T05:38:51.168Z",
+    "updatedAt": "2025-11-11T07:05:21.299Z",
+    "returnDate": "2025-11-11T07:05:20.532Z"
+  },
+  {
+    "borrowerId": "94",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T12:47:06+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762840027555",
+    "createdAt": "2025-11-11T05:47:07.555Z",
+    "updatedAt": "2025-11-11T07:36:40.940Z",
+    "returnDate": "2025-11-11T07:36:40.171Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T12:51:18+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762840279163",
+    "createdAt": "2025-11-11T05:51:19.163Z",
+    "updatedAt": "2025-11-11T08:00:16.265Z",
+    "returnDate": "2025-11-11T08:00:15.473Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T13:24:36+07:00",
+    "dueDate": "2025-11-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762842277010",
+    "createdAt": "2025-11-11T06:24:37.010Z",
+    "updatedAt": "2025-11-11T08:08:23.715Z",
+    "returnDate": "2025-11-11T08:08:22.928Z"
+  },
+  {
+    "borrowerId": "102",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-11T14:58:15+07:00",
+    "dueDate": "2025-11-12T14:57:10+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762847896145",
+    "createdAt": "2025-11-11T07:58:16.145Z",
+    "updatedAt": "2025-11-14T11:07:35.331Z",
+    "returnDate": "2025-11-14T11:07:35.172Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T07:11:25+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762906285640",
+    "createdAt": "2025-11-12T00:11:25.640Z",
+    "updatedAt": "2025-11-12T07:49:51.830Z",
+    "returnDate": "2025-11-12T07:49:52.233Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T07:13:58+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762906438676",
+    "createdAt": "2025-11-12T00:13:58.676Z",
+    "updatedAt": "2025-11-12T07:01:30.225Z",
+    "returnDate": "2025-11-12T07:01:30.577Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T07:28:43+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762907324358",
+    "createdAt": "2025-11-12T00:28:44.358Z",
+    "updatedAt": "2025-11-12T02:27:13.116Z",
+    "returnDate": "2025-11-12T02:27:13.678Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T07:31:04+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762907465405",
+    "createdAt": "2025-11-12T00:31:05.405Z",
+    "updatedAt": "2025-11-12T04:32:37.743Z",
+    "returnDate": "2025-11-12T04:32:38.250Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T07:33:52+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762907632900",
+    "createdAt": "2025-11-12T00:33:52.900Z",
+    "updatedAt": "2025-11-12T04:32:32.122Z",
+    "returnDate": "2025-11-12T04:32:32.627Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T07:46:27+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762908387796",
+    "createdAt": "2025-11-12T00:46:27.796Z",
+    "updatedAt": "2025-11-12T02:27:17.838Z",
+    "returnDate": "2025-11-12T02:27:18.398Z"
+  },
+  {
+    "borrowerId": "107",
+    "items": [
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      },
+      {
+        "rfidCode": "1380566968",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T08:35:54+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762911353539",
+    "createdAt": "2025-11-12T01:35:53.539Z",
+    "updatedAt": "2025-11-12T07:49:32.385Z",
+    "returnDate": "2025-11-12T07:49:32.785Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T10:04:13+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762916652832",
+    "createdAt": "2025-11-12T03:04:12.833Z",
+    "updatedAt": "2025-11-12T04:32:04.304Z",
+    "returnDate": "2025-11-12T04:32:04.810Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T11:33:51+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762922031219",
+    "createdAt": "2025-11-12T04:33:51.219Z",
+    "updatedAt": "2025-11-12T07:41:58.773Z",
+    "returnDate": "2025-11-12T07:41:59.178Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T13:17:27+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh misbah",
+    "id": "1762928247534",
+    "createdAt": "2025-11-12T06:17:27.534Z",
+    "updatedAt": "2025-11-12T08:22:22.611Z",
+    "returnDate": "2025-11-12T08:22:22.975Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-12T13:18:46+07:00",
+    "dueDate": "2025-11-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762928325654",
+    "createdAt": "2025-11-12T06:18:45.654Z",
+    "updatedAt": "2025-11-12T08:15:32.343Z",
+    "returnDate": "2025-11-12T08:15:32.736Z"
+  },
+  {
+    "borrowerId": "79",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T07:10:40+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762992639521",
+    "createdAt": "2025-11-13T00:10:39.521Z",
+    "updatedAt": "2025-11-13T07:50:38.521Z",
+    "returnDate": "2025-11-13T07:50:39.483Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "1380566968",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T07:16:58+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762993017409",
+    "createdAt": "2025-11-13T00:16:57.409Z",
+    "updatedAt": "2025-11-13T07:01:43.698Z",
+    "returnDate": "2025-11-13T07:01:44.694Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T07:46:09+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": " ",
+    "id": "1762994768496",
+    "createdAt": "2025-11-13T00:46:08.496Z",
+    "updatedAt": "2025-11-13T08:04:48.069Z",
+    "returnDate": "2025-11-13T08:04:49.017Z"
+  },
+  {
+    "borrowerId": "94",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T08:03:16+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1762995795265",
+    "createdAt": "2025-11-13T01:03:15.265Z",
+    "updatedAt": "2025-11-13T07:35:53.723Z",
+    "returnDate": "2025-11-13T07:35:54.675Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T08:40:58+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1762998056987",
+    "createdAt": "2025-11-13T01:40:56.987Z",
+    "updatedAt": "2025-11-13T08:11:26.770Z",
+    "returnDate": "2025-11-13T08:11:27.720Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T12:33:36+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763012015426",
+    "createdAt": "2025-11-13T05:33:35.426Z",
+    "updatedAt": "2025-11-13T06:59:30.516Z",
+    "returnDate": "2025-11-13T06:59:31.503Z"
+  },
+  {
+    "borrowerId": "107",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T12:49:25+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763012964412",
+    "createdAt": "2025-11-13T05:49:24.412Z",
+    "updatedAt": "2025-11-13T07:35:04.808Z",
+    "returnDate": "2025-11-13T07:35:05.787Z"
+  },
+  {
+    "borrowerId": "102",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T13:12:49+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763014368959",
+    "createdAt": "2025-11-13T06:12:48.959Z",
+    "updatedAt": "2025-11-13T06:46:20.058Z",
+    "returnDate": "2025-11-13T06:46:21.055Z"
+  },
+  {
+    "borrowerId": "106",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-13T14:06:25+07:00",
+    "dueDate": "2025-11-13T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763017584879",
+    "createdAt": "2025-11-13T07:06:24.879Z",
+    "updatedAt": "2025-11-14T11:07:27.821Z",
+    "returnDate": "2025-11-14T11:07:27.661Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-14T09:41:43+07:00",
+    "dueDate": "2025-11-14T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763088103273",
+    "createdAt": "2025-11-14T02:41:43.273Z",
+    "updatedAt": "2025-11-14T05:32:59.106Z",
+    "returnDate": "2025-11-14T05:32:59.086Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-14T09:42:31+07:00",
+    "dueDate": "2025-11-14T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763088151418",
+    "createdAt": "2025-11-14T02:42:31.418Z",
+    "updatedAt": "2025-11-14T06:36:50.337Z",
+    "returnDate": "2025-11-14T06:36:50.290Z"
+  },
+  {
+    "borrowerId": "109",
+    "items": [
+      {
+        "rfidCode": "12345678",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-14T09:45:07+07:00",
+    "dueDate": "2025-11-14T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763088307608",
+    "createdAt": "2025-11-14T02:45:07.608Z",
+    "updatedAt": "2025-11-14T08:01:04.804Z",
+    "returnDate": "2025-11-14T08:01:04.715Z"
+  },
+  {
+    "borrowerId": "107",
+    "items": [
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-14T10:12:10+07:00",
+    "dueDate": "2025-11-14T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763089930800",
+    "createdAt": "2025-11-14T03:12:10.800Z",
+    "updatedAt": "2025-11-14T05:32:48.278Z",
+    "returnDate": "2025-11-14T05:32:48.256Z"
+  },
+  {
+    "borrowerId": "26",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T07:59:05+07:00",
+    "dueDate": "2025-11-18T07:57:18+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "id": "1763341145494",
+    "createdAt": "2025-11-17T00:59:05.494Z",
+    "updatedAt": "2025-11-17T00:59:05.494Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "155485923",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:08:45+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763341725112",
+    "createdAt": "2025-11-17T01:08:45.112Z",
+    "updatedAt": "2025-11-17T06:52:10.620Z",
+    "returnDate": "2025-11-17T06:52:10.536Z"
+  },
+  {
+    "borrowerId": "107",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:12:33+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763341953033",
+    "createdAt": "2025-11-17T01:12:33.033Z",
+    "updatedAt": "2025-11-17T01:34:39.862Z",
+    "returnDate": "2025-11-17T01:34:39.962Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:12:50+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763341970074",
+    "createdAt": "2025-11-17T01:12:50.075Z",
+    "updatedAt": "2025-11-17T07:59:09.087Z",
+    "returnDate": "2025-11-17T07:59:08.306Z"
+  },
+  {
+    "borrowerId": "94",
+    "items": [
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:13:24+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763342004830",
+    "createdAt": "2025-11-17T01:13:24.830Z",
+    "updatedAt": "2025-11-17T08:14:18.156Z",
+    "returnDate": "2025-11-17T08:14:17.377Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:19:16+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763342356423",
+    "createdAt": "2025-11-17T01:19:16.423Z",
+    "updatedAt": "2025-11-17T23:46:12.494Z",
+    "returnDate": "2025-11-17T23:46:12.116Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "rfidCode": "LGTCH123",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:20:43+07:00",
+    "dueDate": "2025-12-17T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "Pribadi",
+    "id": "1763342443324",
+    "createdAt": "2025-11-17T01:20:43.324Z",
+    "updatedAt": "2025-11-17T01:20:43.324Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:28:38+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763342917910",
+    "createdAt": "2025-11-17T01:28:37.910Z",
+    "updatedAt": "2025-11-17T08:14:59.537Z",
+    "returnDate": "2025-11-17T08:14:58.754Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T08:29:44+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763342984518",
+    "createdAt": "2025-11-17T01:29:44.518Z",
+    "updatedAt": "2025-11-17T05:41:00.601Z",
+    "returnDate": "2025-11-17T05:41:00.572Z"
+  },
+  {
+    "borrowerId": "29",
+    "items": [
+      {
+        "rfidCode": "1380566968",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T09:12:37+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1763345557284",
+    "createdAt": "2025-11-17T02:12:37.284Z",
+    "updatedAt": "2025-11-17T02:12:37.284Z"
+  },
+  {
+    "borrowerId": "86",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T10:10:45+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763349045926",
+    "createdAt": "2025-11-17T03:10:45.926Z",
+    "updatedAt": "2025-11-17T04:33:10.907Z",
+    "returnDate": "2025-11-17T04:33:10.921Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T10:37:03+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763350623905",
+    "createdAt": "2025-11-17T03:37:03.905Z",
+    "updatedAt": "2025-11-17T05:30:53.977Z",
+    "returnDate": "2025-11-17T05:30:53.955Z"
+  },
+  {
+    "borrowerId": "79",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T10:46:55+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763351215358",
+    "createdAt": "2025-11-17T03:46:55.358Z",
+    "updatedAt": "2025-11-17T07:35:56.951Z",
+    "returnDate": "2025-11-17T07:35:56.848Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-17T13:56:36+07:00",
+    "dueDate": "2025-11-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763362596736",
+    "createdAt": "2025-11-17T06:56:36.736Z",
+    "updatedAt": "2025-11-17T08:14:05.105Z",
+    "returnDate": "2025-11-17T08:14:04.322Z"
+  },
+  {
+    "borrowerId": "59",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T06:38:23+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763422704330",
+    "createdAt": "2025-11-17T23:38:24.330Z",
+    "updatedAt": "2025-11-18T03:04:31.965Z",
+    "returnDate": "2025-11-18T03:04:31.483Z"
+  },
+  {
+    "borrowerId": "26",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T06:56:22+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763423782762",
+    "createdAt": "2025-11-17T23:56:22.762Z",
+    "updatedAt": "2025-11-18T06:14:54.833Z",
+    "returnDate": "2025-11-18T06:14:54.256Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T07:22:22+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763425342753",
+    "createdAt": "2025-11-18T00:22:22.753Z",
+    "updatedAt": "2025-11-18T07:26:52.662Z",
+    "returnDate": "2025-11-18T07:26:52.038Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T07:28:55+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763425735498",
+    "createdAt": "2025-11-18T00:28:55.499Z",
+    "updatedAt": "2025-11-18T01:38:26.440Z",
+    "returnDate": "2025-11-18T01:38:26.008Z"
+  },
+  {
+    "borrowerId": "98",
+    "items": [
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      },
+      {
+        "rfidCode": "851788775",
+        "note": ""
+      },
+      {
+        "rfidCode": "1388709832",
+        "note": ""
+      },
+      {
+        "rfidCode": "1315056715",
+        "note": ""
+      },
+      {
+        "rfidCode": "858620167",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T07:31:48+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763425909292",
+    "createdAt": "2025-11-18T00:31:49.292Z",
+    "updatedAt": "2025-11-18T05:30:35.090Z",
+    "returnDate": "2025-11-18T05:30:34.503Z"
+  },
+  {
+    "borrowerId": "124",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T07:32:28+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763425949067",
+    "createdAt": "2025-11-18T00:32:29.067Z",
+    "updatedAt": "2025-11-18T04:44:14.237Z",
+    "returnDate": "2025-11-18T04:44:13.702Z"
+  },
+  {
+    "borrowerId": "98",
+    "items": [
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T08:28:04+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh Farel",
+    "id": "1763429284913",
+    "createdAt": "2025-11-18T01:28:04.913Z",
+    "updatedAt": "2025-11-18T05:30:40.834Z",
+    "returnDate": "2025-11-18T05:30:40.263Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T08:59:39+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763431179893",
+    "createdAt": "2025-11-18T01:59:39.893Z",
+    "updatedAt": "2025-11-18T08:01:52.415Z",
+    "returnDate": "2025-11-18T08:01:51.780Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T10:47:00+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763437621507",
+    "createdAt": "2025-11-18T03:47:01.507Z",
+    "updatedAt": "2025-11-18T08:15:34.616Z",
+    "returnDate": "2025-11-18T08:15:33.980Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T12:25:29+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763443529631",
+    "createdAt": "2025-11-18T05:25:29.631Z",
+    "updatedAt": "2025-11-18T08:22:29.364Z",
+    "returnDate": "2025-11-18T08:22:28.724Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T12:54:23+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763445263750",
+    "createdAt": "2025-11-18T05:54:23.750Z",
+    "updatedAt": "2025-11-18T07:32:49.942Z",
+    "returnDate": "2025-11-18T07:32:49.315Z"
+  },
+  {
+    "borrowerId": "23",
+    "items": [
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      },
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "1448321908",
+        "note": ""
+      },
+      {
+        "rfidCode": "1451850100",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-18T12:56:20+07:00",
+    "dueDate": "2025-11-18T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763445381485",
+    "createdAt": "2025-11-18T05:56:21.485Z",
+    "updatedAt": "2025-11-18T08:03:39.287Z",
+    "returnDate": "2025-11-18T08:03:38.667Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:21:09+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763511668663",
+    "createdAt": "2025-11-19T00:21:08.663Z",
+    "updatedAt": "2025-11-19T05:21:41.450Z",
+    "returnDate": "2025-11-19T05:21:41.725Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:21:37+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763511696833",
+    "createdAt": "2025-11-19T00:21:36.833Z",
+    "updatedAt": "2025-11-19T03:36:10.850Z",
+    "returnDate": "2025-11-19T03:36:11.170Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      },
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "1448321908",
+        "note": ""
+      },
+      {
+        "rfidCode": "1451850100",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:24:17+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763511856682",
+    "createdAt": "2025-11-19T00:24:16.682Z",
+    "updatedAt": "2025-11-19T02:38:05.729Z",
+    "returnDate": "2025-11-19T02:38:06.081Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "441030467",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:24:46+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763511886159",
+    "createdAt": "2025-11-19T00:24:46.159Z",
+    "updatedAt": "2025-11-19T01:29:48.088Z",
+    "returnDate": "2025-11-19T01:29:48.470Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "1388709832",
+        "note": ""
+      },
+      {
+        "rfidCode": "858620167",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:27:05+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil siswi",
+    "id": "1763512024987",
+    "createdAt": "2025-11-19T00:27:04.987Z",
+    "updatedAt": "2025-11-19T02:38:10.673Z",
+    "returnDate": "2025-11-19T02:38:11.024Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:32:14+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763512334162",
+    "createdAt": "2025-11-19T00:32:14.162Z",
+    "updatedAt": "2025-11-19T01:41:17.317Z",
+    "returnDate": "2025-11-19T01:41:17.703Z"
+  },
+  {
+    "borrowerId": "76",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "2805597667",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:33:25+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763512405093",
+    "createdAt": "2025-11-19T00:33:25.093Z",
+    "updatedAt": "2025-11-19T01:57:46.652Z",
+    "returnDate": "2025-11-19T01:57:47.023Z"
+  },
+  {
+    "borrowerId": "98",
+    "items": [
+      {
+        "rfidCode": "155485923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1315056715",
+        "note": ""
+      },
+      {
+        "rfidCode": "851788775",
+        "note": ""
+      },
+      {
+        "rfidCode": "876547654",
+        "note": ""
+      },
+      {
+        "rfidCode": "765446565",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:36:03+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763512562750",
+    "createdAt": "2025-11-19T00:36:02.750Z",
+    "updatedAt": "2025-12-05T01:23:00.546Z",
+    "returnDate": "2025-12-05T01:23:01.284Z"
+  },
+  {
+    "borrowerId": "26",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:36:51+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763512611493",
+    "createdAt": "2025-11-19T00:36:51.493Z",
+    "updatedAt": "2025-11-19T03:41:04.378Z",
+    "returnDate": "2025-11-19T03:41:04.707Z"
+  },
+  {
+    "borrowerId": "76",
+    "items": [
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:39:36+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswi",
+    "id": "1763512776572",
+    "createdAt": "2025-11-19T00:39:36.572Z",
+    "updatedAt": "2025-11-19T01:57:50.471Z",
+    "returnDate": "2025-11-19T01:57:50.847Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "TAB003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T07:50:02+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763513402060",
+    "createdAt": "2025-11-19T00:50:02.060Z",
+    "updatedAt": "2025-11-19T01:29:41.835Z",
+    "returnDate": "2025-11-19T01:29:42.215Z"
+  },
+  {
+    "borrowerId": "30",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T08:37:07+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763516227095",
+    "createdAt": "2025-11-19T01:37:07.095Z",
+    "updatedAt": "2025-11-19T02:49:47.728Z",
+    "returnDate": "2025-11-19T02:49:48.065Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T08:41:10+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763516470165",
+    "createdAt": "2025-11-19T01:41:10.165Z",
+    "updatedAt": "2025-11-19T08:05:25.559Z",
+    "returnDate": "2025-11-19T08:05:25.872Z"
+  },
+  {
+    "borrowerId": "57",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T12:36:24+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763530584633",
+    "createdAt": "2025-11-19T05:36:24.633Z",
+    "updatedAt": "2025-11-19T06:59:12.089Z",
+    "returnDate": "2025-11-19T06:59:12.441Z"
+  },
+  {
+    "borrowerId": "100",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T12:47:30+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763531249995",
+    "createdAt": "2025-11-19T05:47:29.995Z",
+    "updatedAt": "2025-11-19T08:01:41.584Z",
+    "returnDate": "2025-11-19T08:01:41.888Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T13:21:04+07:00",
+    "dueDate": "2025-11-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763533264395",
+    "createdAt": "2025-11-19T06:21:04.395Z",
+    "updatedAt": "2025-11-19T08:24:53.011Z",
+    "returnDate": "2025-11-19T08:24:53.312Z"
+  },
+  {
+    "borrowerId": "124",
+    "items": [
+      {
+        "rfidCode": "LNVTPM010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-19T15:35:15+07:00",
+    "dueDate": "2025-12-31T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "PPG",
+    "id": "1763541314966",
+    "createdAt": "2025-11-19T08:35:14.966Z",
+    "updatedAt": "2025-11-24T07:43:19.415Z",
+    "returnDate": "2025-11-24T07:43:19.019Z"
+  },
+  {
+    "borrowerId": "80",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T07:12:10+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763597530323",
+    "createdAt": "2025-11-20T00:12:10.323Z",
+    "updatedAt": "2025-11-20T03:23:01.486Z",
+    "returnDate": "2025-11-20T03:23:01.971Z"
+  },
+  {
+    "borrowerId": "86",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T07:24:18+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763598257587",
+    "createdAt": "2025-11-20T00:24:17.587Z",
+    "updatedAt": "2025-11-20T07:14:09.030Z",
+    "returnDate": "2025-11-20T07:14:09.384Z"
+  },
+  {
+    "borrowerId": "94",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T07:45:45+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763599544457",
+    "createdAt": "2025-11-20T00:45:44.457Z",
+    "updatedAt": "2025-11-20T06:41:12.901Z",
+    "returnDate": "2025-11-20T06:41:13.280Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T08:05:40+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763600740229",
+    "createdAt": "2025-11-20T01:05:40.229Z",
+    "updatedAt": "2025-11-20T08:02:26.177Z",
+    "returnDate": "2025-11-20T08:02:26.519Z"
+  },
+  {
+    "borrowerId": "76",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T08:10:12+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763601012259",
+    "createdAt": "2025-11-20T01:10:12.259Z",
+    "updatedAt": "2025-11-20T03:22:46.225Z",
+    "returnDate": "2025-11-20T03:22:46.707Z"
+  },
+  {
+    "borrowerId": "26",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T10:23:45+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763609024866",
+    "createdAt": "2025-11-20T03:23:44.866Z",
+    "updatedAt": "2025-12-07T23:33:13.275Z",
+    "returnDate": "2025-12-07T23:33:13.253Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      },
+      {
+        "rfidCode": "TAB003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T10:35:37+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763609736897",
+    "createdAt": "2025-11-20T03:35:36.897Z",
+    "updatedAt": "2025-11-20T08:02:05.807Z",
+    "returnDate": "2025-11-20T08:02:06.150Z"
+  },
+  {
+    "borrowerId": "107",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T12:28:25+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763616505307",
+    "createdAt": "2025-11-20T05:28:25.307Z",
+    "updatedAt": "2025-11-20T06:48:11.492Z",
+    "returnDate": "2025-11-20T06:48:11.864Z"
+  },
+  {
+    "borrowerId": "46",
+    "items": [
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-20T12:46:59+07:00",
+    "dueDate": "2025-11-20T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763617618686",
+    "createdAt": "2025-11-20T05:46:58.686Z",
+    "updatedAt": "2025-11-20T07:53:49.830Z",
+    "returnDate": "2025-11-20T07:53:50.167Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-21T08:14:51+07:00",
+    "dueDate": "2025-11-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763687691276",
+    "createdAt": "2025-11-21T01:14:51.276Z",
+    "updatedAt": "2025-11-21T04:06:44.084Z",
+    "returnDate": "2025-11-21T04:06:43.940Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-21T09:18:38+07:00",
+    "dueDate": "2025-11-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763691518496",
+    "createdAt": "2025-11-21T02:18:38.496Z",
+    "updatedAt": "2025-11-21T03:10:48.309Z",
+    "returnDate": "2025-11-21T03:10:48.198Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "LNVTPM003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-21T10:04:22+07:00",
+    "dueDate": "2025-11-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763694262447",
+    "createdAt": "2025-11-21T03:04:22.447Z",
+    "updatedAt": "2025-11-21T04:06:37.276Z",
+    "returnDate": "2025-11-21T04:06:37.132Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "HDMI001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-21T10:32:38+07:00",
+    "dueDate": "2025-11-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763695958417",
+    "createdAt": "2025-11-21T03:32:38.417Z",
+    "updatedAt": "2025-11-21T07:13:13.547Z",
+    "returnDate": "2025-11-21T07:13:13.307Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-21T12:52:16+07:00",
+    "dueDate": "2025-11-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763704336657",
+    "createdAt": "2025-11-21T05:52:16.657Z",
+    "updatedAt": "2025-11-21T07:07:55.964Z",
+    "returnDate": "2025-11-21T07:07:55.730Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-21T12:53:39+07:00",
+    "dueDate": "2025-11-21T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763704419481",
+    "createdAt": "2025-11-21T05:53:39.481Z",
+    "updatedAt": "2025-11-21T07:15:51.873Z",
+    "returnDate": "2025-11-21T07:15:51.642Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T06:58:57+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763942337648",
+    "createdAt": "2025-11-23T23:58:57.648Z",
+    "updatedAt": "2025-11-24T07:54:01.429Z",
+    "returnDate": "2025-11-24T07:54:01.027Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:03:45+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763942626031",
+    "createdAt": "2025-11-24T00:03:46.031Z",
+    "updatedAt": "2025-11-24T08:02:21.054Z",
+    "returnDate": "2025-11-24T08:02:20.651Z"
+  },
+  {
+    "borrowerId": "47",
+    "items": [
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:05:35+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763942736088",
+    "createdAt": "2025-11-24T00:05:36.088Z",
+    "updatedAt": "2025-11-24T01:40:25.502Z",
+    "returnDate": "2025-11-24T01:40:25.288Z"
+  },
+  {
+    "borrowerId": "26",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:08:09+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763942889996",
+    "createdAt": "2025-11-24T00:08:09.997Z",
+    "updatedAt": "2025-11-24T02:20:13.281Z",
+    "returnDate": "2025-11-24T02:20:13.040Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:16:35+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763943395494",
+    "createdAt": "2025-11-24T00:16:35.494Z",
+    "updatedAt": "2025-11-24T02:44:47.257Z",
+    "returnDate": "2025-11-24T02:44:47.007Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      },
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:28:14+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763944094710",
+    "createdAt": "2025-11-24T00:28:14.710Z",
+    "updatedAt": "2025-11-24T07:49:43.650Z",
+    "returnDate": "2025-11-24T07:49:43.251Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      },
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:28:50+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763944130312",
+    "createdAt": "2025-11-24T00:28:50.312Z",
+    "updatedAt": "2025-11-24T05:25:21.973Z",
+    "returnDate": "2025-11-24T05:25:21.652Z"
+  },
+  {
+    "borrowerId": "79",
+    "items": [
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      },
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:30:19+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763944219628",
+    "createdAt": "2025-11-24T00:30:19.628Z",
+    "updatedAt": "2025-11-24T03:03:09.978Z",
+    "returnDate": "2025-11-24T03:03:09.727Z"
+  },
+  {
+    "borrowerId": "77",
+    "items": [
+      {
+        "rfidCode": "TAB003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T07:30:58+07:00",
+    "dueDate": "2025-12-24T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "Pribadi",
+    "id": "1763944259016",
+    "createdAt": "2025-11-24T00:30:59.016Z",
+    "updatedAt": "2025-11-24T00:30:59.016Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      },
+      {
+        "rfidCode": "1324439387",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T08:05:27+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763946327403",
+    "createdAt": "2025-11-24T01:05:27.403Z",
+    "updatedAt": "2025-11-24T05:49:52.113Z",
+    "returnDate": "2025-11-24T05:49:51.773Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "1321947195",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T08:17:33+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763947054023",
+    "createdAt": "2025-11-24T01:17:34.023Z",
+    "updatedAt": "2025-11-24T08:02:01.258Z",
+    "returnDate": "2025-11-24T08:02:00.859Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T08:31:40+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1763947900657",
+    "createdAt": "2025-11-24T01:31:40.657Z",
+    "updatedAt": "2025-11-24T05:49:41.716Z",
+    "returnDate": "2025-11-24T05:49:41.373Z"
+  },
+  {
+    "borrowerId": "86",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T09:11:40+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763950300461",
+    "createdAt": "2025-11-24T02:11:40.461Z",
+    "updatedAt": "2025-11-24T03:50:39.052Z",
+    "returnDate": "2025-11-24T03:50:38.765Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "HDMI001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T09:43:02+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763952182793",
+    "createdAt": "2025-11-24T02:43:02.793Z",
+    "updatedAt": "2025-11-24T05:56:52.331Z",
+    "returnDate": "2025-11-24T05:56:51.964Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      },
+      {
+        "rfidCode": "SPK001",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T10:05:06+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763953506332",
+    "createdAt": "2025-11-24T03:05:06.332Z",
+    "updatedAt": "2025-11-24T08:17:48.787Z",
+    "returnDate": "2025-11-24T08:17:48.371Z"
+  },
+  {
+    "borrowerId": "12",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T10:38:28+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763955508827",
+    "createdAt": "2025-11-24T03:38:28.827Z",
+    "updatedAt": "2025-11-24T07:12:43.062Z",
+    "returnDate": "2025-11-24T07:12:42.675Z"
+  },
+  {
+    "borrowerId": "18",
+    "items": [
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "1448321908",
+        "note": ""
+      },
+      {
+        "rfidCode": "1451850100",
+        "note": ""
+      },
+      {
+        "rfidCode": "441030467",
+        "note": ""
+      },
+      {
+        "rfidCode": "1388709832",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T10:47:12+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763956032434",
+    "createdAt": "2025-11-24T03:47:12.434Z",
+    "updatedAt": "2025-11-24T08:01:45.271Z",
+    "returnDate": "2025-11-24T08:01:44.860Z"
+  },
+  {
+    "borrowerId": "48",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL011",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T10:53:52+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763956432818",
+    "createdAt": "2025-11-24T03:53:52.818Z",
+    "updatedAt": "2025-11-24T07:44:27.239Z",
+    "returnDate": "2025-11-24T07:44:26.851Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T13:06:55+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1763964416029",
+    "createdAt": "2025-11-24T06:06:56.029Z",
+    "updatedAt": "2025-11-24T08:12:48.713Z",
+    "returnDate": "2025-11-24T08:12:48.299Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-24T13:25:32+07:00",
+    "dueDate": "2025-11-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1763965533050",
+    "createdAt": "2025-11-24T06:25:33.050Z",
+    "updatedAt": "2025-11-24T08:04:04.535Z",
+    "returnDate": "2025-11-24T08:04:04.124Z"
+  },
+  {
+    "borrowerId": "70",
+    "items": [
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-25T10:06:46+07:00",
+    "dueDate": "2025-11-25T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764040008047",
+    "createdAt": "2025-11-25T03:06:48.047Z",
+    "updatedAt": "2025-11-25T03:51:18.546Z",
+    "returnDate": "2025-11-25T03:51:17.083Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T06:36:04+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764113765403",
+    "createdAt": "2025-11-25T23:36:05.403Z",
+    "updatedAt": "2025-11-26T01:41:41.707Z",
+    "returnDate": "2025-11-26T01:41:41.074Z"
+  },
+  {
+    "borrowerId": "47",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:24:54+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764116694683",
+    "createdAt": "2025-11-26T00:24:54.683Z",
+    "updatedAt": "2025-11-26T06:59:43.683Z",
+    "returnDate": "2025-11-26T06:59:42.887Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      },
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:29:07+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764116947963",
+    "createdAt": "2025-11-26T00:29:07.963Z",
+    "updatedAt": "2025-11-26T07:18:33.360Z",
+    "returnDate": "2025-11-26T07:18:32.566Z"
+  },
+  {
+    "borrowerId": "1758511853576",
+    "items": [
+      {
+        "rfidCode": "SPK001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:31:02+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764117063468",
+    "createdAt": "2025-11-26T00:31:03.468Z",
+    "updatedAt": "2025-11-26T03:28:17.940Z",
+    "returnDate": "2025-11-26T03:28:17.257Z"
+  },
+  {
+    "borrowerId": "98",
+    "items": [
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:40:55+07:00",
+    "dueDate": "2025-11-27T07:31:03+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": ".",
+    "id": "1764117655870",
+    "createdAt": "2025-11-26T00:40:55.870Z",
+    "updatedAt": "2025-11-26T08:22:46.513Z",
+    "returnDate": "2025-11-26T08:22:45.686Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:44:37+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764117877870",
+    "createdAt": "2025-11-26T00:44:37.870Z",
+    "updatedAt": "2025-11-26T05:41:56.491Z",
+    "returnDate": "2025-11-26T05:41:55.750Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:45:09+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764117910276",
+    "createdAt": "2025-11-26T00:45:10.276Z",
+    "updatedAt": "2025-11-26T08:01:01.345Z",
+    "returnDate": "2025-11-26T08:01:00.533Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T07:46:00+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764117961540",
+    "createdAt": "2025-11-26T00:46:01.540Z",
+    "updatedAt": "2025-11-26T04:47:53.747Z",
+    "returnDate": "2025-11-26T04:47:53.033Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T08:31:32+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764120692668",
+    "createdAt": "2025-11-26T01:31:32.668Z",
+    "updatedAt": "2025-11-26T08:00:44.254Z",
+    "returnDate": "2025-11-26T08:00:43.446Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T08:38:23+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764121103718",
+    "createdAt": "2025-11-26T01:38:23.718Z",
+    "updatedAt": "2025-11-26T08:25:30.943Z",
+    "returnDate": "2025-11-26T08:25:30.109Z"
+  },
+  {
+    "borrowerId": "57",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T09:11:33+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764123094316",
+    "createdAt": "2025-11-26T02:11:34.316Z",
+    "updatedAt": "2025-11-26T08:00:35.781Z",
+    "returnDate": "2025-11-26T08:00:34.974Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL011",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM003",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM004",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM005",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM006",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM007",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM008",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM009",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM010",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM011",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM012",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM013",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM014",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T09:34:40+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764124481424",
+    "createdAt": "2025-11-26T02:34:41.424Z",
+    "updatedAt": "2025-11-26T07:46:59.531Z",
+    "returnDate": "2025-11-26T07:46:58.662Z"
+  },
+  {
+    "borrowerId": "100",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      },
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T12:38:09+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764135490410",
+    "createdAt": "2025-11-26T05:38:10.410Z",
+    "updatedAt": "2025-11-26T08:28:26.668Z",
+    "returnDate": "2025-11-26T08:28:25.845Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-26T14:15:30+07:00",
+    "dueDate": "2025-11-26T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764141331098",
+    "createdAt": "2025-11-26T07:15:31.098Z",
+    "updatedAt": "2025-11-26T08:07:49.464Z",
+    "returnDate": "2025-11-26T08:07:48.646Z"
+  },
+  {
+    "borrowerId": "47",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T07:09:12+07:00",
+    "dueDate": "2025-11-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM & Ekskul",
+    "id": "1764202153187",
+    "createdAt": "2025-11-27T00:09:13.187Z",
+    "updatedAt": "2025-11-28T04:10:51.263Z",
+    "returnDate": "2025-11-28T04:10:50.291Z"
+  },
+  {
+    "borrowerId": "86",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T07:14:07+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764202447950",
+    "createdAt": "2025-11-27T00:14:07.950Z",
+    "updatedAt": "2025-11-27T07:40:23.375Z",
+    "returnDate": "2025-11-27T07:40:22.543Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T07:26:31+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764203191885",
+    "createdAt": "2025-11-27T00:26:31.885Z",
+    "updatedAt": "2025-11-27T23:51:49.034Z",
+    "returnDate": "2025-11-27T23:51:48.192Z"
+  },
+  {
+    "borrowerId": "92",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T07:27:23+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764203243230",
+    "createdAt": "2025-11-27T00:27:23.230Z",
+    "updatedAt": "2025-11-27T05:26:15.277Z",
+    "returnDate": "2025-11-27T05:26:14.498Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T07:27:35+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764203255964",
+    "createdAt": "2025-11-27T00:27:35.964Z",
+    "updatedAt": "2025-11-27T03:26:53.149Z",
+    "returnDate": "2025-11-27T03:26:52.406Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T07:50:58+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764204659837",
+    "createdAt": "2025-11-27T00:50:59.837Z",
+    "updatedAt": "2025-11-27T08:20:35.408Z",
+    "returnDate": "2025-11-27T08:20:34.546Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T09:17:48+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "diambil oleh siswa",
+    "id": "1764209868345",
+    "createdAt": "2025-11-27T02:17:48.345Z",
+    "updatedAt": "2025-11-27T06:50:37.013Z",
+    "returnDate": "2025-11-27T06:50:36.190Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "1324439387",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T09:18:08+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764209888813",
+    "createdAt": "2025-11-27T02:18:08.813Z",
+    "updatedAt": "2025-11-27T07:52:55.394Z",
+    "returnDate": "2025-11-27T07:52:54.553Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "LNVTPM003",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM004",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM005",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T09:40:12+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764211213234",
+    "createdAt": "2025-11-27T02:40:13.234Z",
+    "updatedAt": "2025-11-27T05:25:38.660Z",
+    "returnDate": "2025-11-27T05:25:37.882Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T12:34:17+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764221658277",
+    "createdAt": "2025-11-27T05:34:18.277Z",
+    "updatedAt": "2025-11-27T06:49:19.491Z",
+    "returnDate": "2025-11-27T06:49:18.670Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T13:48:55+07:00",
+    "dueDate": "2025-11-27T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764226135917",
+    "createdAt": "2025-11-27T06:48:55.917Z",
+    "updatedAt": "2025-11-27T08:19:37.714Z",
+    "returnDate": "2025-11-27T08:19:36.715Z"
+  },
+  {
+    "borrowerId": "47",
+    "items": [
+      {
+        "rfidCode": "SPK001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-27T15:43:27+07:00",
+    "dueDate": "2025-11-28T15:43:03+07:00",
+    "status": "dikembalikan",
+    "purpose": "bahasa jepang bersama jack",
+    "notes": "jack yang ngambil",
+    "id": "1764233008218",
+    "createdAt": "2025-11-27T08:43:28.218Z",
+    "updatedAt": "2025-11-28T04:09:57.817Z",
+    "returnDate": "2025-11-28T04:09:56.843Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T07:53:12+07:00",
+    "dueDate": "2025-11-29T07:47:37+07:00",
+    "status": "dikembalikan",
+    "purpose": "jp  6",
+    "id": "1764291193254",
+    "createdAt": "2025-11-28T00:53:13.255Z",
+    "updatedAt": "2025-11-28T05:56:45.244Z",
+    "returnDate": "2025-11-28T05:56:44.245Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T07:55:33+07:00",
+    "dueDate": "2025-11-29T07:53:13+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764291334044",
+    "createdAt": "2025-11-28T00:55:34.044Z",
+    "updatedAt": "2025-11-28T06:34:02.966Z",
+    "returnDate": "2025-11-28T06:34:01.947Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T07:56:53+07:00",
+    "dueDate": "2025-11-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764291414345",
+    "createdAt": "2025-11-28T00:56:54.345Z",
+    "updatedAt": "2025-11-28T03:32:21.457Z",
+    "returnDate": "2025-11-28T03:32:20.442Z"
+  },
+  {
+    "borrowerId": "125",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T07:57:16+07:00",
+    "dueDate": "2025-11-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764291437332",
+    "createdAt": "2025-11-28T00:57:17.332Z",
+    "updatedAt": "2025-11-28T02:31:20.413Z",
+    "returnDate": "2025-11-28T02:31:19.495Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T07:58:36+07:00",
+    "dueDate": "2025-11-29T07:57:17+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764291517762",
+    "createdAt": "2025-11-28T00:58:37.762Z",
+    "updatedAt": "2025-11-28T07:11:50.434Z",
+    "returnDate": "2025-11-28T07:11:49.402Z"
+  },
+  {
+    "borrowerId": "123",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T08:08:34+07:00",
+    "dueDate": "2025-11-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764292114978",
+    "createdAt": "2025-11-28T01:08:34.978Z",
+    "updatedAt": "2025-11-28T03:46:08.823Z",
+    "returnDate": "2025-11-28T03:46:07.858Z"
+  },
+  {
+    "id": "1764292824253",
+    "borrowerId": "42",
+    "items": [
+      {
+        "rfidCode": "1311632715"
+      },
+      {
+        "rfidCode": "481096242"
+      },
+      {
+        "rfidCode": "0855536887"
+      },
+      {
+        "rfidCode": "149780771"
+      },
+      {
+        "rfidCode": "1444089684"
+      },
+      {
+        "rfidCode": "149659187"
+      },
+      {
+        "rfidCode": "855737827"
+      },
+      {
+        "rfidCode": "TRL008"
+      }
+    ],
+    "borrowDate": "2025-11-28T01:30:00.000Z",
+    "dueDate": "2025-11-29T01:30:00.000Z",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "",
+    "createdAt": "2025-11-28T01:55:52.676Z",
+    "updatedAt": "2025-11-28T05:34:04.407Z",
+    "returnDate": "2025-11-28T05:34:03.415Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "rfidCode": "0131530707",
+        "note": ""
+      },
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T12:35:20+07:00",
+    "dueDate": "2025-11-29T12:34:11+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara pramuka ",
+    "notes": "diambil oleh andrian pramua",
+    "id": "1764308121157",
+    "createdAt": "2025-11-28T05:35:21.157Z",
+    "updatedAt": "2025-12-05T02:20:08.057Z",
+    "returnDate": "2025-12-05T02:20:08.768Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-11-28T13:12:42+07:00",
+    "dueDate": "2025-11-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764310363622",
+    "createdAt": "2025-11-28T06:12:43.622Z",
+    "updatedAt": "2025-11-28T07:17:01.060Z",
+    "returnDate": "2025-11-28T07:17:00.033Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-01T07:12:29+07:00",
+    "dueDate": "2025-12-01T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764547949799",
+    "createdAt": "2025-12-01T00:12:29.799Z",
+    "updatedAt": "2025-12-01T06:17:33.517Z",
+    "returnDate": "2025-12-01T06:17:33.394Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      },
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-01T07:14:51+07:00",
+    "dueDate": "2025-12-01T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764548091868",
+    "createdAt": "2025-12-01T00:14:51.868Z",
+    "updatedAt": "2025-12-01T01:11:31.108Z",
+    "returnDate": "2025-12-01T01:11:31.158Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      },
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-01T07:20:31+07:00",
+    "dueDate": "2025-12-01T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764548431536",
+    "createdAt": "2025-12-01T00:20:31.536Z",
+    "updatedAt": "2025-12-01T01:39:54.828Z",
+    "returnDate": "2025-12-01T01:39:54.867Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-01T07:36:49+07:00",
+    "dueDate": "2025-12-01T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764549409394",
+    "createdAt": "2025-12-01T00:36:49.394Z",
+    "updatedAt": "2025-12-01T08:22:26.629Z",
+    "returnDate": "2025-12-01T08:22:26.409Z"
+  },
+  {
+    "borrowerId": "42",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-01T08:44:27+07:00",
+    "dueDate": "2025-12-01T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764553467342",
+    "createdAt": "2025-12-01T01:44:27.342Z",
+    "updatedAt": "2025-12-01T08:12:56.952Z",
+    "returnDate": "2025-12-01T08:12:56.750Z"
+  },
+  {
+    "borrowerId": "18",
+    "items": [
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-01T10:26:22+07:00",
+    "dueDate": "2025-12-01T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764559582708",
+    "createdAt": "2025-12-01T03:26:22.708Z",
+    "updatedAt": "2025-12-01T08:11:01.591Z",
+    "returnDate": "2025-12-01T08:11:01.382Z"
+  },
+  {
+    "id": "1764545576238",
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "150021523"
+      },
+      {
+        "rfidCode": "1442990964"
+      },
+      {
+        "rfidCode": "149927443"
+      },
+      {
+        "rfidCode": "1309464923"
+      },
+      {
+        "rfidCode": "1311632715"
+      },
+      {
+        "rfidCode": "0149960963"
+      },
+      {
+        "rfidCode": "847522295"
+      },
+      {
+        "rfidCode": "481096242"
+      },
+      {
+        "rfidCode": "0855536887"
+      },
+      {
+        "rfidCode": "122587299"
+      },
+      {
+        "rfidCode": "TRL003"
+      },
+      {
+        "rfidCode": "TRL006"
+      }
+    ],
+    "borrowDate": "2025-12-01T00:00:00.000Z",
+    "dueDate": "2025-12-02T00:00:00.000Z",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "",
+    "createdAt": "2025-12-01T04:21:42.871Z",
+    "updatedAt": "2025-12-01T07:18:44.961Z",
+    "returnDate": "2025-12-01T07:18:44.786Z"
+  },
+  {
+    "id": "1764562923875",
+    "borrowerId": "100",
+    "items": [
+      {
+        "rfidCode": "602048064"
+      },
+      {
+        "rfidCode": "1320214843"
+      },
+      {
+        "rfidCode": "TRL009"
+      }
+    ],
+    "borrowDate": "2025-12-01T06:30:00.000Z",
+    "dueDate": "2025-12-02T06:30:00.000Z",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": "",
+    "createdAt": "2025-12-01T06:39:22.388Z",
+    "updatedAt": "2025-12-01T08:06:06.532Z",
+    "returnDate": "2025-12-01T08:06:06.330Z"
+  },
+  {
+    "borrowerId": "115",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T06:58:13+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764633492895",
+    "createdAt": "2025-12-01T23:58:12.895Z",
+    "updatedAt": "2025-12-02T08:08:07.215Z",
+    "returnDate": "2025-12-02T08:08:07.524Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "1388709832",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      },
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T07:19:24+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764634764236",
+    "createdAt": "2025-12-02T00:19:24.236Z",
+    "updatedAt": "2025-12-02T08:24:52.711Z",
+    "returnDate": "2025-12-02T08:24:53.010Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T07:34:16+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764635655758",
+    "createdAt": "2025-12-02T00:34:15.758Z",
+    "updatedAt": "2025-12-02T03:14:25.177Z",
+    "returnDate": "2025-12-02T03:14:25.658Z"
+  },
+  {
+    "borrowerId": "81",
+    "items": [
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T07:34:50+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764635689641",
+    "createdAt": "2025-12-02T00:34:49.641Z",
+    "updatedAt": "2025-12-02T01:42:58.534Z",
+    "returnDate": "2025-12-02T01:42:59.081Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T08:33:45+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764639224843",
+    "createdAt": "2025-12-02T01:33:44.843Z",
+    "updatedAt": "2025-12-02T08:17:49.758Z",
+    "returnDate": "2025-12-02T08:17:50.067Z"
+  },
+  {
+    "borrowerId": "30",
+    "items": [
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T09:30:43+07:00",
+    "dueDate": "2025-12-03T09:29:58+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764642643273",
+    "createdAt": "2025-12-02T02:30:43.274Z",
+    "updatedAt": "2025-12-02T03:28:00.169Z",
+    "returnDate": "2025-12-02T03:28:00.648Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      },
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "1448321908",
+        "note": ""
+      },
+      {
+        "rfidCode": "1451850100",
+        "note": ""
+      },
+      {
+        "rfidCode": "441030467",
+        "note": ""
+      },
+      {
+        "rfidCode": "1388709832",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T12:37:50+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764653870083",
+    "createdAt": "2025-12-02T05:37:50.083Z",
+    "updatedAt": "2025-12-02T07:55:24.705Z",
+    "returnDate": "2025-12-02T07:55:25.028Z"
+  },
+  {
+    "borrowerId": "23",
+    "items": [
+      {
+        "rfidCode": "858620167",
+        "note": ""
+      },
+      {
+        "rfidCode": "2805597667",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T13:25:51+07:00",
+    "dueDate": "2025-12-02T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764656751207",
+    "createdAt": "2025-12-02T06:25:51.207Z",
+    "updatedAt": "2025-12-02T07:09:49.833Z",
+    "returnDate": "2025-12-02T07:09:50.184Z"
+  },
+  {
+    "borrowerId": "12",
+    "items": [
+      {
+        "rfidCode": "0177051075",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-02T15:13:40+07:00",
+    "dueDate": "2025-12-31T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "id": "1764663220080",
+    "createdAt": "2025-12-02T08:13:40.080Z",
+    "updatedAt": "2025-12-02T08:13:40.080Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "122587299",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "149780771",
+        "note": ""
+      },
+      {
+        "rfidCode": "1444089684",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T06:38:46+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764718726389",
+    "createdAt": "2025-12-02T23:38:46.389Z",
+    "updatedAt": "2025-12-03T06:51:19.144Z",
+    "returnDate": "2025-12-03T06:51:19.061Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "149659187",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T07:21:14+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764721274588",
+    "createdAt": "2025-12-03T00:21:14.588Z",
+    "updatedAt": "2025-12-03T05:23:25.827Z",
+    "returnDate": "2025-12-03T05:23:25.796Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T07:25:56+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764721556314",
+    "createdAt": "2025-12-03T00:25:56.314Z",
+    "updatedAt": "2025-12-03T04:46:08.068Z",
+    "returnDate": "2025-12-03T04:46:08.070Z"
+  },
+  {
+    "borrowerId": "58",
+    "items": [
+      {
+        "rfidCode": "1378696616",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T07:34:34+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764722074446",
+    "createdAt": "2025-12-03T00:34:34.446Z",
+    "updatedAt": "2025-12-03T04:46:02.919Z",
+    "returnDate": "2025-12-03T04:46:02.919Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "TRL007",
+        "note": ""
+      },
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T08:18:12+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1764724692206",
+    "createdAt": "2025-12-03T01:18:12.206Z",
+    "updatedAt": "2025-12-03T08:37:33.126Z",
+    "returnDate": "2025-12-03T08:37:32.981Z"
+  },
+  {
+    "borrowerId": "57",
+    "items": [
+      {
+        "rfidCode": "TRL008",
+        "note": ""
+      },
+      {
+        "rfidCode": "0123642947",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T08:38:09+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764725889472",
+    "createdAt": "2025-12-03T01:38:09.472Z",
+    "updatedAt": "2025-12-03T06:56:31.571Z",
+    "returnDate": "2025-12-03T06:56:31.492Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "USBLAN001",
+        "note": ""
+      },
+      {
+        "rfidCode": "USBLAN002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T08:54:07+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "diambil oleh siswi",
+    "id": "1764726847755",
+    "createdAt": "2025-12-03T01:54:07.755Z",
+    "updatedAt": "2025-12-03T03:16:46.262Z",
+    "returnDate": "2025-12-03T03:16:46.309Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T08:57:22+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764727042739",
+    "createdAt": "2025-12-03T01:57:22.739Z",
+    "updatedAt": "2025-12-04T01:15:40.166Z",
+    "returnDate": "2025-12-04T01:15:40.085Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T09:00:13+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764727213810",
+    "createdAt": "2025-12-03T02:00:13.810Z",
+    "updatedAt": "2025-12-03T03:32:59.096Z",
+    "returnDate": "2025-12-03T03:32:59.132Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "TRL011",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T09:26:03+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "diambil oleh siswa",
+    "id": "1764728763001",
+    "createdAt": "2025-12-03T02:26:03.001Z",
+    "updatedAt": "2025-12-03T03:16:38.622Z",
+    "returnDate": "2025-12-03T03:16:38.669Z"
+  },
+  {
+    "borrowerId": "113",
+    "items": [
+      {
+        "rfidCode": "TRL012",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T09:36:12+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Acara di MM",
+    "id": "1764729371982",
+    "createdAt": "2025-12-03T02:36:11.983Z",
+    "updatedAt": "2025-12-03T08:07:06.864Z",
+    "returnDate": "2025-12-03T08:07:06.728Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "LNVTPM003",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM004",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM005",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM006",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM007",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM008",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM009",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM010",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM011",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM012",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM013",
+        "note": ""
+      },
+      {
+        "rfidCode": "LNVTPM014",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL011",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL013",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T10:19:50+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764731990850",
+    "createdAt": "2025-12-03T03:19:50.850Z",
+    "updatedAt": "2025-12-03T08:07:59.889Z",
+    "returnDate": "2025-12-03T08:07:59.767Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T10:31:48+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764732708403",
+    "createdAt": "2025-12-03T03:31:48.403Z",
+    "updatedAt": "2025-12-03T05:59:54.797Z",
+    "returnDate": "2025-12-03T05:59:54.745Z"
+  },
+  {
+    "borrowerId": "120",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T12:22:06+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764739326992",
+    "createdAt": "2025-12-03T05:22:06.992Z",
+    "updatedAt": "2025-12-03T06:46:06.832Z",
+    "returnDate": "2025-12-03T06:46:06.751Z"
+  },
+  {
+    "borrowerId": "100",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T12:52:37+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764741157061",
+    "createdAt": "2025-12-03T05:52:37.061Z",
+    "updatedAt": "2025-12-03T07:45:25.618Z",
+    "returnDate": "2025-12-03T07:45:25.505Z"
+  },
+  {
+    "borrowerId": "63",
+    "items": [
+      {
+        "rfidCode": "TRL014",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-03T13:21:51+07:00",
+    "dueDate": "2025-12-03T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "diambil oleh siswa",
+    "id": "1764742911488",
+    "createdAt": "2025-12-03T06:21:51.488Z",
+    "updatedAt": "2025-12-03T07:52:41.788Z",
+    "returnDate": "2025-12-03T07:52:41.672Z"
+  },
+  {
+    "borrowerId": "115",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-04T07:25:08+07:00",
+    "dueDate": "2025-12-04T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764807908404",
+    "createdAt": "2025-12-04T00:25:08.404Z",
+    "updatedAt": "2025-12-04T03:19:09.678Z",
+    "returnDate": "2025-12-04T03:19:09.515Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-04T07:31:52+07:00",
+    "dueDate": "2025-12-04T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "diambil oleh siswa",
+    "id": "1764808312994",
+    "createdAt": "2025-12-04T00:31:52.994Z",
+    "updatedAt": "2025-12-04T05:04:35.959Z",
+    "returnDate": "2025-12-04T05:04:35.732Z"
+  },
+  {
+    "borrowerId": "105",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      },
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-04T07:38:37+07:00",
+    "dueDate": "2025-12-04T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764808718008",
+    "createdAt": "2025-12-04T00:38:38.008Z",
+    "updatedAt": "2025-12-04T02:31:07.950Z",
+    "returnDate": "2025-12-04T02:31:07.791Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "1320214843",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-04T08:48:40+07:00",
+    "dueDate": "2025-12-04T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764812921036",
+    "createdAt": "2025-12-04T01:48:41.036Z",
+    "updatedAt": "2025-12-04T07:54:04.029Z",
+    "returnDate": "2025-12-04T07:54:03.696Z"
+  },
+  {
+    "borrowerId": "66",
+    "items": [
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      },
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-04T09:42:39+07:00",
+    "dueDate": "2025-12-04T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764816159400",
+    "createdAt": "2025-12-04T02:42:39.400Z",
+    "updatedAt": "2025-12-04T04:30:44.847Z",
+    "returnDate": "2025-12-04T04:30:44.631Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T07:40:49+07:00",
+    "dueDate": "2025-12-06T07:40:32+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1764894931952",
+    "createdAt": "2025-12-05T00:35:31.952Z",
+    "updatedAt": "2025-12-05T04:35:50.926Z",
+    "returnDate": "2025-12-05T04:41:08.741Z"
+  },
+  {
+    "borrowerId": "13",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      },
+      {
+        "rfidCode": "855737827",
+        "note": ""
+      },
+      {
+        "rfidCode": "1384902120",
+        "note": ""
+      },
+      {
+        "rfidCode": "602048064",
+        "note": ""
+      },
+      {
+        "rfidCode": "1448321908",
+        "note": ""
+      },
+      {
+        "rfidCode": "1451850100",
+        "note": ""
+      },
+      {
+        "rfidCode": "441030467",
+        "note": ""
+      },
+      {
+        "rfidCode": "1388709832",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL006",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T07:35:53+07:00",
+    "dueDate": "2025-12-05T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764894953085",
+    "createdAt": "2025-12-05T00:35:53.085Z",
+    "updatedAt": "2025-12-05T06:50:55.633Z",
+    "returnDate": "2025-12-05T06:50:56.180Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "0854329079",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL009",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T08:03:12+07:00",
+    "dueDate": "2025-12-05T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764896591792",
+    "createdAt": "2025-12-05T01:03:11.792Z",
+    "updatedAt": "2025-12-05T03:11:37.368Z",
+    "returnDate": "2025-12-05T03:11:38.052Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "0123642947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL010",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T08:16:37+07:00",
+    "dueDate": "2025-12-05T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "diambil oleh siswa",
+    "id": "1764897396749",
+    "createdAt": "2025-12-05T01:16:36.749Z",
+    "updatedAt": "2025-12-05T07:52:12.133Z",
+    "returnDate": "2025-12-05T07:52:12.640Z"
+  },
+  {
+    "borrowerId": "115",
+    "items": [
+      {
+        "rfidCode": "858620167",
+        "note": ""
+      },
+      {
+        "rfidCode": "2805597667",
+        "note": ""
+      },
+      {
+        "rfidCode": "155485923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1315056715",
+        "note": ""
+      },
+      {
+        "rfidCode": "851788775",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL011",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T08:23:17+07:00",
+    "dueDate": "2025-12-05T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764897796290",
+    "createdAt": "2025-12-05T01:23:16.290Z",
+    "updatedAt": "2025-12-05T04:22:39.728Z",
+    "returnDate": "2025-12-05T04:22:40.351Z"
+  },
+  {
+    "borrowerId": "18",
+    "items": [
+      {
+        "rfidCode": "876547654",
+        "note": ""
+      },
+      {
+        "rfidCode": "765446565",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T08:55:30+07:00",
+    "dueDate": "2025-12-05T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764899729689",
+    "createdAt": "2025-12-05T01:55:29.689Z",
+    "updatedAt": "2025-12-05T09:37:34.795Z",
+    "returnDate": "2025-12-05T09:37:35.272Z"
+  },
+  {
+    "id": "1764810252574",
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "0149960963"
+      },
+      {
+        "rfidCode": "847522295"
+      },
+      {
+        "rfidCode": "481096242"
+      },
+      {
+        "rfidCode": "0855536887"
+      },
+      {
+        "rfidCode": "122587299"
+      },
+      {
+        "rfidCode": "1382240728"
+      },
+      {
+        "rfidCode": "149780771"
+      },
+      {
+        "rfidCode": "1444089684"
+      },
+      {
+        "rfidCode": "149659187"
+      },
+      {
+        "rfidCode": "1378696616"
+      },
+      {
+        "rfidCode": "TRL007"
+      },
+      {
+        "rfidCode": "TRL008"
+      }
+    ],
+    "borrowDate": "2025-12-05T02:50:00.000Z",
+    "dueDate": "2025-12-06T02:50:00.000Z",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "",
+    "createdAt": "2025-12-05T02:09:38.737Z",
+    "updatedAt": "2025-12-05T06:42:25.896Z",
+    "returnDate": "2025-12-05T06:42:26.452Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "0845694151",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-05T09:20:32+07:00",
+    "dueDate": "2025-12-05T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1764901231602",
+    "createdAt": "2025-12-05T02:20:31.602Z",
+    "updatedAt": "2025-12-05T07:18:54.019Z",
+    "returnDate": "2025-12-05T07:18:54.554Z"
+  },
+  {
+    "borrowerId": "106",
+    "items": [
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      },
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T07:30:47+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765153847450",
+    "createdAt": "2025-12-08T00:30:47.450Z",
+    "updatedAt": "2025-12-08T01:39:21.384Z",
+    "returnDate": "2025-12-08T01:39:21.283Z"
+  },
+  {
+    "borrowerId": "50",
+    "items": [
+      {
+        "rfidCode": "1452720996",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T07:31:33+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765153893520",
+    "createdAt": "2025-12-08T00:31:33.520Z",
+    "updatedAt": "2025-12-08T00:40:13.934Z",
+    "returnDate": "2025-12-08T00:40:13.888Z"
+  },
+  {
+    "borrowerId": "37",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T07:40:05+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1765154405379",
+    "createdAt": "2025-12-08T00:40:05.379Z",
+    "updatedAt": "2025-12-08T08:11:43.177Z",
+    "returnDate": "2025-12-08T08:11:42.829Z"
+  },
+  {
+    "borrowerId": "79",
+    "items": [
+      {
+        "rfidCode": "0123642947",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T08:48:07+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS/KBM",
+    "id": "1765158487151",
+    "createdAt": "2025-12-08T01:48:07.151Z",
+    "updatedAt": "2025-12-08T03:25:27.962Z",
+    "returnDate": "2025-12-08T03:25:27.788Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "rfidCode": "KBLNV001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T09:49:10+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "notes": "diambil oleh Rona",
+    "id": "1765162150330",
+    "createdAt": "2025-12-08T02:49:10.330Z",
+    "updatedAt": "2025-12-08T07:32:40.718Z",
+    "returnDate": "2025-12-08T07:32:40.396Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T10:45:07+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1765165507509",
+    "createdAt": "2025-12-08T03:45:07.509Z",
+    "updatedAt": "2025-12-08T07:35:36.470Z",
+    "returnDate": "2025-12-08T07:35:36.152Z"
+  },
+  {
+    "borrowerId": "102",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      },
+      {
+        "rfidCode": "1382240728",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T14:02:16+07:00",
+    "dueDate": "2025-12-08T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Aula Mimake",
+    "notes": "diambil oleh Handra",
+    "id": "1765177336667",
+    "createdAt": "2025-12-08T07:02:16.667Z",
+    "updatedAt": "2025-12-08T23:47:05.113Z",
+    "returnDate": "2025-12-08T23:47:05.071Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-08T23:30:24+07:00",
+    "dueDate": "2025-12-09T23:30:05+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1765211102674",
+    "createdAt": "2025-12-08T16:25:02.674Z",
+    "updatedAt": "2025-12-29T00:36:56.016Z",
+    "returnDate": "2025-12-29T00:42:38.121Z"
+  },
+  {
+    "borrowerId": "115",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T07:16:34+07:00",
+    "dueDate": "2025-12-09T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1765239394969",
+    "createdAt": "2025-12-09T00:16:34.969Z",
+    "updatedAt": "2025-12-09T08:01:34.015Z",
+    "returnDate": "2025-12-09T08:01:33.722Z"
+  },
+  {
+    "borrowerId": "24",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T07:52:13+07:00",
+    "dueDate": "2025-12-09T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1765241534038",
+    "createdAt": "2025-12-09T00:52:14.038Z",
+    "updatedAt": "2025-12-09T08:01:30.016Z",
+    "returnDate": "2025-12-09T08:01:29.722Z"
+  },
+  {
+    "borrowerId": "60",
+    "items": [
+      {
+        "rfidCode": "LNVTPM003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T09:21:04+07:00",
+    "dueDate": "2025-12-09T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "id": "1765246864440",
+    "createdAt": "2025-12-09T02:21:04.440Z",
+    "updatedAt": "2025-12-09T02:21:04.440Z"
+  },
+  {
+    "borrowerId": "111",
+    "items": [
+      {
+        "rfidCode": "0154334947",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T10:06:23+07:00",
+    "dueDate": "2025-12-09T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Ruang BK",
+    "id": "1765249583504",
+    "createdAt": "2025-12-09T03:06:23.504Z",
+    "updatedAt": "2025-12-09T23:41:40.345Z",
+    "returnDate": "2025-12-09T23:41:39.366Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "1453456180",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T12:29:46+07:00",
+    "dueDate": "2025-12-10T10:53:52+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765258186525",
+    "createdAt": "2025-12-09T05:29:46.525Z",
+    "updatedAt": "2025-12-09T06:51:43.239Z",
+    "returnDate": "2025-12-09T06:51:42.973Z"
+  },
+  {
+    "borrowerId": "91",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T12:30:15+07:00",
+    "dueDate": "2025-12-10T12:29:47+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765258215808",
+    "createdAt": "2025-12-09T05:30:15.808Z",
+    "updatedAt": "2025-12-09T06:51:39.608Z",
+    "returnDate": "2025-12-09T06:51:39.341Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "rfidCode": "0842397383",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T12:47:39+07:00",
+    "dueDate": "2025-12-09T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "SAS",
+    "id": "1765259259553",
+    "createdAt": "2025-12-09T05:47:39.553Z",
+    "updatedAt": "2025-12-09T07:30:03.943Z",
+    "returnDate": "2025-12-09T07:30:03.660Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-09T12:55:09+07:00",
+    "dueDate": "2025-12-09T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara di aula mimake",
+    "notes": "diambil oleh OSIS",
+    "id": "1765259709385",
+    "createdAt": "2025-12-09T05:55:09.385Z",
+    "updatedAt": "2025-12-09T23:41:52.895Z",
+    "returnDate": "2025-12-09T23:41:51.919Z"
+  },
+  {
+    "borrowerId": "110",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      },
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      },
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      },
+      {
+        "rfidCode": "1309464923",
+        "note": ""
+      },
+      {
+        "rfidCode": "1311632715",
+        "note": ""
+      },
+      {
+        "rfidCode": "0149960963",
+        "note": ""
+      },
+      {
+        "rfidCode": "2347265994",
+        "note": ""
+      },
+      {
+        "rfidCode": "847522295",
+        "note": ""
+      },
+      {
+        "rfidCode": "481096242",
+        "note": ""
+      },
+      {
+        "rfidCode": "0855536887",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-10T07:09:58+07:00",
+    "dueDate": "2025-12-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765325398646",
+    "createdAt": "2025-12-10T00:09:58.646Z",
+    "updatedAt": "2025-12-10T09:15:55.890Z",
+    "returnDate": "2025-12-10T09:15:55.207Z"
+  },
+  {
+    "borrowerId": "163",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-10T09:32:37+07:00",
+    "dueDate": "2025-12-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Kebutuhan",
+    "id": "1765333958114",
+    "createdAt": "2025-12-10T02:32:38.115Z",
+    "updatedAt": "2025-12-12T09:33:17.763Z",
+    "returnDate": "2025-12-12T09:33:17.405Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-10T10:35:16+07:00",
+    "dueDate": "2025-12-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "notes": "dmbilalif",
+    "id": "1765337717489",
+    "createdAt": "2025-12-10T03:35:17.489Z",
+    "updatedAt": "2025-12-10T10:27:33.605Z",
+    "returnDate": "2025-12-10T10:27:32.202Z"
+  },
+  {
+    "borrowerId": "116",
+    "items": [
+      {
+        "rfidCode": "0123642947",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-10T15:03:55+07:00",
+    "dueDate": "2025-12-10T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Technical Meeting Ruang 26",
+    "notes": "diambil oleh siswi",
+    "id": "1765353835672",
+    "createdAt": "2025-12-10T08:03:55.672Z",
+    "updatedAt": "2025-12-10T10:27:42.644Z",
+    "returnDate": "2025-12-10T10:27:41.242Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-11T07:36:43+07:00",
+    "dueDate": "2025-12-11T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765413403425",
+    "createdAt": "2025-12-11T00:36:43.425Z",
+    "updatedAt": "2025-12-11T05:26:52.112Z",
+    "returnDate": "2025-12-11T05:26:51.650Z"
+  },
+  {
+    "borrowerId": "116",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "HDMI001",
+        "note": ""
+      },
+      {
+        "rfidCode": "HDMI002",
+        "note": ""
+      },
+      {
+        "rfidCode": "0230928329",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-12T12:29:14+07:00",
+    "dueDate": "2025-12-12T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Aula",
+    "id": "1765517354911",
+    "createdAt": "2025-12-12T05:29:14.912Z",
+    "updatedAt": "2025-12-12T09:27:16.745Z",
+    "returnDate": "2025-12-12T09:27:16.397Z"
+  },
+  {
+    "borrowerId": "101",
+    "items": [
+      {
+        "rfidCode": "MSE001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-12T12:35:27+07:00",
+    "dueDate": "2025-12-31T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "erapor",
+    "id": "1765517403739",
+    "createdAt": "2025-12-12T05:30:03.739Z",
+    "updatedAt": "2025-12-12T05:30:03.739Z"
+  },
+  {
+    "borrowerId": "150",
+    "items": [
+      {
+        "rfidCode": "TAB004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-12T16:35:53+07:00",
+    "dueDate": "2025-12-28T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "untuk kbm",
+    "id": "1765532154315",
+    "createdAt": "2025-12-12T09:35:54.315Z",
+    "updatedAt": "2025-12-29T00:36:45.437Z",
+    "returnDate": "2025-12-29T00:42:27.537Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-15T07:37:44+07:00",
+    "dueDate": "2025-12-15T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765759064459",
+    "createdAt": "2025-12-15T00:37:44.459Z",
+    "updatedAt": "2025-12-15T09:06:28.547Z",
+    "returnDate": "2025-12-15T09:06:28.650Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-16T07:03:27+07:00",
+    "dueDate": "2025-12-16T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "notes": " ",
+    "id": "1765843407455",
+    "createdAt": "2025-12-16T00:03:27.455Z",
+    "updatedAt": "2025-12-16T08:17:50.081Z",
+    "returnDate": "2025-12-16T08:17:49.960Z"
+  },
+  {
+    "borrowerId": "112",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-16T07:45:02+07:00",
+    "dueDate": "2025-12-16T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "PKS",
+    "notes": "diambil oleh osis",
+    "id": "1765845902240",
+    "createdAt": "2025-12-16T00:45:02.240Z",
+    "updatedAt": "2025-12-19T02:03:16.658Z",
+    "returnDate": "2025-12-19T02:03:17.389Z"
+  },
+  {
+    "borrowerId": "67",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-17T08:02:37+07:00",
+    "dueDate": "2025-12-17T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765933356864",
+    "createdAt": "2025-12-17T01:02:36.864Z",
+    "updatedAt": "2025-12-17T08:37:46.141Z",
+    "returnDate": "2025-12-17T08:37:46.852Z"
+  },
+  {
+    "borrowerId": "150",
+    "items": [
+      {
+        "rfidCode": "USBB001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-17T09:29:09+07:00",
+    "dueDate": "2025-12-18T09:27:45+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1765938549656",
+    "createdAt": "2025-12-17T02:29:09.656Z",
+    "updatedAt": "2025-12-17T02:31:57.226Z",
+    "returnDate": "2025-12-17T02:31:57.146Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "rfidCode": "SPK001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-19T07:13:30+07:00",
+    "dueDate": "2025-12-20T07:12:46+07:00",
+    "status": "dikembalikan",
+    "purpose": "buat mengajar",
+    "id": "1766103209763",
+    "createdAt": "2025-12-19T00:13:29.763Z",
+    "updatedAt": "2025-12-19T03:47:37.170Z",
+    "returnDate": "2025-12-19T03:47:37.845Z"
+  },
+  {
+    "borrowerId": "8",
+    "items": [
+      {
+        "rfidCode": "LNVTPM004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-19T08:08:28+07:00",
+    "dueDate": "2025-12-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Acara di MM",
+    "id": "1766106507791",
+    "createdAt": "2025-12-19T01:08:27.791Z",
+    "updatedAt": "2025-12-19T02:15:34.997Z",
+    "returnDate": "2025-12-19T02:15:35.676Z"
+  },
+  {
+    "borrowerId": "33",
+    "items": [
+      {
+        "rfidCode": "LNVTPM005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-19T08:09:04+07:00",
+    "dueDate": "2025-12-19T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "Acara di MM",
+    "id": "1766106543687",
+    "createdAt": "2025-12-19T01:09:03.687Z",
+    "updatedAt": "2025-12-19T03:05:34.344Z",
+    "returnDate": "2025-12-19T03:05:35.036Z"
+  },
+  {
+    "borrowerId": "16",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-19T09:20:39+07:00",
+    "dueDate": "2025-12-20T09:20:14+07:00",
+    "status": "dipinjam",
+    "purpose": "pengisian e-raport",
+    "id": "1766110839098",
+    "createdAt": "2025-12-19T02:20:39.098Z",
+    "updatedAt": "2025-12-19T02:20:39.098Z"
+  },
+  {
+    "borrowerId": "33",
+    "items": [
+      {
+        "rfidCode": "LNVTPM004",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-19T10:54:04+07:00",
+    "dueDate": "2025-12-20T10:53:32+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara",
+    "id": "1766116443992",
+    "createdAt": "2025-12-19T03:54:03.992Z",
+    "updatedAt": "2025-12-23T08:06:05.688Z",
+    "returnDate": "2025-12-23T08:06:05.771Z"
+  },
+  {
+    "borrowerId": "102",
+    "items": [
+      {
+        "rfidCode": "2939832620",
+        "note": ""
+      },
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      },
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      },
+      {
+        "rfidCode": "HDMI001",
+        "note": ""
+      },
+      {
+        "rfidCode": "HDMI002",
+        "note": ""
+      },
+      {
+        "rfidCode": "0230928329",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-19T11:34:55+07:00",
+    "dueDate": "2025-12-24T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "acara osis aula",
+    "id": "1766118894826",
+    "createdAt": "2025-12-19T04:34:54.826Z",
+    "updatedAt": "2025-12-22T02:53:27.389Z",
+    "returnDate": "2025-12-22T02:53:28.204Z"
+  },
+  {
+    "borrowerId": "43",
+    "items": [
+      {
+        "rfidCode": "SPK001",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-22T08:02:19+07:00",
+    "dueDate": "2025-12-23T08:02:00+07:00",
+    "status": "dikembalikan",
+    "purpose": ".",
+    "id": "1766365338845",
+    "createdAt": "2025-12-22T01:02:18.845Z",
+    "updatedAt": "2025-12-22T06:52:07.835Z",
+    "returnDate": "2025-12-22T06:52:08.552Z"
+  },
+  {
+    "borrowerId": "82",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-24T12:06:57+07:00",
+    "dueDate": "2025-12-24T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "Pribadi",
+    "id": "1766552817874",
+    "createdAt": "2025-12-24T05:06:57.874Z",
+    "updatedAt": "2025-12-24T05:06:57.874Z"
+  },
+  {
+    "borrowerId": "162",
+    "items": [
+      {
+        "rfidCode": "TAB005",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2025-12-27T10:26:05+07:00",
+    "dueDate": "2025-12-31T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "ppg",
+    "id": "1766805965633",
+    "createdAt": "2025-12-27T03:26:05.633Z",
+    "updatedAt": "2025-12-27T03:26:05.633Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-01-06T08:38:25+07:00",
+    "dueDate": "2026-01-06T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "pribadi",
+    "id": "1767663155252",
+    "createdAt": "2026-01-06T01:32:35.252Z",
+    "updatedAt": "2026-01-06T02:22:51.407Z",
+    "returnDate": "2026-01-06T02:22:51.066Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "rfidCode": "TRL003",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-01-06T09:20:34+07:00",
+    "dueDate": "2026-01-06T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "pribadi",
+    "id": "1767666034998",
+    "createdAt": "2026-01-06T02:20:34.998Z",
+    "updatedAt": "2026-01-06T02:23:00.602Z",
+    "returnDate": "2026-01-06T02:23:00.266Z"
+  },
+  {
+    "borrowerId": "68",
+    "items": [
+      {
+        "rfidCode": "TRL002",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-01-06T09:23:45+07:00",
+    "dueDate": "2026-01-06T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "pribadi",
+    "id": "1767666225844",
+    "createdAt": "2026-01-06T02:23:45.844Z",
+    "updatedAt": "2026-01-06T02:23:45.844Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "rfidCode": "150021523",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-01-06T09:25:05+07:00",
+    "dueDate": "2026-01-06T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "kbm",
+    "id": "1767666305562",
+    "createdAt": "2026-01-06T02:25:05.562Z",
+    "updatedAt": "2026-01-06T02:25:05.562Z"
+  },
+  {
+    "borrowerId": "156",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-01-06T09:32:33+07:00",
+    "dueDate": "2026-01-07T09:32:17+07:00",
+    "status": "dipinjam",
+    "purpose": "tes",
+    "id": "1767666754164",
+    "createdAt": "2026-01-06T02:32:34.164Z",
+    "updatedAt": "2026-01-06T02:32:34.164Z"
+  },
+  {
+    "borrowerId": "1758511853577",
+    "items": [
+      {
+        "rfidCode": "1442990964",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-01-06T09:57:57+07:00",
+    "dueDate": "2026-01-07T09:57:41+07:00",
+    "status": "dipinjam",
+    "purpose": "tes",
+    "id": "1767668277860",
+    "createdAt": "2026-01-06T02:57:57.860Z",
+    "updatedAt": "2026-01-06T02:57:57.860Z"
   }
 ]

@@ -245,7 +245,7 @@ export default function PeminjamanPage() {
             purpose: purpose,
             notes: notes || undefined
           };
-          await fetch("http://145.10.0.6:3000/pinjam", {
+          await fetch("/external/pinjam", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

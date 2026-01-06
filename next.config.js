@@ -29,6 +29,14 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/external/:path*',
+        destination: 'http://145.10.0.6:3000/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = withPWA(nextConfig)
