@@ -1237,8 +1237,8 @@ A: Ganti file `public/mrc.png` dan `public/mrc-icon.png` dengan logo Anda.
 Untuk pertanyaan, bug report, atau feature request:
 
 - **GitHub Issues**: [https://github.com/abdipr/mrc/issues](https://github.com/abdipr/mrc/issues)
-- **Email**: me@abdi.es
-- **Website**: [abdi.es](https://abdi.es)
+- **Email**: me@abdi.cc
+- **Website**: [abdi.cc](https://abdi.cc)
 
 ---
 
@@ -1254,7 +1254,7 @@ Aplikasi ini adalah properti MRC di SMKN 1 Subang dan untuk penggunaan internal 
 
   <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
     <img src="public/mrc.png" alt="MRC Icon" height="40"/>
-    <img src="https://abdi.es/assets/abdi.png" alt="Abdi Icon" height="40"/>
+    <img src="https://abdi.cc/assets/abdi.png" alt="Abdi Icon" height="40"/>
   </div>
 </div>
 
