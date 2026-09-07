@@ -11,6 +11,10 @@ const defaultSettings = {
     username: "admin",
     password: "admin123"
   },
+  users: [
+    { id: "1", username: "admin", password: "admin123", role: "super_admin" },
+    { id: "2", username: "petugas", password: "petugas123", role: "admin" }
+  ],
   notifications: {
     overdueReminders: true,
     returnReminders: true
@@ -37,6 +41,7 @@ function mergeSettings(input: any) {
       ...defaultSettings.admin,
       ...(input.admin || {})
     },
+    users: Array.isArray(input.users) ? input.users : defaultSettings.users,
     notifications: {
       ...defaultSettings.notifications,
       ...(input.notifications || {})

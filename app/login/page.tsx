@@ -22,8 +22,8 @@ export default function LoginPage() {
     setError("")
 
     try {
-      await auth.login(username, password)
-      router.push("/")
+      const user = await auth.login(username, password)
+      router.push(user.role === "admin" ? "/peminjaman" : "/")
     } catch (err) {
       setError(err instanceof Error ? err.message : "Terjadi kesalahan")
     } finally {

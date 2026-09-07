@@ -2,7 +2,9 @@
 
 import type React from "react"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { auth } from "@/lib/auth"
 import Sidebar from "./sidebar"
 import MobileNav from "./mobile-nav"
 
@@ -12,6 +14,19 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname()
+  const router = useRouter()
+  const isPublicPath = ["/login", "/book", "/print", "/whatsapp"].includes(pathname)
+
+  useEffect(() => {
+    if (!isPublicPath && !auth.isAuthenticated()) {
+      router.push("/login")
+      return
+    }
+
+    if (!isPublicPath && auth.isAuthenticated() && !auth.canAccess(pathname)) {
+      router.replace("/")
+    }
+  }, [isPublicPath, pathname, router])
 
   if (pathname === "/login" || pathname === "/print" || pathname === "/stats" || pathname === "/book" || pathname === "/whatsapp") {
     return (

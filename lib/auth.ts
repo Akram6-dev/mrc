@@ -2,6 +2,7 @@ export interface User {
   id: string
   username: string
   name: string
+  role: "super_admin" | "admin"
 }
 
 class AuthService {
@@ -12,12 +13,20 @@ class AuthService {
     const res = await fetch("/api/settings")
     if (!res.ok) throw new Error("Gagal mengambil data admin")
     const settings = await res.json()
-    const admin = settings.admin
-    if (username === admin.username && password === admin.password) {
+    const users = [
+      ...(settings.users || []),
+      { id: "1", username: settings.admin.username, password: settings.admin.password, role: "super_admin" },
+    ]
+    const account = users.find(
+      (user: { username: string; password: string }) => user.username === username && user.password === password,
+    )
+
+    if (account) {
       const user: User = {
-        id: "1",
-        username: admin.username,
+        id: account.id,
+        username: account.username,
         name: settings.siteName,
+        role: account.role,
       }
       if (typeof window !== "undefined") {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user))
@@ -37,13 +46,24 @@ class AuthService {
   getCurrentUser(): User | null {
     if (typeof window !== "undefined") {
       const userData = localStorage.getItem(this.STORAGE_KEY)
-      return userData ? JSON.parse(userData) : null
+      if (!userData) return null
+
+      const user = JSON.parse(userData)
+      return { ...user, role: user.role || "super_admin" }
     }
     return null
   }
 
   isAuthenticated(): boolean {
     return this.getCurrentUser() !== null
+  }
+
+  canAccess(pathname: string): boolean {
+    const user = this.getCurrentUser()
+    if (!user) return false
+    if (user.role === "super_admin") return true
+
+    return ["/", "/peminjaman", "/pengembalian", "/riwayat"].includes(pathname)
   }
 }
 
