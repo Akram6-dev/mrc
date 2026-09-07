@@ -220,6 +220,8 @@ export default function AnalisisPage() {
         loansByHourWeekday={loansByHourWeekday}
         loansByDate={loansByDate}
         allLoans={loans}
+        allBorrowers={borrowers}
+        allItems={items}
       />
     </div>
   );

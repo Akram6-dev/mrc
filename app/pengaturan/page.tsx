@@ -629,20 +629,21 @@ export default function PengaturanPage() {
                         Hapus semua data aplikasi. Tindakan ini tidak dapat dibatalkan!
                       </p>
                       <button
-                        onClick={() => {
-                          if (
-                            confirm(
-                              "Apakah Anda yakin ingin menghapus semua data? Tindakan ini tidak dapat dibatalkan!",
-                            )
-                          ) {
+                        onClick={async () => {
+                          if (!confirm("Apakah Anda yakin ingin menghapus semua data? Tindakan ini tidak dapat dibatalkan!")) return
+
+                          setError("")
+                          setSuccess("")
+                          try {
+                            const res = await fetch("/api/reset", { method: "POST" })
+                            if (!res.ok) throw new Error("Reset gagal")
                             localStorage.clear()
-                            setSuccess("Data berhasil direset")
+                            setSuccess("Semua data berhasil direset")
+                          } catch {
+                            setError("Gagal mereset semua data")
                           }
                         }}
-                        className={`flex items-center px-5 py-2 rounded-lg font-medium bg-red-600 text-white focus:ring-2 focus:ring-red-400 transition-colors shadow-sm disabled:opacity-50 ${
-                          !true ? "hover:bg-red-700" : ""
-                        }`}
-                        disabled={true}
+                        className="flex items-center px-5 py-2 rounded-lg font-medium bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-400 transition-colors shadow-sm"
                       >
                         <Trash2 className="w-4 h-4 mr-2" />
                         Reset Semua Data

@@ -5,6 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "start /B node scripts/notificationScheduler.js && next dev -p 80",
+    "bot": "npm --prefix mrc-bot start",
+    "dev:all": "start \"MRC WhatsApp Bot\" /B cmd /c \"npm run bot\" && npm run dev",
     "lint": "next lint",
     "start": "start /B node scripts/notificationScheduler.js && next start -p 80"
   },

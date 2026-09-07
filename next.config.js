@@ -5,6 +5,8 @@ const withPWA = require("next-pwa")({
   disable: process.env.NODE_ENV === "development" || process.env.VERCEL_ENV === "preview",
 })
 
+const mrcBotUrl = process.env.MRC_BOT_URL || "http://127.0.0.1:3000"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -33,7 +35,7 @@ const nextConfig = {
     return [
       {
         source: '/external/:path*',
-        destination: 'http://145.10.0.6:3000/:path*',
+        destination: `${mrcBotUrl}/:path*`,
       },
     ]
   },

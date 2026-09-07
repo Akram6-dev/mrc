@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+/mrc-bot/node_modules/
+/mrc-bot/auth_info/
+/mrc-bot/tmp/
 
 # next.js
 /.next/

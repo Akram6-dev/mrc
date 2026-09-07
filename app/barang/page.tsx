@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Search, Edit, Trash2, Filter, Image as ImageIcon } from "lucide-react"
+import { Plus, Search, Edit, Trash2, Filter, Image as ImageIcon, Table2 } from "lucide-react"
 // Icon components mapping (lucide-react)
 import {
   Laptop,
@@ -185,6 +185,35 @@ export default function BarangPage() {
     setFilteredItems(filtered)
   }
 
+  const handleExportItems = async () => {
+    const XLSX = await import("xlsx")
+    const rows = filteredItems.flatMap((item) => {
+      const serials = Array.isArray(item.items) ? item.items : []
+      if (serials.length === 0) {
+        return [{
+          Nama: item.name,
+          Kategori: item.category,
+          Deskripsi: item.description || "",
+          Serial: "",
+          Status: "",
+          Kondisi: "",
+        }]
+      }
+      return serials.map((serial: any) => ({
+        Nama: item.name,
+        Kategori: item.category,
+        Deskripsi: item.description || "",
+        Serial: serial.sn || serial.rfidCode || "",
+        Status: serial.status === 1 ? "Tersedia" : serial.status === 0 ? "Dipinjam" : "Tidak tersedia",
+        Kondisi: serial.condition === 1 ? "Baik" : serial.condition === 0 ? "Rusak" : "Hilang",
+      }))
+    })
+    const worksheet = XLSX.utils.json_to_sheet(rows)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Barang")
+    XLSX.writeFile(workbook, `mrc-barang-${new Date().toISOString().split("T")[0]}.xlsx`)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
@@ -321,6 +350,13 @@ export default function BarangPage() {
             <p className="text-sm text-gray-600 dark:text-gray-400">Kelola data barang yang tersedia untuk dipinjam</p>
           </div>
           <div className="flex items-center gap-3 mt-4 md:mt-0">
+            <button
+              onClick={handleExportItems}
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg shadow-sm"
+            >
+              <Table2 className="w-5 h-5" />
+              Export Excel
+            </button>
             <button
               onClick={() => router.push('/barang/detail')}
               className="bg-accent-500 hover:bg-accent-600 text-white text-sm font-medium px-3 py-2 rounded-lg transition-all shadow-soft hover:shadow-medium transform hover:scale-[1.02] active:scale-[0.98] flex items-center duration-300 select-none cursor-pointer"

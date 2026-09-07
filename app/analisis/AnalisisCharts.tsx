@@ -38,13 +38,13 @@ const ICON_OPTIONS = [
 ];
 
 import { PieChart, Pie, Cell, LabelList } from "recharts";
-import { TrendingUp } from "lucide-react";
+import { Download, TrendingUp } from "lucide-react";
 import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import itemsDB from '../../database/items.json';
 
 
@@ -57,19 +57,218 @@ export default function AnalisisCharts({
     topItems,
     loansByHourWeekday,
     loansByDate,
-    allLoans
+    allLoans,
+    allBorrowers,
+    allItems
 }: any) {
     // Only weekdays
     const weekdayNames = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
+
+    const getLoanDate = (loan: any) => new Date(loan.createdAt || loan.borrowDate || loan.loanDate);
+    const validLoanDates = (Array.isArray(allLoans) ? allLoans : [])
+        .map((loan: any) => getLoanDate(loan))
+        .filter((date: Date) => !isNaN(date.getTime()));
+    const latestLoanDate = [...validLoanDates].sort((a: Date, b: Date) => b.getTime() - a.getTime())[0] || new Date();
+    const availableYears = Array.from(new Set(validLoanDates.map((date: Date) => date.getFullYear()))).sort((a, b) => b - a);
+    const [selectedYear, setSelectedYear] = useState<number | "all">("all");
+    const [selectedMonth, setSelectedMonth] = useState<number | "all">("all");
+    const [pieWeek, setPieWeek] = useState<number | "all">("all");
+    const [averageWeek, setAverageWeek] = useState<number | "all">("all");
+    const [hourlyWeek, setHourlyWeek] = useState<number | "all">("all");
+
+    const filteredLoans = useMemo(() => (Array.isArray(allLoans) ? allLoans : []).filter((loan: any) => {
+        const date = getLoanDate(loan);
+        return !isNaN(date.getTime()) &&
+            (selectedYear === "all" || date.getFullYear() === selectedYear) &&
+            (selectedMonth === "all" || date.getMonth() === selectedMonth);
+    }), [allLoans, selectedMonth, selectedYear]);
+
+    const filterControls = (
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+            <select value={selectedMonth} onChange={(event) => setSelectedMonth(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Bulan</option>
+                {Array.from({ length: 12 }, (_, month) => <option key={month} value={month}>{new Date(2000, month, 1).toLocaleString("id-ID", { month: "long" })}</option>)}
+            </select>
+            <select value={selectedYear} onChange={(event) => setSelectedYear(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Tahun</option>
+                {availableYears.map((year) => <option key={year} value={year}>{year}</option>)}
+            </select>
+        </div>
+    );
+
+    const weekControls = (value: number | "all", onChange: (value: number | "all") => void) => (
+        <select value={value} onChange={(event) => onChange(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+            <option value="all">Semua Minggu</option>
+            {Array.from({ length: 5 }, (_, index) => <option key={index + 1} value={index + 1}>Minggu {index + 1}</option>)}
+        </select>
+    );
+
+    const exportCard = async (fileName: string, rows: any[]) => {
+        try {
+            const XLSX = await import("xlsx");
+            const exportRows = rows.map((row: any) => Object.fromEntries(
+                Object.entries(row).map(([key, value]) => [
+                    key,
+                    value !== null && typeof value === "object" ? JSON.stringify(value) : value,
+                ]),
+            ));
+            const worksheet = XLSX.utils.json_to_sheet(exportRows);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+            const yearLabel = selectedYear === "all" ? "semua-tahun" : selectedYear;
+            const monthLabel = selectedMonth === "all" ? "semua-bulan" : String(Number(selectedMonth) + 1).padStart(2, "0");
+            XLSX.writeFile(workbook, `${fileName}-${yearLabel}-${monthLabel}.xlsx`);
+        } catch (error) {
+            console.error("Gagal mengekspor data analisis", error);
+            window.alert("Data gagal diekspor. Silakan coba lagi.");
+        }
+    };
+
+    const borrowerMap = useMemo(() => {
+        const map: Record<string, any> = {};
+        (Array.isArray(allBorrowers) ? allBorrowers : []).forEach((borrower: any) => { map[String(borrower.id)] = borrower; });
+        return map;
+    }, [allBorrowers]);
+
+    const rankBorrowers = (predicate: (loan: any) => boolean = () => true) => {
+        const counts: Record<string, number> = {};
+        filteredLoans.filter(predicate).forEach((loan: any) => {
+            if (loan.borrowerId) counts[String(loan.borrowerId)] = (counts[String(loan.borrowerId)] || 0) + 1;
+        });
+        return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([id, count]) => ({
+            ...(borrowerMap[id] || {}), id, name: borrowerMap[id]?.name || id, count,
+        }));
+    };
+
+    const filteredTopBorrowers = useMemo(() => rankBorrowers(), [filteredLoans, borrowerMap]);
+    const filteredTopReturners = useMemo(() => rankBorrowers((loan) => !!loan.returnDate && !!loan.dueDate && new Date(loan.returnDate) <= new Date(loan.dueDate)), [filteredLoans, borrowerMap]);
+    const filteredTopLateReturners = useMemo(() => rankBorrowers((loan) => !!loan.returnDate && !!loan.dueDate && new Date(loan.returnDate) > new Date(loan.dueDate)), [filteredLoans, borrowerMap]);
+
+    const itemMap = useMemo(() => {
+        const map: Record<string, any> = {};
+        (Array.isArray(allItems) ? allItems : []).forEach((item: any) => {
+            map[String(item.id)] = item;
+            (item.items || []).forEach((serial: any) => {
+                const key = serial.rfidCode || serial.sn;
+                if (key) map[String(key)] = { ...item, serial: key };
+            });
+        });
+        return map;
+    }, [allItems]);
+
+    const filteredTopItems = useMemo(() => {
+        const counts: Record<string, number> = {};
+        filteredLoans.forEach((loan: any) => (loan.items || []).forEach((entry: any) => {
+            const key = typeof entry === "string" ? entry : entry?.itemId || entry?.id || entry?.rfidCode || entry?.sn;
+            if (key) counts[String(key)] = (counts[String(key)] || 0) + (typeof entry?.quantity === "number" ? entry.quantity : 1);
+        }));
+        const grouped: Record<string, any> = {};
+        Object.entries(counts).forEach(([key, count]) => {
+            const item = itemMap[key] || { id: key, name: key };
+            const itemId = String(item.id || key);
+            grouped[itemId] = { ...item, id: itemId, count: (grouped[itemId]?.count || 0) + count };
+        });
+        return Object.values(grouped).sort((a: any, b: any) => b.count - a.count).slice(0, 10);
+    }, [filteredLoans, itemMap]);
+
+    const filteredTopSerials = useMemo(() => {
+        const counts: Record<string, number> = {};
+        filteredLoans.forEach((loan: any) => (loan.items || []).forEach((entry: any) => {
+            const serial = entry?.rfidCode || entry?.sn || entry?.serial;
+            if (serial) counts[String(serial)] = (counts[String(serial)] || 0) + 1;
+        }));
+        return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([serial, count]) => ({
+            serial, sn: itemMap[serial]?.serial || serial, item: itemMap[serial], count,
+        }));
+    }, [filteredLoans, itemMap]);
+
+    const filterByWeek = (loans: any[], week: number | "all") => loans.filter((loan: any) => {
+        if (week === "all") return true;
+        const date = getLoanDate(loan);
+        const weekStart = (week - 1) * 7 + 1;
+        return date.getDate() >= weekStart && date.getDate() <= (week === 5 ? 31 : week * 7);
+    });
+    const filteredPieLoans = useMemo(() => filterByWeek(filteredLoans, pieWeek), [filteredLoans, pieWeek]);
+    const filteredAverageLoans = useMemo(() => filterByWeek(filteredLoans, averageWeek), [filteredLoans, averageWeek]);
+
+    const hourlyMonth = useMemo(() => {
+        const latest = [...validLoanDates].sort((a: Date, b: Date) => b.getTime() - a.getTime())[0] || new Date();
+        return {
+            year: selectedYear === "all" ? latest.getFullYear() : selectedYear,
+            month: selectedMonth === "all" ? latest.getMonth() : selectedMonth,
+        };
+    }, [selectedMonth, selectedYear, validLoanDates]);
+
+    const startOfCalendarWeek = (date: Date) => {
+        const result = new Date(date);
+        const day = result.getDay();
+        result.setDate(result.getDate() - (day === 0 ? 6 : day - 1));
+        result.setHours(0, 0, 0, 0);
+        return result;
+    };
+
+    const addDays = (date: Date, days: number) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    };
+
+    const filteredLoansByHourWeekday = useMemo(() => {
+        const rows = Array.from({ length: 24 }, (_, hour) => {
+            const row: any = { hour };
+            weekdayNames.forEach((weekday) => (row[weekday] = 0));
+            return row;
+        });
+        const monthStart = new Date(hourlyMonth.year, hourlyMonth.month, 1);
+        const monthEnd = new Date(hourlyMonth.year, hourlyMonth.month + 1, 0, 23, 59, 59, 999);
+        let rangeStart = monthStart;
+        let rangeEnd = monthEnd;
+
+        if (hourlyWeek !== "all") {
+            rangeStart = addDays(startOfCalendarWeek(monthStart), (hourlyWeek - 1) * 7);
+            rangeEnd = addDays(rangeStart, 6);
+        }
+
+        (Array.isArray(allLoans) ? allLoans : []).forEach((loan: any) => {
+            const date = getLoanDate(loan);
+            if (isNaN(date.getTime()) || date < rangeStart || date > rangeEnd) return;
+
+            const day = date.getDay();
+            if (day >= 1 && day <= 5) {
+                rows[date.getHours()][weekdayNames[day - 1]]++;
+            }
+        });
+        return rows;
+    }, [allLoans, hourlyMonth, hourlyWeek]);
 
     // --- Pie Chart: Hari Paling Sering Ada Peminjaman ---
     // loansByDate: [{date, Peminjaman}]
     // loansByHourWeekday: [{hour, Senin, Selasa, ...}]
     // But we need to count by weekday from all loans
     // Pie chart: only weekdays (Senin=1, ..., Jumat=5)
+    const filteredLoansByDate = useMemo(() => {
+        const counts = new Map<string, number>();
+        filteredPieLoans.forEach((loan: any) => {
+            const date = getLoanDate(loan);
+            const key = date.toISOString().slice(0, 10);
+            counts.set(key, (counts.get(key) || 0) + 1);
+        });
+        return Array.from(counts.entries()).sort(([a], [b]) => a.localeCompare(b)).map(([date, count]) => ({ date, Peminjaman: count }));
+    }, [filteredPieLoans]);
+
+    const filteredAverageLoansByDate = useMemo(() => {
+        const counts = new Map<string, number>();
+        filteredAverageLoans.forEach((loan: any) => {
+            const date = getLoanDate(loan);
+            const key = date.toISOString().slice(0, 10);
+            counts.set(key, (counts.get(key) || 0) + 1);
+        });
+        return Array.from(counts.entries()).sort(([a], [b]) => a.localeCompare(b)).map(([date, count]) => ({ date, Peminjaman: count }));
+    }, [filteredAverageLoans]);
+
     const pieData = useMemo(() => {
         const counts = Array(5).fill(0); // 0: Senin, 1: Selasa, ...
-        loansByDate.forEach((row: any) => {
+        filteredLoansByDate.forEach((row: any) => {
             const d = new Date(row.date);
             if (!isNaN(d.getTime())) {
                 const day = d.getDay();
@@ -80,7 +279,7 @@ export default function AnalisisCharts({
             }
         });
         return weekdayNames.map((name, idx) => ({ name, value: counts[idx] }));
-    }, [loansByDate]);
+    }, [filteredLoansByDate]);
 
     // --- Infografis: Rata-rata Durasi Peminjaman, Rata-rata Peminjaman per Hari, dst ---
     // We need all loans (not just aggregated)
@@ -93,13 +292,13 @@ export default function AnalisisCharts({
         let durations: number[] = [];
         let onTime = 0, late = 0;
         let totalItems = 0, countItems = 0;
-        if (Array.isArray(loansByDate) && loansByDate.length > 0) {
-            minDate = new Date(loansByDate[0].date);
-            maxDate = new Date(loansByDate[loansByDate.length - 1].date);
-            totalLoans = loansByDate.reduce((sum, row) => sum + (row.Peminjaman || 0), 0);
+        if (filteredAverageLoansByDate.length > 0) {
+            minDate = new Date(filteredAverageLoansByDate[0].date);
+            maxDate = new Date(filteredAverageLoansByDate[filteredAverageLoansByDate.length - 1].date);
+            totalLoans = filteredAverageLoansByDate.reduce((sum, row) => sum + (row.Peminjaman || 0), 0);
         }
-        if (Array.isArray(allLoans) && allLoans.length > 0) {
-            allLoans.forEach((l: any) => {
+        if (filteredAverageLoans.length > 0) {
+            filteredAverageLoans.forEach((l: any) => {
                 // Durasi
                 if (l.loanDate && l.returnDate) {
                     const start = new Date(l.loanDate);
@@ -188,7 +387,7 @@ export default function AnalisisCharts({
             percentLate,
             avgItemsPerLoan,
         };
-    }, [loansByDate, allLoans]);
+    }, [filteredAverageLoansByDate, filteredAverageLoans]);
 
     // Pie chart colors
     // Match bar chart colors: Senin - blue, Selasa - green, Rabu - yellow, Kamis - orange, Jumat - red
@@ -209,6 +408,8 @@ export default function AnalisisCharts({
                     <CardHeader className="items-center pb-1 pt-3">
                         <CardTitle className="text-base font-semibold text-center">Distribusi Hari Peminjaman</CardTitle>
                         <CardDescription className="text-xs text-center">Hari-hari dengan jumlah peminjaman terbanyak</CardDescription>
+                        {filterControls}
+                        {weekControls(pieWeek, setPieWeek)}
                     </CardHeader>
                     <CardContent className="flex-1 flex items-center justify-center p-4">
                         <ChartContainer
@@ -262,6 +463,8 @@ export default function AnalisisCharts({
                     <CardHeader className="pb-1 pt-3">
                         <CardTitle className="text-base font-semibold text-center">Infografis Rata-rata</CardTitle>
                         <CardDescription className="text-xs text-center">Statistik rata-rata dari seluruh data peminjaman</CardDescription>
+                        {filterControls}
+                        {weekControls(averageWeek, setAverageWeek)}
                     </CardHeader>
                     <CardContent className="pt-3 pb-2">
                         <div className="grid grid-cols-2 gap-x-6 gap-y-3 w-full text-base">
@@ -329,11 +532,12 @@ export default function AnalisisCharts({
                     <CardHeader className="pb-1 pt-3">
                         <CardTitle className="text-base font-semibold">Distribusi Jam Peminjaman per Hari</CardTitle>
                         <CardDescription className="text-xs">Jumlah peminjaman pada setiap jam, dipisah per hari</CardDescription>
+                        {weekControls(hourlyWeek, setHourlyWeek)}
                     </CardHeader>
                     <CardContent className="pt-0">
                         <div className="w-full h-72">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={loansByHourWeekday} margin={{ top: 8, right: 16, left: 0, bottom: 0 }} barCategoryGap={2}>
+                                <BarChart data={filteredLoansByHourWeekday} margin={{ top: 8, right: 16, left: 0, bottom: 0 }} barCategoryGap={2}>
                                     <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                                     <XAxis
                                         dataKey="hour"
@@ -392,8 +596,9 @@ export default function AnalisisCharts({
                         <CardDescription className="text-xs">Setiap peminjaman dihitung 1</CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0">
-                        <div className="w-full h-72">
-                            <ResponsiveContainer width="100%" height="100%">
+                        <div className="w-full overflow-x-auto pb-2">
+                            <div className="h-72" style={{ minWidth: `${Math.max(900, loansByDate.length * 64)}px` }}>
+                                <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={loansByDate} margin={{ left: 12, right: 12 }}>
                                     <defs>
                                         <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
@@ -402,19 +607,20 @@ export default function AnalisisCharts({
                                         </linearGradient>
                                     </defs>
                                     <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
-                                    <XAxis
-                                        dataKey="date"
-                                        tickLine={false}
-                                        axisLine={false}
-                                        tickMargin={8}
-                                        tickFormatter={(value) => value.slice(5)}
-                                        className="text-gray-500 dark:text-gray-400"
-                                        tick={{
-                                            fontFamily: 'inherit',
-                                            fontSize: 12,
-                                            fill: 'currentColor',
-                                        }}
-                                    />
+                                        <XAxis
+                                            dataKey="date"
+                                            interval={0}
+                                            tickLine={false}
+                                            axisLine={false}
+                                            tickMargin={8}
+                                            tickFormatter={(value) => value.slice(5)}
+                                            className="text-gray-500 dark:text-gray-400"
+                                            tick={{
+                                                fontFamily: 'inherit',
+                                                fontSize: 12,
+                                                fill: 'currentColor',
+                                            }}
+                                        />
                                     <YAxis
                                         allowDecimals={false}
                                         className="text-gray-500 dark:text-gray-400"
@@ -447,8 +653,9 @@ export default function AnalisisCharts({
                                         stroke="#2563eb"
                                         strokeWidth={2}
                                     />
-                                </AreaChart>
-                            </ResponsiveContainer>
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            </div>
                         </div>
                     </CardContent>
                     <CardFooter>
@@ -497,8 +704,9 @@ export default function AnalisisCharts({
                 {/* Terbanyak Pinjam */}
                 <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
                     <CardHeader className="pb-1 pt-3">
-                        <CardTitle className="text-base font-semibold">10 Guru Terbanyak Meminjam</CardTitle>
+                        <div className="flex items-center justify-between gap-2"><CardTitle className="text-base font-semibold">10 Guru Terbanyak Meminjam</CardTitle><button type="button" onClick={() => exportCard("guru-terbanyak-meminjam", filteredTopBorrowers)} className="text-gray-600 hover:text-blue-600" title="Ekspor Excel"><Download className="h-4 w-4" /></button></div>
                         <CardDescription className="text-xs">Berdasarkan jumlah transaksi peminjaman</CardDescription>
+                        {filterControls}
                     </CardHeader>
                     <CardContent className="pt-0">
                         <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
@@ -509,7 +717,7 @@ export default function AnalisisCharts({
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {topBorrowers.map((b: any) => (
+                                {filteredTopBorrowers.map((b: any) => (
                                     <TableRow key={b.id}>
                                         <TableCell className="px-3 py-2">{b.name}</TableCell>
                                         <TableCell className="px-3 py-2 text-center font-bold">{b.count}</TableCell>
@@ -522,8 +730,9 @@ export default function AnalisisCharts({
                 {/* Tepat Waktu */}
                 <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
                     <CardHeader className="pb-1 pt-3">
-                        <CardTitle className="text-base font-semibold">10 Guru Paling Rajin Mengembalikan (Tepat Waktu)</CardTitle>
+                        <div className="flex items-center justify-between gap-2"><CardTitle className="text-base font-semibold">10 Guru Paling Rajin Mengembalikan (Tepat Waktu)</CardTitle><button type="button" onClick={() => exportCard("guru-tepat-waktu", filteredTopReturners)} className="text-gray-600 hover:text-blue-600" title="Ekspor Excel"><Download className="h-4 w-4" /></button></div>
                         <CardDescription className="text-xs">Pengembalian sebelum atau sama dengan tanggal jatuh tempo</CardDescription>
+                        {filterControls}
                     </CardHeader>
                     <CardContent className="pt-0">
                         <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
@@ -534,7 +743,7 @@ export default function AnalisisCharts({
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {topReturners.map((b: any) => (
+                                {filteredTopReturners.map((b: any) => (
                                     <TableRow key={b.id}>
                                         <TableCell className="px-3 py-2">{b.name}</TableCell>
                                         <TableCell className="px-3 py-2 text-center font-bold">{b.count}</TableCell>
@@ -547,8 +756,9 @@ export default function AnalisisCharts({
                 {/* Terlambat */}
                 <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
                     <CardHeader className="pb-1 pt-3">
-                        <CardTitle className="text-base font-semibold">10 Guru Paling Sering Terlambat</CardTitle>
+                        <div className="flex items-center justify-between gap-2"><CardTitle className="text-base font-semibold">10 Guru Paling Sering Terlambat</CardTitle><button type="button" onClick={() => exportCard("guru-terlambat", filteredTopLateReturners)} className="text-gray-600 hover:text-blue-600" title="Ekspor Excel"><Download className="h-4 w-4" /></button></div>
                         <CardDescription className="text-xs">Pengembalian setelah tanggal jatuh tempo</CardDescription>
+                        {filterControls}
                     </CardHeader>
                     <CardContent className="pt-0">
                         <Table className="text-sm bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
@@ -559,7 +769,7 @@ export default function AnalisisCharts({
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {topLateReturners.map((b: any) => (
+                                {filteredTopLateReturners.map((b: any) => (
                                     <TableRow key={b.id}>
                                         <TableCell className="px-3 py-2">{b.name}</TableCell>
                                         <TableCell className="px-3 py-2 text-center font-bold">{b.count}</TableCell>
@@ -575,8 +785,9 @@ export default function AnalisisCharts({
                 {/* Left: 10 jenis barang yang sering dipinjam */}
                 <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
                     <CardHeader className="pb-1 pt-3">
-                        <CardTitle className="text-base font-semibold">10 Jenis Barang Paling Sering Dipinjam</CardTitle>
+                        <div className="flex items-center justify-between gap-2"><CardTitle className="text-base font-semibold">10 Jenis Barang Paling Sering Dipinjam</CardTitle><button type="button" onClick={() => exportCard("jenis-barang-terbanyak", filteredTopItems)} className="text-gray-600 hover:text-blue-600" title="Ekspor Excel"><Download className="h-4 w-4" /></button></div>
                         <CardDescription className="text-xs">Urutan berdasarkan total jumlah dipinjam terbanyak (per jenis)</CardDescription>
+                        {filterControls}
                     </CardHeader>
                     <CardContent className="pt-0">
                         <div className="overflow-x-auto">
@@ -590,7 +801,7 @@ export default function AnalisisCharts({
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {topItems.map((i: any, idx: number) => {
+                                    {filteredTopItems.map((i: any, idx: number) => {
                                         const Icon = ICON_OPTIONS.find(opt => opt.value === (i.icon || "laptop"))?.icon || Laptop;
 
                                         // Resolve item id (support new "id" and older "itemId")
@@ -650,8 +861,9 @@ export default function AnalisisCharts({
                 {/* Right: Top 10 per-serial */}
                 <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl">
                     <CardHeader className="pb-1 pt-3">
-                        <CardTitle className="text-base font-semibold">10 Serial Paling Sering Dipinjam</CardTitle>
+                        <div className="flex items-center justify-between gap-2"><CardTitle className="text-base font-semibold">10 Serial Paling Sering Dipinjam</CardTitle><button type="button" onClick={() => exportCard("serial-terbanyak-dipinjam", filteredTopSerials)} className="text-gray-600 hover:text-blue-600" title="Ekspor Excel"><Download className="h-4 w-4" /></button></div>
                         <CardDescription className="text-xs">Top 10 berdasarkan serial number — menunjukkan serial individual yang paling sering dipinjam</CardDescription>
+                        {filterControls}
                     </CardHeader>
                     <CardContent className="pt-0">
                         <div className="overflow-x-auto">
@@ -713,7 +925,7 @@ export default function AnalisisCharts({
                                         serialArr.sort((a, b) => b.count - a.count);
                                         const topSerials = serialArr.slice(0, 10);
 
-                                        return topSerials.map((s: any, idx: number) => (
+                                        return filteredTopSerials.map((s: any, idx: number) => (
                                             <TableRow key={s.serial} className="hover:bg-gray-50 dark:hover:bg-gray-900/40 transition-colors">
                                                 <TableCell className="px-3 py-2 text-center font-bold">{idx + 1}</TableCell>
                                                 <TableCell className="px-3 py-2">{s.sn}</TableCell>

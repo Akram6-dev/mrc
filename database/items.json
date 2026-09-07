@@ -11,21 +11,21 @@
         "sn": "PF051WVE",
         "status": 0,
         "condition": 0,
-        "loanId": "1767666754164"
+        "loanId": "1784879377862"
       },
       {
         "rfidCode": "150021523",
         "sn": "PF07VGWV",
         "status": 0,
         "condition": 1,
-        "loanId": "1767666305562"
+        "loanId": "1784879436430"
       },
       {
         "rfidCode": "1442990964",
         "sn": "PF052471",
-        "status": 0,
+        "status": 2,
         "condition": 1,
-        "loanId": "1767668277860"
+        "loanId": "1788137699623"
       },
       {
         "rfidCode": "149927443",
@@ -93,9 +93,9 @@
       {
         "rfidCode": "0177051075",
         "sn": "PF057WEG",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1764663220080"
+        "loanId": null
       },
       {
         "rfidCode": "1382240728",
@@ -239,7 +239,7 @@
       }
     ],
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2026-01-06T02:57:57.893Z",
+    "updatedAt": "2026-09-07T10:06:23.969Z",
     "stock": 33,
     "serialSearch": "",
     "image": "/assets/img/1760406973256.jpg"
@@ -254,16 +254,16 @@
       {
         "rfidCode": "0154334948",
         "sn": "X8A41900578",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1766552817874"
+        "loanId": null
       },
       {
         "rfidCode": "1380566968",
         "sn": "X8A41700568",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1763345557284"
+        "loanId": null
       },
       {
         "rfidCode": "2939832620",
@@ -283,7 +283,7 @@
         "rfidCode": "0131530707",
         "sn": "X8A40Z01640",
         "status": 1,
-        "condition": 1,
+        "condition": 0,
         "loanId": null
       },
       {
@@ -297,42 +297,35 @@
         "rfidCode": "0854329079",
         "sn": "X8A41106180",
         "status": 1,
-        "condition": 1,
-        "loanId": null
-      },
-      {
-        "rfidCode": "1453456180",
-        "sn": "WFEK6200197",
-        "status": 1,
-        "condition": 1,
+        "condition": 0,
         "loanId": null
       },
       {
         "rfidCode": "1324439387",
         "sn": "X8A44X01796",
         "status": 1,
-        "condition": 1,
+        "condition": 0,
         "loanId": null
       },
       {
         "rfidCode": "1321947195",
         "sn": "X8A44X01691",
         "status": 1,
-        "condition": 1,
+        "condition": 0,
         "loanId": null
       },
       {
         "rfidCode": "0154334947",
         "sn": "X8A44X01779",
         "status": 1,
-        "condition": 1,
+        "condition": 0,
         "loanId": null
       },
       {
         "rfidCode": "0842397383",
         "sn": "X8A44X01674",
         "status": 1,
-        "condition": 1,
+        "condition": 0,
         "loanId": null
       },
       {
@@ -344,8 +337,8 @@
       }
     ],
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2026-01-06T02:57:57.922Z",
-    "stock": 13,
+    "updatedAt": "2026-09-07T10:06:24.042Z",
+    "stock": 12,
     "serialSearch": "",
     "image": "/assets/img/1760408189747.jpg"
   },
@@ -358,9 +351,9 @@
     "items": [
       {
         "rfidCode": "HDMI001",
-        "status": 1,
+        "status": 0,
         "condition": 1,
-        "loanId": null
+        "loanId": "1784779242415"
       },
       {
         "rfidCode": "HDMI002",
@@ -442,7 +435,7 @@
       }
     ],
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2026-01-06T02:57:57.951Z",
+    "updatedAt": "2026-09-07T10:06:24.112Z",
     "image": "/assets/img/1760421697842.png",
     "serialSearch": "",
     "stock": 14
@@ -456,21 +449,21 @@
     "items": [
       {
         "rfidCode": "TRL001",
-        "status": 0,
-        "condition": 1,
-        "loanId": "1766110839098"
-      },
-      {
-        "rfidCode": "TRL002",
-        "status": 0,
-        "condition": 1,
-        "loanId": "1767666225844"
-      },
-      {
-        "rfidCode": "TRL003",
         "status": 1,
         "condition": 1,
         "loanId": null
+      },
+      {
+        "rfidCode": "TRL002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL003",
+        "status": 2,
+        "condition": 1,
+        "loanId": "1788137699623"
       },
       {
         "rfidCode": "TRL004",
@@ -617,7 +610,7 @@
       }
     ],
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2026-01-06T02:57:57.978Z",
+    "updatedAt": "2026-09-07T10:06:24.220Z",
     "stock": 25,
     "serialSearch": "",
     "image": "/assets/img/1760421889541.webp"
@@ -655,7 +648,7 @@
       }
     ],
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2026-01-06T02:57:58.005Z",
+    "updatedAt": "2026-09-07T10:06:24.317Z",
     "image": "/assets/img/1760422046967.jpg",
     "serialSearch": "",
     "stock": 4
@@ -669,21 +662,21 @@
     "items": [
       {
         "rfidCode": "LNVTPM001",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1761963297369"
+        "loanId": null
       },
       {
         "rfidCode": "LNVTPM002",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1762764432804"
+        "loanId": null
       },
       {
         "rfidCode": "LNVTPM003",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1765246864440"
+        "loanId": null
       },
       {
         "rfidCode": "LNVTPM004",
@@ -750,13 +743,20 @@
         "status": 1,
         "condition": 1,
         "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM015",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
       }
     ],
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2026-01-06T02:57:58.032Z",
+    "updatedAt": "2026-09-07T10:06:24.391Z",
     "image": "/assets/img/1760422192877.webp",
     "serialSearch": "",
-    "stock": 14
+    "stock": 15
   },
   {
     "name": "Mouse",
@@ -767,9 +767,9 @@
     "items": [
       {
         "rfidCode": "MSE001",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1765517403739"
+        "loanId": null
       },
       {
         "rfidCode": "MSE002",
@@ -851,7 +851,7 @@
       }
     ],
     "createdAt": "2025-08-20T02:03:43.398Z",
-    "updatedAt": "2026-01-06T02:57:58.058Z",
+    "updatedAt": "2026-09-07T10:06:24.460Z",
     "image": "/assets/img/1760422356679.jpg",
     "serialSearch": "",
     "stock": 14
@@ -895,7 +895,7 @@
       }
     ],
     "createdAt": "2025-08-25T05:55:09.869Z",
-    "updatedAt": "2026-01-06T02:57:58.086Z",
+    "updatedAt": "2026-09-07T10:06:24.529Z",
     "image": "/assets/img/1760422410717.jpg",
     "serialSearch": "",
     "stock": 5
@@ -921,7 +921,7 @@
       }
     ],
     "createdAt": "2025-08-27T03:58:44.262Z",
-    "updatedAt": "2026-01-06T02:57:58.112Z",
+    "updatedAt": "2026-09-07T10:06:24.628Z",
     "image": "/assets/img/1760422492923.webp",
     "serialSearch": "",
     "stock": 2
@@ -936,21 +936,21 @@
       {
         "rfidCode": "TAB001",
         "sn": "747",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1756288100244"
+        "loanId": null
       },
       {
         "rfidCode": "TAB002",
         "status": 0,
         "condition": 1,
-        "loanId": "1761883144315"
+        "loanId": "1785481145438"
       },
       {
         "rfidCode": "TAB003",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1763944259016"
+        "loanId": null
       },
       {
         "rfidCode": "TAB004",
@@ -963,13 +963,111 @@
         "status": 1,
         "condition": 1,
         "loanId": null
+      },
+      {
+        "rfidCode": "TAB006",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB007",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB008",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB009",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB010",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB011",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1111",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "2222",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "3333",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "4444",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "555",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "66666",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "7777",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "8888",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
       }
     ],
     "createdAt": "2025-08-27T09:46:52.966Z",
-    "updatedAt": "2026-01-06T02:57:58.140Z",
+    "updatedAt": "2026-09-07T10:06:24.737Z",
     "image": "/assets/img/1760422663355.jfif",
     "serialSearch": "",
-    "stock": 5
+    "stock": 19
   },
   {
     "name": "Tangga Teleskopik",
@@ -986,7 +1084,7 @@
       }
     ],
     "createdAt": "2025-09-04T00:51:04.431Z",
-    "updatedAt": "2026-01-06T02:57:58.166Z",
+    "updatedAt": "2026-09-07T10:06:24.795Z",
     "image": "/assets/img/1760422868475.png",
     "serialSearch": "",
     "stock": 1
@@ -1014,18 +1112,18 @@
         "rfidCode": "USBLAN003",
         "status": 1,
         "condition": 1,
-        "loanId": "1760597065644"
+        "loanId": null
       },
       {
         "rfidCode": "USBLAN004",
         "sn": "",
         "status": 1,
         "condition": 1,
-        "loanId": "1760597065644"
+        "loanId": null
       }
     ],
     "createdAt": "2025-09-04T07:05:19.963Z",
-    "updatedAt": "2026-01-06T02:57:58.192Z",
+    "updatedAt": "2026-09-07T10:06:24.881Z",
     "image": "/assets/img/1760422905339.jpg",
     "serialSearch": "",
     "stock": 4
@@ -1042,13 +1140,20 @@
         "status": 1,
         "condition": 1,
         "loanId": null
+      },
+      {
+        "rfidCode": "TRP002",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
       }
     ],
     "createdAt": "2025-09-15T01:09:16.984Z",
-    "updatedAt": "2026-01-06T02:57:58.218Z",
+    "updatedAt": "2026-09-07T10:06:24.942Z",
     "image": "/assets/img/1760422935106.jpg",
     "serialSearch": "",
-    "stock": 1
+    "stock": 2
   },
   {
     "name": "USB-B",
@@ -1065,7 +1170,7 @@
       }
     ],
     "createdAt": "2025-10-06T05:35:13.994Z",
-    "updatedAt": "2026-01-06T02:57:58.244Z",
+    "updatedAt": "2026-09-07T10:06:25.001Z",
     "image": "/assets/img/1760423019819.jfif",
     "serialSearch": "",
     "stock": 1
@@ -1089,7 +1194,7 @@
     "stock": 1,
     "id": "1761621927855",
     "createdAt": "2025-10-28T03:25:27.855Z",
-    "updatedAt": "2026-01-06T02:57:58.271Z"
+    "updatedAt": "2026-09-07T10:06:25.101Z"
   },
   {
     "name": "Lenovo V310",
@@ -1101,27 +1206,34 @@
       {
         "rfidCode": "012345678",
         "sn": "012345678",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1761883091447"
+        "loanId": null
+      },
+      {
+        "rfidCode": "0123456789",
+        "sn": "12345678",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
       }
     ],
     "serialSearch": "",
-    "stock": 1,
+    "stock": 2,
     "id": "1761882488737",
     "createdAt": "2025-10-31T03:48:08.737Z",
-    "updatedAt": "2026-01-06T02:57:58.299Z"
+    "updatedAt": "2026-09-07T10:06:25.185Z"
   },
   {
-    "name": "Switch tp-link",
-    "category": "Elektronik",
+    "name": "LENOVO V310",
+    "category": "ELEKTRONIK",
     "description": "",
-    "icon": "other",
-    "image": "/assets/img/1762826176289.jpg",
+    "icon": "laptop",
+    "image": "",
     "items": [
       {
-        "rfidCode": "08765",
-        "sn": "123456",
+        "rfidCode": "111111",
+        "sn": "1111111",
         "status": 1,
         "condition": 1,
         "loanId": null
@@ -1129,71 +1241,92 @@
     ],
     "serialSearch": "",
     "stock": 1,
-    "id": "1762825717289",
-    "createdAt": "2025-11-11T01:48:37.289Z",
-    "updatedAt": "2026-01-06T02:57:58.325Z"
+    "id": "1776155598559",
+    "createdAt": "2026-04-14T08:33:18.559Z",
+    "updatedAt": "2026-09-07T10:06:25.246Z"
   },
   {
-    "name": "Logitech MK220",
-    "category": "Elektronik",
-    "description": "",
-    "icon": "keyboard",
+    "name": "Tesss",
+    "category": "alat elektronik",
+    "description": "ini hanya pengetesan\n",
+    "icon": "other",
     "image": "",
     "items": [
       {
-        "rfidCode": "LGTCH123",
-        "sn": "123",
+        "rfidCode": "123456",
+        "sn": "789123456",
         "status": 0,
         "condition": 1,
-        "loanId": "1763342443324"
-      }
-    ],
-    "serialSearch": "",
-    "stock": 1,
-    "id": "1763342396555",
-    "createdAt": "2025-11-17T01:19:56.555Z",
-    "updatedAt": "2026-01-06T02:57:58.351Z"
-  },
-  {
-    "name": "Keyboard Lenovo",
-    "category": "Elektronik",
-    "description": "",
-    "icon": "keyboard",
-    "image": "",
-    "items": [
+        "loanId": "1788747092007"
+      },
       {
-        "rfidCode": "KBLNV001",
-        "sn": "65746315456",
+        "rfidCode": "98765",
+        "sn": "12345678",
+        "status": 0,
+        "condition": 0,
+        "loanId": "1788772822794"
+      },
+      {
+        "rfidCode": "18939",
+        "sn": "6812378",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775372336"
+      },
+      {
+        "rfidCode": "1234567",
+        "sn": "12345678",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775336275"
+      },
+      {
+        "rfidCode": "777",
+        "sn": "888",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775492914"
+      },
+      {
+        "rfidCode": "111222",
+        "sn": "3334",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775289397"
+      },
+      {
+        "rfidCode": "3456789",
+        "sn": "234567",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775411157"
+      },
+      {
+        "rfidCode": "45678",
+        "sn": "87654",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775551558"
+      },
+      {
+        "rfidCode": "876543",
+        "sn": "63242",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775583782"
+      },
+      {
+        "rfidCode": "47362",
+        "sn": "665356",
         "status": 1,
         "condition": 1,
         "loanId": null
       }
     ],
     "serialSearch": "",
-    "stock": 1,
-    "id": "1763709648326",
-    "createdAt": "2025-11-21T07:20:48.326Z",
-    "updatedAt": "2026-01-06T02:57:58.377Z"
-  },
-  {
-    "name": "HDMI Splitter Vention",
-    "category": "Elektronik",
-    "description": "",
-    "icon": "plug",
-    "image": "",
-    "items": [
-      {
-        "rfidCode": "0230928329",
-        "sn": "SPLT001",
-        "status": 1,
-        "condition": 1,
-        "loanId": null
-      }
-    ],
-    "serialSearch": "",
-    "stock": 1,
-    "id": "1765517317938",
-    "createdAt": "2025-12-12T05:28:37.938Z",
-    "updatedAt": "2026-01-06T02:57:58.403Z"
+    "stock": 10,
+    "id": "1788315049865",
+    "createdAt": "2026-09-02T02:10:49.865Z",
+    "updatedAt": "2026-09-07T10:06:25.304Z"
   }
 ]

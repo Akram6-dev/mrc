@@ -3,7 +3,7 @@
   "theme": "light",
   "admin": {
     "username": "admin",
-    "password": "nesas1965!"
+    "password": "admin123"
   },
   "notifications": {
     "overdueReminders": true,
@@ -13,12 +13,30 @@
     "defaultLoanDays": 1,
     "maxLoanItems": 20,
     "returnConfirmation": true,
-    "borrowConfirmation": true
-  },
-  "messages": {
-    "aiReply": true,
-    "loanMessage": true,
-    "returnMessage": true,
-    "reminderMessage": true
+    "borrowConfirmation": false
   }
 }
+// {
+//   "siteName": "Administrator",
+//   "theme": "light",
+//   "admin": {
+//     "username": "admin",
+//     "password": "nesas1965!"
+//   },
+//   "notifications": {
+//     "overdueReminders": true,
+//     "returnReminders": true
+//   },
+//   "system": {
+//     "defaultLoanDays": 1,
+//     "maxLoanItems": 20,
+//     "returnConfirmation": true,
+//     "borrowConfirmation": true
+//   },
+//   "messages": {
+//     "aiReply": true,
+//     "loanMessage": true,
+//     "returnMessage": true,
+//     "reminderMessage": true
+//   }
+// }
