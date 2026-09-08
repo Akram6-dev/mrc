@@ -35,8 +35,8 @@ function invalidateCache(...urls: string[]) {
 
 // Items API
 
-export async function getItems(): Promise<Item[]> {
-  return getCached<Item[]>('/api/items')
+export async function getItems(includeDeleted = false): Promise<Item[]> {
+  return getCached<Item[]>(includeDeleted ? '/api/items?includeDeleted=true' : '/api/items')
 }
 
 
@@ -47,6 +47,7 @@ export async function createItem(item: Omit<Item, 'id' | 'createdAt' | 'updatedA
     body: JSON.stringify(item),
   })
   const data = await res.json()
+  if (!res.ok) throw new Error(data.error || 'Gagal menghapus barang')
   invalidateCache('/api/items')
   return data
 }
@@ -71,14 +72,15 @@ export async function deleteItem(id: string): Promise<{ success: boolean }> {
     body: JSON.stringify({ id }),
   })
   const data = await res.json()
+  if (!res.ok) throw new Error(data.error || 'Gagal menghapus barang')
   invalidateCache('/api/items')
   return data
 }
 
 // Borrowers API
 
-export async function getBorrowers(): Promise<Borrower[]> {
-  return getCached<Borrower[]>('/api/borrowers')
+export async function getBorrowers(includeDeleted = false): Promise<Borrower[]> {
+  return getCached<Borrower[]>(includeDeleted ? '/api/borrowers?includeDeleted=true' : '/api/borrowers')
 }
 
 
@@ -113,6 +115,7 @@ export async function deleteBorrower(id: string): Promise<{ success: boolean }> 
     body: JSON.stringify({ id }),
   })
   const data = await res.json()
+  if (!res.ok) throw new Error(data.error || 'Gagal menghapus peminjam')
   invalidateCache('/api/borrowers')
   return data
 }
@@ -121,6 +124,10 @@ export async function deleteBorrower(id: string): Promise<{ success: boolean }> 
 
 export async function getLoans(): Promise<Loan[]> {
   return getCached<Loan[]>('/api/loans')
+}
+
+export async function getLoanHistory(): Promise<Loan[]> {
+  return getCached<Loan[]>('/api/loans/history')
 }
 
 
@@ -155,6 +162,7 @@ export async function deleteLoan(id: string): Promise<{ success: boolean }> {
     body: JSON.stringify({ id }),
   })
   const data = await res.json()
+  if (!res.ok) throw new Error(data.error || 'Gagal menghapus peminjaman')
   invalidateCache('/api/loans')
   return data
 }
@@ -201,6 +209,7 @@ const api = {
   updateItem,
   deleteItem,
   getLoans,
+  getLoanHistory,
   createLoan,
   updateLoan,
   deleteLoan,

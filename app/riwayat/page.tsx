@@ -106,7 +106,6 @@ export default function RiwayatPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [monthFilter, setMonthFilter] = useState<string>("all");
-  const [yearFilter, setYearFilter] = useState<string>("all");
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc"); // terbaru default
   const [page, setPage] = useState(1);
   const [detailLoan, setDetailLoan] = useState<LoanWithDetails | null>(null);
@@ -134,16 +133,16 @@ export default function RiwayatPage() {
 
   useEffect(() => {
     filterLoans();
-  }, [loansWithDetails, search, statusFilter, monthFilter, yearFilter, sortOrder]);
+  }, [loansWithDetails, search, statusFilter, monthFilter, sortOrder]);
 
   const loadLoans = async () => {
     try {
       setIsLoading(true);
-      // Fetch all loans, items, and borrowers
+      // Fetch recent history, items, and borrowers
       const [loansData, items, borrowers] = await Promise.all([
-        api.getLoans(),
-        api.getItems(),
-        api.getBorrowers(),
+        api.getLoanHistory(),
+        api.getItems(true),
+        api.getBorrowers(true),
       ]);
 
       // Index borrowers and items by id for fast lookup
@@ -319,15 +318,12 @@ export default function RiwayatPage() {
         return loan.status === "dipinjam" && days <= 3 && days >= 0;
       });
     }
-    // Filter by month and year
-    if (monthFilter !== "all" || yearFilter !== "all") {
+    // Filter by month within the already-limited recent three-month window
+    if (monthFilter !== "all") {
       filtered = filtered.filter((loan) => {
         const date = new Date(loan.borrowDate);
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
-        const year = date.getFullYear().toString();
-        const monthMatch = monthFilter === "all" || month === monthFilter;
-        const yearMatch = yearFilter === "all" || year === yearFilter;
-        return monthMatch && yearMatch;
+        const month = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+        return month === monthFilter;
       });
     }
     // Sort by createdAt
@@ -346,6 +342,19 @@ export default function RiwayatPage() {
     (page - 1) * PAGE_SIZE,
     page * PAGE_SIZE
   );
+  const recentMonths = Array.from(
+    new Map(
+      loansWithDetails
+        .map((loan) => {
+          const date = new Date(loan.borrowDate);
+          return [
+            `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
+            date.toLocaleString("id-ID", { month: "long" }),
+          ] as const;
+        })
+        .sort(([first], [second]) => second.localeCompare(first)),
+    ),
+  ).slice(0, 3);
 
   const getStatusBadge = (loan: LoanWithDetails) => {
     if (loan.status === "dikembalikan") {
@@ -440,7 +449,6 @@ export default function RiwayatPage() {
                   search,
                   status: statusFilter,
                   month: monthFilter,
-                  year: yearFilter,
                   sort: sortOrder,
                 });
                 window.open(`/print?${params.toString()}`, '_blank');
@@ -491,31 +499,8 @@ export default function RiwayatPage() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Semua Bulan</SelectItem>
-                <SelectItem value="01">Januari</SelectItem>
-                <SelectItem value="02">Februari</SelectItem>
-                <SelectItem value="03">Maret</SelectItem>
-                <SelectItem value="04">April</SelectItem>
-                <SelectItem value="05">Mei</SelectItem>
-                <SelectItem value="06">Juni</SelectItem>
-                <SelectItem value="07">Juli</SelectItem>
-                <SelectItem value="08">Agustus</SelectItem>
-                <SelectItem value="09">September</SelectItem>
-                <SelectItem value="10">Oktober</SelectItem>
-                <SelectItem value="11">November</SelectItem>
-                <SelectItem value="12">Desember</SelectItem>
-              </SelectContent>
-            </Select>
-
-            {/* Tahun */}
-            <Select value={yearFilter} onValueChange={setYearFilter}>
-              <SelectTrigger className="input-field">
-                <SelectValue placeholder="Tahun" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Semua Tahun</SelectItem>
-                {/* Generate unique years from loansWithDetails */}
-                {Array.from(new Set(loansWithDetails.map(l => new Date(l.borrowDate).getFullYear()))).sort((a, b) => b - a).map((year) => (
-                  <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+                {recentMonths.map(([value, label]) => (
+                  <SelectItem key={value} value={value}>{label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

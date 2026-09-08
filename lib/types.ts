@@ -30,6 +30,8 @@ export interface Item {
   icon?: string;
   items?: ItemSerial[];
   image?: string;
+  deletedAt?: string;
+  deletedBy?: string;
 }
 
 export interface Borrower {
@@ -43,6 +45,8 @@ export interface Borrower {
   createdAt: string
   updatedAt: string
   isFrozen?: boolean
+  deletedAt?: string
+  deletedBy?: string
 }
 
 
@@ -67,6 +71,8 @@ export interface Loan {
   returnedBy?: string;
   createdAt: string;
   updatedAt: string;
+  deletedAt?: string;
+  deletedBy?: string;
 }
 
 export interface LoanWithDetails extends Loan {

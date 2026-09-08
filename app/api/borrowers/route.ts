@@ -23,12 +23,14 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const idParams = searchParams.getAll('id')
   const borrowers = await readBorrowers()
+  const includeDeleted = searchParams.get("includeDeleted") === "true"
+  const visibleBorrowers = includeDeleted ? borrowers : borrowers.filter((borrower) => !borrower.deletedAt)
   if (idParams.length === 0) {
-    return NextResponse.json(borrowers)
+    return NextResponse.json(visibleBorrowers)
   }
   // idParams bisa array atau satuan, filter borrowers
   const idSet = new Set(idParams)
-  const filtered = borrowers.filter(b => idSet.has(b.id))
+  const filtered = visibleBorrowers.filter(b => idSet.has(b.id))
   return NextResponse.json(filtered)
 }
 
@@ -67,9 +69,17 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const body = await req.json()
-  let borrowers = await readBorrowers()
-  const before = borrowers.length
-  borrowers = borrowers.filter(b => b.id !== body.id)
+  const borrowers = await readBorrowers()
+  const index = borrowers.findIndex((borrower) => borrower.id === body.id && !borrower.deletedAt)
+  if (index === -1) return NextResponse.json({ success: false }, { status: 404 })
+  const actor = getActor(req)
+  borrowers[index] = {
+    ...borrowers[index],
+    deletedAt: new Date().toISOString(),
+    deletedBy: actor.username,
+    updatedAt: new Date().toISOString(),
+  }
   await writeBorrowers(borrowers)
-  return NextResponse.json({ success: borrowers.length < before })
+  await writeAuditLog({ ...actor, action: "delete", entity: "peminjam", description: `Menghapus peminjam ${body.id}` })
+  return NextResponse.json({ success: true })
 }

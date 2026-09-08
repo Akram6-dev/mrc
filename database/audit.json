@@ -1,5 +1,59 @@
 [
   {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo G40-45",
+    "id": "1788859842885",
+    "createdAt": "2026-09-08T09:30:42.885Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788859564647",
+    "id": "1788859842127",
+    "createdAt": "2026-09-08T09:30:42.127Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo G40-45",
+    "id": "1788859568988",
+    "createdAt": "2026-09-08T09:26:08.988Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788859564647 untuk 122",
+    "id": "1788859564749",
+    "createdAt": "2026-09-08T09:26:04.749Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788857749780",
+    "createdAt": "2026-09-08T08:55:49.780Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788857728558",
+    "createdAt": "2026-09-08T08:55:28.558Z"
+  },
+  {
     "username": "asep",
     "role": "admin",
     "action": "update",

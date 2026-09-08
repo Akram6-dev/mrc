@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 import path from "path";
 
 const DATABASE_PATH = path.join(process.cwd(), "database");
-const DATA_FILES = ["items.json", "borrowers.json", "loans.json", "bookings.json", "notifications.json"];
+const DATA_FILES = ["items.json", "borrowers.json", "loans.json", "loan-history.json", "bookings.json", "notifications.json"];
 
 export async function POST() {
   try {

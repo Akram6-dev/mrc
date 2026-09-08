@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { MessageCircle, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { auth } from "@/lib/auth"
 
 export default function WhatsAppPage() {
   const [status, setStatus] = useState("offline")
@@ -16,7 +17,8 @@ export default function WhatsAppPage() {
   const loadWhatsApp = async () => {
     setLoading(true)
     try {
-      const statusResponse = await fetch("/api/whatsapp/status", { cache: "no-store" })
+      const headers = auth.getAuthHeaders()
+      const statusResponse = await fetch("/api/whatsapp/status", { cache: "no-store", headers })
       const statusData = await statusResponse.json()
       setStatus(statusData.status || "offline")
       setError(statusData.error || null)
@@ -24,13 +26,13 @@ export default function WhatsAppPage() {
       setConnectedAt(statusData.connectedAt || null)
 
       if (statusData.hasQr) {
-        const qrResponse = await fetch("/api/whatsapp/qr", { cache: "no-store" })
+        const qrResponse = await fetch("/api/whatsapp/qr", { cache: "no-store", headers })
         const qrData = await qrResponse.json()
         setQr(qrResponse.ok ? qrData.qr : null)
       } else {
         setQr(null)
       }
-      const logResponse = await fetch("/api/whatsapp/notification-log", { cache: "no-store" })
+      const logResponse = await fetch("/api/whatsapp/notification-log", { cache: "no-store", headers })
       if (logResponse.ok) setLogs(await logResponse.json())
     } catch {
       setStatus("offline")

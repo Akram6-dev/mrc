@@ -142,17 +142,19 @@ export default function Sidebar() {
           })}
         </nav>
 
-        <div className="px-4 pb-3">
-          <button
-            type="button"
-            onClick={() => router.push("/whatsapp")}
-            className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors"
-          >
-            <MessageCircle className="mr-3 h-5 w-5" />
-            WhatsApp Bot
-            <span className="ml-auto h-2.5 w-2.5 rounded-full bg-gray-400" />
-          </button>
-        </div>
+        {user?.role === "super_admin" && (
+          <div className="px-4 pb-3">
+            <button
+              type="button"
+              onClick={() => router.push("/whatsapp")}
+              className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors"
+            >
+              <MessageCircle className="mr-3 h-5 w-5" />
+              WhatsApp Bot
+              <span className="ml-auto h-2.5 w-2.5 rounded-full bg-gray-400" />
+            </button>
+          </div>
+        )}
 
         {/* Bottom section */}
         <div className="flex-shrink-0 border-t border-gray-200 dark:border-gray-700 p-4 space-y-3">

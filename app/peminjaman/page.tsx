@@ -171,7 +171,7 @@ export default function PeminjamanPage() {
         if (!serial) {
           throw new Error(`Serial number ${loanItem.rfidCode} tidak ditemukan`);
         }
-        if (serial.status !== 1) {
+        if (serial.status !== 1 || serial.condition === -1) {
           throw new Error(`Serial number ${loanItem.rfidCode} tidak tersedia untuk dipinjam`);
         }
       }
@@ -629,7 +629,7 @@ export default function PeminjamanPage() {
                         category: item.category,
                         description: item.description,
                       })))
-                      .filter((serial) => serial.status === 1 && !loanItems.some(li => li.rfidCode === serial.rfidCode));
+                      .filter((serial) => serial.status === 1 && serial.condition !== -1 && !loanItems.some(li => li.rfidCode === serial.rfidCode));
                     // Filter by search
                     const filtered = serialSearch.trim() === ""
                       ? availableSerials

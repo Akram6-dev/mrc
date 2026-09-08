@@ -42643,5 +42643,24 @@
     "createdBy": "asep",
     "createdAt": "2026-09-08T04:28:30.459Z",
     "updatedAt": "2026-09-08T04:28:30.459Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "149927443",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T16:26:03+07:00",
+    "dueDate": "2026-09-09T16:00:00+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM0088982254",
+    "id": "1788859564647",
+    "createdBy": "admin",
+    "createdAt": "2026-09-08T09:26:04.647Z",
+    "updatedAt": "2026-09-08T09:30:42.060Z",
+    "returnDate": "2026-09-08T09:30:42.011Z",
+    "returnedBy": "admin"
   }
 ]

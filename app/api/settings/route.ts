@@ -33,7 +33,8 @@ const defaultSettings = {
   }
 };
 
-function mergeSettings(input: any) {
+function mergeSettings(input: any, includeDeletedUsers = false) {
+  const users = Array.isArray(input.users) ? input.users : defaultSettings.users
   return {
     ...defaultSettings,
     ...input,
@@ -41,7 +42,7 @@ function mergeSettings(input: any) {
       ...defaultSettings.admin,
       ...(input.admin || {})
     },
-    users: Array.isArray(input.users) ? input.users : defaultSettings.users,
+    users: includeDeletedUsers ? users : users.filter((user: any) => !user.deletedAt),
     notifications: {
       ...defaultSettings.notifications,
       ...(input.notifications || {})
@@ -72,7 +73,11 @@ export async function GET() {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const merged = mergeSettings(body);
+    const existing = JSON.parse(await fs.readFile(SETTINGS_PATH, "utf-8"));
+    const existingDeletedUsers = Array.isArray(existing.users)
+      ? existing.users.filter((user: any) => user.deletedAt && !(body.users || []).some((incoming: any) => incoming.id === user.id))
+      : [];
+    const merged = mergeSettings({ ...body, users: [...(body.users || []), ...existingDeletedUsers] }, true);
     await fs.writeFile(SETTINGS_PATH, JSON.stringify(merged, null, 2));
     return NextResponse.json({ success: true });
   } catch (e) {

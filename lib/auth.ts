@@ -14,7 +14,7 @@ class AuthService {
     if (!res.ok) throw new Error("Gagal mengambil data admin")
     const settings = await res.json()
     const users = [
-      ...(settings.users || []),
+      ...(settings.users || []).filter((user: { deletedAt?: string }) => !user.deletedAt),
       { id: "1", username: settings.admin.username, password: settings.admin.password, role: "super_admin" },
     ]
     const account = users.find(

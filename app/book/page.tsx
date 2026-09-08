@@ -41,7 +41,7 @@ export default function BookPublicPage() {
             setBorrowers(borrowers);
             setItems(items);
             setBookingItems(
-                items.map((item: any) => ({ itemId: item.id, name: item.name, qty: 0, max: (item.items?.filter((s: any) => s.status === 1).length || 0) }))
+                items.map((item: any) => ({ itemId: item.id, name: item.name, qty: 0, max: (item.items?.filter((s: any) => s.status === 1 && (s.condition === 1 || String(s.condition) === "1")).length || 0) }))
             );
         }).finally(() => setIsLoading(false));
     }, []);
@@ -159,7 +159,7 @@ export default function BookPublicPage() {
             setSelectedBorrower("");
             setBorrowerSearch("");
             setBorrowerValidationMsg(null);
-            setBookingItems(items.map((item: any) => ({ itemId: item.id, name: item.name, qty: 0, max: (item.items?.filter((s: any) => s.status === 1).length || 0) })));
+            setBookingItems(items.map((item: any) => ({ itemId: item.id, name: item.name, qty: 0, max: (item.items?.filter((s: any) => s.status === 1 && (s.condition === 1 || String(s.condition) === "1")).length || 0) })));
             setStartDate(undefined);
             setDuration(1);
             setNotes("");

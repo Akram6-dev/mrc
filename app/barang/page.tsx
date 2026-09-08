@@ -134,10 +134,10 @@ export default function BarangPage() {
     try {
       setIsLoading(true)
       const data = await api.getItems()
-      // Map: stock = jumlah seluruh serials (items array), items = array serials (for form/UI)
+      // Stock excludes serials marked as missing.
       const mapped = data.map((item: any) => ({
         ...item,
-        stock: Array.isArray(item.items) ? item.items.length : 0,
+        stock: Array.isArray(item.items) ? item.items.filter((s: any) => s.condition !== -1).length : 0,
         items: Array.isArray(item.items)
           ? item.items.map((s: any) => ({
             rfidCode: s.rfidCode,
@@ -549,15 +549,19 @@ export default function BarangPage() {
                                 {/* Status badge only, not editable */}
                                 <span
                                   className={`inline-block px-2 py-1 rounded text-xs font-semibold
-                                  ${s.status === 1
+                                    ${s.condition === -1
+                                      ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+                                      : s.status === 1
                                       ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
                                       : s.status === 2
                                         ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
                                         : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"}
                                 `}
                                 >
-                                  {s.status === 1
-                                    ? "Tersedia"
+                                  {s.condition === -1
+                                    ? "Hilang"
+                                    : s.status === 1
+                                      ? "Tersedia"
                                     : s.status === 2
                                       ? "Dibooking"
                                       : "Dipinjam"}
@@ -577,7 +581,7 @@ export default function BarangPage() {
                                   <SelectContent>
                                     <SelectItem value="1">Baik</SelectItem>
                                     <SelectItem value="0">Rusak</SelectItem>
-                                    <SelectItem value="-1">Hilang</SelectItem>
+                                    {editingItem && <SelectItem value="-1">Hilang</SelectItem>}
                                   </SelectContent>
                                 </Select>
                                 <Button
@@ -758,7 +762,7 @@ export default function BarangPage() {
                     const rusak = item.items?.filter((s: any) => s.condition === 0).length || 0;
                     const hilang = item.items?.filter((s: any) => s.condition === -1).length || 0;
                     // Status counts
-                    const tersedia = item.items?.filter((s: any) => s.status === 1).length || 0;
+                    const tersedia = item.items?.filter((s: any) => s.status === 1 && s.condition !== -1).length || 0;
                     const dipinjam = item.items?.filter((s: any) => s.status === 0).length || 0;
                     const dibooking = item.items?.filter((s: any) => s.status === 2).length || 0;
                     return <>

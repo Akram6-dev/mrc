@@ -19,9 +19,10 @@ async function writeItems(items: Item[]) {
   await fs.writeFile(DB_PATH, JSON.stringify(items, null, 2), 'utf-8')
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const items = await readItems()
-  return NextResponse.json(items)
+  const includeDeleted = new URL(req.url).searchParams.get("includeDeleted") === "true"
+  return NextResponse.json(includeDeleted ? items : items.filter((item) => !item.deletedAt))
 }
 
 export async function POST(req: NextRequest) {
@@ -54,13 +55,20 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const body = await req.json()
-  let items = await readItems()
-  const before = items.length
-  items = items.filter(i => i.id !== body.id)
-  await writeItems(items)
-  if (items.length < before) {
-    const actor = getActor(req)
-    await writeAuditLog({ ...actor, action: "delete", entity: "barang", description: `Menghapus barang ${body.id}` })
+  const items = await readItems()
+  const index = items.findIndex((item) => item.id === body.id && !item.deletedAt)
+  if (index === -1) return NextResponse.json({ success: false }, { status: 404 })
+  if (items[index].items?.some((serial) => serial.status === 0 || serial.status === 2)) {
+    return NextResponse.json({ success: false, error: "Barang masih dipinjam atau dibooking" }, { status: 409 })
   }
-  return NextResponse.json({ success: items.length < before })
+  const actor = getActor(req)
+  items[index] = {
+    ...items[index],
+    deletedAt: new Date().toISOString(),
+    deletedBy: actor.username,
+    updatedAt: new Date().toISOString(),
+  }
+  await writeItems(items)
+  await writeAuditLog({ ...actor, action: "delete", entity: "barang", description: `Menghapus barang ${body.id}` })
+  return NextResponse.json({ success: true })
 }

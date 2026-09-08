@@ -14,7 +14,6 @@ export default function PrintRiwayatPage() {
   const search = searchParams?.get('search')?.toLowerCase() || '';
   const status = searchParams?.get('status') || 'all';
   const month = searchParams?.get('month') || 'all';
-  const year = searchParams?.get('year') || 'all';
   const sort = (searchParams?.get('sort') as 'asc' | 'desc') || 'desc';
 
 
@@ -23,9 +22,9 @@ export default function PrintRiwayatPage() {
       try {
         setLoading(true);
         const [loansData, items, borrowers] = await Promise.all([
-          api.getLoans(),
-          api.getItems(),
-          api.getBorrowers(),
+          api.getLoanHistory(),
+          api.getItems(true),
+          api.getBorrowers(true),
         ]);
 
         // Index borrowers and items by id for fast lookup
@@ -127,14 +126,11 @@ export default function PrintRiwayatPage() {
   if (status !== "all") {
     filtered = filtered.filter((loan) => loan.status === status);
   }
-  if (month !== "all" || year !== "all") {
+  if (month !== "all") {
     filtered = filtered.filter((loan) => {
       const date = new Date(loan.borrowDate);
-      const m = (date.getMonth() + 1).toString().padStart(2, "0");
-      const y = date.getFullYear().toString();
-      const monthMatch = month === "all" || m === month;
-      const yearMatch = year === "all" || y === year;
-      return monthMatch && yearMatch;
+      const m = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+      return m === month;
     });
   }
   // Sort by createdAt

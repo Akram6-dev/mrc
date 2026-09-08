@@ -28,7 +28,7 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
       category: item.category,
       description: item.description,
     })))
-    .filter((serial) => serial.status === 1 && !disabledSerials.includes(serial.rfidCode));
+    .filter((serial) => serial.status === 1 && serial.condition !== -1 && !disabledSerials.includes(serial.rfidCode));
 
   // Filter by search (serial number or item name)
   const filtered = search.trim() === ""

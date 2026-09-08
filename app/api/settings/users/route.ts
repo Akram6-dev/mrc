@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     const settings = JSON.parse(await fs.readFile(SETTINGS_PATH, "utf-8"));
     const users = Array.isArray(settings.users) ? settings.users : [];
-    const duplicate = users.some((user: any) => user.username?.toLowerCase() === username.toLowerCase())
+    const duplicate = users.some((user: any) => !user.deletedAt && user.username?.toLowerCase() === username.toLowerCase())
       || settings.admin?.username?.toLowerCase() === username.toLowerCase();
     if (duplicate) {
       return NextResponse.json({ error: "Username sudah digunakan" }, { status: 409 });
@@ -45,11 +45,11 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const settings = JSON.parse(await fs.readFile(SETTINGS_PATH, "utf-8"));
     const users = Array.isArray(settings.users) ? settings.users : [];
-    const index = users.findIndex((user: any) => user.id === body.id && user.role === "admin");
+    const index = users.findIndex((user: any) => user.id === body.id && user.role === "admin" && !user.deletedAt);
     if (index === -1) return NextResponse.json({ error: "Akun admin tidak ditemukan" }, { status: 404 });
     const username = typeof body.username === "string" ? body.username.trim() : "";
     if (!username) return NextResponse.json({ error: "Username wajib diisi" }, { status: 400 });
-    const duplicate = users.some((user: any, userIndex: number) => userIndex !== index && user.username?.toLowerCase() === username.toLowerCase())
+    const duplicate = users.some((user: any, userIndex: number) => userIndex !== index && !user.deletedAt && user.username?.toLowerCase() === username.toLowerCase())
       || settings.admin?.username?.toLowerCase() === username.toLowerCase();
     if (duplicate) return NextResponse.json({ error: "Username sudah digunakan" }, { status: 409 });
     users[index] = { ...users[index], username, ...(body.password ? { password: body.password } : {}) };
@@ -70,10 +70,16 @@ export async function DELETE(req: NextRequest) {
     const body = await req.json();
     const settings = JSON.parse(await fs.readFile(SETTINGS_PATH, "utf-8"));
     const users = Array.isArray(settings.users) ? settings.users : [];
-    const user = users.find((entry: any) => entry.id === body.id && entry.role === "admin");
+    const userIndex = users.findIndex((entry: any) => entry.id === body.id && entry.role === "admin" && !entry.deletedAt);
+    const user = userIndex === -1 ? null : users[userIndex];
     if (!user) return NextResponse.json({ error: "Akun admin tidak ditemukan" }, { status: 404 });
-    await fs.writeFile(SETTINGS_PATH, JSON.stringify({ ...settings, users: users.filter((entry: any) => entry.id !== body.id) }, null, 2), "utf-8");
     const actor = getActor(req);
+    users[userIndex] = {
+      ...user,
+      deletedAt: new Date().toISOString(),
+      deletedBy: actor.username,
+    };
+    await fs.writeFile(SETTINGS_PATH, JSON.stringify({ ...settings, users }, null, 2), "utf-8");
     await writeAuditLog({ ...actor, action: "delete", entity: "akun admin", description: `Menghapus akun admin ${user.username}` });
     return NextResponse.json({ success: true });
   } catch {

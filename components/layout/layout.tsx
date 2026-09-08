@@ -15,7 +15,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname()
   const router = useRouter()
-  const isPublicPath = ["/login", "/book", "/print", "/whatsapp"].includes(pathname)
+  const isPublicPath = ["/login", "/book", "/print"].includes(pathname)
 
   useEffect(() => {
     if (!isPublicPath && !auth.isAuthenticated()) {
@@ -27,6 +27,10 @@ export default function Layout({ children }: LayoutProps) {
       router.replace("/")
     }
   }, [isPublicPath, pathname, router])
+
+  if (!isPublicPath && !auth.isAuthenticated()) {
+    return null
+  }
 
   if (pathname === "/login" || pathname === "/print" || pathname === "/stats" || pathname === "/book" || pathname === "/whatsapp") {
     return (
