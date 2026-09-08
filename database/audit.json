@@ -1,5 +1,572 @@
 [
   {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788841726452",
+    "createdAt": "2026-09-08T04:28:46.452Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang LENOVO V310",
+    "id": "1788841725803",
+    "createdAt": "2026-09-08T04:28:45.803Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo V310",
+    "id": "1788841724689",
+    "createdAt": "2026-09-08T04:28:44.689Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang HDMI to VGA",
+    "id": "1788841724110",
+    "createdAt": "2026-09-08T04:28:44.110Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang USB-B",
+    "id": "1788841723168",
+    "createdAt": "2026-09-08T04:28:43.168Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tripod Stand HP",
+    "id": "1788841722479",
+    "createdAt": "2026-09-08T04:28:42.479Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang USB to LAN",
+    "id": "1788841721415",
+    "createdAt": "2026-09-08T04:28:41.415Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tangga Teleskopik",
+    "id": "1788841720713",
+    "createdAt": "2026-09-08T04:28:40.713Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tablet ADVAN 8001",
+    "id": "1788841718056",
+    "createdAt": "2026-09-08T04:28:38.056Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Layar Proyektor",
+    "id": "1788841717396",
+    "createdAt": "2026-09-08T04:28:37.396Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Kabel UTP",
+    "id": "1788841716310",
+    "createdAt": "2026-09-08T04:28:36.310Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Mouse",
+    "id": "1788841715864",
+    "createdAt": "2026-09-08T04:28:35.864Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo Ideapad 320 Core i3",
+    "id": "1788841714847",
+    "createdAt": "2026-09-08T04:28:34.847Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Speaker Bluetooth",
+    "id": "1788841713979",
+    "createdAt": "2026-09-08T04:28:33.979Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Terminal Listrik",
+    "id": "1788841712900",
+    "createdAt": "2026-09-08T04:28:32.900Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Kabel HDMI",
+    "id": "1788841712778",
+    "createdAt": "2026-09-08T04:28:32.778Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Proyektor",
+    "id": "1788841711932",
+    "createdAt": "2026-09-08T04:28:31.932Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo G40-45",
+    "id": "1788841711248",
+    "createdAt": "2026-09-08T04:28:31.248Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788841710459 untuk 1788751103501",
+    "id": "1788841710474",
+    "createdAt": "2026-09-08T04:28:30.474Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788841513445",
+    "createdAt": "2026-09-08T04:25:13.445Z"
+  },
+  {
+    "username": "asep",
+    "role": "admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788841040614",
+    "id": "1788841512908",
+    "createdAt": "2026-09-08T04:25:12.908Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "akun admin",
+    "description": "Menambahkan akun admin asep",
+    "id": "1788841312641",
+    "createdAt": "2026-09-08T04:21:52.641Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788841057738",
+    "createdAt": "2026-09-08T04:17:37.738Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang LENOVO V310",
+    "id": "1788841056824",
+    "createdAt": "2026-09-08T04:17:36.824Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo V310",
+    "id": "1788841056215",
+    "createdAt": "2026-09-08T04:17:36.215Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang HDMI to VGA",
+    "id": "1788841055272",
+    "createdAt": "2026-09-08T04:17:35.272Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang USB-B",
+    "id": "1788841054710",
+    "createdAt": "2026-09-08T04:17:34.710Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tripod Stand HP",
+    "id": "1788841053566",
+    "createdAt": "2026-09-08T04:17:33.566Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang USB to LAN",
+    "id": "1788841052958",
+    "createdAt": "2026-09-08T04:17:32.958Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tangga Teleskopik",
+    "id": "1788841050248",
+    "createdAt": "2026-09-08T04:17:30.248Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tablet ADVAN 8001",
+    "id": "1788841049715",
+    "createdAt": "2026-09-08T04:17:29.715Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Layar Proyektor",
+    "id": "1788841048780",
+    "createdAt": "2026-09-08T04:17:28.780Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Kabel UTP",
+    "id": "1788841048690",
+    "createdAt": "2026-09-08T04:17:28.690Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Mouse",
+    "id": "1788841048025",
+    "createdAt": "2026-09-08T04:17:28.025Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo Ideapad 320 Core i3",
+    "id": "1788841047107",
+    "createdAt": "2026-09-08T04:17:27.107Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Speaker Bluetooth",
+    "id": "1788841046463",
+    "createdAt": "2026-09-08T04:17:26.463Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Terminal Listrik",
+    "id": "1788841045289",
+    "createdAt": "2026-09-08T04:17:25.289Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Kabel HDMI",
+    "id": "1788841045161",
+    "createdAt": "2026-09-08T04:17:25.161Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Proyektor",
+    "id": "1788841044274",
+    "createdAt": "2026-09-08T04:17:24.274Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo G40-45",
+    "id": "1788841041343",
+    "createdAt": "2026-09-08T04:17:21.343Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788841040614 untuk 1788751103501",
+    "id": "1788841040629",
+    "createdAt": "2026-09-08T04:17:20.629Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788839829623",
+    "createdAt": "2026-09-08T03:57:09.623Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788839452679",
+    "id": "1788839828913",
+    "createdAt": "2026-09-08T03:57:08.913Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788839471601",
+    "createdAt": "2026-09-08T03:51:11.601Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang LENOVO V310",
+    "id": "1788839470660",
+    "createdAt": "2026-09-08T03:51:10.660Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo V310",
+    "id": "1788839469747",
+    "createdAt": "2026-09-08T03:51:09.747Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang HDMI to VGA",
+    "id": "1788839468753",
+    "createdAt": "2026-09-08T03:51:08.753Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang USB-B",
+    "id": "1788839467910",
+    "createdAt": "2026-09-08T03:51:07.910Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tripod Stand HP",
+    "id": "1788839465358",
+    "createdAt": "2026-09-08T03:51:05.358Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang USB to LAN",
+    "id": "1788839464628",
+    "createdAt": "2026-09-08T03:51:04.628Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tangga Teleskopik",
+    "id": "1788839463660",
+    "createdAt": "2026-09-08T03:51:03.660Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tablet ADVAN 8001",
+    "id": "1788839462992",
+    "createdAt": "2026-09-08T03:51:02.992Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Layar Proyektor",
+    "id": "1788839462079",
+    "createdAt": "2026-09-08T03:51:02.079Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Kabel UTP",
+    "id": "1788839461295",
+    "createdAt": "2026-09-08T03:51:01.295Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Mouse",
+    "id": "1788839460185",
+    "createdAt": "2026-09-08T03:51:00.185Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo Ideapad 320 Core i3",
+    "id": "1788839457941",
+    "createdAt": "2026-09-08T03:50:57.941Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Speaker Bluetooth",
+    "id": "1788839457484",
+    "createdAt": "2026-09-08T03:50:57.484Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Terminal Listrik",
+    "id": "1788839456804",
+    "createdAt": "2026-09-08T03:50:56.804Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Kabel HDMI",
+    "id": "1788839455970",
+    "createdAt": "2026-09-08T03:50:55.970Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Proyektor",
+    "id": "1788839454862",
+    "createdAt": "2026-09-08T03:50:54.862Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Lenovo G40-45",
+    "id": "1788839454155",
+    "createdAt": "2026-09-08T03:50:54.155Z"
+  },
+  {
+    "username": "petugas",
+    "role": "admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788839452679 untuk 1788751103501",
+    "id": "1788839452696",
+    "createdAt": "2026-09-08T03:50:52.696Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "peminjam",
+    "description": "Mengaktifkan kembali akun peminjam HIdayat",
+    "id": "1788839429481",
+    "createdAt": "2026-09-08T03:50:29.481Z"
+  },
+  {
     "username": "admin",
     "role": "super_admin",
     "action": "update",

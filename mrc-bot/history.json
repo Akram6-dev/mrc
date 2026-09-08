@@ -4250,22 +4250,6 @@
     },
     {
       "role": "assistant",
-      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 07:29*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *KBM*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️"
-    },
-    {
-      "role": "assistant",
-      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 08:41*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️"
-    },
-    {
-      "role": "assistant",
-      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:15*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-08*\n📌 Keperluan: *tes*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️"
-    },
-    {
-      "role": "assistant",
-      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:25*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Resource Center_ 🛠️"
-    },
-    {
-      "role": "assistant",
       "content": "📢 Yth. *HIdayat*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:25*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_"
     },
     {
@@ -4283,6 +4267,26 @@
     {
       "role": "assistant",
       "content": "✅ Yth. *HIdayat*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n1. Tesss (1x)\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:34*\n📌 Keperluan: *tess*\n\n⏳ Durasi peminjaman: *0 jam, 0 menit*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Management Resource Center_ 🛠️"
+    },
+    {
+      "role": "assistant",
+      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 10:50*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️"
+    },
+    {
+      "role": "assistant",
+      "content": "✅ Yth. *HIdayat*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n1. Tesss (1x)\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 10:50*\n📌 Keperluan: *tess*\n\n⏳ Durasi peminjaman: *0 jam, 6 menit*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Management Resource Center_ 🛠️"
+    },
+    {
+      "role": "assistant",
+      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 11:17*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *KBM*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️"
+    },
+    {
+      "role": "assistant",
+      "content": "✅ Yth. *HIdayat*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n1. Tesss (1x)\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 11:17*\n📌 Keperluan: *KBM*\n\n⏳ Durasi peminjaman: *0 jam, 7 menit*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Management Resource Center_ 🛠️"
+    },
+    {
+      "role": "assistant",
+      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 11:28*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *kbm*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️"
     }
   ],
   "120363426177992474@g.us": [

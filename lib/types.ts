@@ -63,6 +63,8 @@ export interface Loan {
   status: "dipinjam" | "dikembalikan" | "terlambat";
   purpose?: string;
   notes?: string;
+  createdBy?: string;
+  returnedBy?: string;
   createdAt: string;
   updatedAt: string;
 }

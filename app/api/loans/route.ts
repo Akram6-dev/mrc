@@ -27,16 +27,17 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const body = await req.json()
   const loans = await readLoans()
+  const actor = getActor(req)
   const newLoan: Loan = {
     ...body,
     id: body.id == null ? Date.now().toString() : body.id,
+    createdBy: actor.username,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
   loans.push(newLoan)
   await writeLoans(loans)
-  const actor = getActor(req)
-  await writeAuditLog({ ...actor, action: "create", entity: "peminjaman", description: `Mencatat peminjaman untuk ${newLoan.borrowerId || "peminjam"}` })
+  await writeAuditLog({ ...actor, action: "create", entity: "peminjaman", description: `Mencatat peminjaman ${newLoan.id} untuk ${newLoan.borrowerId || "peminjam"}` })
   return NextResponse.json(newLoan)
 }
 
@@ -45,10 +46,11 @@ export async function PUT(req: NextRequest) {
   const loans = await readLoans()
   const idx = loans.findIndex(l => l.id === body.id)
   if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 })
-  loans[idx] = { ...loans[idx], ...body, updatedAt: new Date().toISOString() }
-  await writeLoans(loans)
   const actor = getActor(req)
   const isReturn = body.status === "dikembalikan" || body.returnDate
+  const returnedBy = isReturn && !loans[idx].returnedBy ? actor.username : loans[idx].returnedBy
+  loans[idx] = { ...loans[idx], ...body, ...(isReturn && !loans[idx].returnedBy ? { returnedBy } : {}), updatedAt: new Date().toISOString() }
+  await writeLoans(loans)
   await writeAuditLog({ ...actor, action: "update", entity: isReturn ? "pengembalian" : "peminjaman", description: isReturn ? `Mencatat pengembalian peminjaman ${body.id}` : `Mengubah peminjaman ${body.id}` })
   return NextResponse.json(loans[idx])
 }
