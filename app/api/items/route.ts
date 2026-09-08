@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 import { Item } from '@/lib/types'
+import { getActor, writeAuditLog } from '@/lib/audit'
 
 const DB_PATH = path.join(process.cwd(), 'database', 'items.json')
 
@@ -34,6 +35,8 @@ export async function POST(req: NextRequest) {
   }
   items.push(newItem)
   await writeItems(items)
+  const actor = getActor(req)
+  await writeAuditLog({ ...actor, action: "create", entity: "barang", description: `Menambah barang ${newItem.name}` })
   return NextResponse.json(newItem)
 }
 
@@ -44,6 +47,8 @@ export async function PUT(req: NextRequest) {
   if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   items[idx] = { ...items[idx], ...body, updatedAt: new Date().toISOString() }
   await writeItems(items)
+  const actor = getActor(req)
+  await writeAuditLog({ ...actor, action: "update", entity: "barang", description: `Mengubah barang ${items[idx].name}` })
   return NextResponse.json(items[idx])
 }
 
@@ -53,5 +58,9 @@ export async function DELETE(req: NextRequest) {
   const before = items.length
   items = items.filter(i => i.id !== body.id)
   await writeItems(items)
+  if (items.length < before) {
+    const actor = getActor(req)
+    await writeAuditLog({ ...actor, action: "delete", entity: "barang", description: `Menghapus barang ${body.id}` })
+  }
   return NextResponse.json({ success: items.length < before })
 }

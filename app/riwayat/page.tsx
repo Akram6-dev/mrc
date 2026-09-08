@@ -27,6 +27,7 @@ import {
   MicVocal,
   Printer as PrinterIcon,
   X,
+  ClipboardList,
 } from "lucide-react";
 
 // Icon options for items, idiomatik seperti barang
@@ -85,6 +86,7 @@ import {
 } from "@/components/ui/pagination";
 import { auth } from "@/lib/auth";
 import api from "@/lib/api";
+import type { AuditLog } from "@/lib/audit";
 import type { LoanWithDetails, ItemSerialDetail } from "@/lib/types";
 import {
   formatDate,
@@ -109,6 +111,7 @@ export default function RiwayatPage() {
   const [page, setPage] = useState(1);
   const [detailLoan, setDetailLoan] = useState<LoanWithDetails | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -117,6 +120,7 @@ export default function RiwayatPage() {
       return;
     }
     loadLoans();
+    if (auth.getCurrentUser()?.role === "super_admin") loadAuditLogs();
   }, [router]);
 
   useEffect(() => {
@@ -264,6 +268,11 @@ export default function RiwayatPage() {
     }
   };
 
+  const loadAuditLogs = async () => {
+    const response = await fetch("/api/audit", { headers: auth.getAuthHeaders() });
+    if (response.ok) setAuditLogs(await response.json());
+  };
+
   const filterLoans = () => {
     let filtered = loansWithDetails;
     if (search && search.trim() !== "") {
@@ -366,7 +375,7 @@ export default function RiwayatPage() {
   if (!auth.isAuthenticated()) return null;
 
   // Jangan render tabel sebelum mapping selesai
-  if (isLoading || loansWithDetails.length === 0) {
+  if (isLoading) {
     return (
       <div className="min-h-screen gradient-bg">
         <div className="max-w-[90rem] mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -980,6 +989,40 @@ export default function RiwayatPage() {
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
+          </div>
+        )}
+
+        {auth.getCurrentUser()?.role === "super_admin" && (
+          <div className="mt-10 card overflow-hidden">
+            <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-200 dark:border-gray-700">
+              <ClipboardList className="w-5 h-5 text-accent-600" />
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Riwayat Perubahan Admin</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Catatan aktivitas admin dan super admin</p>
+              </div>
+            </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Waktu</TableHead>
+                  <TableHead>Username</TableHead>
+                  <TableHead>Peran</TableHead>
+                  <TableHead>Perubahan</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {auditLogs.length === 0 ? (
+                  <TableRow><TableCell colSpan={4} className="text-center py-8 text-gray-500">Belum ada riwayat perubahan</TableCell></TableRow>
+                ) : auditLogs.map((log) => (
+                  <TableRow key={log.id}>
+                    <TableCell>{formatDateTime(log.createdAt)}</TableCell>
+                    <TableCell className="font-medium">{log.username}</TableCell>
+                    <TableCell>{log.role === "super_admin" ? "Super Admin" : "Admin"}</TableCell>
+                    <TableCell>{log.description}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         )}
       </div>

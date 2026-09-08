@@ -10,6 +10,7 @@ import { formatDate, formatDateTime, getColorFromName } from "@/lib/utils";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { CheckCircle, XCircle, Package, Clock, Laptop, Cable, Projector, HdmiPort, Plug, Mouse, Tablet, Printer, Monitor, Keyboard, Speaker, Presentation, MicVocal, X, Search, Filter, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { auth } from "@/lib/auth";
 
 // Icon options mapping (mirip pengembalian)
 const ICON_OPTIONS = [
@@ -132,7 +133,7 @@ export default function BookingAdminPage() {
             // 1. Update status booking
             await fetch(`/api/booking`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
                 body: JSON.stringify({ ...booking, status: "accepted" }),
             });
 
@@ -151,7 +152,7 @@ export default function BookingAdminPage() {
                 });
                 await fetch("/api/items", {
                     method: "PUT",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
                     body: JSON.stringify({ ...item, items: updatedSerials }),
                 });
             }
@@ -194,7 +195,7 @@ export default function BookingAdminPage() {
             };
             await fetch("/api/loans", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
                 body: JSON.stringify(loanData),
             });
 
@@ -258,7 +259,7 @@ export default function BookingAdminPage() {
                 }
                 await fetch("/api/items", {
                     method: "PUT",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
                     body: JSON.stringify({ ...item, items: updatedSerials }),
                 });
             }

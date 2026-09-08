@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation"
 import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen, AlertTriangle, MessageCircle } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
-import { auth } from "@/lib/auth"
+import { auth, type User } from "@/lib/auth"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
@@ -26,14 +26,15 @@ export default function Sidebar() {
   const [notifications, setNotifications] = useState<any[]>([])
   const [loadingNotif, setLoadingNotif] = useState(false)
   const [notifUnread, setNotifUnread] = useState(0)
+  const [user, setUser] = useState<User | null>(null)
   const router = useRouter()
   const pathname = usePathname()
-  const user = auth.getCurrentUser()
   const visibleNavigation = user?.role === "admin"
-    ? navigation.filter((item) => ["/", "/peminjaman", "/pengembalian", "/riwayat"].includes(item.href))
+    ? navigation.filter((item) => ["/", "/peminjaman", "/pengembalian", "/booking", "/riwayat"].includes(item.href))
     : navigation
 
   useEffect(() => {
+    setUser(auth.getCurrentUser())
     const savedTheme = localStorage.getItem("theme")
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 

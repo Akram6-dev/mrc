@@ -54,6 +54,11 @@ class AuthService {
     return null
   }
 
+  getAuthHeaders(): Record<string, string> {
+    const user = this.getCurrentUser()
+    return user ? { "x-user-name": user.username, "x-user-role": user.role } : {}
+  }
+
   isAuthenticated(): boolean {
     return this.getCurrentUser() !== null
   }
@@ -63,7 +68,7 @@ class AuthService {
     if (!user) return false
     if (user.role === "super_admin") return true
 
-    return ["/", "/peminjaman", "/pengembalian", "/riwayat"].includes(pathname)
+    return ["/", "/peminjaman", "/pengembalian", "/booking", "/riwayat"].includes(pathname)
   }
 }
 

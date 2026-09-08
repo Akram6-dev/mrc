@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { DatePickerField } from "../peminjaman/DatePickerField";
+import { auth } from "@/lib/auth";
 
 export default function BookPublicPage() {
     const [borrowers, setBorrowers] = useState<any[]>([]);
@@ -127,7 +128,7 @@ export default function BookPublicPage() {
                 if (changed > 0) {
                     await fetch("/api/items", {
                         method: "PUT",
-                        headers: { "Content-Type": "application/json" },
+                        headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
                         body: JSON.stringify({ ...item, items: updatedSerials }),
                     });
                 }

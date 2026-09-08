@@ -14,7 +14,37 @@ const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { execFile } = require("child_process");
-const GS_CMD = path.join('C:\\Program Files\\gs\\gs10.06.0\\bin\\gswin64c.exe'); // sesuaikan dengan lokasi Ghostscript di sistem Anda
+
+function resolveGhostscriptCommand() {
+  const configuredPath = process.env.GHOSTSCRIPT_PATH;
+  if (configuredPath) return configuredPath;
+
+  const programFiles = [
+    process.env.ProgramFiles,
+    process.env["ProgramFiles(x86)"],
+  ].filter(Boolean);
+
+  for (const directory of programFiles) {
+    const ghostscriptRoot = path.join(directory, "gs");
+    if (!fs.existsSync(ghostscriptRoot)) continue;
+
+    const versions = fs.readdirSync(ghostscriptRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort()
+      .reverse();
+
+    for (const version of versions) {
+      const candidate = path.join(ghostscriptRoot, version, "bin", "gswin64c.exe");
+      if (fs.existsSync(candidate)) return candidate;
+    }
+  }
+
+  return "gswin64c.exe";
+}
+
+const GS_CMD = resolveGhostscriptCommand();
+let ghostscriptAvailable = false;
 
 const app = express();
 app.use((req, res, next) => {
@@ -54,6 +84,10 @@ app.get("/qr", async (_req, res) => {
 
 function compressPDF(inputPath, outputPath) {
   return new Promise((resolve, reject) => {
+    if (!ghostscriptAvailable) {
+      return reject(new Error("Ghostscript belum tersedia. Install Ghostscript atau atur GHOSTSCRIPT_PATH ke lokasi gswin64c.exe."));
+    }
+
     const args = [
       "-sDEVICE=pdfwrite",
       "-dCompatibilityLevel=1.4",
@@ -77,7 +111,16 @@ function compressPDF(inputPath, outputPath) {
 function checkGhostscript() {
   return new Promise((resolve, reject) => {
     execFile(GS_CMD, ["--version"], (err, stdout) => {
-      if (err) return reject(err);
+      if (err) {
+        const message = [
+          `Ghostscript tidak ditemukan di: ${GS_CMD}`,
+          "Install Ghostscript atau atur GHOSTSCRIPT_PATH ke lokasi gswin64c.exe.",
+          `Contoh PowerShell: $env:GHOSTSCRIPT_PATH = 'C:\\Program Files\\gs\\<versi>\\bin\\gswin64c.exe'`,
+        ].join(" ");
+        console.warn(`${message} (${err.message})`);
+        return resolve();
+      }
+      ghostscriptAvailable = true;
       console.log("Ghostscript version:", stdout.trim());
       resolve();
     });
