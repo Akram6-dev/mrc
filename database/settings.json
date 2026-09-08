@@ -1,0 +1,38 @@
+{
+  "siteName": "Administrator",
+  "theme": "light",
+  "admin": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "super_admin"
+    },
+    {
+      "id": "2",
+      "username": "petugas",
+      "password": "petugas123",
+      "role": "admin"
+    }
+  ],
+  "notifications": {
+    "overdueReminders": true,
+    "returnReminders": true
+  },
+  "messages": {
+    "aiReply": true,
+    "loanMessage": true,
+    "returnMessage": true,
+    "reminderMessage": true
+  },
+  "system": {
+    "defaultLoanDays": 1,
+    "maxLoanItems": 20,
+    "returnConfirmation": true,
+    "borrowConfirmation": false
+  }
+}

@@ -1,0 +1,1332 @@
+[
+  {
+    "name": "Lenovo G40-45",
+    "category": "Elektronik",
+    "description": "Laptop Umum",
+    "icon": "laptop",
+    "id": "1754637098494",
+    "items": [
+      {
+        "rfidCode": "448740179",
+        "sn": "PF051WVE",
+        "status": 0,
+        "condition": 0,
+        "loanId": "1784879377862"
+      },
+      {
+        "rfidCode": "150021523",
+        "sn": "PF07VGWV",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1784879436430"
+      },
+      {
+        "rfidCode": "1442990964",
+        "sn": "PF052471",
+        "status": 2,
+        "condition": 1,
+        "loanId": "1788137699623"
+      },
+      {
+        "rfidCode": "149927443",
+        "sn": "PF051XSY",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1309464923",
+        "sn": "PF054E1Q",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1311632715",
+        "sn": "PF07Q9MS",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0149960963",
+        "sn": "PF07QKBP",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "2347265994",
+        "sn": "PF054XW8",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "847522295",
+        "sn": "PF054EA0",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "481096242",
+        "sn": "PF055RA4",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0855536887",
+        "sn": "PF0540HX",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "122587299",
+        "sn": "PF051XXL",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0177051075",
+        "sn": "PF057WEG",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1382240728",
+        "sn": "PF052SGY",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "149780771",
+        "sn": "PF059HZD",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1444089684",
+        "sn": "PF052RG1",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1452720996",
+        "sn": "PF054JFN",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "149659187",
+        "sn": "PF0525FJ",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1378696616",
+        "sn": "PF0512T1",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "855737827",
+        "sn": "PF050WU3",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1384902120",
+        "sn": "PF07SC0Z",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "602048064",
+        "sn": "PF0512JT",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1448321908",
+        "sn": "PF054XRK",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1451850100",
+        "sn": "PF07SARG",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "441030467",
+        "sn": "PF054WYY",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1388709832",
+        "sn": "PF07S4J1",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "858620167",
+        "sn": "PF052QR6",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "2805597667",
+        "sn": "PF05502Q",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "155485923",
+        "sn": "PF05CF20",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1315056715",
+        "sn": "PF07Q6P2",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "851788775",
+        "sn": "PF076MTE",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "876547654",
+        "sn": "PF124",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "765446565",
+        "sn": "PF123",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-08T07:11:38.494Z",
+    "updatedAt": "2026-09-08T00:30:00.340Z",
+    "stock": 33,
+    "serialSearch": "",
+    "image": "/assets/img/1760406973256.jpg"
+  },
+  {
+    "name": "Proyektor",
+    "category": "Elektronik",
+    "description": "LCD Proyektor EPSON EB-X51\nSet (Kabel HDMI, VGA & Power)",
+    "icon": "projector",
+    "id": "1754696680732",
+    "items": [
+      {
+        "rfidCode": "0154334948",
+        "sn": "X8A41900578",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1380566968",
+        "sn": "X8A41700568",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "2939832620",
+        "sn": "X4GG9201149",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0845694151",
+        "sn": "X4GG9200922",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0131530707",
+        "sn": "X8A40Z01640",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1320214843",
+        "sn": "X4GG9200970",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0854329079",
+        "sn": "X8A41106180",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1324439387",
+        "sn": "X8A44X01796",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1321947195",
+        "sn": "X8A44X01691",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0154334947",
+        "sn": "X8A44X01779",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0842397383",
+        "sn": "X8A44X01674",
+        "status": 1,
+        "condition": 0,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0123642947",
+        "sn": "X8A44X01680",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-08T23:44:40.732Z",
+    "updatedAt": "2026-09-08T00:30:00.496Z",
+    "stock": 12,
+    "serialSearch": "",
+    "image": "/assets/img/1760408189747.jpg"
+  },
+  {
+    "name": "Kabel HDMI",
+    "category": "Elektronik",
+    "description": "Vention HDMI 5 meter",
+    "icon": "hdmi",
+    "id": "1754696777625",
+    "items": [
+      {
+        "rfidCode": "HDMI001",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1784779242415"
+      },
+      {
+        "rfidCode": "HDMI002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "HDMI014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-08T23:46:17.625Z",
+    "updatedAt": "2026-09-08T00:30:00.582Z",
+    "image": "/assets/img/1760421697842.png",
+    "serialSearch": "",
+    "stock": 14
+  },
+  {
+    "name": "Terminal Listrik",
+    "category": "Elektronik",
+    "description": "Ukuran panjang & pendek",
+    "icon": "plug",
+    "id": "1754873198845",
+    "items": [
+      {
+        "rfidCode": "TRL001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL003",
+        "status": 2,
+        "condition": 1,
+        "loanId": "1788137699623"
+      },
+      {
+        "rfidCode": "TRL004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL015",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL016",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL017",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL018",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL019",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL020",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL021",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL022",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL023",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL024",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRL025",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-11T00:46:38.846Z",
+    "updatedAt": "2026-09-08T00:30:02.158Z",
+    "stock": 25,
+    "serialSearch": "",
+    "image": "/assets/img/1760421889541.webp"
+  },
+  {
+    "name": "Speaker Bluetooth",
+    "category": "Elektronik",
+    "description": "Nemesis Odette X70",
+    "icon": "speaker",
+    "id": "1754890073251",
+    "items": [
+      {
+        "rfidCode": "SPK001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "SPK002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "SPK003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "SPK004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-11T05:27:53.251Z",
+    "updatedAt": "2026-09-08T00:30:03.615Z",
+    "image": "/assets/img/1760422046967.jpg",
+    "serialSearch": "",
+    "stock": 4
+  },
+  {
+    "name": "Lenovo Ideapad 320 Core i3",
+    "category": "Elektronik",
+    "description": "Khusus TPM",
+    "icon": "laptop",
+    "id": "1754983247404",
+    "items": [
+      {
+        "rfidCode": "LNVTPM001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LNVTPM015",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-12T07:20:47.404Z",
+    "updatedAt": "2026-09-08T00:30:04.169Z",
+    "image": "/assets/img/1760422192877.webp",
+    "serialSearch": "",
+    "stock": 15
+  },
+  {
+    "name": "Mouse",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "mouse",
+    "id": "1755655423398",
+    "items": [
+      {
+        "rfidCode": "MSE001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE006",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE007",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE008",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE009",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE010",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE011",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE012",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE013",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "MSE014",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-20T02:03:43.398Z",
+    "updatedAt": "2026-09-08T00:30:05.389Z",
+    "image": "/assets/img/1760422356679.jpg",
+    "serialSearch": "",
+    "stock": 14
+  },
+  {
+    "name": "Kabel UTP",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "cable",
+    "id": "1756101309869",
+    "items": [
+      {
+        "rfidCode": "UTP001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "UTP002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "UTP003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "UTP004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "UTP005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-25T05:55:09.869Z",
+    "updatedAt": "2026-09-08T00:30:05.527Z",
+    "image": "/assets/img/1760422410717.jpg",
+    "serialSearch": "",
+    "stock": 5
+  },
+  {
+    "name": "Layar Proyektor",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "presentation",
+    "id": "1756267124262",
+    "items": [
+      {
+        "rfidCode": "LYR001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "LYR002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-27T03:58:44.262Z",
+    "updatedAt": "2026-09-08T00:30:06.358Z",
+    "image": "/assets/img/1760422492923.webp",
+    "serialSearch": "",
+    "stock": 2
+  },
+  {
+    "name": "Tablet ADVAN 8001",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "tablet",
+    "id": "1756288012966",
+    "items": [
+      {
+        "rfidCode": "TAB001",
+        "sn": "747",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB002",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1785481145438"
+      },
+      {
+        "rfidCode": "TAB003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB004",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB005",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB006",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB007",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB008",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB009",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB010",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TAB011",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "1111",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "2222",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "3333",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "4444",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "555",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "66666",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "7777",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "8888",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-08-27T09:46:52.966Z",
+    "updatedAt": "2026-09-08T00:30:07.546Z",
+    "image": "/assets/img/1760422663355.jfif",
+    "serialSearch": "",
+    "stock": 19
+  },
+  {
+    "name": "Tangga Teleskopik",
+    "category": "Alat",
+    "description": "",
+    "icon": "other",
+    "id": "1756947064431",
+    "items": [
+      {
+        "rfidCode": "TNG001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-09-04T00:51:04.431Z",
+    "updatedAt": "2026-09-08T00:30:08.287Z",
+    "image": "/assets/img/1760422868475.png",
+    "serialSearch": "",
+    "stock": 1
+  },
+  {
+    "name": "USB to LAN",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "cable",
+    "id": "1756969519963",
+    "items": [
+      {
+        "rfidCode": "USBLAN001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "USBLAN002",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "USBLAN003",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "USBLAN004",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-09-04T07:05:19.963Z",
+    "updatedAt": "2026-09-08T00:30:10.075Z",
+    "image": "/assets/img/1760422905339.jpg",
+    "serialSearch": "",
+    "stock": 4
+  },
+  {
+    "name": "Tripod Stand HP",
+    "category": "Alat",
+    "description": "",
+    "icon": "other",
+    "id": "1757898556984",
+    "items": [
+      {
+        "rfidCode": "TRP001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "TRP002",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-09-15T01:09:16.984Z",
+    "updatedAt": "2026-09-08T00:30:10.196Z",
+    "image": "/assets/img/1760422935106.jpg",
+    "serialSearch": "",
+    "stock": 2
+  },
+  {
+    "name": "USB-B",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "cable",
+    "id": "1759728913994",
+    "items": [
+      {
+        "rfidCode": "USBB001",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "createdAt": "2025-10-06T05:35:13.994Z",
+    "updatedAt": "2026-09-08T00:30:11.051Z",
+    "image": "/assets/img/1760423019819.jfif",
+    "serialSearch": "",
+    "stock": 1
+  },
+  {
+    "name": "HDMI to VGA",
+    "category": "Elektronik",
+    "description": "",
+    "icon": "cable",
+    "image": "/assets/img/1761622152293.jpg",
+    "items": [
+      {
+        "rfidCode": "HDMIVGA001",
+        "sn": "",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "serialSearch": "",
+    "stock": 1,
+    "id": "1761621927855",
+    "createdAt": "2025-10-28T03:25:27.855Z",
+    "updatedAt": "2026-09-08T00:30:12.428Z"
+  },
+  {
+    "name": "Lenovo V310",
+    "category": "Laptop",
+    "description": "",
+    "icon": "laptop",
+    "image": "",
+    "items": [
+      {
+        "rfidCode": "012345678",
+        "sn": "012345678",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "0123456789",
+        "sn": "12345678",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "serialSearch": "",
+    "stock": 2,
+    "id": "1761882488737",
+    "createdAt": "2025-10-31T03:48:08.737Z",
+    "updatedAt": "2026-09-08T00:30:12.586Z"
+  },
+  {
+    "name": "LENOVO V310",
+    "category": "ELEKTRONIK",
+    "description": "",
+    "icon": "laptop",
+    "image": "",
+    "items": [
+      {
+        "rfidCode": "111111",
+        "sn": "1111111",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "serialSearch": "",
+    "stock": 1,
+    "id": "1776155598559",
+    "createdAt": "2026-04-14T08:33:18.559Z",
+    "updatedAt": "2026-09-08T00:30:13.178Z"
+  },
+  {
+    "name": "Tesss",
+    "category": "alat elektronik",
+    "description": "ini hanya pengetesan\n",
+    "icon": "other",
+    "image": "",
+    "items": [
+      {
+        "rfidCode": "123456",
+        "sn": "789123456",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788747092007"
+      },
+      {
+        "rfidCode": "98765",
+        "sn": "12345678",
+        "status": 0,
+        "condition": 0,
+        "loanId": "1788772822794"
+      },
+      {
+        "rfidCode": "18939",
+        "sn": "6812378",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788827169540"
+      },
+      {
+        "rfidCode": "1234567",
+        "sn": "12345678",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788827398908"
+      },
+      {
+        "rfidCode": "777",
+        "sn": "888",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "111222",
+        "sn": "3334",
+        "status": 0,
+        "condition": 1,
+        "loanId": "1788775289397"
+      },
+      {
+        "rfidCode": "3456789",
+        "sn": "234567",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "45678",
+        "sn": "87654",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "876543",
+        "sn": "63242",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      },
+      {
+        "rfidCode": "47362",
+        "sn": "665356",
+        "status": 1,
+        "condition": 1,
+        "loanId": null
+      }
+    ],
+    "serialSearch": "",
+    "stock": 10,
+    "id": "1788315049865",
+    "createdAt": "2026-09-02T02:10:49.865Z",
+    "updatedAt": "2026-09-08T00:30:14.266Z"
+  }
+]
