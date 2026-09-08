@@ -29,7 +29,8 @@ class AuthService {
         role: account.role,
       }
       if (typeof window !== "undefined") {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user))
+        sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(user))
+        localStorage.removeItem(this.STORAGE_KEY)
       }
       return user
     } else {
@@ -39,13 +40,13 @@ class AuthService {
 
   logout(): void {
     if (typeof window !== "undefined") {
-      localStorage.removeItem(this.STORAGE_KEY)
+      sessionStorage.removeItem(this.STORAGE_KEY)
     }
   }
 
   getCurrentUser(): User | null {
     if (typeof window !== "undefined") {
-      const userData = localStorage.getItem(this.STORAGE_KEY)
+      const userData = sessionStorage.getItem(this.STORAGE_KEY)
       if (!userData) return null
 
       const user = JSON.parse(userData)
