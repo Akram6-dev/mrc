@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Search, Edit, Trash2, Users, X } from "lucide-react"
+import { Plus, Search, Edit, Trash2, Users, X, Table2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
@@ -205,6 +205,23 @@ export default function PeminjamPage() {
     setIsDialogOpen(true)
   }
 
+  const handleExportExcel = async () => {
+    const XLSX = await import("xlsx")
+    const rows = filteredBorrowers.map((borrower) => ({
+      "Nama": borrower.name || "",
+      "NIP": borrower.nip || "",
+      "ID Pegawai": borrower.officerId || "",
+      "Jenis Kelamin": borrower.gender === "L" ? "Laki-laki" : "Perempuan",
+      "No. HP": borrower.phone || "",
+      "RFID": borrower.rfid || "",
+      "Terdaftar": borrower.createdAt ? formatDate(borrower.createdAt) : "",
+    }))
+    const worksheet = XLSX.utils.json_to_sheet(rows)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Peminjam")
+    XLSX.writeFile(workbook, `mrc-peminjam-${new Date().toISOString().split("T")[0]}.xlsx`)
+  }
+
   if (!auth.isAuthenticated()) return null
 
   if (isLoading) {
@@ -226,7 +243,15 @@ export default function PeminjamPage() {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Manajemen Peminjam</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400">Kelola data guru dan staff yang dapat meminjam barang</p>
           </div>
-          <Dialog open={isDialogOpen} onOpenChange={(open) => {
+          <div className="flex items-center gap-3 mt-4 md:mt-0">
+            <button
+              onClick={handleExportExcel}
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-lg shadow-sm"
+            >
+              <Table2 className="w-5 h-5" />
+              Export Excel
+            </button>
+            <Dialog open={isDialogOpen} onOpenChange={(open) => {
             setIsDialogOpen(open)
             if (!open) {
               setEditingBorrower(null)
@@ -343,7 +368,8 @@ export default function PeminjamPage() {
                 </div>
               </form>
             </DialogContent>
-          </Dialog>
+            </Dialog>
+          </div>
         </div>
         {/* Search */}
         <div className="p-6 mb-6">
