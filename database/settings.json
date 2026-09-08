@@ -23,16 +23,16 @@
     "overdueReminders": true,
     "returnReminders": true
   },
-  "messages": {
-    "aiReply": true,
-    "loanMessage": true,
-    "returnMessage": true,
-    "reminderMessage": true
-  },
   "system": {
     "defaultLoanDays": 1,
     "maxLoanItems": 20,
     "returnConfirmation": true,
     "borrowConfirmation": false
+  },
+  "messages": {
+    "aiReply": false,
+    "loanMessage": true,
+    "returnMessage": true,
+    "reminderMessage": true
   }
 }
