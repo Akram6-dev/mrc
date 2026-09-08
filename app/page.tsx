@@ -55,6 +55,9 @@ export default function DashboardPage() {
   const router = useRouter()
 
   const [activeBorrowers, setActiveBorrowers] = useState(0)
+  const [selectedYear, setSelectedYear] = useState<number | "all">("all")
+  const [selectedMonth, setSelectedMonth] = useState<number | "all">("all")
+  const [hourlyWeek, setHourlyWeek] = useState<number | "all">("all")
 
   useEffect(() => {
     if (!auth.isAuthenticated()) {
@@ -211,6 +214,16 @@ export default function DashboardPage() {
   ]
 
   // --- Chart Data Processing ---
+  const getLoanDate = (loan: LoanWithDetails) => new Date(loan.createdAt || loan.borrowDate)
+  const validLoanDates = allLoans.map(getLoanDate).filter((date) => !Number.isNaN(date.getTime()))
+  const availableYears = Array.from(new Set(validLoanDates.map((date) => date.getFullYear()))).sort((a, b) => b - a)
+  const filteredChartLoans = allLoans.filter((loan) => {
+    const date = getLoanDate(loan)
+    return !Number.isNaN(date.getTime()) &&
+      (selectedYear === "all" || date.getFullYear() === selectedYear) &&
+      (selectedMonth === "all" || date.getMonth() === selectedMonth)
+  })
+
   // 1. Bar chart: loans per hour per weekday
   const weekdayNames = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"]
   const hourLabels = Array.from({ length: 24 }, (_, i) => i)
@@ -220,8 +233,25 @@ export default function DashboardPage() {
     weekdayNames.forEach((wd) => (row[wd] = 0))
     return row
   })
+  const latestChartDate = validLoanDates.sort((a, b) => b.getTime() - a.getTime())[0] || new Date()
+  const chartYear = selectedYear === "all" ? latestChartDate.getFullYear() : selectedYear
+  const chartMonth = selectedMonth === "all" ? latestChartDate.getMonth() : selectedMonth
+  const monthStart = new Date(chartYear, chartMonth, 1)
+  const monthEnd = new Date(chartYear, chartMonth + 1, 0, 23, 59, 59, 999)
+  let hourRangeStart = monthStart
+  let hourRangeEnd = monthEnd
+  if (hourlyWeek !== "all") {
+    hourRangeStart = new Date(monthStart)
+    const day = hourRangeStart.getDay()
+    hourRangeStart.setDate(hourRangeStart.getDate() - (day === 0 ? 6 : day - 1) + (hourlyWeek - 1) * 7)
+    hourRangeStart.setHours(0, 0, 0, 0)
+    hourRangeEnd = new Date(hourRangeStart)
+    hourRangeEnd.setDate(hourRangeEnd.getDate() + 6)
+    hourRangeEnd.setHours(23, 59, 59, 999)
+  }
   allLoans.forEach((loan) => {
-    const d = new Date(loan.createdAt)
+    const d = getLoanDate(loan)
+    if (d < hourRangeStart || d > hourRangeEnd) return
     const hour = d.getHours()
     const dayIdx = d.getDay()
     // getDay: 0 = Minggu, 1 = Senin, ..., 6 = Sabtu
@@ -235,8 +265,8 @@ export default function DashboardPage() {
   // 2. Line chart: loans per date
   // Build: [{ date: '2025-08-01', count: 3 }, ...]
   const loansByDateMap = new Map<string, number>()
-  allLoans.forEach((loan) => {
-    const d = new Date(loan.createdAt)
+  filteredChartLoans.forEach((loan) => {
+    const d = getLoanDate(loan)
     const dateStr = d.toISOString().slice(0, 10)
     loansByDateMap.set(dateStr, (loansByDateMap.get(dateStr) || 0) + 1)
   })
@@ -395,6 +425,20 @@ export default function DashboardPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Distribusi Jam Peminjaman per Hari</CardTitle>
             <CardDescription className="text-xs">Jumlah peminjaman pada setiap jam, dipisah per hari</CardDescription>
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <select value={selectedMonth} onChange={(event) => setSelectedMonth(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Bulan</option>
+                {Array.from({ length: 12 }, (_, month) => <option key={month} value={month}>{new Date(2000, month, 1).toLocaleString("id-ID", { month: "long" })}</option>)}
+              </select>
+              <select value={selectedYear} onChange={(event) => setSelectedYear(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Tahun</option>
+                {availableYears.map((year) => <option key={year} value={year}>{year}</option>)}
+              </select>
+              <select value={hourlyWeek} onChange={(event) => setHourlyWeek(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Minggu</option>
+                {Array.from({ length: 5 }, (_, index) => <option key={index + 1} value={index + 1}>Minggu {index + 1}</option>)}
+              </select>
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
             <div className="w-full h-72">
@@ -456,6 +500,16 @@ export default function DashboardPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold">Jumlah Peminjaman per Tanggal</CardTitle>
             <CardDescription className="text-xs">Setiap peminjaman dihitung 1</CardDescription>
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <select value={selectedMonth} onChange={(event) => setSelectedMonth(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Bulan</option>
+                {Array.from({ length: 12 }, (_, month) => <option key={month} value={month}>{new Date(2000, month, 1).toLocaleString("id-ID", { month: "long" })}</option>)}
+              </select>
+              <select value={selectedYear} onChange={(event) => setSelectedYear(event.target.value === "all" ? "all" : Number(event.target.value))} className="h-8 rounded-md border border-gray-200 bg-white px-2 text-xs dark:border-gray-700 dark:bg-gray-800">
+                <option value="all">Semua Tahun</option>
+                {availableYears.map((year) => <option key={year} value={year}>{year}</option>)}
+              </select>
+            </div>
           </CardHeader>
           <CardContent className="pt-0">
             <div className="w-full h-72">

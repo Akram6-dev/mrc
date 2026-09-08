@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Plus, Search, Edit, Trash2, Users, X, Table2 } from "lucide-react"
+import { Plus, Search, Edit, Trash2, Users, X, Table2, Lock, Unlock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"
@@ -82,6 +82,7 @@ export default function PeminjamPage() {
         rfid: b.rfid || "",
         phone: b.phone || "",
         gender: b.gender,
+        isFrozen: Boolean(b.isFrozen),
         createdAt: b.createdAt,
         updatedAt: b.updatedAt,
       })))
@@ -184,6 +185,22 @@ export default function PeminjamPage() {
       toast.error("Gagal menghapus peminjam: " + (err?.message || JSON.stringify(err)), {
         duration: 6000,
         className: "toast-error"
+      })
+    }
+  }
+
+  const handleToggleFreeze = async (borrower: Borrower) => {
+    try {
+      await api.updateBorrower(borrower.id, { isFrozen: !borrower.isFrozen })
+      toast.success(borrower.isFrozen ? "Akun peminjam diaktifkan" : "Akun peminjam dinonaktifkan", {
+        duration: 4000,
+        className: "toast-success",
+      })
+      loadBorrowers()
+    } catch (err: any) {
+      toast.error("Gagal mengubah status akun: " + (err?.message || "Terjadi kesalahan"), {
+        duration: 6000,
+        className: "toast-error",
       })
     }
   }
@@ -455,7 +472,10 @@ export default function PeminjamPage() {
                     key={borrower.id}
                     className={paginatedBorrowers.indexOf(borrower) % 2 === 1 ? "bg-gray-50 dark:bg-gray-800/40" : ""}
                   >
-                    <TableCell className="font-medium text-gray-900 dark:text-white">{borrower.name}</TableCell>
+                    <TableCell className="font-medium text-gray-900 dark:text-white">
+                      <div>{borrower.name}</div>
+                      {borrower.isFrozen && <div className="text-xs font-normal text-amber-600">Akun nonaktif</div>}
+                    </TableCell>
                     <TableCell>{borrower.nip}</TableCell>
                     <TableCell>{borrower.officerId}</TableCell>
                     <TableCell>{borrower.gender === "L" ? "L" : "P"}</TableCell>
@@ -468,6 +488,16 @@ export default function PeminjamPage() {
                           className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
                         >
                           <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleToggleFreeze(borrower)}
+                          title={borrower.isFrozen ? "Aktifkan akun" : "Nonaktifkan akun"}
+                          className={`p-2 rounded-lg transition-colors ${borrower.isFrozen
+                            ? "text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                            : "text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                            }`}
+                        >
+                          {borrower.isFrozen ? <Unlock className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
                         </button>
                         <button
                           onClick={() => {
