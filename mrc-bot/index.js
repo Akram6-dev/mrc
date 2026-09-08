@@ -14,37 +14,19 @@ const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { execFile } = require("child_process");
+const PORT = Number(process.env.PORT || 3000);
+const AUTH_DIR = path.join(__dirname, "auth_info");
+const GS_CMD = process.env.GHOSTSCRIPT_PATH || findGhostscript();
 
-function resolveGhostscriptCommand() {
-  const configuredPath = process.env.GHOSTSCRIPT_PATH;
-  if (configuredPath) return configuredPath;
-
-  const programFiles = [
-    process.env.ProgramFiles,
-    process.env["ProgramFiles(x86)"],
-  ].filter(Boolean);
-
-  for (const directory of programFiles) {
-    const ghostscriptRoot = path.join(directory, "gs");
-    if (!fs.existsSync(ghostscriptRoot)) continue;
-
-    const versions = fs.readdirSync(ghostscriptRoot, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name)
-      .sort()
-      .reverse();
-
-    for (const version of versions) {
-      const candidate = path.join(ghostscriptRoot, version, "bin", "gswin64c.exe");
-      if (fs.existsSync(candidate)) return candidate;
-    }
-  }
-
-  return "gswin64c.exe";
+function findGhostscript() {
+  const gsRoot = "C:\\Program Files\\gs";
+  if (!fs.existsSync(gsRoot)) return null;
+  const candidates = fs.readdirSync(gsRoot)
+    .sort()
+    .reverse()
+    .map((version) => path.join(gsRoot, version, "bin", "gswin64c.exe"));
+  return candidates.find((candidate) => fs.existsSync(candidate)) || null;
 }
-
-const GS_CMD = resolveGhostscriptCommand();
-let ghostscriptAvailable = false;
 
 const app = express();
 app.use((req, res, next) => {
@@ -65,29 +47,79 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const HISTORY_FILE = path.join(__dirname, "history.json");
 const PINJAMAN_FILE = path.join(__dirname, "pinjaman.json");
 const SETTINGS_FILE = path.join(__dirname, "settings.json");
+const NOTIFICATION_LOG_FILE = path.join(__dirname, "notification-log.json");
 const MRC_DATABASE_PATH = process.env.MRC_DATABASE_PATH || path.resolve(__dirname, "..", "database");
 const MAX_HISTORY_ITEMS = 10;
 const MODEL = "nvidia/nemotron-3-ultra-550b-a55b:free";
 let sockGlobal;
 let botStatus = "offline";
 let latestQr = null;
+let botError = null;
+let connectedAccount = null;
+let connectedAt = null;
+let startInProgress = false;
+let reconnectTimer = null;
+
+function readNotificationLog() {
+  try {
+    if (!fs.existsSync(NOTIFICATION_LOG_FILE)) return [];
+    const data = JSON.parse(fs.readFileSync(NOTIFICATION_LOG_FILE, "utf8"));
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Gagal membaca log notifikasi:", error.message);
+    return [];
+  }
+}
+
+function logNotification(type, jid, name, success, error = null) {
+  const logs = readNotificationLog();
+  logs.unshift({
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    type,
+    recipient: jid.replace("@s.whatsapp.net", ""),
+    name: name || "-",
+    success,
+    error,
+    timestamp: new Date().toISOString(),
+  });
+  try {
+    fs.writeFileSync(NOTIFICATION_LOG_FILE, JSON.stringify(logs.slice(0, 100), null, 2));
+  } catch (writeError) {
+    console.error("Gagal menyimpan log notifikasi:", writeError.message);
+  }
+}
 
 app.get("/status", (_req, res) => {
-  res.json({ status: botStatus, hasQr: Boolean(latestQr) });
+  res.json({
+    status: botStatus,
+    hasQr: Boolean(latestQr),
+    error: botError,
+    account: connectedAccount,
+    connectedAt,
+  });
+});
+
+app.get("/notification-log", (_req, res) => {
+  res.json(readNotificationLog().slice(0, 50));
 });
 
 app.get("/qr", async (_req, res) => {
   if (!latestQr) return res.status(404).json({ error: "QR belum tersedia" });
-  const image = await QRCode.toDataURL(latestQr, { width: 320, margin: 2 });
-  res.json({ qr: image });
+  try {
+    const image = await QRCode.toDataURL(latestQr, { width: 320, margin: 2 });
+    res.json({ qr: image });
+  } catch (error) {
+    console.error("Gagal membuat gambar QR:", error);
+    res.status(500).json({ error: "Gagal membuat gambar QR" });
+  }
 });
 
 function compressPDF(inputPath, outputPath) {
   return new Promise((resolve, reject) => {
-    if (!ghostscriptAvailable) {
-      return reject(new Error("Ghostscript belum tersedia. Install Ghostscript atau atur GHOSTSCRIPT_PATH ke lokasi gswin64c.exe."));
+    if (!GS_CMD) {
+      reject(new Error("Ghostscript tidak ditemukan. Atur GHOSTSCRIPT_PATH untuk fitur PDF."));
+      return;
     }
-
     const args = [
       "-sDEVICE=pdfwrite",
       "-dCompatibilityLevel=1.4",
@@ -109,18 +141,12 @@ function compressPDF(inputPath, outputPath) {
   });
 }
 function checkGhostscript() {
+  if (!GS_CMD) {
+    return Promise.resolve();
+  }
   return new Promise((resolve, reject) => {
     execFile(GS_CMD, ["--version"], (err, stdout) => {
-      if (err) {
-        const message = [
-          `Ghostscript tidak ditemukan di: ${GS_CMD}`,
-          "Install Ghostscript atau atur GHOSTSCRIPT_PATH ke lokasi gswin64c.exe.",
-          `Contoh PowerShell: $env:GHOSTSCRIPT_PATH = 'C:\\Program Files\\gs\\<versi>\\bin\\gswin64c.exe'`,
-        ].join(" ");
-        console.warn(`${message} (${err.message})`);
-        return resolve();
-      }
-      ghostscriptAvailable = true;
+      if (err) return reject(err);
       console.log("Ghostscript version:", stdout.trim());
       resolve();
     });
@@ -151,6 +177,44 @@ function savePinjaman(pinjaman) {
     fs.writeFileSync(PINJAMAN_FILE, JSON.stringify(pinjaman, null, 2));
   } catch (e) {
     console.error("Gagal simpan pinjaman.json:", e.message);
+  }
+}
+
+function loadApplicationLoan(id) {
+  const loansPath = path.join(MRC_DATABASE_PATH, "loans.json");
+  const borrowersPath = path.join(MRC_DATABASE_PATH, "borrowers.json");
+  const itemsPath = path.join(MRC_DATABASE_PATH, "items.json");
+  try {
+    const loans = JSON.parse(fs.readFileSync(loansPath, "utf8"));
+    const loan = loans.find((entry) => String(entry.id) === String(id));
+    if (!loan) return null;
+    const borrowers = JSON.parse(fs.readFileSync(borrowersPath, "utf8"));
+    const borrower = borrowers.find((entry) => String(entry.id) === String(loan.borrowerId));
+    const items = JSON.parse(fs.readFileSync(itemsPath, "utf8"));
+    const serialLookup = new Map();
+    for (const item of items) {
+      for (const serial of Array.isArray(item.items) ? item.items : []) {
+        serialLookup.set(String(serial.rfidCode), item.name);
+      }
+    }
+    return {
+      id: String(loan.id),
+      number: borrower?.phone || "",
+      name: borrower?.name || `Peminjam ${loan.borrowerId}`,
+      start_date: loan.borrowDate,
+      due_date: loan.dueDate,
+      purpose: loan.purpose || "-",
+      notes: loan.notes || "",
+      items: (Array.isArray(loan.items) ? loan.items : []).map((entry) => ({
+        item_name: serialLookup.get(String(entry.rfidCode)) || "Barang",
+        qty: 1,
+      })),
+      status: loan.status,
+      returned_at: loan.returnDate || new Date().toISOString(),
+    };
+  } catch (error) {
+    console.error("Gagal membaca transaksi aplikasi:", error.message);
+    return null;
   }
 }
 
@@ -345,12 +409,18 @@ async function getAIResponse(messages) {
 
 // ===== start bot =====
 async function startBot() {
-  const { state, saveCreds } = await useMultiFileAuthState("auth_info");
-  const { version } = await fetchLatestBaileysVersion();
-  await checkGhostscript();
+  if (startInProgress) return;
+  startInProgress = true;
+  const { state, saveCreds } = await useMultiFileAuthState(AUTH_DIR);
+  let version;
+  try {
+    ({ version } = await fetchLatestBaileysVersion());
+  } catch (error) {
+    console.warn("Versi Baileys terbaru tidak dapat diambil, memakai versi default:", error.message);
+  }
 
   const sock = makeWASocket({
-    version,
+    ...(version ? { version } : {}),
     auth: state,
     printQRInTerminal: false,
   });
@@ -358,25 +428,49 @@ async function startBot() {
   sockGlobal = sock;
 
   sock.ev.on("connection.update", (update) => {
+    if (sock !== sockGlobal) return;
     const { connection, lastDisconnect, qr } = update;
     if (qr) {
+      botError = null;
       botStatus = "qr";
       latestQr = qr;
       console.log("Scan QR berikut untuk login WhatsApp:");
       qrcode.generate(qr, { small: true });
     }
     if (connection === "close") {
+      sockGlobal = null;
+      startInProgress = false;
       botStatus = "offline";
+      latestQr = null;
+      connectedAccount = null;
+      connectedAt = null;
       const reason = lastDisconnect?.error?.output?.statusCode;
       if (reason !== DisconnectReason.loggedOut) {
-        console.log("Koneksi terputus, reconnect...");
-        startBot();
+        if (reconnectTimer) return;
+        console.log("Koneksi terputus, reconnect sekali...");
+        reconnectTimer = setTimeout(() => {
+          reconnectTimer = null;
+          startBot().catch((error) => {
+            botError = error.message;
+            console.error("Reconnect bot gagal:", error);
+          });
+        }, 5000);
       } else {
         console.log("Anda logout, hapus folder auth_info untuk login ulang.");
       }
     } else if (connection === "open") {
+      startInProgress = false;
       botStatus = "connected";
+      botError = null;
       latestQr = null;
+      connectedAccount = sock.user
+        ? {
+            id: sock.user.id,
+            number: sock.user.id.split(":")[0].replace("@s.whatsapp.net", ""),
+            name: sock.user.name || null,
+          }
+        : null;
+      connectedAt = new Date().toISOString();
       console.log("✅ Bot WhatsApp MRC siap!");
     }
   });
@@ -1013,6 +1107,7 @@ app.post("/pinjam", async (req, res) => {
     saveHistory(conversationHistory);
 
     await sockGlobal.sendMessage(jid, { text: message });
+    logNotification("peminjaman", jid, name, true);
 
     const startTime = new Date(start_date).getTime();
     const dueTime = new Date(due_date).getTime();
@@ -1028,9 +1123,10 @@ app.post("/pinjam", async (req, res) => {
     setTimeout(async () => {
       const latestPinjaman = pinjamanDB.find((p) => p.id === pinjamId);
       if (latestPinjaman && latestPinjaman.status !== "dikembalikan") {
-        const reminderMsg = `📢 Yth. *${name}*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_`;
+        const reminderMsg = `📢 Yth. *${name}*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Menagement Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_`;
         try {
           await sockGlobal.sendMessage(jid, { text: reminderMsg });
+          logNotification("pengingat", jid, name, true);
           console.log(
             `[${new Date().toLocaleString("en-US", {
               timeZone: "Asia/Jakarta",
@@ -1070,18 +1166,23 @@ app.post("/kembali", async (req, res) => {
     if (!id) {
       return res.status(400).json({ error: "ID peminjaman wajib diisi" });
     }
-    const idx = pinjamanDB.findIndex((p) => p.id === id);
-    if (idx === -1) {
+    const localIndex = pinjamanDB.findIndex((p) => String(p.id) === String(id));
+    const applicationLoan = loadApplicationLoan(id);
+    const pinjaman = localIndex >= 0 ? pinjamanDB[localIndex] : applicationLoan;
+    if (!pinjaman) {
       return res.status(404).json({ error: "ID peminjaman tidak ditemukan" });
     }
-    if (pinjamanDB[idx].status === "dikembalikan") {
-      return res
-        .status(400)
-        .json({ error: "Barang sudah dikembalikan sebelumnya" });
+    if (localIndex >= 0 && pinjamanDB[localIndex].status === "dikembalikan") {
+      return res.status(400).json({ error: "Barang sudah dikembalikan sebelumnya" });
     }
-    pinjamanDB[idx].status = "dikembalikan";
-    pinjamanDB[idx].returned_at = new Date().toISOString();
-    const { number, name, items, start_date, purpose, notes } = pinjamanDB[idx];
+    if (localIndex >= 0) {
+      pinjamanDB[localIndex].status = "dikembalikan";
+      pinjamanDB[localIndex].returned_at = new Date().toISOString();
+    }
+    const { number, name, items, start_date, purpose, notes } = pinjaman;
+    if (!number) {
+      return res.status(422).json({ error: "Nomor WhatsApp peminjam tidak tersedia" });
+    }
     const jid = number.includes("@s.whatsapp.net")
       ? number
       : number.replace(/\D/g, "") + "@s.whatsapp.net";
@@ -1090,7 +1191,7 @@ app.post("/kembali", async (req, res) => {
       .join("\n");
     // Hitung durasi peminjaman
     const startTime = new Date(pinjamanDB[idx].start_date).getTime();
-    const returnedTime = new Date(pinjamanDB[idx].returned_at).getTime();
+    const returnedTime = new Date(pinjaman.returned_at || new Date()).getTime();
     let durationMs = returnedTime - startTime;
     if (durationMs < 0) durationMs = 0;
     let m = Math.floor(durationMs / 1000 / 60) % 60;
@@ -1118,10 +1219,11 @@ app.post("/kembali", async (req, res) => {
     })();
     let notesText = notes && notes.trim() ? `📄 Catatan: *${notes}*\n` : "";
 
-    const message = `✅ Yth. *${name}*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n${itemsText}\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⏳ Durasi peminjaman: *${durasiStr}*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Maintenance Repair Calibration_ 🛠️`;
+    const message = `✅ Yth. *${name}*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n${itemsText}\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⏳ Durasi peminjaman: *${durasiStr}*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Management Resource Center_ 🛠️`;
 
     try {
       await sockGlobal.sendMessage(jid, { text: message });
+      logNotification("pengembalian", jid, name, true);
       ensureUserHistoryKey(jid);
       conversationHistory[jid].push({ role: "assistant", content: message });
       const system = conversationHistory[jid][0];
@@ -1129,6 +1231,7 @@ app.post("/kembali", async (req, res) => {
       conversationHistory[jid] = [system, ...rest];
       saveHistory(conversationHistory);
     } catch (e) {
+      logNotification("pengembalian", jid, name, false, e.message || String(e));
       console.error("Gagal kirim konfirmasi pengembalian:", e.message || e);
     }
     savePinjaman(pinjamanDB);
@@ -1191,9 +1294,10 @@ app.post("/pengingat", async (req, res) => {
     const startDateText = formatStart(start_date);
     const dueDateText = formatDue(due_date);
     let notesText = notes && notes.trim() ? `📄 Catatan: *${notes}*\n` : "";
-    const reminderMsg = `📢 Yth. *${name}*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_`;
+    const reminderMsg = `📢 Yth. *${name}*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_`;
     try {
       await sockGlobal.sendMessage(jid, { text: reminderMsg });
+      logNotification("pengingat", jid, pinjaman.name, true);
       ensureUserHistoryKey(jid);
       conversationHistory[jid].push({ role: "assistant", content: reminderMsg });
       const system = conversationHistory[jid][0];
@@ -1207,6 +1311,7 @@ app.post("/pengingat", async (req, res) => {
         })}] 🔔 Pengingat pengembalian dikirim ke ${number}`
       );
     } catch (e) {
+      logNotification("pengingat", jid, pinjaman.name, false, e.message || String(e));
       console.error("Gagal kirim pengingat:", e.message || e);
       res.status(500).json({ error: "Gagal mengirim pengingat" });
     }
@@ -1307,8 +1412,18 @@ app.post("/book", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("🚀 Server API Bot MRC berjalan di port 3000");
+const server = app.listen(PORT, () => {
+  console.log(`🚀 Server API Bot MRC berjalan di port ${PORT}`);
+  startBot().catch((err) => {
+    startInProgress = false;
+    botStatus = "offline";
+    botError = err.message;
+    console.error("Start bot error:", err);
+  });
 });
 
-startBot().catch((err) => console.error("Start bot error:", err));
+server.on("error", (err) => {
+  console.error(`Gagal membuka port ${PORT}. Pastikan hanya satu bot yang berjalan.`, err.message);
+  process.exitCode = 1;
+  process.exit(1);
+});

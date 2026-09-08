@@ -42398,11 +42398,12 @@
     ],
     "borrowDate": "2026-09-07T17:02:17+07:00",
     "dueDate": "2026-09-10T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1788775336275",
     "createdAt": "2026-09-07T10:02:16.275Z",
-    "updatedAt": "2026-09-07T10:02:16.275Z"
+    "updatedAt": "2026-09-08T00:25:15.952Z",
+    "returnDate": "2026-09-08T00:25:15.881Z"
   },
   {
     "borrowerId": "122",
@@ -42414,11 +42415,12 @@
     ],
     "borrowDate": "2026-09-07T17:02:53+07:00",
     "dueDate": "2026-09-08T17:02:38+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "",
     "id": "1788775372336",
     "createdAt": "2026-09-07T10:02:52.336Z",
-    "updatedAt": "2026-09-07T10:02:52.336Z"
+    "updatedAt": "2026-09-08T00:15:38.553Z",
+    "returnDate": "2026-09-08T00:15:38.431Z"
   },
   {
     "borrowerId": "122",
@@ -42430,11 +42432,12 @@
     ],
     "borrowDate": "2026-09-07T17:03:32+07:00",
     "dueDate": "2026-09-15T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "",
     "id": "1788775411157",
     "createdAt": "2026-09-07T10:03:31.157Z",
-    "updatedAt": "2026-09-07T10:03:31.157Z"
+    "updatedAt": "2026-09-07T22:57:23.547Z",
+    "returnDate": "2026-09-07T22:57:23.526Z"
   },
   {
     "borrowerId": "122",
@@ -42446,11 +42449,12 @@
     ],
     "borrowDate": "2026-09-07T17:04:54+07:00",
     "dueDate": "2026-09-13T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "kbm",
     "id": "1788775492914",
     "createdAt": "2026-09-07T10:04:52.914Z",
-    "updatedAt": "2026-09-07T10:04:52.914Z"
+    "updatedAt": "2026-09-07T22:46:38.812Z",
+    "returnDate": "2026-09-07T22:46:38.782Z"
   },
   {
     "borrowerId": "122",
@@ -42462,11 +42466,12 @@
     ],
     "borrowDate": "2026-09-07T17:05:52+07:00",
     "dueDate": "2026-09-11T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "",
     "id": "1788775551558",
     "createdAt": "2026-09-07T10:05:51.558Z",
-    "updatedAt": "2026-09-07T10:05:51.558Z"
+    "updatedAt": "2026-09-07T22:39:31.604Z",
+    "returnDate": "2026-09-07T22:39:31.550Z"
   },
   {
     "borrowerId": "122",
@@ -42478,10 +42483,43 @@
     ],
     "borrowDate": "2026-09-07T17:06:24+07:00",
     "dueDate": "2026-09-12T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "",
     "id": "1788775583782",
     "createdAt": "2026-09-07T10:06:23.782Z",
-    "updatedAt": "2026-09-07T10:06:23.782Z"
+    "updatedAt": "2026-09-07T22:00:06.605Z",
+    "returnDate": "2026-09-07T22:00:06.523Z"
+  },
+  {
+    "borrowerId": "122",
+    "items": [
+      {
+        "rfidCode": "18939",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T07:26:09+07:00",
+    "dueDate": "2026-09-09T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "id": "1788827169540",
+    "createdAt": "2026-09-08T00:26:09.540Z",
+    "updatedAt": "2026-09-08T00:26:09.540Z"
+  },
+  {
+    "borrowerId": "1788751103501",
+    "items": [
+      {
+        "rfidCode": "1234567",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T07:29:57+07:00",
+    "dueDate": "2026-09-09T16:00:00+07:00",
+    "status": "dipinjam",
+    "purpose": "KBM",
+    "id": "1788827398908",
+    "createdAt": "2026-09-08T00:29:58.908Z",
+    "updatedAt": "2026-09-08T00:29:58.908Z"
   }
 ]

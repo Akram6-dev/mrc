@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1788827400086-vbsstg",
+    "type": "peminjaman",
+    "recipient": "6283829572060",
+    "name": "HIdayat",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T00:30:00.086Z"
+  },
+  {
+    "id": "1788827171073-gpttz3",
+    "type": "peminjaman",
+    "recipient": "6289655617417",
+    "name": "Taufik Dzikri Pangestu, S.Pd.",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T00:26:11.073Z"
+  }
+]

@@ -272,15 +272,21 @@ export default function PengembalianPage() {
     });
     if (allSerialsReturned && settings?.messages?.returnMessage) {
         try {
-        await fetch("/external/kembali", {
+        const response = await fetch("/external/kembali", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({ id: returningLoan.id })
         })
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}))
+          throw new Error(data.error || "Bot gagal mengirim notifikasi pengembalian")
+        }
+        setSuccess((current) => `${current} Notifikasi WhatsApp berhasil dikirim.`)
       } catch (err) {
         console.error("Gagal POST ke API eksternal /kembali:", err)
+        setError(err instanceof Error ? err.message : "Gagal mengirim notifikasi WhatsApp")
       }
     }
     loadLoans();
