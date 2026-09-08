@@ -239,7 +239,7 @@
       }
     ],
     "createdAt": "2025-08-08T07:11:38.494Z",
-    "updatedAt": "2026-09-08T01:41:36.689Z",
+    "updatedAt": "2026-09-08T02:25:46.468Z",
     "stock": 33,
     "serialSearch": "",
     "image": "/assets/img/1760406973256.jpg"
@@ -337,7 +337,7 @@
       }
     ],
     "createdAt": "2025-08-08T23:44:40.732Z",
-    "updatedAt": "2026-09-08T01:41:37.037Z",
+    "updatedAt": "2026-09-08T02:25:47.178Z",
     "stock": 12,
     "serialSearch": "",
     "image": "/assets/img/1760408189747.jpg"
@@ -435,7 +435,7 @@
       }
     ],
     "createdAt": "2025-08-08T23:46:17.625Z",
-    "updatedAt": "2026-09-08T01:41:37.821Z",
+    "updatedAt": "2026-09-08T02:25:47.875Z",
     "image": "/assets/img/1760421697842.png",
     "serialSearch": "",
     "stock": 14
@@ -610,7 +610,7 @@
       }
     ],
     "createdAt": "2025-08-11T00:46:38.846Z",
-    "updatedAt": "2026-09-08T01:41:38.394Z",
+    "updatedAt": "2026-09-08T02:25:48.019Z",
     "stock": 25,
     "serialSearch": "",
     "image": "/assets/img/1760421889541.webp"
@@ -648,7 +648,7 @@
       }
     ],
     "createdAt": "2025-08-11T05:27:53.251Z",
-    "updatedAt": "2026-09-08T01:41:38.947Z",
+    "updatedAt": "2026-09-08T02:25:48.978Z",
     "image": "/assets/img/1760422046967.jpg",
     "serialSearch": "",
     "stock": 4
@@ -753,7 +753,7 @@
       }
     ],
     "createdAt": "2025-08-12T07:20:47.404Z",
-    "updatedAt": "2026-09-08T01:41:39.521Z",
+    "updatedAt": "2026-09-08T02:25:49.625Z",
     "image": "/assets/img/1760422192877.webp",
     "serialSearch": "",
     "stock": 15
@@ -851,7 +851,7 @@
       }
     ],
     "createdAt": "2025-08-20T02:03:43.398Z",
-    "updatedAt": "2026-09-08T01:41:40.107Z",
+    "updatedAt": "2026-09-08T02:25:50.306Z",
     "image": "/assets/img/1760422356679.jpg",
     "serialSearch": "",
     "stock": 14
@@ -895,7 +895,7 @@
       }
     ],
     "createdAt": "2025-08-25T05:55:09.869Z",
-    "updatedAt": "2026-09-08T01:41:40.612Z",
+    "updatedAt": "2026-09-08T02:25:51.226Z",
     "image": "/assets/img/1760422410717.jpg",
     "serialSearch": "",
     "stock": 5
@@ -921,7 +921,7 @@
       }
     ],
     "createdAt": "2025-08-27T03:58:44.262Z",
-    "updatedAt": "2026-09-08T01:41:41.237Z",
+    "updatedAt": "2026-09-08T02:25:51.371Z",
     "image": "/assets/img/1760422492923.webp",
     "serialSearch": "",
     "stock": 2
@@ -1064,7 +1064,7 @@
       }
     ],
     "createdAt": "2025-08-27T09:46:52.966Z",
-    "updatedAt": "2026-09-08T01:41:41.749Z",
+    "updatedAt": "2026-09-08T02:25:52.191Z",
     "image": "/assets/img/1760422663355.jfif",
     "serialSearch": "",
     "stock": 19
@@ -1084,7 +1084,7 @@
       }
     ],
     "createdAt": "2025-09-04T00:51:04.431Z",
-    "updatedAt": "2026-09-08T01:41:42.349Z",
+    "updatedAt": "2026-09-08T02:25:52.793Z",
     "image": "/assets/img/1760422868475.png",
     "serialSearch": "",
     "stock": 1
@@ -1123,7 +1123,7 @@
       }
     ],
     "createdAt": "2025-09-04T07:05:19.963Z",
-    "updatedAt": "2026-09-08T01:41:43.252Z",
+    "updatedAt": "2026-09-08T02:25:53.997Z",
     "image": "/assets/img/1760422905339.jpg",
     "serialSearch": "",
     "stock": 4
@@ -1150,7 +1150,7 @@
       }
     ],
     "createdAt": "2025-09-15T01:09:16.984Z",
-    "updatedAt": "2026-09-08T01:41:43.785Z",
+    "updatedAt": "2026-09-08T02:25:55.550Z",
     "image": "/assets/img/1760422935106.jpg",
     "serialSearch": "",
     "stock": 2
@@ -1170,7 +1170,7 @@
       }
     ],
     "createdAt": "2025-10-06T05:35:13.994Z",
-    "updatedAt": "2026-09-08T01:41:44.262Z",
+    "updatedAt": "2026-09-08T02:25:55.708Z",
     "image": "/assets/img/1760423019819.jfif",
     "serialSearch": "",
     "stock": 1
@@ -1194,7 +1194,7 @@
     "stock": 1,
     "id": "1761621927855",
     "createdAt": "2025-10-28T03:25:27.855Z",
-    "updatedAt": "2026-09-08T01:41:44.903Z"
+    "updatedAt": "2026-09-08T02:25:56.659Z"
   },
   {
     "name": "Lenovo V310",
@@ -1222,7 +1222,7 @@
     "stock": 2,
     "id": "1761882488737",
     "createdAt": "2025-10-31T03:48:08.737Z",
-    "updatedAt": "2026-09-08T01:41:45.449Z"
+    "updatedAt": "2026-09-08T02:25:57.291Z"
   },
   {
     "name": "LENOVO V310",
@@ -1243,7 +1243,7 @@
     "stock": 1,
     "id": "1776155598559",
     "createdAt": "2026-04-14T08:33:18.559Z",
-    "updatedAt": "2026-09-08T01:41:46.029Z"
+    "updatedAt": "2026-09-08T02:25:57.858Z"
   },
   {
     "name": "Tesss",
@@ -1276,9 +1276,9 @@
       {
         "rfidCode": "1234567",
         "sn": "12345678",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1788827398908"
+        "loanId": null
       },
       {
         "rfidCode": "777",
@@ -1297,9 +1297,9 @@
       {
         "rfidCode": "3456789",
         "sn": "234567",
-        "status": 0,
+        "status": 1,
         "condition": 1,
-        "loanId": "1788831693991"
+        "loanId": null
       },
       {
         "rfidCode": "45678",
@@ -1327,6 +1327,6 @@
     "stock": 10,
     "id": "1788315049865",
     "createdAt": "2026-09-02T02:10:49.865Z",
-    "updatedAt": "2026-09-08T01:41:46.618Z"
+    "updatedAt": "2026-09-08T02:26:28.933Z"
   }
 ]

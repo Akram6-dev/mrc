@@ -263,7 +263,7 @@ let conversationHistory = loadHistory();
 
 const SYSTEM_PROMPT = {
   role: "system",
-  content: `Kamu adalah asisten digital di WhatsApp untuk instansi MRC (Maintenance Resource Center), peminjaman barang dan layanan teknis komputer/jaringan di SMKN 1 Subang.
+  content: `Kamu adalah asisten digital di WhatsApp untuk instansi MRC (Management Resource Center), peminjaman barang dan layanan teknis komputer/jaringan di SMKN 1 Subang.
   
   Ruang MRC bertempat di bagian barat sekolah, dekat dengan toilet siswa di pojok.
   
@@ -1083,7 +1083,7 @@ app.post("/pinjam", async (req, res) => {
     const dueDateText = formatDue(due_date);
 
     let notesText = notes && notes.trim() ? `📄 Catatan: *${notes}*\n` : "";
-    const message = `📢 Yth. *${name}*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Resource Center_ 🛠️`;
+    const message = `📢 Yth. *${name}*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️`;
 
     pinjamanDB.push({
       id: pinjamId,
@@ -1190,7 +1190,7 @@ app.post("/kembali", async (req, res) => {
       .map((it, idx) => `${idx + 1}. ${it.item_name} (${it.qty}x)`)
       .join("\n");
     // Hitung durasi peminjaman
-    const startTime = new Date(pinjamanDB[idx].start_date).getTime();
+    const startTime = new Date(start_date).getTime();
     const returnedTime = new Date(pinjaman.returned_at || new Date()).getTime();
     let durationMs = returnedTime - startTime;
     if (durationMs < 0) durationMs = 0;
