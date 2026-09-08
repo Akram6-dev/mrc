@@ -221,12 +221,12 @@ function loadApplicationLoan(id) {
 
 function loadSettings() {
   try {
-    if (!fs.existsSync(SETTINGS_FILE)) return { ai_active: true };
+    if (!fs.existsSync(SETTINGS_FILE)) return { ai_active: false };
     const raw = fs.readFileSync(SETTINGS_FILE, "utf8");
-    return JSON.parse(raw || "{\"ai_active\":true}");
+    return JSON.parse(raw || "{\"ai_active\":false}");
   } catch (e) {
     console.error("Gagal load settings.json, membuat baru. Error:", e.message);
-    return { ai_active: true };
+    return { ai_active: false };
   }
 }
 function saveSettings(settings) {

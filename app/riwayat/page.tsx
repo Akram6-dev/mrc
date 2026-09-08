@@ -112,7 +112,23 @@ export default function RiwayatPage() {
   const [detailLoan, setDetailLoan] = useState<LoanWithDetails | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
+  const [auditSearch, setAuditSearch] = useState("");
+  const [auditMonthFilter, setAuditMonthFilter] = useState("all");
+  const [auditYearFilter, setAuditYearFilter] = useState("all");
   const router = useRouter();
+
+  const filteredAuditLogs = auditLogs.filter((log) => {
+    const date = new Date(log.createdAt);
+    const query = auditSearch.trim().toLowerCase();
+    const matchesSearch = !query || [log.username, log.role, log.entity, log.description]
+      .some((value) => value?.toLowerCase().includes(query));
+    const matchesMonth = auditMonthFilter === "all" || String(date.getMonth() + 1).padStart(2, "0") === auditMonthFilter;
+    const matchesYear = auditYearFilter === "all" || String(date.getFullYear()) === auditYearFilter;
+    return matchesSearch && matchesMonth && matchesYear;
+  });
+
+  const auditYears = Array.from(new Set(auditLogs.map((log) => new Date(log.createdAt).getFullYear())))
+    .sort((a, b) => b - a);
 
   useEffect(() => {
     if (!auth.isAuthenticated()) {
@@ -1001,6 +1017,39 @@ export default function RiwayatPage() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">Catatan aktivitas admin dan super admin</p>
               </div>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-4 border-b border-gray-200 dark:border-gray-700">
+              <Input
+                value={auditSearch}
+                onChange={(event) => setAuditSearch(event.target.value)}
+                placeholder="Cari username atau perubahan..."
+                className="input-field md:col-span-2"
+              />
+              <Select value={auditMonthFilter} onValueChange={setAuditMonthFilter}>
+                <SelectTrigger className="input-field"><SelectValue placeholder="Bulan" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Semua Bulan</SelectItem>
+                  <SelectItem value="01">Januari</SelectItem>
+                  <SelectItem value="02">Februari</SelectItem>
+                  <SelectItem value="03">Maret</SelectItem>
+                  <SelectItem value="04">April</SelectItem>
+                  <SelectItem value="05">Mei</SelectItem>
+                  <SelectItem value="06">Juni</SelectItem>
+                  <SelectItem value="07">Juli</SelectItem>
+                  <SelectItem value="08">Agustus</SelectItem>
+                  <SelectItem value="09">September</SelectItem>
+                  <SelectItem value="10">Oktober</SelectItem>
+                  <SelectItem value="11">November</SelectItem>
+                  <SelectItem value="12">Desember</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={auditYearFilter} onValueChange={setAuditYearFilter}>
+                <SelectTrigger className="input-field"><SelectValue placeholder="Tahun" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Semua Tahun</SelectItem>
+                  {auditYears.map((year) => <SelectItem key={year} value={String(year)}>{year}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -1011,9 +1060,9 @@ export default function RiwayatPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {auditLogs.length === 0 ? (
-                  <TableRow><TableCell colSpan={4} className="text-center py-8 text-gray-500">Belum ada riwayat perubahan</TableCell></TableRow>
-                ) : auditLogs.map((log) => (
+                {filteredAuditLogs.length === 0 ? (
+                  <TableRow><TableCell colSpan={4} className="text-center py-8 text-gray-500">Tidak ada riwayat perubahan yang sesuai filter</TableCell></TableRow>
+                ) : filteredAuditLogs.map((log) => (
                   <TableRow key={log.id}>
                     <TableCell>{formatDateTime(log.createdAt)}</TableCell>
                     <TableCell className="font-medium">{log.username}</TableCell>

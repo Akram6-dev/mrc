@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 import { Borrower } from '@/lib/types'
+import { getActor, writeAuditLog } from '@/lib/audit'
 
 const DB_PATH = path.join(process.cwd(), 'database', 'borrowers.json')
 
@@ -52,6 +53,15 @@ export async function PUT(req: NextRequest) {
   if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   borrowers[idx] = { ...borrowers[idx], ...body, updatedAt: new Date().toISOString() }
   await writeBorrowers(borrowers)
+  if (typeof body.isFrozen === "boolean") {
+    const actor = getActor(req)
+    await writeAuditLog({
+      ...actor,
+      action: "update",
+      entity: "peminjam",
+      description: `${body.isFrozen ? "Menonaktifkan" : "Mengaktifkan kembali"} akun peminjam ${borrowers[idx].name}`,
+    })
+  }
   return NextResponse.json(borrowers[idx])
 }
 

@@ -153,6 +153,13 @@ export default function PeminjamanPage() {
     setSuccess("");
 
     try {
+      const borrower = borrowers.find((entry) => entry.id === selectedBorrower);
+      if (!borrower) {
+        throw new Error("Pilih peminjam terlebih dahulu");
+      }
+      if (borrower.isFrozen) {
+        throw new Error("Akun peminjam sedang nonaktif dan tidak dapat dipilih");
+      }
       // Validate serials
       const validItems = loanItems.filter((item) => item.rfidCode);
       if (validItems.length === 0) {
@@ -487,7 +494,7 @@ export default function PeminjamanPage() {
                         } else if (e.key === "Enter") {
                           e.preventDefault();
                           const selected = filtered[activeBorrowerIdx];
-                          if (selected) {
+                          if (selected && !selected.isFrozen) {
                             setSelectedBorrower(selected.id);
                             setIsPopoverOpen(false);
                             setBorrowerSearch("");
@@ -541,7 +548,9 @@ export default function PeminjamanPage() {
                               <CommandItem
                                 key={borrower.id}
                                 value={borrower.id}
+                                disabled={borrower.isFrozen}
                                 onSelect={() => {
+                                  if (borrower.isFrozen) return;
                                   setSelectedBorrower(borrower.id);
                                   setIsPopoverOpen(false);
                                   setBorrowerSearch("");
@@ -552,14 +561,12 @@ export default function PeminjamanPage() {
                                     el.scrollIntoView({ block: "nearest" });
                                 }}
                                 className={
-                                  idx === activeBorrowerIdx
-                                    ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200"
-                                    : ""
+                                  `${idx === activeBorrowerIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""} ${borrower.isFrozen ? "opacity-50 cursor-not-allowed" : ""}`
                                 }
                               >
                                 <div className="flex flex-col text-left">
                                   <span className="font-medium">
-                                    {borrower.name || "-"}
+                                    {borrower.name || "-"}{borrower.isFrozen ? " (Nonaktif)" : ""}
                                   </span>
                                   <span className="text-xs text-gray-500">
                                     {borrower?.nip && borrower?.officerId

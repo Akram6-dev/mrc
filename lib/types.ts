@@ -42,6 +42,7 @@ export interface Borrower {
   gender: "L" | "P"
   createdAt: string
   updatedAt: string
+  isFrozen?: boolean
 }
 
 

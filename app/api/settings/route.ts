@@ -26,7 +26,7 @@ const defaultSettings = {
     borrowConfirmation: false
   },
   messages: {
-    aiReply: true,
+    aiReply: false,
     loanMessage: true,
     returnMessage: true,
     reminderMessage: true
