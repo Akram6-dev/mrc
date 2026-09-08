@@ -17,6 +17,12 @@
       "username": "petugas",
       "password": "petugas123",
       "role": "admin"
+    },
+    {
+      "id": "1788841312635",
+      "username": "asep",
+      "password": "asep123",
+      "role": "admin"
     }
   ],
   "notifications": {

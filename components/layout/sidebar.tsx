@@ -3,7 +3,7 @@
 import { Fragment, useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen, AlertTriangle, MessageCircle } from "lucide-react"
+import { Home, Package, Users, FileText, RotateCcw, History, Settings, LogOut, Sun, Moon, Bell, Info, ChartColumn, NotebookPen, AlertTriangle, MessageCircle, ClipboardList } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { auth, type User } from "@/lib/auth"
@@ -14,6 +14,7 @@ const navigation = [
   { name: "Pengembalian", href: "/pengembalian", icon: RotateCcw },
   { name: "Booking", href: "/booking", icon: NotebookPen },
   { name: "Riwayat", href: "/riwayat", icon: History },
+  { name: "Aktivitas", href: "/aktivitas", icon: ClipboardList },
   { name: "Analisis", href: "/analisis", icon: ChartColumn },
   { name: "Barang", href: "/barang", icon: Package },
   { name: "Peminjam", href: "/peminjam", icon: Users },

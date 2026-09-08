@@ -264,19 +264,17 @@ export default function PeminjamanPage() {
         }
       }
 
-      // Update semua serial: jika rfidCode dipinjam, set loanId ke createdLoan.id dan status 0, jika tidak, pastikan loanId null/undefined
+      // Update hanya item yang punya serial yang dipinjam
       for (const item of items) {
         if (!item.items) continue;
+        const hasBorrowedSerial = item.items.some(s => validItems.some(li => li.rfidCode === s.rfidCode));
+        if (!hasBorrowedSerial) continue;
         const updatedSerials = item.items.map(s => {
           const isBorrowed = validItems.some(li => li.rfidCode === s.rfidCode);
           if (isBorrowed) {
             return { ...s, status: 0 as 0, loanId: createdLoan.id };
-          } else if (s.loanId === createdLoan.id) {
-            // Serial yang sebelumnya dipinjam loan ini tapi tidak dipilih sekarang, reset loanId
-            return { ...s, loanId: undefined };
-          } else {
-            return s;
           }
+          return s;
         });
         await api.updateItem(item.id, { items: updatedSerials });
       }

@@ -112,23 +112,16 @@ export default function RiwayatPage() {
   const [detailLoan, setDetailLoan] = useState<LoanWithDetails | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
-  const [auditSearch, setAuditSearch] = useState("");
-  const [auditMonthFilter, setAuditMonthFilter] = useState("all");
-  const [auditYearFilter, setAuditYearFilter] = useState("all");
   const router = useRouter();
 
-  const filteredAuditLogs = auditLogs.filter((log) => {
-    const date = new Date(log.createdAt);
-    const query = auditSearch.trim().toLowerCase();
-    const matchesSearch = !query || [log.username, log.role, log.entity, log.description]
-      .some((value) => value?.toLowerCase().includes(query));
-    const matchesMonth = auditMonthFilter === "all" || String(date.getMonth() + 1).padStart(2, "0") === auditMonthFilter;
-    const matchesYear = auditYearFilter === "all" || String(date.getFullYear()) === auditYearFilter;
-    return matchesSearch && matchesMonth && matchesYear;
-  });
-
-  const auditYears = Array.from(new Set(auditLogs.map((log) => new Date(log.createdAt).getFullYear())))
-    .sort((a, b) => b - a);
+  const detailAuditLog = detailLoan
+    ? auditLogs
+      .filter((log) =>
+        (log.entity === "peminjaman" || log.entity === "pengembalian") &&
+        log.description.includes(String(detailLoan.id)),
+      )
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0]
+    : null;
 
   useEffect(() => {
     if (!auth.isAuthenticated()) {
@@ -136,7 +129,7 @@ export default function RiwayatPage() {
       return;
     }
     loadLoans();
-    if (auth.getCurrentUser()?.role === "super_admin") loadAuditLogs();
+    loadAuditLogs();
   }, [router]);
 
   useEffect(() => {
@@ -172,7 +165,12 @@ export default function RiwayatPage() {
       });
 
       // Gabungkan semua data ke satu array, tampilkan semua serial yang pernah dipinjam pada loan ini
-      const mapped: LoanWithDetails[] = (loansData || []).map((loan: any) => {
+      const currentUser = auth.getCurrentUser();
+      const isAdmin = currentUser?.role === "admin";
+      const filteredLoansData = isAdmin
+        ? (loansData || []).filter((loan: any) => loan.createdBy === currentUser?.username || loan.returnedBy === currentUser?.username)
+        : (loansData || []);
+      const mapped: LoanWithDetails[] = filteredLoansData.map((loan: any) => {
         const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {};
         let itemDetails: ItemSerialDetail[] = [];
         if (Array.isArray(loan.items)) {
@@ -769,7 +767,7 @@ export default function RiwayatPage() {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Detail Peminjaman</AlertDialogTitle>
-                    <AlertDialogDescription>
+                      <AlertDialogDescription asChild>
                       {detailLoan ? (
                         <div className="space-y-6">
                           {/* Borrower Card */}
@@ -844,6 +842,14 @@ export default function RiwayatPage() {
                                 <span className="font-semibold">Catatan:</span>{" "}
                                 {detailLoan.notes || "-"}
                               </div>
+                              <div>
+                                <span className="font-semibold">Petugas Peminjaman:</span>{" "}
+                                {detailLoan.createdBy || detailAuditLog?.username || "-"}
+                              </div>
+                              <div>
+                                <span className="font-semibold">Petugas Pengembalian:</span>{" "}
+                                {detailLoan.returnedBy || "-"}
+                              </div>
                             </div>
                           </div>
                           {/* Detail per-serial, mirip pengembalian, read-only */}
@@ -905,7 +911,7 @@ export default function RiwayatPage() {
                             </ul>
                           </div>
                         </div>
-                      ) : null}
+                        ) : <div />}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -1008,72 +1014,7 @@ export default function RiwayatPage() {
           </div>
         )}
 
-        {auth.getCurrentUser()?.role === "super_admin" && (
-          <div className="mt-10 card overflow-hidden">
-            <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-200 dark:border-gray-700">
-              <ClipboardList className="w-5 h-5 text-accent-600" />
-              <div>
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Riwayat Perubahan Admin</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Catatan aktivitas admin dan super admin</p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-4 border-b border-gray-200 dark:border-gray-700">
-              <Input
-                value={auditSearch}
-                onChange={(event) => setAuditSearch(event.target.value)}
-                placeholder="Cari username atau perubahan..."
-                className="input-field md:col-span-2"
-              />
-              <Select value={auditMonthFilter} onValueChange={setAuditMonthFilter}>
-                <SelectTrigger className="input-field"><SelectValue placeholder="Bulan" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Semua Bulan</SelectItem>
-                  <SelectItem value="01">Januari</SelectItem>
-                  <SelectItem value="02">Februari</SelectItem>
-                  <SelectItem value="03">Maret</SelectItem>
-                  <SelectItem value="04">April</SelectItem>
-                  <SelectItem value="05">Mei</SelectItem>
-                  <SelectItem value="06">Juni</SelectItem>
-                  <SelectItem value="07">Juli</SelectItem>
-                  <SelectItem value="08">Agustus</SelectItem>
-                  <SelectItem value="09">September</SelectItem>
-                  <SelectItem value="10">Oktober</SelectItem>
-                  <SelectItem value="11">November</SelectItem>
-                  <SelectItem value="12">Desember</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={auditYearFilter} onValueChange={setAuditYearFilter}>
-                <SelectTrigger className="input-field"><SelectValue placeholder="Tahun" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Semua Tahun</SelectItem>
-                  {auditYears.map((year) => <SelectItem key={year} value={String(year)}>{year}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            </div>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Waktu</TableHead>
-                  <TableHead>Username</TableHead>
-                  <TableHead>Peran</TableHead>
-                  <TableHead>Perubahan</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredAuditLogs.length === 0 ? (
-                  <TableRow><TableCell colSpan={4} className="text-center py-8 text-gray-500">Tidak ada riwayat perubahan yang sesuai filter</TableCell></TableRow>
-                ) : filteredAuditLogs.map((log) => (
-                  <TableRow key={log.id}>
-                    <TableCell>{formatDateTime(log.createdAt)}</TableCell>
-                    <TableCell className="font-medium">{log.username}</TableCell>
-                    <TableCell>{log.role === "super_admin" ? "Super Admin" : "Admin"}</TableCell>
-                    <TableCell>{log.description}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
+
       </div>
     </div>
   );
