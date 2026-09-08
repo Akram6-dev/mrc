@@ -1,11 +1,41 @@
 import type { Item, Borrower, Loan, DashboardStats } from './types'
 
+const CACHE_TTL_MS = 15_000
+const responseCache = new Map<string, { expiresAt: number; data: unknown }>()
+const pendingRequests = new Map<string, Promise<unknown>>()
+
+async function getCached<T>(url: string): Promise<T> {
+  const cached = responseCache.get(url)
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.data as T
+  }
+
+  const pending = pendingRequests.get(url)
+  if (pending) return pending as Promise<T>
+
+  const request = fetch(url, { cache: 'no-store' })
+    .then(async (res) => {
+      if (!res.ok) throw new Error(`Request ${url} gagal (${res.status})`)
+      const data = await res.json() as T
+      responseCache.set(url, { expiresAt: Date.now() + CACHE_TTL_MS, data })
+      return data
+    })
+    .finally(() => {
+      pendingRequests.delete(url)
+    })
+
+  pendingRequests.set(url, request)
+  return request
+}
+
+function invalidateCache(...urls: string[]) {
+  urls.forEach((url) => responseCache.delete(url))
+}
 
 // Items API
 
 export async function getItems(): Promise<Item[]> {
-  const res = await fetch('/api/items')
-  return await res.json()
+  return getCached<Item[]>('/api/items')
 }
 
 
@@ -15,7 +45,9 @@ export async function createItem(item: Omit<Item, 'id' | 'createdAt' | 'updatedA
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/items')
+  return data
 }
 
 
@@ -25,7 +57,9 @@ export async function updateItem(id: string, item: Partial<Item>): Promise<Item>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, ...item }),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/items')
+  return data
 }
 
 
@@ -35,14 +69,15 @@ export async function deleteItem(id: string): Promise<{ success: boolean }> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/items')
+  return data
 }
 
 // Borrowers API
 
 export async function getBorrowers(): Promise<Borrower[]> {
-  const res = await fetch('/api/borrowers')
-  return await res.json()
+  return getCached<Borrower[]>('/api/borrowers')
 }
 
 
@@ -52,7 +87,9 @@ export async function createBorrower(borrower: Omit<Borrower, 'id' | 'createdAt'
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(borrower),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/borrowers')
+  return data
 }
 
 
@@ -62,7 +99,9 @@ export async function updateBorrower(id: string, borrower: Partial<Borrower>): P
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, ...borrower }),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/borrowers')
+  return data
 }
 
 
@@ -72,14 +111,15 @@ export async function deleteBorrower(id: string): Promise<{ success: boolean }> 
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/borrowers')
+  return data
 }
 
 // Loans API
 
 export async function getLoans(): Promise<Loan[]> {
-  const res = await fetch('/api/loans')
-  return await res.json()
+  return getCached<Loan[]>('/api/loans')
 }
 
 
@@ -89,7 +129,9 @@ export async function createLoan(loan: Omit<Loan, 'id' | 'createdAt' | 'updatedA
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(loan),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/loans')
+  return data
 }
 
 
@@ -99,7 +141,9 @@ export async function updateLoan(id: string, loan: Partial<Loan>): Promise<Loan>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, ...loan }),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/loans')
+  return data
 }
 
 
@@ -109,7 +153,9 @@ export async function deleteLoan(id: string): Promise<{ success: boolean }> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id }),
   })
-  return await res.json()
+  const data = await res.json()
+  invalidateCache('/api/loans')
+  return data
 }
 
 // Dashboard stats helper (optional)
@@ -145,6 +191,7 @@ export async function returnLoan(loanId: string): Promise<void> {
       returnDate: new Date().toISOString(),
     }),
   })
+  invalidateCache('/api/loans', '/api/items')
 }
 
 const api = {
