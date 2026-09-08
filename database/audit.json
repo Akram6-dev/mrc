@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman untuk 1788751103501",
+    "id": "1788835975861",
+    "createdAt": "2026-09-08T02:52:55.861Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788835971191",
+    "createdAt": "2026-09-08T02:52:51.191Z"
+  },
+  {
+    "username": "Tidak diketahui",
+    "role": "admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788835955275",
+    "createdAt": "2026-09-08T02:52:35.275Z"
+  }
+]
