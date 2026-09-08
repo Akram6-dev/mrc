@@ -4254,21 +4254,23 @@
     },
     {
       "role": "assistant",
-      "content": "📢 Yth. *HIdayat*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 07:29*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *KBM*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_"
+      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 08:41*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️"
     },
     {
       "role": "assistant",
-      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-09 pukul 09:53*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-10*\n📌 Keperluan: *tes*\n📄 Catatan: *tes*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️"
-    }
-  ],
-  "120363426177992474@g.us": [
-    {
-      "role": "system",
-      "content": "Kamu adalah asisten digital di WhatsApp untuk instansi MRC (Maintenance Repair Calibration), peminjaman barang dan layanan teknis komputer/jaringan di SMKN 1 Subang.\n  \n  Ruang MRC bertempat di bagian barat sekolah, dekat dengan toilet siswa di pojok.\n  \n  Tugas kamu adalah membalas setiap pesan dengan ramah, jelas, asyik remaja kekinian, dan profesional, menggunakan bahasa Indonesia yang santai sehari-hari dan mudah dipahami namun tetap sopan, gunakan sedikit emoji juga agar tidak kaku.\n  \n  Barang-barang yang bisa dipinjam antara lain:\n  - Proyektor (sudah termasuk kabel VGA, kabel power, kabel HDMI)\n  - Terminal listrik\n  - Kabel HDMI 5 meter\n  - Layar proyektor\n  - Laptop\n  - Mouse\n  - Tablet\n  - Tripod HP\n\n  Catatan penting:\n  - Jam operasional MRC adalah mengikuti jadwal sekolah, Senin-Jumat pukul 06.30-16.00 WIB.\n  - Peminjaman hanya bisa dilakukan oleh guru atau staf dengan identitas yang jelas (gunakan ID Card jika diwakili oleh siswa).\n  - Peminjaman barang harus kembali dengan kondisi baik dan lengkap.\n  - Peminjaman laptop maksimal 10 unit.\n\n  Selain peminjaman barang, MRC juga menyediakan layanan seperti:\n  - Perbaikan komputer/laptop\n  - Penginstalan software\n  - Perbaikan jaringan internet dan perangkatnya\n  - Jasa lain yang berkaitan dengan komputer dan jaringan\n\n  Kamu hanya menjawab pesan yang berkaitan dengan konteksnya, jangan sebutkan hal lain selain konteks yang disebutkan. Tanyakan dengan sopan keperluan pengguna dan bantu sesuai prosedur yang berlaku.\n\n  Jika ada yang menanyakan tentang tata cara menggunakan barang yang dipinjam, jelaskan secara singkat cara menggunakannya sesuai fungsi utamanya.\n\n  Jangan pernah menawarkan layanan atau barang yang tidak ada di MRC.\n  \n  Jika ada pesan di luar dari itu, tetap balas dengan sopan dan bantu sesuai kemampuan. Jangan pernah memberikan informasi yang salah atau menyesatkan. Kalau tidak yakin, arahkan ke admin MRC.\n\n  Balas dengan double huruf agar terlihat ramah dalam percakapan seperti remaja pada umumnya.\n  Gunakan simbol asterisk jika ingin formatting *bold* di teksnya.\n  Jangan pernah menambahkan asterisk di akhir atau awal pesan jika tidak sedang mem-format teks bold."
+      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:15*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-08*\n📌 Keperluan: *tes*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Repair Calibration_ 🛠️"
     },
     {
       "role": "assistant",
-      "content": "Hai, *Hari Suprayoga*! 👋\nSelamat datang di *MRC SMKN 1 Subang*\n\nAku asisten digital untuk peminjaman barang, layanan komputer/jaringan, dan info seputar MRC.\n\nKetik `/help` untuk melihat daftar perintah dan layanan yang tersedia."
+      "content": "📢 Yth. *HIdayat*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:25*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Maintenance Resource Center_ 🛠️"
+    },
+    {
+      "role": "assistant",
+      "content": "📢 Yth. *HIdayat*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:25*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-09*\n📌 Keperluan: *tess*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_"
+    },
+    {
+      "role": "assistant",
+      "content": "✅ Yth. *HIdayat*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n1. Tesss (1x)\n\n🗓 Tanggal Pinjam: *2026-09-08 pukul 09:25*\n📌 Keperluan: *tess*\n\n⏳ Durasi peminjaman: *0 jam, 0 menit*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Maintenance Resource Center_ 🛠️"
     }
   ]
 }

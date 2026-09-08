@@ -6,10 +6,10 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { User, Bell, Shield, MessageSquare, Database, Download, Upload, Save, Trash2 } from "lucide-react"
+import { User, Bell, Shield, MessageSquare, Database, Download, Upload, Save, Trash2, UserPlus, Pencil, X } from "lucide-react"
 import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
-import { auth } from "@/lib/auth"
+import { auth, type User as AuthUser } from "@/lib/auth"
 import api from "@/lib/api"
 
 export default function PengaturanPage() {
@@ -27,10 +27,15 @@ export default function PengaturanPage() {
     newPassword: "",
     confirmPassword: "",
   })
+  const [adminAccount, setAdminAccount] = useState({ username: "", password: "", confirmPassword: "" })
+  const [editingAdminId, setEditingAdminId] = useState<string | null>(null)
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null)
 
   // Load settings from API on mount
   useEffect(() => {
-    if (!auth.isAuthenticated()) {
+    const user = auth.getCurrentUser()
+    setCurrentUser(user)
+    if (!user) {
       router.push("/login")
       return
     }
@@ -139,6 +144,60 @@ export default function PengaturanPage() {
     }
   }
 
+  const handleAdminAccountSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError("")
+    setSuccess("")
+
+    const username = adminAccount.username.trim()
+    if (!username || (!editingAdminId && !adminAccount.password)) {
+      setError("Username dan password akun admin wajib diisi")
+      return
+    }
+    if (adminAccount.password !== adminAccount.confirmPassword) {
+      setError("Konfirmasi password akun admin tidak cocok")
+      return
+    }
+
+    const users = Array.isArray(settings?.users) ? settings.users : []
+    if (users.some((user: any) => user.id !== editingAdminId && user.username.toLowerCase() === username.toLowerCase()) ||
+      settings?.admin?.username?.toLowerCase() === username.toLowerCase()) {
+      setError("Username sudah digunakan")
+      return
+    }
+
+    try {
+      const res = await fetch("/api/settings/users", {
+        method: editingAdminId ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
+        body: JSON.stringify({ id: editingAdminId, username, password: adminAccount.password }),
+      })
+      if (!res.ok) throw new Error("Gagal menambahkan akun admin")
+      const newSettings = await fetch("/api/settings").then((response) => response.json())
+      setSettings(newSettings)
+      setAdminAccount({ username: "", password: "", confirmPassword: "" })
+      setEditingAdminId(null)
+      setSuccess(editingAdminId ? "Akun admin berhasil diubah" : "Akun admin berhasil ditambahkan")
+    } catch {
+      setError("Gagal menambahkan akun admin")
+    }
+  }
+
+  const handleDeleteAdmin = async (id: string, username: string) => {
+    if (!confirm(`Hapus akun admin ${username}?`)) return
+    const res = await fetch("/api/settings/users", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", ...auth.getAuthHeaders() },
+      body: JSON.stringify({ id }),
+    })
+    if (!res.ok) {
+      setError("Gagal menghapus akun admin")
+      return
+    }
+    setSettings(await fetch("/api/settings").then((response) => response.json()))
+    setSuccess("Akun admin berhasil dihapus")
+  }
+
   const handleExportData = async () => {
     try {
       const [items, borrowers, loans] = await Promise.all([api.getItems(), api.getBorrowers(), api.getLoans()])
@@ -211,6 +270,9 @@ export default function PengaturanPage() {
     { id: "system", name: "Sistem", icon: Shield },
     { id: "messages", name: "Pesan", icon: MessageSquare },
     { id: "data", name: "Data", icon: Database },
+    ...(currentUser?.role === "super_admin"
+      ? [{ id: "admin-accounts", name: "Akun Admin", icon: UserPlus }]
+      : []),
   ]
   const handleMessagesSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -270,7 +332,7 @@ export default function PengaturanPage() {
     return () => clearInterval(interval);
   }, []);
 
-  if (!auth.isAuthenticated()) return null
+  if (!currentUser) return null
 
   return (
     <div className="min-h-screen gradient-bg">
@@ -649,6 +711,81 @@ export default function PengaturanPage() {
                         Reset Semua Data
                       </button>
                     </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "admin-accounts" && currentUser.role === "super_admin" && (
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Akun Admin</h2>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                    Tambahkan akun petugas yang dapat mengelola peminjaman, pengembalian, dan booking.
+                  </p>
+                  <form onSubmit={handleAdminAccountSubmit} className="space-y-5 max-w-xl">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Username</label>
+                      <Input
+                        value={adminAccount.username}
+                        onChange={(e) => setAdminAccount({ ...adminAccount, username: e.target.value })}
+                        className="input-field"
+                        autoComplete="off"
+                        required
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                        <Input
+                          type="password"
+                          value={adminAccount.password}
+                          onChange={(e) => setAdminAccount({ ...adminAccount, password: e.target.value })}
+                          className="input-field"
+                          autoComplete="new-password"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Konfirmasi Password</label>
+                        <Input
+                          type="password"
+                          value={adminAccount.confirmPassword}
+                          onChange={(e) => setAdminAccount({ ...adminAccount, confirmPassword: e.target.value })}
+                          className="input-field"
+                          autoComplete="new-password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <button type="submit" className="btn-primary">
+                        <UserPlus className="w-4 h-4 mr-2" />
+                        {editingAdminId ? "Simpan Perubahan" : "Tambah Akun Admin"}
+                      </button>
+                    </div>
+                  </form>
+
+                  <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Daftar Akun Admin</h3>
+                    <div className="space-y-2">
+                      {(settings?.users || []).filter((user: any) => user.role === "admin").map((user: any) => (
+                        <div key={user.id} className="flex items-center justify-between rounded-lg bg-gray-50 dark:bg-gray-700/50 px-4 py-3">
+                          <span className="font-medium text-gray-900 dark:text-white">{user.username}</span>
+                          <div className="flex items-center gap-2">
+                            <button type="button" title="Edit akun" onClick={() => {
+                              setEditingAdminId(user.id)
+                              setAdminAccount({ username: user.username, password: "", confirmPassword: "" })
+                            }} className="p-2 text-accent-600 hover:bg-accent-100 rounded-lg"><Pencil className="w-4 h-4" /></button>
+                            <button type="button" title="Hapus akun" onClick={() => handleDeleteAdmin(user.id, user.username)} className="p-2 text-red-600 hover:bg-red-100 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                          </div>
+                        </div>
+                      ))}
+                      {(settings?.users || []).filter((user: any) => user.role === "admin").length === 0 && (
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Belum ada akun admin tambahan.</p>
+                      )}
+                    </div>
+                    {editingAdminId && (
+                      <button type="button" onClick={() => { setEditingAdminId(null); setAdminAccount({ username: "", password: "", confirmPassword: "" }) }} className="mt-3 text-sm text-gray-500 hover:text-gray-800 flex items-center gap-1"><X className="w-4 h-4" /> Batal edit</button>
+                    )}
                   </div>
                 </div>
               )}

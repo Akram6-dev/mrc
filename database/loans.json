@@ -42516,26 +42516,62 @@
     ],
     "borrowDate": "2026-09-08T07:29:57+07:00",
     "dueDate": "2026-09-09T16:00:00+07:00",
-    "status": "dipinjam",
+    "status": "dikembalikan",
     "purpose": "KBM",
     "id": "1788827398908",
     "createdAt": "2026-09-08T00:29:58.908Z",
-    "updatedAt": "2026-09-08T00:29:58.908Z"
+    "updatedAt": "2026-09-08T02:23:07.852Z",
+    "returnDate": "2026-09-08T02:23:07.813Z"
   },
   {
-    "id": "1788835954560",
     "borrowerId": "1788751103501",
     "items": [
       {
-        "rfidCode": "777"
+        "rfidCode": "3456789",
+        "note": ""
       }
     ],
-    "borrowDate": "2026-09-09T02:53:00.000Z",
-    "dueDate": "2026-09-10T02:53:00.000Z",
-    "status": "dipinjam",
+    "borrowDate": "2026-09-08T08:41:32+07:00",
+    "dueDate": "2026-09-09T08:41:17+07:00",
+    "status": "dikembalikan",
+    "purpose": "tess",
+    "id": "1788831693991",
+    "createdAt": "2026-09-08T01:41:33.991Z",
+    "updatedAt": "2026-09-08T02:17:39.096Z",
+    "returnDate": "2026-09-08T02:17:39.043Z"
+  },
+  {
+    "borrowerId": "1788751103501",
+    "items": [
+      {
+        "rfidCode": "876543",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T09:15:27+07:00",
+    "dueDate": "2026-09-08T16:00:00+07:00",
+    "status": "dikembalikan",
     "purpose": "tes",
-    "notes": "tes",
-    "createdAt": "2026-09-08T02:52:55.439Z",
-    "updatedAt": "2026-09-08T02:52:55.439Z"
+    "id": "1788833729106",
+    "createdAt": "2026-09-08T02:15:29.106Z",
+    "updatedAt": "2026-09-08T02:16:14.151Z",
+    "returnDate": "2026-09-08T02:16:14.120Z"
+  },
+  {
+    "borrowerId": "1788751103501",
+    "items": [
+      {
+        "rfidCode": "777",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T09:25:42+07:00",
+    "dueDate": "2026-09-09T09:25:19+07:00",
+    "status": "dikembalikan",
+    "purpose": "tess",
+    "id": "1788834345767",
+    "createdAt": "2026-09-08T02:25:45.767Z",
+    "updatedAt": "2026-09-08T02:26:28.334Z",
+    "returnDate": "2026-09-08T02:26:28.293Z"
   }
 ]

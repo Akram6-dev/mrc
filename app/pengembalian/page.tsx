@@ -623,7 +623,7 @@ export default function PengembalianPage() {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Detail Peminjaman</AlertDialogTitle>
-                    <AlertDialogDescription>
+                    <AlertDialogDescription asChild>
                       {detailLoan ? (
                         <div className="space-y-6">
                           {/* Borrower Card */}
@@ -705,7 +705,7 @@ export default function PengembalianPage() {
                             </ul>
                           </div>
                         </div>
-                      ) : null}
+                      ) : <div />}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
