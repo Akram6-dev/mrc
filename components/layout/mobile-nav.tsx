@@ -212,6 +212,21 @@ export default function MobileNav() {
                   </Link>
                 )
               })}
+              {user && (
+                <Link
+                  href="/whatsapp"
+                  className={cn(
+                    "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
+                    pathname === "/whatsapp"
+                      ? "bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md"
+                      : "text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20",
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <MessageCircle className="mr-3 h-5 w-5" />
+                  WhatsApp Bot
+                </Link>
+              )}
             </nav>
 
             <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700 space-y-3">

@@ -85,6 +85,7 @@ class AuthService {
       "/pengembalian",
       "/booking",
       "/riwayat",
+      "/whatsapp",
     ].includes(pathname);
   }
 }

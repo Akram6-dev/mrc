@@ -176,7 +176,7 @@ export default function Sidebar() {
           })}
         </nav>
 
-        {user?.role === "super_admin" && (
+        {user && (
           <div className="px-4 pb-3">
             <button
               type="button"

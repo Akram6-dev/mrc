@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const BOT_URL = process.env.MRC_BOT_URL || "http://127.0.0.1:3000";
 
 export async function POST(req: NextRequest) {
-  if (req.headers.get("x-user-role") !== "super_admin") {
+  if (!["admin", "super_admin"].includes(req.headers.get("x-user-role") || "")) {
     return NextResponse.json(
       { error: "Akses hanya untuk super admin" },
       { status: 403 },
