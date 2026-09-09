@@ -11,6 +11,9 @@ export async function POST(req: NextRequest) {
     await refreshLoanHistory(loans);
     return NextResponse.json({ success: true });
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err?.message || "Unknown error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: err?.message || "Unknown error" },
+      { status: 500 },
+    );
   }
 }

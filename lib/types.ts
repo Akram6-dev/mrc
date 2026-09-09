@@ -1,4 +1,3 @@
-
 export interface ItemSerialDetail {
   id: string;
   name: string;
@@ -35,27 +34,25 @@ export interface Item {
 }
 
 export interface Borrower {
-  id: string
-  name: string
-  nip: string
-  officerId: string
-  rfid: string
-  phone: string
-  gender: "L" | "P"
-  createdAt: string
-  updatedAt: string
-  isFrozen?: boolean
-  deletedAt?: string
-  deletedBy?: string
+  id: string;
+  name: string;
+  nip: string;
+  officerId: string;
+  rfid: string;
+  phone: string;
+  gender: "L" | "P";
+  createdAt: string;
+  updatedAt: string;
+  isFrozen?: boolean;
+  deletedAt?: string;
+  deletedBy?: string;
 }
-
 
 // Now loan is per serial number, not per item+quantity
 export interface LoanItem {
   rfidCode: string;
   note?: string;
 }
-
 
 export interface Loan {
   id: string;
@@ -76,13 +73,18 @@ export interface Loan {
 }
 
 export interface LoanWithDetails extends Loan {
-  borrower: Borrower
-  itemDetails: (Item & { quantity: number; rfidCode?: string; sn?: string; status: 0 | 1 | 2 })[]
+  borrower: Borrower;
+  itemDetails: (Item & {
+    quantity: number;
+    rfidCode?: string;
+    sn?: string;
+    status: 0 | 1 | 2;
+  })[];
 }
 
 export interface DashboardStats {
-  totalItems: number
-  totalBorrowers: number
-  activeLoan: number
-  overdueLoan: number
+  totalItems: number;
+  totalBorrowers: number;
+  activeLoan: number;
+  overdueLoan: number;
 }

@@ -4,6 +4,258 @@
     "role": "super_admin",
     "action": "update",
     "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788913090759",
+    "createdAt": "2026-09-09T00:18:10.760Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788913088649 untuk 1788911372953",
+    "id": "1788913088707",
+    "createdAt": "2026-09-09T00:18:08.707Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788913022189",
+    "createdAt": "2026-09-09T00:17:02.189Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788912988533",
+    "id": "1788913021446",
+    "createdAt": "2026-09-09T00:17:01.446Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788912988533",
+    "id": "1788913006266",
+    "createdAt": "2026-09-09T00:16:46.266Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788912989895",
+    "createdAt": "2026-09-09T00:16:29.895Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788912988533 untuk 2",
+    "id": "1788912988583",
+    "createdAt": "2026-09-09T00:16:28.583Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788912003640",
+    "createdAt": "2026-09-09T00:00:03.640Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788911999735 untuk 1788911372953",
+    "id": "1788911999861",
+    "createdAt": "2026-09-08T23:59:59.861Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788911445919",
+    "createdAt": "2026-09-08T23:50:45.919Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788911426284",
+    "id": "1788911444811",
+    "createdAt": "2026-09-08T23:50:44.811Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788911428568",
+    "createdAt": "2026-09-08T23:50:28.568Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788911426284 untuk 1788911372953",
+    "id": "1788911426468",
+    "createdAt": "2026-09-08T23:50:26.468Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "delete",
+    "entity": "peminjam",
+    "description": "Menghapus peminjam 1788751103501",
+    "id": "1788910304914",
+    "createdAt": "2026-09-08T23:31:44.914Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "delete",
+    "entity": "barang",
+    "description": "Menghapus barang 1788880696517",
+    "id": "1788910205599",
+    "createdAt": "2026-09-08T23:30:05.599Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang tes1",
+    "id": "1788880908559",
+    "createdAt": "2026-09-08T15:21:48.559Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788880834777",
+    "id": "1788880907653",
+    "createdAt": "2026-09-08T15:21:47.653Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788880834777",
+    "id": "1788880899618",
+    "createdAt": "2026-09-08T15:21:39.618Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang tes1",
+    "id": "1788880835424",
+    "createdAt": "2026-09-08T15:20:35.424Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788880834777 untuk 1788751103501",
+    "id": "1788880834832",
+    "createdAt": "2026-09-08T15:20:34.832Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang tes1",
+    "id": "1788880794784",
+    "createdAt": "2026-09-08T15:19:54.784Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788880745854",
+    "id": "1788880793495",
+    "createdAt": "2026-09-08T15:19:53.495Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang tes1",
+    "id": "1788880748554",
+    "createdAt": "2026-09-08T15:19:08.555Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "peminjaman",
+    "description": "Mencatat peminjaman 1788880745854 untuk 3",
+    "id": "1788880745936",
+    "createdAt": "2026-09-08T15:19:05.936Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "create",
+    "entity": "barang",
+    "description": "Menambah barang tes1",
+    "id": "1788880696560",
+    "createdAt": "2026-09-08T15:18:16.560Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
+    "description": "Mengubah barang Tesss",
+    "id": "1788880394964",
+    "createdAt": "2026-09-08T15:13:14.964Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788841710459",
+    "id": "1788880394436",
+    "createdAt": "2026-09-08T15:13:14.436Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "pengembalian",
+    "description": "Mencatat pengembalian peminjaman 1788841710459",
+    "id": "1788880385222",
+    "createdAt": "2026-09-08T15:13:05.222Z"
+  },
+  {
+    "username": "admin",
+    "role": "super_admin",
+    "action": "update",
+    "entity": "barang",
     "description": "Mengubah barang Lenovo G40-45",
     "id": "1788859842885",
     "createdAt": "2026-09-08T09:30:42.885Z"

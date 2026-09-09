@@ -1,8 +1,19 @@
 "use client";
 import React, { useRef, useState } from "react";
 import type { Item } from "@/lib/types";
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -13,7 +24,11 @@ interface SerialAutocompleteProps {
   disabledSerials: string[];
 }
 
-export default function SerialAutocomplete({ items, onAddSerial, disabledSerials }: SerialAutocompleteProps) {
+export default function SerialAutocomplete({
+  items,
+  onAddSerial,
+  disabledSerials,
+}: SerialAutocompleteProps) {
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -21,25 +36,33 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
 
   // Flat list of available serials
   const availableSerials = items
-    .flatMap((item) => (item.items || []).map((serial) => ({
-      ...serial,
-      itemName: item.name,
-      itemId: item.id,
-      category: item.category,
-      description: item.description,
-    })))
-    .filter((serial) => serial.status === 1 && serial.condition !== -1 && !disabledSerials.includes(serial.rfidCode));
+    .flatMap((item) =>
+      (item.items || []).map((serial) => ({
+        ...serial,
+        itemName: item.name,
+        itemId: item.id,
+        category: item.category,
+        description: item.description,
+      })),
+    )
+    .filter(
+      (serial) =>
+        serial.status === 1 &&
+        serial.condition !== -1 &&
+        !disabledSerials.includes(serial.rfidCode),
+    );
 
   // Filter by search (serial number or item name)
-  const filtered = search.trim() === ""
-    ? availableSerials
-    : availableSerials.filter((s) => {
-        const q = search.trim().toLowerCase();
-        return (
-          s.rfidCode.toLowerCase().includes(q) ||
-          (s.itemName || "").toLowerCase().includes(q)
-        );
-      });
+  const filtered =
+    search.trim() === ""
+      ? availableSerials
+      : availableSerials.filter((s) => {
+          const q = search.trim().toLowerCase();
+          return (
+            s.rfidCode.toLowerCase().includes(q) ||
+            (s.itemName || "").toLowerCase().includes(q)
+          );
+        });
 
   // Keyboard navigation and selection
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,7 +84,8 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
       // Only add if exact match or user selects from list
       const exact = filtered.find(
         (s, idx) =>
-          s.rfidCode.toLowerCase() === search.trim().toLowerCase() || idx === activeIdx
+          s.rfidCode.toLowerCase() === search.trim().toLowerCase() ||
+          idx === activeIdx,
       );
       if (exact) {
         onAddSerial(exact);
@@ -120,16 +144,25 @@ export default function SerialAutocomplete({ items, onAddSerial, disabledSerials
                       setSearch("");
                       setActiveIdx(0);
                       setTimeout(() => {
-                        if (inputRef.current) (inputRef.current as HTMLInputElement).focus();
+                        if (inputRef.current)
+                          (inputRef.current as HTMLInputElement).focus();
                       }, 10);
                     }}
-                    ref={el => {
-                      if (idx === activeIdx && el) el.scrollIntoView({ block: "nearest" });
+                    ref={(el) => {
+                      if (idx === activeIdx && el)
+                        el.scrollIntoView({ block: "nearest" });
                     }}
-                    className={idx === activeIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""}
+                    className={
+                      idx === activeIdx
+                        ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200"
+                        : ""
+                    }
                   >
                     <span className="font-medium">{serial.itemName}</span>
-                    <span className="ml-2 text-xs text-gray-500">SN: {serial.rfidCode} | {serial.category}{serial.description ? ` | ${serial.description}` : ""}</span>
+                    <span className="ml-2 text-xs text-gray-500">
+                      SN: {serial.rfidCode} | {serial.category}
+                      {serial.description ? ` | ${serial.description}` : ""}
+                    </span>
                   </CommandItem>
                 ))}
               </CommandGroup>

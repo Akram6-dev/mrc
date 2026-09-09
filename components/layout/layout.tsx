@@ -1,43 +1,46 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { usePathname, useRouter } from "next/navigation"
-import { useEffect } from "react"
-import { auth } from "@/lib/auth"
-import Sidebar from "./sidebar"
-import MobileNav from "./mobile-nav"
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { auth } from "@/lib/auth";
+import Sidebar from "./sidebar";
+import MobileNav from "./mobile-nav";
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const pathname = usePathname()
-  const router = useRouter()
-  const isPublicPath = ["/login", "/book", "/print"].includes(pathname)
+  const pathname = usePathname();
+  const router = useRouter();
+  const isPublicPath = ["/login", "/book", "/print"].includes(pathname);
 
   useEffect(() => {
     if (!isPublicPath && !auth.isAuthenticated()) {
-      router.push("/login")
-      return
+      router.push("/login");
+      return;
     }
 
     if (!isPublicPath && auth.isAuthenticated() && !auth.canAccess(pathname)) {
-      router.replace("/")
+      router.replace("/");
     }
-  }, [isPublicPath, pathname, router])
+  }, [isPublicPath, pathname, router]);
 
   if (!isPublicPath && !auth.isAuthenticated()) {
-    return null
+    return null;
   }
 
-  if (pathname === "/login" || pathname === "/print" || pathname === "/stats" || pathname === "/book" || pathname === "/whatsapp") {
+  if (
+    pathname === "/login" ||
+    pathname === "/print" ||
+    pathname === "/stats" ||
+    pathname === "/book"
+  ) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        {children}
-      </div>
-    )
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">{children}</div>
+    );
   }
 
   return (
@@ -48,5 +51,5 @@ export default function Layout({ children }: LayoutProps) {
         <main className="flex-1">{children}</main>
       </div>
     </div>
-  )
+  );
 }

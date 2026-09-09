@@ -1,25 +1,33 @@
 export interface User {
-  id: string
-  username: string
-  name: string
-  role: "super_admin" | "admin"
+  id: string;
+  username: string;
+  name: string;
+  role: "super_admin" | "admin";
 }
 
 class AuthService {
-  private readonly STORAGE_KEY = "school_borrowing_user"
+  private readonly STORAGE_KEY = "school_borrowing_user";
 
   async login(username: string, password: string): Promise<User> {
     // Fetch admin credentials from /api/settings
-    const res = await fetch("/api/settings")
-    if (!res.ok) throw new Error("Gagal mengambil data admin")
-    const settings = await res.json()
+    const res = await fetch("/api/settings");
+    if (!res.ok) throw new Error("Gagal mengambil data admin");
+    const settings = await res.json();
     const users = [
-      ...(settings.users || []).filter((user: { deletedAt?: string }) => !user.deletedAt),
-      { id: "1", username: settings.admin.username, password: settings.admin.password, role: "super_admin" },
-    ]
+      ...(settings.users || []).filter(
+        (user: { deletedAt?: string }) => !user.deletedAt,
+      ),
+      {
+        id: "1",
+        username: settings.admin.username,
+        password: settings.admin.password,
+        role: "super_admin",
+      },
+    ];
     const account = users.find(
-      (user: { username: string; password: string }) => user.username === username && user.password === password,
-    )
+      (user: { username: string; password: string }) =>
+        user.username === username && user.password === password,
+    );
 
     if (account) {
       const user: User = {
@@ -27,50 +35,58 @@ class AuthService {
         username: account.username,
         name: settings.siteName,
         role: account.role,
-      }
+      };
       if (typeof window !== "undefined") {
-        sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(user))
-        localStorage.removeItem(this.STORAGE_KEY)
+        sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+        localStorage.removeItem(this.STORAGE_KEY);
       }
-      return user
+      return user;
     } else {
-      throw new Error("Username atau password salah")
+      throw new Error("Username atau password salah");
     }
   }
 
   logout(): void {
     if (typeof window !== "undefined") {
-      sessionStorage.removeItem(this.STORAGE_KEY)
+      sessionStorage.removeItem(this.STORAGE_KEY);
     }
   }
 
   getCurrentUser(): User | null {
     if (typeof window !== "undefined") {
-      const userData = sessionStorage.getItem(this.STORAGE_KEY)
-      if (!userData) return null
+      const userData = sessionStorage.getItem(this.STORAGE_KEY);
+      if (!userData) return null;
 
-      const user = JSON.parse(userData)
-      return { ...user, role: user.role || "super_admin" }
+      const user = JSON.parse(userData);
+      return { ...user, role: user.role || "super_admin" };
     }
-    return null
+    return null;
   }
 
   getAuthHeaders(): Record<string, string> {
-    const user = this.getCurrentUser()
-    return user ? { "x-user-name": user.username, "x-user-role": user.role } : {}
+    const user = this.getCurrentUser();
+    return user
+      ? { "x-user-name": user.username, "x-user-role": user.role }
+      : {};
   }
 
   isAuthenticated(): boolean {
-    return this.getCurrentUser() !== null
+    return this.getCurrentUser() !== null;
   }
 
   canAccess(pathname: string): boolean {
-    const user = this.getCurrentUser()
-    if (!user) return false
-    if (user.role === "super_admin") return true
+    const user = this.getCurrentUser();
+    if (!user) return false;
+    if (user.role === "super_admin") return true;
 
-    return ["/", "/peminjaman", "/pengembalian", "/booking", "/riwayat"].includes(pathname)
+    return [
+      "/",
+      "/peminjaman",
+      "/pengembalian",
+      "/booking",
+      "/riwayat",
+    ].includes(pathname);
   }
 }
 
-export const auth = new AuthService()
+export const auth = new AuthService();

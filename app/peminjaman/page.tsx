@@ -35,7 +35,17 @@ const ICON_OPTIONS = [
   { label: "Mic", value: "mic", icon: MicVocal },
   { label: "Lainnya", value: "other", icon: Package },
 ];
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 import Loading from "@/components/ui/loading";
 import { toast } from "sonner";
 import { Calendar } from "@/components/ui/calendar";
@@ -68,7 +78,6 @@ import { auth } from "@/lib/auth";
 import api from "@/lib/api";
 import type { Item, Borrower, Loan, LoanItem } from "@/lib/types";
 import { getColorFromName } from "@/lib/utils";
-
 
 export default function PeminjamanPage() {
   const [items, setItems] = useState<Item[]>([]);
@@ -143,7 +152,8 @@ export default function PeminjamanPage() {
   }, [router]);
   // State untuk alert dialog konfirmasi
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [pendingSubmitEvent, setPendingSubmitEvent] = useState<React.FormEvent | null>(null);
+  const [pendingSubmitEvent, setPendingSubmitEvent] =
+    useState<React.FormEvent | null>(null);
 
   // Fungsi submit utama
   const doSubmit = async (e: React.FormEvent) => {
@@ -158,7 +168,9 @@ export default function PeminjamanPage() {
         throw new Error("Pilih peminjam terlebih dahulu");
       }
       if (borrower.isFrozen) {
-        throw new Error("Akun peminjam sedang nonaktif dan tidak dapat dipilih");
+        throw new Error(
+          "Akun peminjam sedang nonaktif dan tidak dapat dipilih",
+        );
       }
       // Validate serials
       const validItems = loanItems.filter((item) => item.rfidCode);
@@ -167,25 +179,29 @@ export default function PeminjamanPage() {
       }
       // Check serial availability
       for (const loanItem of validItems) {
-        const serial = items.flatMap(i => i.items || []).find(s => s.rfidCode === loanItem.rfidCode);
+        const serial = items
+          .flatMap((i) => i.items || [])
+          .find((s) => s.rfidCode === loanItem.rfidCode);
         if (!serial) {
           throw new Error(`Serial number ${loanItem.rfidCode} tidak ditemukan`);
         }
         if (serial.status !== 1 || serial.condition === -1) {
-          throw new Error(`Serial number ${loanItem.rfidCode} tidak tersedia untuk dipinjam`);
+          throw new Error(
+            `Serial number ${loanItem.rfidCode} tidak tersedia untuk dipinjam`,
+          );
         }
       }
 
       // Format borrowDate and dueDate with time in Asia/Jakarta (WIB), 24-hour format
       const nowJakarta = new Date(
-        new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" })
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
       );
       const dueJakarta = dueDate
         ? new Date(
-          new Date(dueDate).toLocaleString("en-US", {
-            timeZone: "Asia/Jakarta",
-          })
-        )
+            new Date(dueDate).toLocaleString("en-US", {
+              timeZone: "Asia/Jakarta",
+            }),
+          )
         : nowJakarta;
 
       function toWIBISOString(date: Date) {
@@ -214,30 +230,37 @@ export default function PeminjamanPage() {
       if (settings?.messages?.loanMessage) {
         try {
           // Ambil data peminjam
-          const borrower = borrowers.find(b => b.id === selectedBorrower);
+          const borrower = borrowers.find((b) => b.id === selectedBorrower);
           // Format items
           // Gabungkan serial dengan nama barang yang sama
           const itemsBody = Object.values(
-            validItems.reduce((acc, item) => {
-              // Temukan info barang
-              const found = items.flatMap(i => (i.items || []).map(s => ({
-                itemName: i.name,
-                rfidCode: s.rfidCode,
-                category: i.category,
-                description: i.description
-              }))).find(s => s.rfidCode === item.rfidCode);
+            validItems.reduce(
+              (acc, item) => {
+                // Temukan info barang
+                const found = items
+                  .flatMap((i) =>
+                    (i.items || []).map((s) => ({
+                      itemName: i.name,
+                      rfidCode: s.rfidCode,
+                      category: i.category,
+                      description: i.description,
+                    })),
+                  )
+                  .find((s) => s.rfidCode === item.rfidCode);
 
-              const key = found?.itemName || "Barang";
-              if (!acc[key]) {
-                acc[key] = {
-                  item_name: key,
-                  qty: 0,
-                };
-              }
-              acc[key].qty += 1;
-              return acc;
-            }, {} as Record<string, { item_name: string; qty: number }>)
-          ).map(group => ({
+                const key = found?.itemName || "Barang";
+                if (!acc[key]) {
+                  acc[key] = {
+                    item_name: key,
+                    qty: 0,
+                  };
+                }
+                acc[key].qty += 1;
+                return acc;
+              },
+              {} as Record<string, { item_name: string; qty: number }>,
+            ),
+          ).map((group) => ({
             item_name: group.item_name,
             qty: group.qty,
           }));
@@ -250,14 +273,14 @@ export default function PeminjamanPage() {
             due_date: toWIBISOString(dueJakarta),
             items: itemsBody,
             purpose: purpose,
-            notes: notes || undefined
+            notes: notes || undefined,
           };
           await fetch("/external/pinjam", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(postBody)
+            body: JSON.stringify(postBody),
           });
         } catch (err) {
           console.error("Gagal POST ke API eksternal:", err);
@@ -267,10 +290,14 @@ export default function PeminjamanPage() {
       // Update hanya item yang punya serial yang dipinjam
       for (const item of items) {
         if (!item.items) continue;
-        const hasBorrowedSerial = item.items.some(s => validItems.some(li => li.rfidCode === s.rfidCode));
+        const hasBorrowedSerial = item.items.some((s) =>
+          validItems.some((li) => li.rfidCode === s.rfidCode),
+        );
         if (!hasBorrowedSerial) continue;
-        const updatedSerials = item.items.map(s => {
-          const isBorrowed = validItems.some(li => li.rfidCode === s.rfidCode);
+        const updatedSerials = item.items.map((s) => {
+          const isBorrowed = validItems.some(
+            (li) => li.rfidCode === s.rfidCode,
+          );
           if (isBorrowed) {
             return { ...s, status: 0 as 0, loanId: createdLoan.id };
           }
@@ -297,7 +324,7 @@ export default function PeminjamanPage() {
       loadData();
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Gagal mencatat peminjaman"
+        err instanceof Error ? err.message : "Gagal mencatat peminjaman",
       );
     } finally {
       setIsSubmitting(false);
@@ -327,7 +354,7 @@ export default function PeminjamanPage() {
   const updateLoanItem = (
     index: number,
     field: keyof LoanItem,
-    value: string
+    value: string,
   ) => {
     const updatedItems = [...loanItems];
     updatedItems[index] = { ...updatedItems[index], [field]: value };
@@ -338,26 +365,28 @@ export default function PeminjamanPage() {
     borrowerSearch.trim() === ""
       ? borrowers
       : borrowers.filter((borrower) => {
-        const q = borrowerSearch.trim().toLowerCase();
-        const keywords = q.split(/\s+/).filter(Boolean);
-        // Gabungkan semua field jadi satu string, pastikan string
-        const name =
-          typeof borrower.name === "string"
-            ? borrower.name.toLowerCase()
-            : "";
-        const nip =
-          typeof borrower.nip === "string" ? borrower.nip.toLowerCase() : "";
-        const officerId =
-          typeof borrower.officerId === "string"
-            ? borrower.officerId.toLowerCase()
-            : "";
-        const rfid =
-          typeof borrower.rfid === "string" ? borrower.rfid.toLowerCase() : "";
+          const q = borrowerSearch.trim().toLowerCase();
+          const keywords = q.split(/\s+/).filter(Boolean);
+          // Gabungkan semua field jadi satu string, pastikan string
+          const name =
+            typeof borrower.name === "string"
+              ? borrower.name.toLowerCase()
+              : "";
+          const nip =
+            typeof borrower.nip === "string" ? borrower.nip.toLowerCase() : "";
+          const officerId =
+            typeof borrower.officerId === "string"
+              ? borrower.officerId.toLowerCase()
+              : "";
+          const rfid =
+            typeof borrower.rfid === "string"
+              ? borrower.rfid.toLowerCase()
+              : "";
 
-        const combined = `${name} ${nip} ${officerId} ${rfid}`;
-        // Semua kata kunci harus ada di string gabungan
-        return keywords.every((word) => combined.includes(word));
-      });
+          const combined = `${name} ${nip} ${officerId} ${rfid}`;
+          // Semua kata kunci harus ada di string gabungan
+          return keywords.every((word) => combined.includes(word));
+        });
 
   // For keyboard navigation
   const [activeBorrowerIdx, setActiveBorrowerIdx] = useState(0);
@@ -366,7 +395,7 @@ export default function PeminjamanPage() {
   }, [borrowerSearch, isLoading]);
 
   const selectedBorrowerData = borrowers.find(
-    (borrower) => borrower.id === selectedBorrower
+    (borrower) => borrower.id === selectedBorrower,
   );
 
   if (!auth.isAuthenticated()) {
@@ -459,32 +488,32 @@ export default function PeminjamanPage() {
                           q === ""
                             ? borrowers
                             : borrowers.filter((b) => {
-                              const name =
-                                typeof b.name === "string"
-                                  ? b.name.toLowerCase()
-                                  : "";
-                              const nip =
-                                typeof b.nip === "string"
-                                  ? b.nip.toLowerCase()
-                                  : "";
-                              const officerId =
-                                typeof b.officerId === "string"
-                                  ? b.officerId.toLowerCase()
-                                  : "";
-                              const rfid =
-                                typeof b.rfid === "string"
-                                  ? b.rfid.toLowerCase()
-                                  : "";
-                              const combined = `${name} ${nip} ${officerId} ${rfid}`;
-                              return keywords.every((word) =>
-                                combined.includes(word)
-                              );
-                            });
+                                const name =
+                                  typeof b.name === "string"
+                                    ? b.name.toLowerCase()
+                                    : "";
+                                const nip =
+                                  typeof b.nip === "string"
+                                    ? b.nip.toLowerCase()
+                                    : "";
+                                const officerId =
+                                  typeof b.officerId === "string"
+                                    ? b.officerId.toLowerCase()
+                                    : "";
+                                const rfid =
+                                  typeof b.rfid === "string"
+                                    ? b.rfid.toLowerCase()
+                                    : "";
+                                const combined = `${name} ${nip} ${officerId} ${rfid}`;
+                                return keywords.every((word) =>
+                                  combined.includes(word),
+                                );
+                              });
                         if (filtered.length === 0) return;
                         if (e.key === "ArrowDown") {
                           e.preventDefault();
                           setActiveBorrowerIdx((idx) =>
-                            Math.min(idx + 1, filtered.length - 1)
+                            Math.min(idx + 1, filtered.length - 1),
                           );
                         } else if (e.key === "ArrowUp") {
                           e.preventDefault();
@@ -510,27 +539,27 @@ export default function PeminjamanPage() {
                           q === ""
                             ? borrowers
                             : borrowers.filter((b) => {
-                              const name =
-                                typeof b.name === "string"
-                                  ? b.name.toLowerCase()
-                                  : "";
-                              const nip =
-                                typeof b.nip === "string"
-                                  ? b.nip.toLowerCase()
-                                  : "";
-                              const officerId =
-                                typeof b.officerId === "string"
-                                  ? b.officerId.toLowerCase()
-                                  : "";
-                              const rfid =
-                                typeof b.rfid === "string"
-                                  ? b.rfid.toLowerCase()
-                                  : "";
-                              const combined = `${name} ${nip} ${officerId} ${rfid}`;
-                              return keywords.every((word) =>
-                                combined.includes(word)
-                              );
-                            });
+                                const name =
+                                  typeof b.name === "string"
+                                    ? b.name.toLowerCase()
+                                    : "";
+                                const nip =
+                                  typeof b.nip === "string"
+                                    ? b.nip.toLowerCase()
+                                    : "";
+                                const officerId =
+                                  typeof b.officerId === "string"
+                                    ? b.officerId.toLowerCase()
+                                    : "";
+                                const rfid =
+                                  typeof b.rfid === "string"
+                                    ? b.rfid.toLowerCase()
+                                    : "";
+                                const combined = `${name} ${nip} ${officerId} ${rfid}`;
+                                return keywords.every((word) =>
+                                  combined.includes(word),
+                                );
+                              });
                         if (filtered.length === 0) {
                           return (
                             <CommandEmpty>
@@ -558,13 +587,12 @@ export default function PeminjamanPage() {
                                   if (idx === activeBorrowerIdx && el)
                                     el.scrollIntoView({ block: "nearest" });
                                 }}
-                                className={
-                                  `${idx === activeBorrowerIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""} ${borrower.isFrozen ? "opacity-50 cursor-not-allowed" : ""}`
-                                }
+                                className={`${idx === activeBorrowerIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""} ${borrower.isFrozen ? "opacity-50 cursor-not-allowed" : ""}`}
                               >
                                 <div className="flex flex-col text-left">
                                   <span className="font-medium">
-                                    {borrower.name || "-"}{borrower.isFrozen ? " (Nonaktif)" : ""}
+                                    {borrower.name || "-"}
+                                    {borrower.isFrozen ? " (Nonaktif)" : ""}
                                   </span>
                                   <span className="text-xs text-gray-500">
                                     {borrower?.nip && borrower?.officerId
@@ -599,8 +627,7 @@ export default function PeminjamanPage() {
                       {selectedBorrowerData.officerId}
                     </span>
                     <span className="text-green-700 dark:text-green-400">
-                      <strong>No. HP:</strong>{" "}
-                      {selectedBorrowerData.phone}
+                      <strong>No. HP:</strong> {selectedBorrowerData.phone}
                     </span>
                   </div>
                 </div>
@@ -622,30 +649,44 @@ export default function PeminjamanPage() {
                   {(() => {
                     // Flat list of available serials
                     const availableSerials = items
-                      .flatMap((item) => (item.items || []).map((serial) => ({
-                        ...serial,
-                        itemName: item.name,
-                        itemId: item.id,
-                        category: item.category,
-                        description: item.description,
-                      })))
-                      .filter((serial) => serial.status === 1 && serial.condition !== -1 && !loanItems.some(li => li.rfidCode === serial.rfidCode));
+                      .flatMap((item) =>
+                        (item.items || []).map((serial) => ({
+                          ...serial,
+                          itemName: item.name,
+                          itemId: item.id,
+                          category: item.category,
+                          description: item.description,
+                        })),
+                      )
+                      .filter(
+                        (serial) =>
+                          serial.status === 1 &&
+                          serial.condition !== -1 &&
+                          !loanItems.some(
+                            (li) => li.rfidCode === serial.rfidCode,
+                          ),
+                      );
                     // Filter by search
-                    const filtered = serialSearch.trim() === ""
-                      ? availableSerials
-                      : availableSerials.filter((s) => {
-                        const q = serialSearch.trim().toLowerCase();
-                        return (
-                          String(s.rfidCode).toLowerCase().includes(q) ||
-                          (s.itemName || "").toLowerCase().includes(q)
-                        );
-                      });
+                    const filtered =
+                      serialSearch.trim() === ""
+                        ? availableSerials
+                        : availableSerials.filter((s) => {
+                            const q = serialSearch.trim().toLowerCase();
+                            return (
+                              String(s.rfidCode).toLowerCase().includes(q) ||
+                              (s.itemName || "").toLowerCase().includes(q)
+                            );
+                          });
                     // Handler
-                    const handleSerialKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+                    const handleSerialKeyDown = (
+                      e: React.KeyboardEvent<HTMLInputElement>,
+                    ) => {
                       if (filtered.length === 0) return;
                       if (e.key === "ArrowDown") {
                         e.preventDefault();
-                        setActiveSerialIdx((idx) => Math.min(idx + 1, filtered.length - 1));
+                        setActiveSerialIdx((idx) =>
+                          Math.min(idx + 1, filtered.length - 1),
+                        );
                       } else if (e.key === "ArrowUp") {
                         e.preventDefault();
                         setActiveSerialIdx((idx) => Math.max(idx - 1, 0));
@@ -653,7 +694,10 @@ export default function PeminjamanPage() {
                         e.preventDefault();
                         const selected = filtered[activeSerialIdx];
                         if (selected) {
-                          setLoanItems((prev) => [...prev, { rfidCode: selected.rfidCode, note: "" }]);
+                          setLoanItems((prev) => [
+                            ...prev,
+                            { rfidCode: selected.rfidCode, note: "" },
+                          ]);
                           setSerialSearch("");
                           setActiveSerialIdx(0);
                           setIsSerialPopoverOpen(false);
@@ -663,7 +707,10 @@ export default function PeminjamanPage() {
                       }
                     };
                     return (
-                      <Popover open={isSerialPopoverOpen} onOpenChange={setIsSerialPopoverOpen}>
+                      <Popover
+                        open={isSerialPopoverOpen}
+                        onOpenChange={setIsSerialPopoverOpen}
+                      >
                         <PopoverTrigger asChild>
                           <Button
                             variant="outline"
@@ -675,7 +722,9 @@ export default function PeminjamanPage() {
                             {serialSearch ? (
                               serialSearch
                             ) : (
-                              <span className="text-gray-400">Cari atau scan serial number...</span>
+                              <span className="text-gray-400">
+                                Cari atau scan serial number...
+                              </span>
                             )}
                           </Button>
                         </PopoverTrigger>
@@ -691,7 +740,9 @@ export default function PeminjamanPage() {
                             />
                             <CommandList className="max-h-60 overflow-auto">
                               {filtered.length === 0 ? (
-                                <CommandEmpty>Serial tidak ditemukan.</CommandEmpty>
+                                <CommandEmpty>
+                                  Serial tidak ditemukan.
+                                </CommandEmpty>
                               ) : (
                                 <CommandGroup>
                                   {filtered.map((serial, idx) => (
@@ -699,18 +750,35 @@ export default function PeminjamanPage() {
                                       key={serial.rfidCode}
                                       value={serial.rfidCode}
                                       onSelect={() => {
-                                        setLoanItems((prev) => [...prev, { rfidCode: serial.rfidCode, note: "" }]);
+                                        setLoanItems((prev) => [
+                                          ...prev,
+                                          {
+                                            rfidCode: serial.rfidCode,
+                                            note: "",
+                                          },
+                                        ]);
                                         setSerialSearch("");
                                         setActiveSerialIdx(0);
                                         setIsSerialPopoverOpen(false);
                                       }}
-                                      ref={el => {
-                                        if (idx === activeSerialIdx && el) el.scrollIntoView({ block: "nearest" });
+                                      ref={(el) => {
+                                        if (idx === activeSerialIdx && el)
+                                          el.scrollIntoView({
+                                            block: "nearest",
+                                          });
                                       }}
-                                      className={idx === activeSerialIdx ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200" : ""}
+                                      className={
+                                        idx === activeSerialIdx
+                                          ? "bg-accent-100 dark:bg-accent-900/20 text-accent-700 dark:text-accent-200"
+                                          : ""
+                                      }
                                     >
-                                      <span className="font-medium">{serial.itemName}</span>
-                                      <span className="ml-2 text-xs text-gray-500">{serial.sn} | {serial.rfidCode}</span>
+                                      <span className="font-medium">
+                                        {serial.itemName}
+                                      </span>
+                                      <span className="ml-2 text-xs text-gray-500">
+                                        {serial.sn} | {serial.rfidCode}
+                                      </span>
                                     </CommandItem>
                                   ))}
                                 </CommandGroup>
@@ -725,15 +793,17 @@ export default function PeminjamanPage() {
                   <div className="space-y-3 mt-2">
                     {loanItems.map((loanItem, index) => {
                       const serial = items
-                        .flatMap((item) => (item.items || []).map((s) => ({
-                          ...s,
-                          itemName: item.name,
-                          itemId: item.id,
-                          category: item.category,
-                          description: item.description,
-                          image: item.image,
-                          icon: item.icon,
-                        })))
+                        .flatMap((item) =>
+                          (item.items || []).map((s) => ({
+                            ...s,
+                            itemName: item.name,
+                            itemId: item.id,
+                            category: item.category,
+                            description: item.description,
+                            image: item.image,
+                            icon: item.icon,
+                          })),
+                        )
                         .find((s) => s.rfidCode === loanItem.rfidCode);
                       if (!serial) return null;
                       return (
@@ -746,14 +816,21 @@ export default function PeminjamanPage() {
                               {/* Item image, fallback to icon */}
                               {serial.image ? (
                                 <img
-                                  src={serial.image.startsWith("/assets/") ? serial.image : `/assets/img/${serial.image}`}
+                                  src={
+                                    serial.image.startsWith("/assets/")
+                                      ? serial.image
+                                      : `/assets/img/${serial.image}`
+                                  }
                                   alt={serial.itemName}
                                   className="w-12 h-12 object-cover rounded-md bg-gray-100 dark:bg-gray-900 flex-shrink-0"
                                 />
                               ) : (
                                 (() => {
                                   const iconKey = serial.icon || "laptop";
-                                  const IconComponent = ICON_OPTIONS.find(opt => opt.value === iconKey)?.icon || Package;
+                                  const IconComponent =
+                                    ICON_OPTIONS.find(
+                                      (opt) => opt.value === iconKey,
+                                    )?.icon || Package;
                                   return (
                                     <span className="w-12 h-12 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-900 text-gray-400">
                                       <IconComponent className="w-6 h-6" />
@@ -793,7 +870,9 @@ export default function PeminjamanPage() {
                             type="text"
                             placeholder="Catatan (opsional)"
                             value={loanItem.note || ""}
-                            onChange={(e) => updateLoanItem(index, "note", e.target.value)}
+                            onChange={(e) =>
+                              updateLoanItem(index, "note", e.target.value)
+                            }
                             className="h-9 text-sm bg-gray-50 mt-2"
                           />
                         </div>
@@ -807,69 +886,100 @@ export default function PeminjamanPage() {
                     {/* Decorative accent */}
                     <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent-200 dark:bg-accent-900/30 rounded-full opacity-20 pointer-events-none" />
                     <div className="flex items-center gap-4 mb-5">
-                      <div className={`flex-shrink-0 w-14 h-14 rounded-full ${getColorFromName(selectedBorrowerData?.name)} flex items-center justify-center text-white text-2xl font-bold`}>
+                      <div
+                        className={`flex-shrink-0 w-14 h-14 rounded-full ${getColorFromName(selectedBorrowerData?.name)} flex items-center justify-center text-white text-2xl font-bold`}
+                      >
                         <User className="w-8 h-8" />
                       </div>
                       <div className="min-w-0">
                         <div className="text-lg font-bold text-gray-900 dark:text-white truncate">
-                          {selectedBorrowerData?.name || <span className="text-gray-400">Pilih peminjam</span>}
+                          {selectedBorrowerData?.name || (
+                            <span className="text-gray-400">
+                              Pilih peminjam
+                            </span>
+                          )}
                         </div>
                         {/* Fallback logic for NIP/officerId */}
                         {selectedBorrowerData?.nip ? (
-                          <div className="text-xs text-accent-700 dark:text-accent-200 font-medium mt-0.5">NIP: {selectedBorrowerData.nip}</div>
+                          <div className="text-xs text-accent-700 dark:text-accent-200 font-medium mt-0.5">
+                            NIP: {selectedBorrowerData.nip}
+                          </div>
                         ) : selectedBorrowerData?.officerId ? (
-                          <div className="text-xs text-accent-700 dark:text-accent-200 font-medium mt-0.5">ID Pegawai: {selectedBorrowerData.officerId}</div>
+                          <div className="text-xs text-accent-700 dark:text-accent-200 font-medium mt-0.5">
+                            ID Pegawai: {selectedBorrowerData.officerId}
+                          </div>
                         ) : null}
                         {selectedBorrowerData?.phone && (
-                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">No. HP: {selectedBorrowerData.phone}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                            No. HP: {selectedBorrowerData.phone}
+                          </div>
                         )}
                       </div>
                     </div>
                     <div className="my-3 border-t border-dashed border-accent-200 dark:border-accent-700" />
                     <div className="mb-2">
-                      <div className="text-xs font-semibold text-accent-700 dark:text-accent-200 mb-1 tracking-wide uppercase">Total Barang Dipinjam</div>
+                      <div className="text-xs font-semibold text-accent-700 dark:text-accent-200 mb-1 tracking-wide uppercase">
+                        Total Barang Dipinjam
+                      </div>
                       <div className="flex flex-col gap-1">
                         {(() => {
                           // Hitung jumlah per nama barang
                           const countPerItem: Record<string, number> = {};
                           loanItems.forEach((loanItem) => {
                             const serial = items
-                              .flatMap((item) => (item.items || []).map((s) => ({
-                                ...s,
-                                itemName: item.name,
-                                icon: item.icon,
-                              })))
+                              .flatMap((item) =>
+                                (item.items || []).map((s) => ({
+                                  ...s,
+                                  itemName: item.name,
+                                  icon: item.icon,
+                                })),
+                              )
                               .find((s) => s.rfidCode === loanItem.rfidCode);
                             if (serial && serial.itemName) {
-                              countPerItem[serial.itemName] = (countPerItem[serial.itemName] || 0) + 1;
+                              countPerItem[serial.itemName] =
+                                (countPerItem[serial.itemName] || 0) + 1;
                             }
                           });
                           const itemNames = Object.keys(countPerItem);
                           if (itemNames.length === 0) {
-                            return <div className="text-gray-400 text-xs">Belum ada barang dipilih</div>;
+                            return (
+                              <div className="text-gray-400 text-xs">
+                                Belum ada barang dipilih
+                              </div>
+                            );
                           }
                           return itemNames.map((name) => (
-                            <div key={name} className="flex items-center justify-between text-sm py-1 px-2 rounded-lg bg-white/70 dark:bg-gray-900/40 mb-1">
+                            <div
+                              key={name}
+                              className="flex items-center justify-between text-sm py-1 px-2 rounded-lg bg-white/70 dark:bg-gray-900/40 mb-1"
+                            >
                               <span className="flex items-center gap-2 min-w-0">
                                 {/* Icon per barang, mapping sesuai data icon */}
                                 {(() => {
                                   // Cari serial pertama dengan nama barang ini
                                   const serial = items
-                                    .flatMap((item) => (item.items || []).map((s) => ({
-                                      ...s,
-                                      itemName: item.name,
-                                      icon: item.icon,
-                                    })))
+                                    .flatMap((item) =>
+                                      (item.items || []).map((s) => ({
+                                        ...s,
+                                        itemName: item.name,
+                                        icon: item.icon,
+                                      })),
+                                    )
                                     .find((s) => s.itemName === name);
                                   const iconKey = serial?.icon || "laptop";
-                                  const Icon = ICON_OPTIONS.find(opt => opt.value === iconKey)?.icon || Package;
-                                  return <Icon className="w-4 h-4 text-accent-600 dark:text-accent-200 flex-shrink-0" />;
+                                  const Icon =
+                                    ICON_OPTIONS.find(
+                                      (opt) => opt.value === iconKey,
+                                    )?.icon || Package;
+                                  return (
+                                    <Icon className="w-4 h-4 text-accent-600 dark:text-accent-200 flex-shrink-0" />
+                                  );
                                 })()}
-                                <span className="truncate font-medium text-gray-900 dark:text-white">{name}</span>
+                                <span className="truncate font-medium text-gray-900 dark:text-white">
+                                  {name}
+                                </span>
                               </span>
-                              <span
-                                className="ml-2 px-0 py-1 rounded bg-accent-600 text-white font-bold text-lg shadow leading-none inline-flex justify-center items-center min-w-[36px] w-[36px] text-center"
-                              >
+                              <span className="ml-2 px-0 py-1 rounded bg-accent-600 text-white font-bold text-lg shadow leading-none inline-flex justify-center items-center min-w-[36px] w-[36px] text-center">
                                 {countPerItem[name]}
                               </span>
                             </div>
@@ -919,7 +1029,10 @@ export default function PeminjamanPage() {
                       <div className="flex justify-end pt-2">
                         {/* Submit Button */}
                         {settings?.system?.borrowConfirmation ? (
-                          <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+                          <AlertDialog
+                            open={showConfirmDialog}
+                            onOpenChange={setShowConfirmDialog}
+                          >
                             <AlertDialogTrigger asChild>
                               <Button
                                 type="button"
@@ -949,16 +1062,20 @@ export default function PeminjamanPage() {
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>Konfirmasi Peminjaman</AlertDialogTitle>
+                                <AlertDialogTitle>
+                                  Konfirmasi Peminjaman
+                                </AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  Apakah Anda yakin ingin mencatat peminjaman ini?
-                                  Data akan disimpan dan peminjam akan dikirim pesan notifikasi.
+                                  Apakah Anda yakin ingin mencatat peminjaman
+                                  ini? Data akan disimpan dan peminjam akan
+                                  dikirim pesan notifikasi.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
                                 <AlertDialogCancel
                                   onClick={() => setShowConfirmDialog(false)}
-                                  className="rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors">
+                                  className="rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-700 transition-colors"
+                                >
                                   Batal
                                 </AlertDialogCancel>
                                 <AlertDialogAction
@@ -1006,7 +1123,6 @@ export default function PeminjamanPage() {
                 </div>
               </div>
             </div>
-
           </form>
         </div>
       </div>

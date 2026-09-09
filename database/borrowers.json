@@ -1631,8 +1631,10 @@
     "gender": "L",
     "id": "1788751103501",
     "createdAt": "2026-09-07T03:18:23.501Z",
-    "updatedAt": "2026-09-08T03:50:29.474Z",
-    "isFrozen": false
+    "updatedAt": "2026-09-08T23:31:44.905Z",
+    "isFrozen": false,
+    "deletedAt": "2026-09-08T23:31:44.905Z",
+    "deletedBy": "admin"
   },
   {
     "name": "ljkkjlkjklj",
@@ -1644,5 +1646,16 @@
     "id": "1788860766654",
     "createdAt": "2026-09-08T09:46:06.654Z",
     "updatedAt": "2026-09-08T09:46:06.654Z"
+  },
+  {
+    "name": "enzo",
+    "nip": "219083",
+    "officerId": "123456",
+    "rfid": "42345657",
+    "phone": "6283829572060",
+    "gender": "L",
+    "id": "1788911372953",
+    "createdAt": "2026-09-08T23:49:32.953Z",
+    "updatedAt": "2026-09-08T23:49:32.953Z"
   }
 ]

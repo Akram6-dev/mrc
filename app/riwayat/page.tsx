@@ -100,7 +100,9 @@ const PAGE_SIZE = 20;
 
 export default function RiwayatPage() {
   // Gabungkan semua data ke satu array: loansWithDetails
-  const [loansWithDetails, setLoansWithDetails] = useState<LoanWithDetails[]>([]);
+  const [loansWithDetails, setLoansWithDetails] = useState<LoanWithDetails[]>(
+    [],
+  );
   const [filteredLoans, setFilteredLoans] = useState<LoanWithDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -115,11 +117,15 @@ export default function RiwayatPage() {
 
   const detailAuditLog = detailLoan
     ? auditLogs
-      .filter((log) =>
-        (log.entity === "peminjaman" || log.entity === "pengembalian") &&
-        log.description.includes(String(detailLoan.id)),
-      )
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0]
+        .filter(
+          (log) =>
+            (log.entity === "peminjaman" || log.entity === "pengembalian") &&
+            log.description.includes(String(detailLoan.id)),
+        )
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        )[0]
     : null;
 
   useEffect(() => {
@@ -147,17 +153,18 @@ export default function RiwayatPage() {
 
       // Index borrowers and items by id for fast lookup
       const borrowerMap = Object.fromEntries(
-        (borrowers || []).map((b: any) => [b.id?.toString(), b])
+        (borrowers || []).map((b: any) => [b.id?.toString(), b]),
       );
       const itemMap = Object.fromEntries(
-        (items || []).map((item: any) => [item.id?.toString(), item])
+        (items || []).map((item: any) => [item.id?.toString(), item]),
       );
       // Build serial lookup for fast serial -> parent item resolution
       const serialLookup: Record<string, { parent: any; serial: any }> = {};
       (items || []).forEach((parent: any) => {
         if (Array.isArray(parent.items)) {
           parent.items.forEach((s: any) => {
-            if (s.rfidCode) serialLookup[String(s.rfidCode)] = { parent, serial: s };
+            if (s.rfidCode)
+              serialLookup[String(s.rfidCode)] = { parent, serial: s };
             if (s.sn) serialLookup[String(s.sn)] = { parent, serial: s };
           });
         }
@@ -167,17 +174,24 @@ export default function RiwayatPage() {
       const currentUser = auth.getCurrentUser();
       const isAdmin = currentUser?.role === "admin";
       const filteredLoansData = isAdmin
-        ? (loansData || []).filter((loan: any) => loan.createdBy === currentUser?.username || loan.returnedBy === currentUser?.username)
-        : (loansData || []);
+        ? (loansData || []).filter(
+            (loan: any) =>
+              loan.createdBy === currentUser?.username ||
+              loan.returnedBy === currentUser?.username,
+          )
+        : loansData || [];
       const mapped: LoanWithDetails[] = filteredLoansData.map((loan: any) => {
-        const borrower = loan.borrowerId ? borrowerMap[loan.borrowerId?.toString()] ?? {} : {};
+        const borrower = loan.borrowerId
+          ? (borrowerMap[loan.borrowerId?.toString()] ?? {})
+          : {};
         let itemDetails: ItemSerialDetail[] = [];
         if (Array.isArray(loan.items)) {
           const details: ItemSerialDetail[] = [];
           for (const loanItem of loan.items) {
             // Try resolve by serial via serialLookup
             if (loanItem.rfidCode && serialLookup[String(loanItem.rfidCode)]) {
-              const { parent, serial } = serialLookup[String(loanItem.rfidCode)];
+              const { parent, serial } =
+                serialLookup[String(loanItem.rfidCode)];
               details.push({
                 id: parent.id,
                 name: parent.name,
@@ -211,16 +225,20 @@ export default function RiwayatPage() {
 
             // Fallback: resolve by itemId (string or object)
             if (loanItem.itemId) {
-              const idStr = typeof loanItem.itemId === 'string' ? loanItem.itemId : loanItem.itemId?.id;
-              const base = idStr ? itemMap[idStr?.toString()] ?? null : null;
+              const idStr =
+                typeof loanItem.itemId === "string"
+                  ? loanItem.itemId
+                  : loanItem.itemId?.id;
+              const base = idStr ? (itemMap[idStr?.toString()] ?? null) : null;
               details.push({
-                id: base?.id ?? '',
-                name: base?.name ?? loanItem.name ?? loanItem.itemName ?? 'Unknown',
-                icon: base?.icon ?? '',
-                rfidCode: '',
-                sn: '',
+                id: base?.id ?? "",
+                name:
+                  base?.name ?? loanItem.name ?? loanItem.itemName ?? "Unknown",
+                icon: base?.icon ?? "",
+                rfidCode: "",
+                sn: "",
                 status: 1,
-                loanId: '',
+                loanId: "",
                 condition: 1,
                 note: loanItem.note,
                 quantity: Number(loanItem.quantity ?? loanItem.qty ?? 1),
@@ -231,13 +249,13 @@ export default function RiwayatPage() {
             // Legacy fallback: item entry directly contains name/quantity
             if (loanItem.name || loanItem.itemName) {
               details.push({
-                id: '',
-                name: loanItem.name ?? loanItem.itemName ?? 'Unknown',
-                icon: '',
-                rfidCode: '',
-                sn: '',
+                id: "",
+                name: loanItem.name ?? loanItem.itemName ?? "Unknown",
+                icon: "",
+                rfidCode: "",
+                sn: "",
                 status: 1,
-                loanId: '',
+                loanId: "",
                 condition: 1,
                 note: loanItem.note,
                 quantity: Number(loanItem.quantity ?? loanItem.qty ?? 1),
@@ -247,13 +265,13 @@ export default function RiwayatPage() {
 
             // If nothing matched, add a minimal Unknown entry
             details.push({
-              id: '',
-              name: 'Unknown',
-              icon: '',
-              rfidCode: loanItem.rfidCode ?? '',
-              sn: loanItem.sn ?? '',
+              id: "",
+              name: "Unknown",
+              icon: "",
+              rfidCode: loanItem.rfidCode ?? "",
+              sn: loanItem.sn ?? "",
               status: 1,
-              loanId: '',
+              loanId: "",
               condition: 1,
               note: loanItem.note,
               quantity: Number(loanItem.quantity ?? loanItem.qty ?? 1),
@@ -282,7 +300,9 @@ export default function RiwayatPage() {
   };
 
   const loadAuditLogs = async () => {
-    const response = await fetch("/api/audit", { headers: auth.getAuthHeaders() });
+    const response = await fetch("/api/audit", {
+      headers: auth.getAuthHeaders(),
+    });
     if (response.ok) setAuditLogs(await response.json());
   };
 
@@ -291,11 +311,22 @@ export default function RiwayatPage() {
     if (search && search.trim() !== "") {
       const q = search.trim().toLowerCase();
       filtered = filtered.filter((loan) => {
-        const borrowerName = typeof loan.borrower?.name === "string" ? loan.borrower.name.toLowerCase() : "";
-        const borrowerNIP = typeof loan.borrower?.nip === "string" ? loan.borrower.nip.toLowerCase() : "";
-        const borrowerOfficerId = typeof loan.borrower?.officerId === "string" ? loan.borrower.officerId.toLowerCase() : "";
+        const borrowerName =
+          typeof loan.borrower?.name === "string"
+            ? loan.borrower.name.toLowerCase()
+            : "";
+        const borrowerNIP =
+          typeof loan.borrower?.nip === "string"
+            ? loan.borrower.nip.toLowerCase()
+            : "";
+        const borrowerOfficerId =
+          typeof loan.borrower?.officerId === "string"
+            ? loan.borrower.officerId.toLowerCase()
+            : "";
         const itemMatch = loan.itemDetails?.some((item) =>
-          typeof item.name === "string" ? item.name.toLowerCase().includes(q) : false
+          typeof item.name === "string"
+            ? item.name.toLowerCase().includes(q)
+            : false,
         );
         return (
           borrowerName.includes(q) ||
@@ -311,7 +342,9 @@ export default function RiwayatPage() {
     } else if (statusFilter === "dikembalikan") {
       filtered = filtered.filter((loan) => loan.status === "dikembalikan");
     } else if (statusFilter === "overdue") {
-      filtered = filtered.filter((loan) => loan.status === "dipinjam" && isOverdue(loan.dueDate));
+      filtered = filtered.filter(
+        (loan) => loan.status === "dipinjam" && isOverdue(loan.dueDate),
+      );
     } else if (statusFilter === "due-soon") {
       filtered = filtered.filter((loan) => {
         const days = getDaysUntilDue(loan.dueDate);
@@ -340,7 +373,7 @@ export default function RiwayatPage() {
   const totalPages = Math.ceil(filteredLoans.length / PAGE_SIZE);
   const paginatedLoans = filteredLoans.slice(
     (page - 1) * PAGE_SIZE,
-    page * PAGE_SIZE
+    page * PAGE_SIZE,
   );
   const recentMonths = Array.from(
     new Map(
@@ -394,7 +427,6 @@ export default function RiwayatPage() {
     return null;
   };
 
-
   if (!auth.isAuthenticated()) return null;
 
   // Jangan render tabel sebelum mapping selesai
@@ -412,21 +444,30 @@ export default function RiwayatPage() {
     const XLSX = await import("xlsx");
     const excelData = filteredLoans.map((loan) => ({
       "Nama Peminjam": loan.borrower?.name || "",
-      "NIP": loan.borrower?.nip || "",
+      NIP: loan.borrower?.nip || "",
       "ID Pegawai": loan.borrower?.officerId || "",
       "No HP": loan.borrower?.phone || "",
       "Tanggal Pinjam": formatDateTime(loan.borrowDate),
       "Jatuh Tempo": formatDateTime(loan.dueDate),
       "Tanggal Kembali": loan.returnDate ? formatDateTime(loan.returnDate) : "",
-      "Status": loan.status,
-      "Keperluan": loan.purpose || "",
-      "Catatan": loan.notes || "",
-      "Barang": loan.itemDetails?.map(item => `${item.name} (${item.quantity}x${item.sn ? `, SN: ${item.sn}` : `, SN: ${item.rfidCode}`})`).join(", ") || ""
+      Status: loan.status,
+      Keperluan: loan.purpose || "",
+      Catatan: loan.notes || "",
+      Barang:
+        loan.itemDetails
+          ?.map(
+            (item) =>
+              `${item.name} (${item.quantity}x${item.sn ? `, SN: ${item.sn}` : `, SN: ${item.rfidCode}`})`,
+          )
+          .join(", ") || "",
     }));
     const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Riwayat Peminjaman");
-    XLSX.writeFile(wb, `mrc-peminjaman-${new Date().toISOString().split("T")[0]}.xlsx`);
+    XLSX.writeFile(
+      wb,
+      `mrc-peminjaman-${new Date().toISOString().split("T")[0]}.xlsx`,
+    );
   };
 
   return (
@@ -451,7 +492,7 @@ export default function RiwayatPage() {
                   month: monthFilter,
                   sort: sortOrder,
                 });
-                window.open(`/print?${params.toString()}`, '_blank');
+                window.open(`/print?${params.toString()}`, "_blank");
               }}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg shadow-sm"
             >
@@ -500,7 +541,9 @@ export default function RiwayatPage() {
               <SelectContent>
                 <SelectItem value="all">Semua Bulan</SelectItem>
                 {recentMonths.map(([value, label]) => (
-                  <SelectItem key={value} value={value}>{label}</SelectItem>
+                  <SelectItem key={value} value={value}>
+                    {label}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -570,37 +613,50 @@ export default function RiwayatPage() {
                     for (let i = 1; i <= totalPages; i++) {
                       items.push(
                         <PaginationItem key={i}>
-                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                          <PaginationLink
+                            isActive={page === i}
+                            onClick={() => setPage(i)}
+                          >
                             {i}
                           </PaginationLink>
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                   } else {
                     // Always show first page
                     items.push(
                       <PaginationItem key={1}>
-                        <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>
+                        <PaginationLink
+                          isActive={page === 1}
+                          onClick={() => setPage(1)}
+                        >
                           1
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem>,
                     );
                     // Show ellipsis if needed before current
                     if (page > 3) {
                       items.push(
                         <PaginationItem key="start-ellipsis">
                           <PaginationEllipsis />
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                     // Show pages around current
-                    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
+                    for (
+                      let i = Math.max(2, page - 1);
+                      i <= Math.min(totalPages - 1, page + 1);
+                      i++
+                    ) {
                       items.push(
                         <PaginationItem key={i}>
-                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                          <PaginationLink
+                            isActive={page === i}
+                            onClick={() => setPage(i)}
+                          >
                             {i}
                           </PaginationLink>
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                     // Show ellipsis if needed after current
@@ -608,16 +664,19 @@ export default function RiwayatPage() {
                       items.push(
                         <PaginationItem key="end-ellipsis">
                           <PaginationEllipsis />
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                     // Always show last page
                     items.push(
                       <PaginationItem key={totalPages}>
-                        <PaginationLink isActive={page === totalPages} onClick={() => setPage(totalPages)}>
+                        <PaginationLink
+                          isActive={page === totalPages}
+                          onClick={() => setPage(totalPages)}
+                        >
                           {totalPages}
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem>,
                     );
                   }
                   return items;
@@ -661,10 +720,11 @@ export default function RiwayatPage() {
                 paginatedLoans.map((loan) => (
                   <TableRow
                     key={loan.id}
-                    className={`hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors ${isOverdue(loan.dueDate) && loan.status === "dipinjam"
-                      ? "bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-800/20"
-                      : ""
-                      } cursor-pointer`}
+                    className={`hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors ${
+                      isOverdue(loan.dueDate) && loan.status === "dipinjam"
+                        ? "bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-800/20"
+                        : ""
+                    } cursor-pointer`}
                     onClick={() => {
                       setDetailLoan(loan);
                       setIsDetailOpen(true);
@@ -672,7 +732,9 @@ export default function RiwayatPage() {
                   >
                     <TableCell>
                       <div className="flex items-center space-x-3">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getColorFromName(loan.borrower?.name)}`}>
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${getColorFromName(loan.borrower?.name)}`}
+                        >
                           <span className="text-white text-base font-semibold">
                             {loan.borrower?.name?.charAt(0) || "U"}
                           </span>
@@ -698,25 +760,43 @@ export default function RiwayatPage() {
                         {loan.itemDetails && loan.itemDetails.length > 0 ? (
                           // Group by item name, sum quantity
                           Object.entries(
-                            loan.itemDetails.reduce((acc, item) => {
-                              const key = item.name || "Barang";
-                              acc[key] = (acc[key] || 0) + (item.quantity || 1);
-                              return acc;
-                            }, {} as Record<string, number>)
+                            loan.itemDetails.reduce(
+                              (acc, item) => {
+                                const key = item.name || "Barang";
+                                acc[key] =
+                                  (acc[key] || 0) + (item.quantity || 1);
+                                return acc;
+                              },
+                              {} as Record<string, number>,
+                            ),
                           ).map(([name, total], idx) => (
-                            <div key={name + idx} className="flex items-center space-x-3">
+                            <div
+                              key={name + idx}
+                              className="flex items-center space-x-3"
+                            >
                               <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
                                 {(() => {
                                   // Ambil icon dari salah satu item dengan nama yang sama
-                                  const found = loan.itemDetails.find(i => i.name === name);
-                                  const Icon = ICON_OPTIONS.find(opt => opt.value === (found?.icon || "laptop"))?.icon || Laptop;
-                                  return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
+                                  const found = loan.itemDetails.find(
+                                    (i) => i.name === name,
+                                  );
+                                  const Icon =
+                                    ICON_OPTIONS.find(
+                                      (opt) =>
+                                        opt.value === (found?.icon || "laptop"),
+                                    )?.icon || Laptop;
+                                  return (
+                                    <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                                  );
                                 })()}
                               </div>
                               <div>
-                                <div className="text-sm font-medium text-gray-900 dark:text-white">{name}</div>
+                                <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                  {name}
+                                </div>
                                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-semibold">{total}</span>x
+                                  <span className="font-semibold">{total}</span>
+                                  x
                                 </div>
                               </div>
                             </div>
@@ -730,10 +810,12 @@ export default function RiwayatPage() {
                       {formatDate(loan.borrowDate)}
                     </TableCell>
                     <TableCell
-                      className={`font-medium ${isOverdue(loan.dueDate) && loan.status !== "dikembalikan"
-                        ? "text-red-600 dark:text-red-400"
-                        : ""
-                        }`}
+                      className={`font-medium ${
+                        isOverdue(loan.dueDate) &&
+                        loan.status !== "dikembalikan"
+                          ? "text-red-600 dark:text-red-400"
+                          : ""
+                      }`}
                     >
                       {formatDate(loan.dueDate)}
                     </TableCell>
@@ -752,12 +834,14 @@ export default function RiwayatPage() {
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Detail Peminjaman</AlertDialogTitle>
-                      <AlertDialogDescription asChild>
+                    <AlertDialogDescription asChild>
                       {detailLoan ? (
                         <div className="space-y-6">
                           {/* Borrower Card */}
                           <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 border border-accent-200 dark:border-accent-700 shadow-sm">
-                            <div className={`flex-shrink-0 w-14 h-14 rounded-full ${getColorFromName(detailLoan.borrower?.name)} flex items-center justify-center text-white text-2xl font-bold`}>
+                            <div
+                              className={`flex-shrink-0 w-14 h-14 rounded-full ${getColorFromName(detailLoan.borrower?.name)} flex items-center justify-center text-white text-2xl font-bold`}
+                            >
                               <User className="w-8 h-8" />
                             </div>
                             <div className="flex-1 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
@@ -828,75 +912,131 @@ export default function RiwayatPage() {
                                 {detailLoan.notes || "-"}
                               </div>
                               <div>
-                                <span className="font-semibold">Petugas Peminjaman:</span>{" "}
-                                {detailLoan.createdBy || detailAuditLog?.username || "-"}
+                                <span className="font-semibold">
+                                  Petugas Peminjaman:
+                                </span>{" "}
+                                {detailLoan.createdBy ||
+                                  detailAuditLog?.username ||
+                                  "-"}
                               </div>
                               <div>
-                                <span className="font-semibold">Petugas Pengembalian:</span>{" "}
+                                <span className="font-semibold">
+                                  Petugas Pengembalian:
+                                </span>{" "}
                                 {detailLoan.returnedBy || "-"}
                               </div>
                             </div>
                           </div>
                           {/* Detail per-serial, mirip pengembalian, read-only */}
                           <div className="rounded-xl bg-white dark:bg-gray-900/60 border border-gray-200 dark:border-gray-700 p-4 shadow-sm">
-                            <div className="font-semibold mb-2">Daftar Barang ({detailLoan.itemDetails.length})</div>
+                            <div className="font-semibold mb-2">
+                              Daftar Barang ({detailLoan.itemDetails.length})
+                            </div>
                             <ul className="divide-y divide-gray-100 dark:divide-gray-800 max-h-72 overflow-y-auto">
-                              {detailLoan.itemDetails && detailLoan.itemDetails.length > 0 ? (
-                                detailLoan.itemDetails.map((item: any, idx: number) => {
-                                  // If already correct shape, use as is
-                                  if (
-                                    typeof item.loanId === 'string' &&
-                                    typeof item.rfidCode === 'string' &&
-                                    typeof item.status !== 'undefined'
-                                  ) {
+                              {detailLoan.itemDetails &&
+                              detailLoan.itemDetails.length > 0 ? (
+                                detailLoan.itemDetails.map(
+                                  (item: any, idx: number) => {
+                                    // If already correct shape, use as is
+                                    if (
+                                      typeof item.loanId === "string" &&
+                                      typeof item.rfidCode === "string" &&
+                                      typeof item.status !== "undefined"
+                                    ) {
+                                      return (
+                                        <li
+                                          key={item.rfidCode}
+                                          className="flex items-center gap-3 py-2"
+                                        >
+                                          <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
+                                            {(() => {
+                                              const Icon =
+                                                ICON_OPTIONS.find(
+                                                  (opt) =>
+                                                    opt.value ===
+                                                    (item.icon || "laptop"),
+                                                )?.icon || Laptop;
+                                              return (
+                                                <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                                              );
+                                            })()}
+                                          </span>
+                                          <div className="flex-1">
+                                            <div className="font-medium text-gray-900 dark:text-white">
+                                              {item.name}
+                                            </div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                              {item.sn || item.rfidCode || "-"}
+                                              {item.note
+                                                ? ` | Catatan: ${item.note}`
+                                                : ""}
+                                            </div>
+                                          </div>
+                                          {item.status === 1 && (
+                                            <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                              Sudah dikembalikan
+                                            </span>
+                                          )}
+                                          {item.status === 0 &&
+                                            item.loanId === detailLoan.id && (
+                                              <span className="ml-2 px-2 py-0.5 rounded text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                                Masih dipinjam
+                                              </span>
+                                            )}
+                                          {item.status === 0 &&
+                                            item.loanId !== detailLoan.id && (
+                                              <span className="ml-2 px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400">
+                                                Dipinjam orang lain
+                                              </span>
+                                            )}
+                                        </li>
+                                      );
+                                    }
+                                    // Fallback: legacy shape, try to map to ItemSerialDetail
                                     return (
-                                      <li key={item.rfidCode} className="flex items-center gap-3 py-2">
+                                      <li
+                                        key={item.rfidCode || idx}
+                                        className="flex items-center gap-3 py-2"
+                                      >
                                         <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
                                           {(() => {
-                                            const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
-                                            return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
+                                            const Icon =
+                                              ICON_OPTIONS.find(
+                                                (opt) =>
+                                                  opt.value ===
+                                                  (item.icon || "laptop"),
+                                              )?.icon || Laptop;
+                                            return (
+                                              <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                                            );
                                           })()}
                                         </span>
                                         <div className="flex-1">
-                                          <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                          <div className="text-xs text-gray-500 dark:text-gray-400">{item.sn || item.rfidCode || '-'}{item.note ? ` | Catatan: ${item.note}` : ""}</div>
+                                          <div className="font-medium text-gray-900 dark:text-white">
+                                            {item.name}
+                                          </div>
+                                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                                            {item.rfidCode || "-"}
+                                          </div>
                                         </div>
-                                        {item.status === 1 && (
-                                          <span className="ml-2 px-2 py-0.5 rounded text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Sudah dikembalikan</span>
-                                        )}
-                                        {item.status === 0 && item.loanId === detailLoan.id && (
-                                          <span className="ml-2 px-2 py-0.5 rounded text-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Masih dipinjam</span>
-                                        )}
-                                        {item.status === 0 && item.loanId !== detailLoan.id && (
-                                          <span className="ml-2 px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400">Dipinjam orang lain</span>
-                                        )}
+                                        <span className="ml-2 px-2 py-0.5 rounded bg-gray-200 text-gray-700 text-xs font-semibold">
+                                          Data tidak lengkap
+                                        </span>
                                       </li>
                                     );
-                                  }
-                                  // Fallback: legacy shape, try to map to ItemSerialDetail
-                                  return (
-                                    <li key={item.rfidCode || idx} className="flex items-center gap-3 py-2">
-                                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-accent-100 dark:bg-accent-900/30">
-                                        {(() => {
-                                          const Icon = ICON_OPTIONS.find(opt => opt.value === (item.icon || "laptop"))?.icon || Laptop;
-                                          return <Icon className="w-5 h-5 text-gray-600 dark:text-gray-400" />;
-                                        })()}
-                                      </span>
-                                      <div className="flex-1">
-                                        <div className="font-medium text-gray-900 dark:text-white">{item.name}</div>
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">{item.rfidCode || '-'}</div>
-                                      </div>
-                                      <span className="ml-2 px-2 py-0.5 rounded bg-gray-200 text-gray-700 text-xs font-semibold">Data tidak lengkap</span>
-                                    </li>
-                                  );
-                                })
+                                  },
+                                )
                               ) : (
-                                <li className="text-gray-400 text-sm py-2">Tidak ada barang</li>
+                                <li className="text-gray-400 text-sm py-2">
+                                  Tidak ada barang
+                                </li>
                               )}
                             </ul>
                           </div>
                         </div>
-                        ) : <div />}
+                      ) : (
+                        <div />
+                      )}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -936,37 +1076,50 @@ export default function RiwayatPage() {
                     for (let i = 1; i <= totalPages; i++) {
                       items.push(
                         <PaginationItem key={i}>
-                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                          <PaginationLink
+                            isActive={page === i}
+                            onClick={() => setPage(i)}
+                          >
                             {i}
                           </PaginationLink>
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                   } else {
                     // Always show first page
                     items.push(
                       <PaginationItem key={1}>
-                        <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>
+                        <PaginationLink
+                          isActive={page === 1}
+                          onClick={() => setPage(1)}
+                        >
                           1
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem>,
                     );
                     // Show ellipsis if needed before current
                     if (page > 3) {
                       items.push(
                         <PaginationItem key="start-ellipsis">
                           <PaginationEllipsis />
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                     // Show pages around current
-                    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
+                    for (
+                      let i = Math.max(2, page - 1);
+                      i <= Math.min(totalPages - 1, page + 1);
+                      i++
+                    ) {
                       items.push(
                         <PaginationItem key={i}>
-                          <PaginationLink isActive={page === i} onClick={() => setPage(i)}>
+                          <PaginationLink
+                            isActive={page === i}
+                            onClick={() => setPage(i)}
+                          >
                             {i}
                           </PaginationLink>
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                     // Show ellipsis if needed after current
@@ -974,16 +1127,19 @@ export default function RiwayatPage() {
                       items.push(
                         <PaginationItem key="end-ellipsis">
                           <PaginationEllipsis />
-                        </PaginationItem>
+                        </PaginationItem>,
                       );
                     }
                     // Always show last page
                     items.push(
                       <PaginationItem key={totalPages}>
-                        <PaginationLink isActive={page === totalPages} onClick={() => setPage(totalPages)}>
+                        <PaginationLink
+                          isActive={page === totalPages}
+                          onClick={() => setPage(totalPages)}
+                        >
                           {totalPages}
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem>,
                     );
                   }
                   return items;
@@ -998,8 +1154,6 @@ export default function RiwayatPage() {
             </Pagination>
           </div>
         )}
-
-
       </div>
     </div>
   );

@@ -9,52 +9,56 @@ const defaultSettings = {
   theme: "light",
   admin: {
     username: "admin",
-    password: "admin123"
+    password: "admin123",
   },
   users: [
     { id: "1", username: "admin", password: "admin123", role: "super_admin" },
-    { id: "2", username: "petugas", password: "petugas123", role: "admin" }
+    { id: "2", username: "petugas", password: "petugas123", role: "admin" },
   ],
   notifications: {
     overdueReminders: true,
-    returnReminders: true
+    returnReminders: true,
   },
   system: {
     defaultLoanDays: 7,
     maxLoanItems: 5,
     returnConfirmation: true,
-    borrowConfirmation: false
+    borrowConfirmation: false,
   },
   messages: {
     aiReply: false,
     loanMessage: true,
     returnMessage: true,
-    reminderMessage: true
-  }
+    reminderMessage: true,
+  },
 };
 
 function mergeSettings(input: any, includeDeletedUsers = false) {
-  const users = Array.isArray(input.users) ? input.users : defaultSettings.users
+  const users = Array.isArray(input.users)
+    ? input.users
+    : defaultSettings.users;
   return {
     ...defaultSettings,
     ...input,
     admin: {
       ...defaultSettings.admin,
-      ...(input.admin || {})
+      ...(input.admin || {}),
     },
-    users: includeDeletedUsers ? users : users.filter((user: any) => !user.deletedAt),
+    users: includeDeletedUsers
+      ? users
+      : users.filter((user: any) => !user.deletedAt),
     notifications: {
       ...defaultSettings.notifications,
-      ...(input.notifications || {})
+      ...(input.notifications || {}),
     },
     system: {
       ...defaultSettings.system,
-      ...(input.system || {})
+      ...(input.system || {}),
     },
     messages: {
       ...defaultSettings.messages,
-      ...(typeof input.messages === "object" ? input.messages : {})
-    }
+      ...(typeof input.messages === "object" ? input.messages : {}),
+    },
   };
 }
 
@@ -75,12 +79,24 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const existing = JSON.parse(await fs.readFile(SETTINGS_PATH, "utf-8"));
     const existingDeletedUsers = Array.isArray(existing.users)
-      ? existing.users.filter((user: any) => user.deletedAt && !(body.users || []).some((incoming: any) => incoming.id === user.id))
+      ? existing.users.filter(
+          (user: any) =>
+            user.deletedAt &&
+            !(body.users || []).some(
+              (incoming: any) => incoming.id === user.id,
+            ),
+        )
       : [];
-    const merged = mergeSettings({ ...body, users: [...(body.users || []), ...existingDeletedUsers] }, true);
+    const merged = mergeSettings(
+      { ...body, users: [...(body.users || []), ...existingDeletedUsers] },
+      true,
+    );
     await fs.writeFile(SETTINGS_PATH, JSON.stringify(merged, null, 2));
     return NextResponse.json({ success: true });
   } catch (e) {
-    return NextResponse.json({ error: "Failed to update settings" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update settings" },
+      { status: 500 },
+    );
   }
 }

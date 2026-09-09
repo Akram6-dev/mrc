@@ -21460,8 +21460,8 @@
     ],
     "purpose": "kbm",
     "notes": "",
-    "status": "dipinjam",
-    "returned_at": null
+    "status": "dikembalikan",
+    "returned_at": "2026-09-08T15:13:15.601Z"
   },
   {
     "id": "1788859564647",
@@ -21479,5 +21479,107 @@
     "notes": "",
     "status": "dikembalikan",
     "returned_at": "2026-09-08T09:30:44.406Z"
+  },
+  {
+    "id": "1788880745854",
+    "number": "628122185645",
+    "name": "H. Saepul Palah, M. Ag",
+    "start_date": "2026-09-08T22:19:03+07:00",
+    "due_date": "2026-09-09T22:18:35+07:00",
+    "items": [
+      {
+        "item_name": "tes1",
+        "qty": 1
+      }
+    ],
+    "purpose": "tes",
+    "notes": "",
+    "status": "dikembalikan",
+    "returned_at": "2026-09-08T15:19:55.159Z"
+  },
+  {
+    "id": "1788880834777",
+    "number": "6283829572060",
+    "name": "HIdayat",
+    "start_date": "2026-09-08T22:20:34+07:00",
+    "due_date": "2026-09-09T22:20:07+07:00",
+    "items": [
+      {
+        "item_name": "tes1",
+        "qty": 1
+      }
+    ],
+    "purpose": "KBM",
+    "notes": "",
+    "status": "dikembalikan",
+    "returned_at": "2026-09-08T15:21:48.868Z"
+  },
+  {
+    "id": "1788911426284",
+    "number": "6283829572060",
+    "name": "enzo",
+    "start_date": "2026-09-09T06:50:25+07:00",
+    "due_date": "2026-09-10T06:49:55+07:00",
+    "items": [
+      {
+        "item_name": "Tesss",
+        "qty": 1
+      }
+    ],
+    "purpose": "KBM",
+    "notes": "",
+    "status": "dikembalikan",
+    "returned_at": "2026-09-08T23:50:47.323Z"
+  },
+  {
+    "id": "1788911999735",
+    "number": "6283829572060",
+    "name": "enzo",
+    "start_date": "2026-09-09T06:59:59+07:00",
+    "due_date": "2026-09-10T06:59:34+07:00",
+    "items": [
+      {
+        "item_name": "Tesss",
+        "qty": 1
+      }
+    ],
+    "purpose": "KBM",
+    "notes": "",
+    "status": "dipinjam",
+    "returned_at": null
+  },
+  {
+    "id": "1788912988533",
+    "number": "6282240280593",
+    "name": "Dra. Hj. Mulya Rohati",
+    "start_date": "2026-09-09T07:16:27+07:00",
+    "due_date": "2026-09-10T07:16:09+07:00",
+    "items": [
+      {
+        "item_name": "Tesss",
+        "qty": 1
+      }
+    ],
+    "purpose": "KBM",
+    "notes": "",
+    "status": "dikembalikan",
+    "returned_at": "2026-09-09T00:17:02.443Z"
+  },
+  {
+    "id": "1788913088649",
+    "number": "6283829572060",
+    "name": "enzo",
+    "start_date": "2026-09-09T07:18:08+07:00",
+    "due_date": "2026-09-10T07:17:44+07:00",
+    "items": [
+      {
+        "item_name": "Tesss",
+        "qty": 1
+      }
+    ],
+    "purpose": "KBM",
+    "notes": "",
+    "status": "dipinjam",
+    "returned_at": null
   }
 ]

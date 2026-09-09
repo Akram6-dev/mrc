@@ -1,5 +1,81 @@
 [
   {
+    "borrowerId": "2",
+    "items": [
+      {
+        "rfidCode": "777",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-09T07:16:27+07:00",
+    "dueDate": "2026-09-10T07:16:09+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1788912988533",
+    "createdBy": "admin",
+    "createdAt": "2026-09-09T00:16:28.533Z",
+    "updatedAt": "2026-09-09T00:17:01.409Z",
+    "returnDate": "2026-09-09T00:17:01.383Z",
+    "returnedBy": "admin"
+  },
+  {
+    "borrowerId": "1788911372953",
+    "items": [
+      {
+        "rfidCode": "777",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-09T06:50:25+07:00",
+    "dueDate": "2026-09-10T06:49:55+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1788911426284",
+    "createdBy": "admin",
+    "createdAt": "2026-09-08T23:50:26.284Z",
+    "updatedAt": "2026-09-08T23:50:44.723Z",
+    "returnDate": "2026-09-08T23:50:44.665Z",
+    "returnedBy": "admin"
+  },
+  {
+    "borrowerId": "1788751103501",
+    "items": [
+      {
+        "rfidCode": "2345678",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T22:20:34+07:00",
+    "dueDate": "2026-09-09T22:20:07+07:00",
+    "status": "dikembalikan",
+    "purpose": "KBM",
+    "id": "1788880834777",
+    "createdBy": "admin",
+    "createdAt": "2026-09-08T15:20:34.777Z",
+    "updatedAt": "2026-09-08T15:21:47.604Z",
+    "returnDate": "2026-09-08T15:21:47.553Z",
+    "returnedBy": "admin"
+  },
+  {
+    "borrowerId": "3",
+    "items": [
+      {
+        "rfidCode": "2345678",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T22:19:03+07:00",
+    "dueDate": "2026-09-09T22:18:35+07:00",
+    "status": "dikembalikan",
+    "purpose": "tes",
+    "id": "1788880745854",
+    "createdBy": "admin",
+    "createdAt": "2026-09-08T15:19:05.854Z",
+    "updatedAt": "2026-09-08T15:19:53.400Z",
+    "returnDate": "2026-09-08T15:19:53.337Z",
+    "returnedBy": "admin"
+  },
+  {
     "borrowerId": "122",
     "items": [
       {
@@ -16,6 +92,25 @@
     "createdAt": "2026-09-08T09:26:04.647Z",
     "updatedAt": "2026-09-08T09:30:42.060Z",
     "returnDate": "2026-09-08T09:30:42.011Z",
+    "returnedBy": "admin"
+  },
+  {
+    "borrowerId": "1788751103501",
+    "items": [
+      {
+        "rfidCode": "777",
+        "note": ""
+      }
+    ],
+    "borrowDate": "2026-09-08T11:28:30+07:00",
+    "dueDate": "2026-09-09T11:27:14+07:00",
+    "status": "dikembalikan",
+    "purpose": "kbm",
+    "id": "1788841710459",
+    "createdBy": "asep",
+    "createdAt": "2026-09-08T04:28:30.459Z",
+    "updatedAt": "2026-09-08T15:13:14.352Z",
+    "returnDate": "2026-09-08T15:13:14.303Z",
     "returnedBy": "admin"
   },
   {

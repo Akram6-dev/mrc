@@ -1,5 +1,125 @@
 [
   {
+    "id": "1788913089663-wq8piw",
+    "type": "peminjaman",
+    "recipient": "6283829572060",
+    "name": "enzo",
+    "success": true,
+    "error": null,
+    "message": "📢 Yth. *enzo*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-09 pukul 07:18*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-10*\n📌 Keperluan: *KBM*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️",
+    "timestamp": "2026-09-09T00:18:09.663Z"
+  },
+  {
+    "id": "1788913022984-u1h50y",
+    "type": "pengembalian",
+    "recipient": "6282240280593",
+    "name": "Dra. Hj. Mulya Rohati",
+    "success": true,
+    "error": null,
+    "message": "✅ Yth. *Dra. Hj. Mulya Rohati*,\nTerima kasih sudah mengembalikan barang ke *MRC*!\n\n📋 Barang yang dikembalikan:\n1. Tesss (1x)\n\n🗓 Tanggal Pinjam: *2026-09-09 pukul 07:16*\n📌 Keperluan: *KBM*\n\n⏳ Durasi peminjaman: *0 jam, 0 menit*\n\nBarang sudah diterima dalam keadaan baik dan lengkap yaa. Kalau butuh bantuan atau mau pinjam lagi, silakan hubungi MRC kapan ajaa 😁✨\n\n_Management Resource Center_ 🛠️",
+    "timestamp": "2026-09-09T00:17:02.984Z"
+  },
+  {
+    "id": "1788912989561-620js1",
+    "type": "peminjaman",
+    "recipient": "6282240280593",
+    "name": "Dra. Hj. Mulya Rohati",
+    "success": true,
+    "error": null,
+    "message": "📢 Yth. *Dra. Hj. Mulya Rohati*,\nAnda telah melakukan peminjaman barang dari *MRC*\n\n🗓 Tanggal Pinjam: *2026-09-09 pukul 07:16*\n📋 Barang yang Dipinjam:\n1. Tesss (1x)\n\n📅 Jatuh Tempo: *2026-09-10*\n📌 Keperluan: *KBM*\n\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️",
+    "timestamp": "2026-09-09T00:16:29.561Z"
+  },
+  {
+    "id": "1788912003075-37pnz8",
+    "type": "peminjaman",
+    "recipient": "6283829572060",
+    "name": "enzo",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-09T00:00:03.075Z"
+  },
+  {
+    "id": "1788911447645-3spgkr",
+    "type": "pengembalian",
+    "recipient": "6283829572060",
+    "name": "enzo",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T23:50:47.645Z"
+  },
+  {
+    "id": "1788911438898-3m4p2w",
+    "type": "pengingat",
+    "recipient": "6283829572060",
+    "name": "enzo",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T23:50:38.898Z"
+  },
+  {
+    "id": "1788911428020-qxm5xd",
+    "type": "peminjaman",
+    "recipient": "6283829572060",
+    "name": "enzo",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T23:50:28.020Z"
+  },
+  {
+    "id": "1788880909158-pgvmii",
+    "type": "pengembalian",
+    "recipient": "6283829572060",
+    "name": "HIdayat",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T15:21:49.158Z"
+  },
+  {
+    "id": "1788880835179-1thacp",
+    "type": "peminjaman",
+    "recipient": "6283829572060",
+    "name": "HIdayat",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T15:20:35.179Z"
+  },
+  {
+    "id": "1788880795501-u8vo3z",
+    "type": "pengembalian",
+    "recipient": "628122185645",
+    "name": "H. Saepul Palah, M. Ag",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T15:19:55.502Z"
+  },
+  {
+    "id": "1788880746877-wznmnx",
+    "type": "peminjaman",
+    "recipient": "628122185645",
+    "name": "H. Saepul Palah, M. Ag",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T15:19:06.877Z"
+  },
+  {
+    "id": "1788880395899-folra6",
+    "type": "pengembalian",
+    "recipient": "6283829572060",
+    "name": "HIdayat",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T15:13:15.899Z"
+  },
+  {
+    "id": "1788880329288-oq0zak",
+    "type": "pengingat",
+    "recipient": "6283829572060",
+    "name": "HIdayat",
+    "success": true,
+    "error": null,
+    "timestamp": "2026-09-08T15:12:09.288Z"
+  },
+  {
     "id": "1788859844415-42bns6",
     "type": "pengembalian",
     "recipient": "6289655617417",

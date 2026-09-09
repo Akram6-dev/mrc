@@ -6,7 +6,7 @@ const {
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
-  downloadMediaMessage
+  downloadMediaMessage,
 } = require("@whiskeysockets/baileys");
 const qrcode = require("qrcode-terminal");
 const QRCode = require("qrcode");
@@ -21,7 +21,8 @@ const GS_CMD = process.env.GHOSTSCRIPT_PATH || findGhostscript();
 function findGhostscript() {
   const gsRoot = "C:\\Program Files\\gs";
   if (!fs.existsSync(gsRoot)) return null;
-  const candidates = fs.readdirSync(gsRoot)
+  const candidates = fs
+    .readdirSync(gsRoot)
     .sort()
     .reverse()
     .map((version) => path.join(gsRoot, version, "bin", "gswin64c.exe"));
@@ -32,11 +33,17 @@ const app = express();
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  );
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+    );
     return res.status(200).json({});
   }
   next();
@@ -48,7 +55,9 @@ const HISTORY_FILE = path.join(__dirname, "history.json");
 const PINJAMAN_FILE = path.join(__dirname, "pinjaman.json");
 const SETTINGS_FILE = path.join(__dirname, "settings.json");
 const NOTIFICATION_LOG_FILE = path.join(__dirname, "notification-log.json");
-const MRC_DATABASE_PATH = process.env.MRC_DATABASE_PATH || path.resolve(__dirname, "..", "database");
+const CHAT_MESSAGES_FILE = path.join(__dirname, "chat-messages.json");
+const MRC_DATABASE_PATH =
+  process.env.MRC_DATABASE_PATH || path.resolve(__dirname, "..", "database");
 const MAX_HISTORY_ITEMS = 10;
 const MODEL = "nvidia/nemotron-3-ultra-550b-a55b:free";
 let sockGlobal;
@@ -71,7 +80,14 @@ function readNotificationLog() {
   }
 }
 
-function logNotification(type, jid, name, success, error = null) {
+function logNotification(
+  type,
+  jid,
+  name,
+  success,
+  error = null,
+  message = null,
+) {
   const logs = readNotificationLog();
   logs.unshift({
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -80,13 +96,66 @@ function logNotification(type, jid, name, success, error = null) {
     name: name || "-",
     success,
     error,
+    message,
     timestamp: new Date().toISOString(),
   });
   try {
-    fs.writeFileSync(NOTIFICATION_LOG_FILE, JSON.stringify(logs.slice(0, 100), null, 2));
+    fs.writeFileSync(
+      NOTIFICATION_LOG_FILE,
+      JSON.stringify(logs.slice(0, 100), null, 2),
+    );
   } catch (writeError) {
     console.error("Gagal menyimpan log notifikasi:", writeError.message);
   }
+}
+
+function loadChatMessages() {
+  try {
+    if (!fs.existsSync(CHAT_MESSAGES_FILE)) return [];
+    const data = JSON.parse(fs.readFileSync(CHAT_MESSAGES_FILE, "utf8"));
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Gagal membaca chat-messages.json:", error.message);
+    return [];
+  }
+}
+
+let chatMessages = loadChatMessages();
+
+function extractText(message) {
+  return (
+    message?.conversation ||
+    message?.extendedTextMessage?.text ||
+    message?.imageMessage?.caption ||
+    message?.documentMessage?.caption ||
+    ""
+  );
+}
+
+function recordChatMessage(jid, direction, text) {
+  if (!jid || !text) return;
+  chatMessages.push({
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    jid,
+    direction,
+    content: text,
+    timestamp: new Date().toISOString(),
+  });
+  chatMessages = chatMessages.slice(-5000);
+  try {
+    fs.writeFileSync(CHAT_MESSAGES_FILE, JSON.stringify(chatMessages, null, 2));
+  } catch (error) {
+    console.error("Gagal menyimpan chat-messages.json:", error.message);
+  }
+}
+
+function captureOutgoingMessages(sock) {
+  const originalSendMessage = sock.sendMessage.bind(sock);
+  sock.sendMessage = async (jid, content, options) => {
+    const result = await originalSendMessage(jid, content, options);
+    if (content?.text) recordChatMessage(jid, "outgoing", content.text);
+    return result;
+  };
 }
 
 app.get("/status", (_req, res) => {
@@ -114,10 +183,98 @@ app.get("/qr", async (_req, res) => {
   }
 });
 
+app.post("/logout", async (_req, res) => {
+  if (!sockGlobal) {
+    return res
+      .status(409)
+      .json({ error: "Bot WhatsApp sedang tidak terhubung" });
+  }
+
+  try {
+    await sockGlobal.logout();
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Gagal logout WhatsApp:", error);
+    res.status(500).json({ error: "Gagal keluar dari akun WhatsApp" });
+  }
+});
+
+function normalizeJid(value) {
+  const raw = String(value || "").trim();
+  if (raw.endsWith("@s.whatsapp.net")) return raw;
+  const number = raw.replace(/\D/g, "");
+  return number ? `${number}@s.whatsapp.net` : "";
+}
+
+function getVisibleChatMessages(jid) {
+  return chatMessages
+    .filter((message) => message.jid === jid)
+    .map((message) => ({
+      id: message.id,
+      role: message.direction === "incoming" ? "user" : "assistant",
+      content: message.content,
+      timestamp: message.timestamp,
+    }));
+}
+
+app.get("/chat/conversations", (_req, res) => {
+  const conversations = [...new Set(chatMessages.map((message) => message.jid))]
+    .map((jid) => {
+      const messages = chatMessages.filter((message) => message.jid === jid);
+      const lastMessage = messages[messages.length - 1];
+      return {
+        jid,
+        number: jid.replace("@s.whatsapp.net", ""),
+        messageCount: messages.length,
+        lastMessage: lastMessage?.content || "",
+        lastTimestamp: lastMessage?.timestamp || null,
+      };
+    })
+    .sort((a, b) =>
+      String(b.lastTimestamp).localeCompare(String(a.lastTimestamp)),
+    );
+  res.json(conversations);
+});
+
+app.get("/chat/messages", (req, res) => {
+  const jid = normalizeJid(req.query.jid);
+  if (!jid)
+    return res.status(400).json({ error: "Nomor WhatsApp wajib diisi" });
+  res.json({ jid, messages: getVisibleChatMessages(jid) });
+});
+
+app.post("/chat/send", async (req, res) => {
+  const jid = normalizeJid(req.body.number || req.body.jid);
+  const text =
+    typeof req.body.message === "string" ? req.body.message.trim() : "";
+  if (!jid || !text)
+    return res.status(400).json({ error: "Nomor dan pesan wajib diisi" });
+  if (text.length > 2000)
+    return res.status(400).json({ error: "Pesan maksimal 2000 karakter" });
+  if (!sockGlobal || botStatus !== "connected") {
+    return res.status(503).json({ error: "Bot WhatsApp belum terhubung" });
+  }
+
+  try {
+    await sockGlobal.sendMessage(jid, { text });
+    ensureUserHistoryKey(jid);
+    conversationHistory[jid].push({ role: "assistant", content: text });
+    saveHistory(conversationHistory);
+    res.json({ success: true, jid, message: text });
+  } catch (error) {
+    console.error("Gagal mengirim chat manual:", error);
+    res.status(500).json({ error: "Gagal mengirim pesan WhatsApp" });
+  }
+});
+
 function compressPDF(inputPath, outputPath) {
   return new Promise((resolve, reject) => {
     if (!GS_CMD) {
-      reject(new Error("Ghostscript tidak ditemukan. Atur GHOSTSCRIPT_PATH untuk fitur PDF."));
+      reject(
+        new Error(
+          "Ghostscript tidak ditemukan. Atur GHOSTSCRIPT_PATH untuk fitur PDF.",
+        ),
+      );
       return;
     }
     const args = [
@@ -128,7 +285,7 @@ function compressPDF(inputPath, outputPath) {
       "-dQUIET",
       "-dBATCH",
       `-sOutputFile=${outputPath}`,
-      inputPath
+      inputPath,
     ];
 
     execFile(GS_CMD, args, (error) => {
@@ -160,7 +317,6 @@ function formatBytes(bytes) {
   return `${(bytes / Math.pow(k, i)).toFixed(2)} ${sizes[i]}`;
 }
 
-
 // ===== load / save pinjaman =====
 function loadPinjaman() {
   try {
@@ -189,7 +345,9 @@ function loadApplicationLoan(id) {
     const loan = loans.find((entry) => String(entry.id) === String(id));
     if (!loan) return null;
     const borrowers = JSON.parse(fs.readFileSync(borrowersPath, "utf8"));
-    const borrower = borrowers.find((entry) => String(entry.id) === String(loan.borrowerId));
+    const borrower = borrowers.find(
+      (entry) => String(entry.id) === String(loan.borrowerId),
+    );
     const items = JSON.parse(fs.readFileSync(itemsPath, "utf8"));
     const serialLookup = new Map();
     for (const item of items) {
@@ -218,12 +376,11 @@ function loadApplicationLoan(id) {
   }
 }
 
-
 function loadSettings() {
   try {
     if (!fs.existsSync(SETTINGS_FILE)) return { ai_active: false };
     const raw = fs.readFileSync(SETTINGS_FILE, "utf8");
-    return JSON.parse(raw || "{\"ai_active\":false}");
+    return JSON.parse(raw || '{"ai_active":false}');
   } catch (e) {
     console.error("Gagal load settings.json, membuat baru. Error:", e.message);
     return { ai_active: false };
@@ -324,13 +481,12 @@ function getMessageForDownload(msg) {
   if (msg.message?.documentWithCaptionMessage) {
     return {
       key: msg.key,
-      message: msg.message.documentWithCaptionMessage.message
+      message: msg.message.documentWithCaptionMessage.message,
     };
   }
 
   return msg;
 }
-
 
 function extractPdfMessage(msg) {
   // PDF dikirim langsung
@@ -339,8 +495,7 @@ function extractPdfMessage(msg) {
   }
 
   // PDF dari reply / forwarded
-  const quoted =
-    msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+  const quoted = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
 
   if (quoted?.documentMessage?.mimetype === "application/pdf") {
     // ❗ PENTING: tetap pakai msg ASLI, bukan quoted
@@ -362,8 +517,7 @@ function getAnyDocumentMessage(msg) {
   }
 
   // quoted / forwarded
-  const quoted =
-    msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+  const quoted = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
 
   if (quoted?.documentMessage) {
     return quoted.documentMessage;
@@ -375,7 +529,6 @@ function getAnyDocumentMessage(msg) {
 
   return null;
 }
-
 
 // ===== fungsi untuk memanggil OpenRouter / model =====
 async function getAIResponse(messages) {
@@ -392,7 +545,7 @@ async function getAIResponse(messages) {
           "Content-Type": "application/json",
         },
         timeout: 60000,
-      }
+      },
     );
 
     const content =
@@ -416,7 +569,10 @@ async function startBot() {
   try {
     ({ version } = await fetchLatestBaileysVersion());
   } catch (error) {
-    console.warn("Versi Baileys terbaru tidak dapat diambil, memakai versi default:", error.message);
+    console.warn(
+      "Versi Baileys terbaru tidak dapat diambil, memakai versi default:",
+      error.message,
+    );
   }
 
   const sock = makeWASocket({
@@ -424,6 +580,8 @@ async function startBot() {
     auth: state,
     printQRInTerminal: false,
   });
+
+  captureOutgoingMessages(sock);
 
   sockGlobal = sock;
 
@@ -483,7 +641,8 @@ async function startBot() {
       latitude: -6.5556091,
       longitude: 107.7593109,
       name: "MRC SMKN 1 Subang",
-      address: "SMKN 1 Subang, Jl. Arief Rahman Hakim No.35, Subang, Jawa Barat"
+      address:
+        "SMKN 1 Subang, Jl. Arief Rahman Hakim No.35, Subang, Jawa Barat",
     };
     // Kontak admin (bisa lebih dari satu)
     const ADMIN_CONTACTS = [
@@ -494,31 +653,30 @@ async function startBot() {
           "VERSION:3.0",
           "FN:Pak Hakim (MRC)",
           "TEL;type=CELL;waid=6288706320887:+62 887-0632-0887",
-          "END:VCARD"
-        ].join("\n")
-      }
+          "END:VCARD",
+        ].join("\n"),
+      },
     ];
 
     try {
-      const adminNumbers = ["6288706320887@s.whatsapp.net", "6288218366466@s.whatsapp.net"];
+      const adminNumbers = [
+        "6288706320887@s.whatsapp.net",
+        "6288218366466@s.whatsapp.net",
+      ];
       const msg = m.messages[0];
-      if (!msg || !msg.message || msg.key.fromMe) return;
+      if (!msg || !msg.message) return;
+      const from = msg.key.remoteJid;
+      const text = extractText(msg.message);
+      if (msg.key.fromMe) return;
+      recordChatMessage(from, "incoming", text);
 
       // DEBUG: log isi pesan WhatsApp mentah untuk analisis katalog/cart
       try {
-        console.log('DEBUG RAW MESSAGE:', JSON.stringify(msg.message, null, 2));
+        console.log("DEBUG RAW MESSAGE:", JSON.stringify(msg.message, null, 2));
       } catch (e) {
-        console.log('DEBUG RAW MESSAGE (stringify error):', msg.message);
+        console.log("DEBUG RAW MESSAGE (stringify error):", msg.message);
       }
-      const from = msg.key.remoteJid;
-      const text =
-        msg.message.conversation ||
-        msg.message.extendedTextMessage?.text ||
-        msg.message?.imageMessage?.caption ||
-        msg.message?.documentMessage?.caption ||
-        "";
       const isMediaMessage = !!getAnyDocumentMessage(msg);
-
 
       // Jika AI mati, blok hanya TEXT biasa, tapi IZINKAN media/file
       if (
@@ -541,11 +699,10 @@ async function startBot() {
         return;
       }
 
-
       console.log(
         `[${new Date().toLocaleString("en-US", {
           timeZone: "Asia/Jakarta",
-        })}] 📩 Pesan dari ${from}: ${text}`
+        })}] 📩 Pesan dari ${from}: ${text}`,
       );
 
       ensureUserHistoryKey(from);
@@ -563,9 +720,12 @@ async function startBot() {
         let sapaan = namaUser ? `Hai, *${namaUser}*! 👋\n` : "Hai! 👋\n";
         let perkenalan = `${sapaan}Selamat datang di *MRC SMKN 1 Subang*\n\nAku asisten digital untuk peminjaman barang, layanan komputer/jaringan, dan info seputar MRC.\n\nKetik \`/help\` untuk melihat daftar perintah dan layanan yang tersedia.`;
         await sock.sendMessage(from, {
-          text: perkenalan
+          text: perkenalan,
         });
-        conversationHistory[from].push({ role: "assistant", content: perkenalan });
+        conversationHistory[from].push({
+          role: "assistant",
+          content: perkenalan,
+        });
         saveHistory(conversationHistory);
       }
 
@@ -578,22 +738,32 @@ async function startBot() {
 
       if (text.trim().toLowerCase().startsWith("/msg ")) {
         if (!adminNumbers.includes(from)) {
-          await sock.sendMessage(from, { text: "❌ Command /msg hanya bisa digunakan oleh admin." });
+          await sock.sendMessage(from, {
+            text: "❌ Command /msg hanya bisa digunakan oleh admin.",
+          });
           return;
         }
         const match = text.trim().match(/^\/msg\s+(\d{8,15})\s+([\s\S]+)/i);
         if (!match) {
-          await sock.sendMessage(from, { text: "Format salah. Contoh: /msg 62812345678 Halo, ini pesan!" });
+          await sock.sendMessage(from, {
+            text: "Format salah. Contoh: /msg 62812345678 Halo, ini pesan!",
+          });
           return;
         }
         const tujuan = match[1];
         const pesan = match[2];
-        const jidTujuan = tujuan.includes("@s.whatsapp.net") ? tujuan : tujuan + "@s.whatsapp.net";
+        const jidTujuan = tujuan.includes("@s.whatsapp.net")
+          ? tujuan
+          : tujuan + "@s.whatsapp.net";
         try {
           await sock.sendMessage(jidTujuan, { text: pesan });
-          await sock.sendMessage(from, { text: `✅ Pesan berhasil dikirim ke ${tujuan}` });
+          await sock.sendMessage(from, {
+            text: `✅ Pesan berhasil dikirim ke ${tujuan}`,
+          });
         } catch (e) {
-          await sock.sendMessage(from, { text: `❌ Gagal kirim pesan ke ${tujuan}: ${e.message || e}` });
+          await sock.sendMessage(from, {
+            text: `❌ Gagal kirim pesan ke ${tujuan}: ${e.message || e}`,
+          });
         }
         return;
       }
@@ -615,9 +785,8 @@ async function startBot() {
         const progressMsg = await sock.sendMessage(
           from,
           { text: "⏳ Mengompres PDF..." },
-          { quoted: msg } // reply ke pesan PDF
+          { quoted: msg }, // reply ke pesan PDF
         );
-
 
         let buffer;
         try {
@@ -629,8 +798,8 @@ async function startBot() {
             {},
             {
               logger: console,
-              reuploadRequest: sock.updateMediaMessage
-            }
+              reuploadRequest: sock.updateMediaMessage,
+            },
           );
         } catch (e) {
           console.error("DOWNLOAD PDF ERROR:", e);
@@ -644,19 +813,22 @@ async function startBot() {
           await compressPDF(inputPath, outputPath);
           const beforeSize = fs.statSync(inputPath).size;
           const afterSize = fs.statSync(outputPath).size;
-          const savedPercent = (((beforeSize - afterSize) / beforeSize) * 100).toFixed(1);
+          const savedPercent = (
+            ((beforeSize - afterSize) / beforeSize) *
+            100
+          ).toFixed(1);
           await sock.sendMessage(from, {
             text:
               "✅ *Kompresi PDF Selesai*\n\n" +
               `📄 ${formatBytes(beforeSize)} → ${formatBytes(afterSize)}\n` +
               `📉 Hemat *${savedPercent}%*`,
-            edit: progressMsg.key
+            edit: progressMsg.key,
           });
 
           await sock.sendMessage(from, {
             document: fs.readFileSync(outputPath),
             fileName: compressedName,
-            mimetype: "application/pdf"
+            mimetype: "application/pdf",
           });
         } catch (e) {
           console.error("COMPRESS ERROR:", e);
@@ -668,7 +840,6 @@ async function startBot() {
 
         return;
       }
-
 
       if (
         text.trim().toLowerCase() === "/reset" ||
@@ -694,8 +865,8 @@ async function startBot() {
             degreesLatitude: MRC_LOCATION.latitude,
             degreesLongitude: MRC_LOCATION.longitude,
             name: MRC_LOCATION.name,
-            address: MRC_LOCATION.address
-          }
+            address: MRC_LOCATION.address,
+          },
         });
         return;
       }
@@ -704,8 +875,11 @@ async function startBot() {
         await sock.sendMessage(from, {
           contacts: {
             displayName: "Admin MRC",
-            contacts: ADMIN_CONTACTS.map(c => ({ displayName: c.displayName, vcard: c.vcard }))
-          }
+            contacts: ADMIN_CONTACTS.map((c) => ({
+              displayName: c.displayName,
+              vcard: c.vcard,
+            })),
+          },
         });
         return;
       }
@@ -713,37 +887,61 @@ async function startBot() {
       if (text.trim().toLowerCase().startsWith("/cek")) {
         // Jika hanya '/cek' tanpa nama
         if (text.trim().toLowerCase() === "/cek") {
-          await sock.sendMessage(from, { text: "Format salah. Ketik: `/cek {nama guru}`\nContoh: `/cek Ahmad Hakim Makarim`" });
+          await sock.sendMessage(from, {
+            text: "Format salah. Ketik: `/cek {nama guru}`\nContoh: `/cek Ahmad Hakim Makarim`",
+          });
           return;
         }
         // Jika '/cek {nama}'
         if (text.trim().toLowerCase().startsWith("/cek ")) {
           try {
             const query = text.trim().slice(5).toLowerCase();
-            const borrowersPath = path.join(MRC_DATABASE_PATH, "borrowers.json");
+            const borrowersPath = path.join(
+              MRC_DATABASE_PATH,
+              "borrowers.json",
+            );
             const loansPath = path.join(MRC_DATABASE_PATH, "loans.json");
             const itemsPath = path.join(MRC_DATABASE_PATH, "items.json");
-            if (!fs.existsSync(borrowersPath) || !fs.existsSync(loansPath) || !fs.existsSync(itemsPath)) {
-              await sock.sendMessage(from, { text: "❌ Data peminjam/loans/items tidak ditemukan." });
+            if (
+              !fs.existsSync(borrowersPath) ||
+              !fs.existsSync(loansPath) ||
+              !fs.existsSync(itemsPath)
+            ) {
+              await sock.sendMessage(from, {
+                text: "❌ Data peminjam/loans/items tidak ditemukan.",
+              });
               return;
             }
-            const borrowers = JSON.parse(fs.readFileSync(borrowersPath, "utf8"));
+            const borrowers = JSON.parse(
+              fs.readFileSync(borrowersPath, "utf8"),
+            );
             const loans = JSON.parse(fs.readFileSync(loansPath, "utf8"));
             const items = JSON.parse(fs.readFileSync(itemsPath, "utf8"));
             // Cari peminjam paling relevan (paling atas yang namanya mengandung query, case-insensitive, urutkan by kemiripan string)
-            const scored = borrowers.map(b => ({
-              ...b,
-              score: b.name.toLowerCase().includes(query) ? 100 - Math.abs(b.name.length - query.length) : 0
-            })).filter(b => b.score > 0).sort((a, b) => b.score - a.score);
+            const scored = borrowers
+              .map((b) => ({
+                ...b,
+                score: b.name.toLowerCase().includes(query)
+                  ? 100 - Math.abs(b.name.length - query.length)
+                  : 0,
+              }))
+              .filter((b) => b.score > 0)
+              .sort((a, b) => b.score - a.score);
             if (!scored.length) {
-              await sock.sendMessage(from, { text: `❌ Tidak ditemukan peminjam dengan nama "${query}".` });
+              await sock.sendMessage(from, {
+                text: `❌ Tidak ditemukan peminjam dengan nama "${query}".`,
+              });
               return;
             }
             const borrower = scored[0];
             // Ambil semua loans milik borrower ini, urutkan terbaru dulu
-            const borrowerLoans = loans.filter(l => l.borrowerId === borrower.id).sort((a, b) => new Date(b.borrowDate) - new Date(a.borrowDate));
+            const borrowerLoans = loans
+              .filter((l) => l.borrowerId === borrower.id)
+              .sort((a, b) => new Date(b.borrowDate) - new Date(a.borrowDate));
             if (!borrowerLoans.length) {
-              await sock.sendMessage(from, { text: `Tidak ada riwayat peminjaman untuk *${borrower.name}*.` });
+              await sock.sendMessage(from, {
+                text: `Tidak ada riwayat peminjaman untuk *${borrower.name}*.`,
+              });
               return;
             }
             // Format detail
@@ -754,30 +952,37 @@ async function startBot() {
               nipLine = `ID Pegawai: ${borrower.officerId}\n`;
             }
             let msg = `📋 *Riwayat Peminjaman*\nNama: *${borrower.name}*\n${nipLine}Total peminjaman: *${borrowerLoans.length}*\n\n`;
-            for (const loan of borrowerLoans.slice(0, 3)) { // tampilkan max 3 terakhir
-              const tglPinjam = new Date(loan.borrowDate).toLocaleString("id-ID", {
-                timeZone: "Asia/Jakarta",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit"
-              });
-              const tglJatuhTempo = new Date(loan.dueDate).toLocaleDateString("id-ID", {
-                timeZone: "Asia/Jakarta",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit"
-              });
-              const tglKembali = loan.returnDate
-                ? new Date(loan.returnDate).toLocaleString("id-ID", {
+            for (const loan of borrowerLoans.slice(0, 3)) {
+              // tampilkan max 3 terakhir
+              const tglPinjam = new Date(loan.borrowDate).toLocaleString(
+                "id-ID",
+                {
                   timeZone: "Asia/Jakarta",
                   year: "numeric",
                   month: "2-digit",
                   day: "2-digit",
                   hour: "2-digit",
-                  minute: "2-digit"
-                })
+                  minute: "2-digit",
+                },
+              );
+              const tglJatuhTempo = new Date(loan.dueDate).toLocaleDateString(
+                "id-ID",
+                {
+                  timeZone: "Asia/Jakarta",
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                },
+              );
+              const tglKembali = loan.returnDate
+                ? new Date(loan.returnDate).toLocaleString("id-ID", {
+                    timeZone: "Asia/Jakarta",
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
                 : "-";
               msg += `🆔 ID: *${loan.id}*\n`;
               msg += `- Tgl Pinjam: *${tglPinjam}*\n`;
@@ -804,10 +1009,14 @@ async function startBot() {
                       sub.rfidCode,
                       sub.serial,
                       sub.serial_no,
-                      sub.s_n
+                      sub.s_n,
                     ];
                     for (const c of candidates) {
-                      if (c !== undefined && c !== null && c.toString().trim() !== "") {
+                      if (
+                        c !== undefined &&
+                        c !== null &&
+                        c.toString().trim() !== ""
+                      ) {
                         serialToName[c.toString()] = item.name;
                       }
                     }
@@ -816,23 +1025,30 @@ async function startBot() {
               }
               // Group loaned serialNumbers by name
               const nameGroups = {};
-              loan.items.forEach(it => {
+              loan.items.forEach((it) => {
                 const candidates = [
                   it.serialNumber,
                   it.sn,
                   it.rfidCode,
                   it.serial,
                   it.serial_no,
-                  it.s_n
+                  it.s_n,
                 ];
-                let serialVal = '';
+                let serialVal = "";
                 for (const c of candidates) {
-                  if (c !== undefined && c !== null && c.toString().trim() !== "") {
+                  if (
+                    c !== undefined &&
+                    c !== null &&
+                    c.toString().trim() !== ""
+                  ) {
                     serialVal = c.toString();
                     break;
                   }
                 }
-                const name = serialVal && serialToName[serialVal] ? serialToName[serialVal] : '(Tidak diketahui)';
+                const name =
+                  serialVal && serialToName[serialVal]
+                    ? serialToName[serialVal]
+                    : "(Tidak diketahui)";
                 if (!nameGroups[name]) nameGroups[name] = [];
                 nameGroups[name].push(serialVal);
               });
@@ -840,13 +1056,17 @@ async function startBot() {
               for (const [name, serials] of Object.entries(nameGroups)) {
                 msg += `${idx++}. ${name} (${serials.length}x)\n`;
               }
-              if (loan.status === "dikembalikan") msg += `- Tgl Kembali: *${tglKembali}*\n`;
+              if (loan.status === "dikembalikan")
+                msg += `- Tgl Kembali: *${tglKembali}*\n`;
               msg += `\n`;
             }
-            if (borrowerLoans.length > 3) msg += `Dan ${borrowerLoans.length - 3} peminjaman lainnya...`;
+            if (borrowerLoans.length > 3)
+              msg += `Dan ${borrowerLoans.length - 3} peminjaman lainnya...`;
             await sock.sendMessage(from, { text: msg });
           } catch (e) {
-            await sock.sendMessage(from, { text: `❌ Gagal cek riwayat: ${e.message || e}` });
+            await sock.sendMessage(from, {
+              text: `❌ Gagal cek riwayat: ${e.message || e}`,
+            });
           }
           return;
         }
@@ -856,26 +1076,32 @@ async function startBot() {
         try {
           const itemsPath = path.join(MRC_DATABASE_PATH, "items.json");
           if (!fs.existsSync(itemsPath)) {
-            await sock.sendMessage(from, { text: "❌ Data stok barang tidak ditemukan." });
+            await sock.sendMessage(from, {
+              text: "❌ Data stok barang tidak ditemukan.",
+            });
             return;
           }
           const itemsRaw = fs.readFileSync(itemsPath, "utf8");
           const items = JSON.parse(itemsRaw);
           if (!Array.isArray(items) || items.length === 0) {
-            await sock.sendMessage(from, { text: "❌ Tidak ada data stok barang." });
+            await sock.sendMessage(from, {
+              text: "❌ Tidak ada data stok barang.",
+            });
             return;
           }
           let stokMsg = `📦 *Daftar Stok Barang MRC*\n\n`;
           for (const item of items) {
             let available = 0;
             if (Array.isArray(item.items)) {
-              available = item.items.filter(sub => sub.status === 1).length;
+              available = item.items.filter((sub) => sub.status === 1).length;
             }
             stokMsg += `- ${item.name}  (*${available}x*)\n`;
           }
           await sock.sendMessage(from, { text: stokMsg });
         } catch (e) {
-          await sock.sendMessage(from, { text: `❌ Gagal mengambil data stok: ${e.message || e}` });
+          await sock.sendMessage(from, {
+            text: `❌ Gagal mengambil data stok: ${e.message || e}`,
+          });
         }
         return;
       }
@@ -900,36 +1126,36 @@ async function startBot() {
         const faqList = [
           {
             q: "Layanan apa saja yang tersedia di MRC?",
-            a: "Peminjaman barang, perbaikan komputer/laptop, instalasi software, perbaikan jaringan."
+            a: "Peminjaman barang, perbaikan komputer/laptop, instalasi software, perbaikan jaringan.",
           },
           {
             q: "Jam operasional?",
-            a: "Senin-Jumat, 06:30 - 16:00 WIB."
+            a: "Senin-Jumat, 06:30 - 16:00 WIB.",
           },
           {
             q: "Bagaimana cara meminjam?",
-            a: "Datang ke MRC oleh guru, tanda tangan form peminjaman, dan bawa barang yang dipinjam."
+            a: "Datang ke MRC oleh guru, tanda tangan form peminjaman, dan bawa barang yang dipinjam.",
           },
           {
             q: "Siapa yang boleh meminjam?",
-            a: "Guru atau staf sekolah dengan identitas yang jelas."
+            a: "Guru atau staf sekolah dengan identitas yang jelas.",
           },
           {
             q: "Batas peminjaman?",
-            a: "Maksimum 7 unit per peminjaman."
+            a: "Maksimum 7 unit per peminjaman.",
           },
           {
             q: "Apa syarat pengembalian?",
-            a: "Dikembalikan dalam kondisi baik dan lengkap (semua aksesoris)."
+            a: "Dikembalikan dalam kondisi baik dan lengkap (semua aksesoris).",
           },
           {
             q: "Dimana lokasi MRC?",
-            a: "Ketik `/lokasi` untuk mendapatkan lokasi MRC di WhatsApp."
+            a: "Ketik `/lokasi` untuk mendapatkan lokasi MRC di WhatsApp.",
           },
           {
             q: "Kontak admin?",
-            a: "Ketik `/admin` untuk mendapatkan kontak admin MRC."
-          }
+            a: "Ketik `/admin` untuk mendapatkan kontak admin MRC.",
+          },
         ];
 
         let payload = "*📚 FAQ - MRC SMKN 1 Subang*";
@@ -951,8 +1177,10 @@ async function startBot() {
         const userCount = Object.keys(conversationHistory).length;
 
         const totalPeminjaman = pinjamanDB.length;
-        const aktif = pinjamanDB.filter(p => p.status === "dipinjam").length;
-        const kembali = pinjamanDB.filter(p => p.status === "dikembalikan").length;
+        const aktif = pinjamanDB.filter((p) => p.status === "dipinjam").length;
+        const kembali = pinjamanDB.filter(
+          (p) => p.status === "dikembalikan",
+        ).length;
 
         let statsMsg = `📊 *Statistik Bot MRC*\n\n`;
         statsMsg += `⏱️ Uptime: *${uptimeStr}*\n`;
@@ -966,21 +1194,27 @@ async function startBot() {
 
       if (text.trim().toLowerCase() === "/bc") {
         if (!adminNumbers.includes(from)) {
-          await sock.sendMessage(from, { text: "❌ Command /bc hanya bisa digunakan oleh admin." });
+          await sock.sendMessage(from, {
+            text: "❌ Command /bc hanya bisa digunakan oleh admin.",
+          });
           return;
         }
         // Simpan state broadcast di memory
         if (!global.broadcastState) global.broadcastState = {};
         global.broadcastState[from] = { waiting: true };
         const userCount = Object.keys(conversationHistory).length;
-        await sock.sendMessage(from, { text: `📢 Kirim teks broadcast yang akan dikirim ke ${userCount} pengguna.\n\nKetik \`batal\` untuk membatalkan.` });
+        await sock.sendMessage(from, {
+          text: `📢 Kirim teks broadcast yang akan dikirim ke ${userCount} pengguna.\n\nKetik \`batal\` untuk membatalkan.`,
+        });
         return;
       }
       // Jika sedang menunggu pesan broadcast
       if (global.broadcastState && global.broadcastState[from]?.waiting) {
         if (!adminNumbers.includes(from)) {
           global.broadcastState[from] = null;
-          await sock.sendMessage(from, { text: "❌ Command broadcast hanya bisa digunakan oleh admin." });
+          await sock.sendMessage(from, {
+            text: "❌ Command broadcast hanya bisa digunakan oleh admin.",
+          });
           return;
         }
         if (text.trim().toLowerCase() === "batal") {
@@ -988,17 +1222,24 @@ async function startBot() {
           await sock.sendMessage(from, { text: "❌ Broadcast dibatalkan." });
           return;
         }
-        const userJids = Object.keys(conversationHistory).filter(jid => jid.endsWith("@s.whatsapp.net"));
+        const userJids = Object.keys(conversationHistory).filter((jid) =>
+          jid.endsWith("@s.whatsapp.net"),
+        );
         let sentCount = 0;
         for (const jid of userJids) {
           try {
             await sock.sendMessage(jid, { text });
             sentCount++;
           } catch (e) {
-            console.error(`❌ Gagal kirim broadcast ke ${jid}:`, e.message || e);
+            console.error(
+              `❌ Gagal kirim broadcast ke ${jid}:`,
+              e.message || e,
+            );
           }
         }
-        await sock.sendMessage(from, { text: `✅ Pesan broadcast telah dikirim ke ${sentCount} orang!` });
+        await sock.sendMessage(from, {
+          text: `✅ Pesan broadcast telah dikirim ke ${sentCount} orang!`,
+        });
         global.broadcastState[from] = null;
         return;
       }
@@ -1015,7 +1256,9 @@ async function startBot() {
         const aiReply = await getAIResponse(messagesToSend);
         conversationHistory[from].push({ role: "assistant", content: aiReply });
         const system = conversationHistory[from][0];
-        const rest = conversationHistory[from].slice(1).slice(-MAX_HISTORY_ITEMS);
+        const rest = conversationHistory[from]
+          .slice(1)
+          .slice(-MAX_HISTORY_ITEMS);
         conversationHistory[from] = [system, ...rest];
         saveHistory(conversationHistory);
         await sock.sendMessage(from, { text: aiReply });
@@ -1036,9 +1279,17 @@ const BOT_START_TIME = Date.now();
 // Endpoint untuk peminjaman barang
 app.post("/pinjam", async (req, res) => {
   try {
-    const { number, name, start_date, due_date, items, id, purpose, notes } = req.body;
+    const { number, name, start_date, due_date, items, id, purpose, notes } =
+      req.body;
 
-    if (!number || !name || !start_date || !due_date || !Array.isArray(items) || !purpose) {
+    if (
+      !number ||
+      !name ||
+      !start_date ||
+      !due_date ||
+      !Array.isArray(items) ||
+      !purpose
+    ) {
       return res.status(400).json({ error: "Data tidak lengkap" });
     }
 
@@ -1107,7 +1358,7 @@ app.post("/pinjam", async (req, res) => {
     saveHistory(conversationHistory);
 
     await sockGlobal.sendMessage(jid, { text: message });
-    logNotification("peminjaman", jid, name, true);
+    logNotification("peminjaman", jid, name, true, null, message);
 
     const startTime = new Date(start_date).getTime();
     const dueTime = new Date(due_date).getTime();
@@ -1126,11 +1377,11 @@ app.post("/pinjam", async (req, res) => {
         const reminderMsg = `📢 Yth. *${name}*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Menagement Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_`;
         try {
           await sockGlobal.sendMessage(jid, { text: reminderMsg });
-          logNotification("pengingat", jid, name, true);
+          logNotification("pengingat", jid, name, true, null, reminderMsg);
           console.log(
             `[${new Date().toLocaleString("en-US", {
               timeZone: "Asia/Jakarta",
-            })}] 🔔 Pengingat pengembalian dikirim ke ${number}`
+            })}] 🔔 Pengingat pengembalian dikirim ke ${number}`,
           );
         } catch (e) {
           console.error("Gagal kirim reminder pengembalian:", e.message || e);
@@ -1141,7 +1392,7 @@ app.post("/pinjam", async (req, res) => {
     console.log(
       `[${new Date().toLocaleString("en-US", {
         timeZone: "Asia/Jakarta",
-      })}] ⏳ Pengingat pengembalian akan dikirim dalam ${durasiStr} ke ${number}`
+      })}] ⏳ Pengingat pengembalian akan dikirim dalam ${durasiStr} ke ${number}`,
     );
 
     res.json({
@@ -1152,7 +1403,7 @@ app.post("/pinjam", async (req, res) => {
     console.log(
       `[${new Date().toLocaleString("en-US", {
         timeZone: "Asia/Jakarta",
-      })}] ✅ Pesan pemberitahuan peminjaman dikirim ke ${number}`
+      })}] ✅ Pesan pemberitahuan peminjaman dikirim ke ${number}`,
     );
   } catch (err) {
     console.error("Error /pinjam:", err);
@@ -1173,7 +1424,9 @@ app.post("/kembali", async (req, res) => {
       return res.status(404).json({ error: "ID peminjaman tidak ditemukan" });
     }
     if (localIndex >= 0 && pinjamanDB[localIndex].status === "dikembalikan") {
-      return res.status(400).json({ error: "Barang sudah dikembalikan sebelumnya" });
+      return res
+        .status(400)
+        .json({ error: "Barang sudah dikembalikan sebelumnya" });
     }
     if (localIndex >= 0) {
       pinjamanDB[localIndex].status = "dikembalikan";
@@ -1181,7 +1434,9 @@ app.post("/kembali", async (req, res) => {
     }
     const { number, name, items, start_date, purpose, notes } = pinjaman;
     if (!number) {
-      return res.status(422).json({ error: "Nomor WhatsApp peminjam tidak tersedia" });
+      return res
+        .status(422)
+        .json({ error: "Nomor WhatsApp peminjam tidak tersedia" });
     }
     const jid = number.includes("@s.whatsapp.net")
       ? number
@@ -1223,7 +1478,7 @@ app.post("/kembali", async (req, res) => {
 
     try {
       await sockGlobal.sendMessage(jid, { text: message });
-      logNotification("pengembalian", jid, name, true);
+      logNotification("pengembalian", jid, name, true, null, message);
       ensureUserHistoryKey(jid);
       conversationHistory[jid].push({ role: "assistant", content: message });
       const system = conversationHistory[jid][0];
@@ -1231,7 +1486,14 @@ app.post("/kembali", async (req, res) => {
       conversationHistory[jid] = [system, ...rest];
       saveHistory(conversationHistory);
     } catch (e) {
-      logNotification("pengembalian", jid, name, false, e.message || String(e));
+      logNotification(
+        "pengembalian",
+        jid,
+        name,
+        false,
+        e.message || String(e),
+        message,
+      );
       console.error("Gagal kirim konfirmasi pengembalian:", e.message || e);
     }
     savePinjaman(pinjamanDB);
@@ -1239,7 +1501,7 @@ app.post("/kembali", async (req, res) => {
     console.log(
       `[${new Date().toLocaleString("en-US", {
         timeZone: "Asia/Jakarta",
-      })}] ✅ Barang dengan ID ${id} telah dikembalikan.`
+      })}] ✅ Barang dengan ID ${id} telah dikembalikan.`,
     );
   } catch (err) {
     console.error("Error /kembali:", err);
@@ -1258,9 +1520,12 @@ app.post("/pengingat", async (req, res) => {
       return res.status(404).json({ error: "ID peminjaman tidak ditemukan" });
     }
     if (pinjaman.status === "dikembalikan") {
-      return res.status(400).json({ error: "Barang sudah dikembalikan sebelumnya" });
+      return res
+        .status(400)
+        .json({ error: "Barang sudah dikembalikan sebelumnya" });
     }
-    const { number, name, items, start_date, due_date, purpose, notes } = pinjaman;
+    const { number, name, items, start_date, due_date, purpose, notes } =
+      pinjaman;
     const jid = number.includes("@s.whatsapp.net")
       ? number
       : number.replace(/\D/g, "") + "@s.whatsapp.net";
@@ -1297,9 +1562,12 @@ app.post("/pengingat", async (req, res) => {
     const reminderMsg = `📢 Yth. *${name}*,\nAnda *belum mengembalikan* barang yang dipinjam dari *MRC*\n\n🗓 Tanggal Pinjam: *${startDateText}*\n📋 Barang yang Dipinjam:\n${itemsText}\n\n📅 Jatuh Tempo: *${dueDateText}*\n📌 Keperluan: *${purpose}*\n${notesText}\n⚠️ Mohon untuk mengembalikan barang tepat waktu dalam keadaan *lengkap* dan *baik* sesuai saat dipinjam.\n\n_Management Resource Center_ 🛠️\n\n> _Abaikan pesan ini jika sudah mengembalikan_`;
     try {
       await sockGlobal.sendMessage(jid, { text: reminderMsg });
-      logNotification("pengingat", jid, pinjaman.name, true);
+      logNotification("pengingat", jid, pinjaman.name, true, null, reminderMsg);
       ensureUserHistoryKey(jid);
-      conversationHistory[jid].push({ role: "assistant", content: reminderMsg });
+      conversationHistory[jid].push({
+        role: "assistant",
+        content: reminderMsg,
+      });
       const system = conversationHistory[jid][0];
       const rest = conversationHistory[jid].slice(1).slice(-MAX_HISTORY_ITEMS);
       conversationHistory[jid] = [system, ...rest];
@@ -1308,10 +1576,17 @@ app.post("/pengingat", async (req, res) => {
       console.log(
         `[${new Date().toLocaleString("en-US", {
           timeZone: "Asia/Jakarta",
-        })}] 🔔 Pengingat pengembalian dikirim ke ${number}`
+        })}] 🔔 Pengingat pengembalian dikirim ke ${number}`,
       );
     } catch (e) {
-      logNotification("pengingat", jid, pinjaman.name, false, e.message || String(e));
+      logNotification(
+        "pengingat",
+        jid,
+        pinjaman.name,
+        false,
+        e.message || String(e),
+        reminderMsg,
+      );
       console.error("Gagal kirim pengingat:", e.message || e);
       res.status(500).json({ error: "Gagal mengirim pengingat" });
     }
@@ -1321,18 +1596,21 @@ app.post("/pengingat", async (req, res) => {
   }
 });
 
-
 // Endpoint untuk mengaktifkan/mematikan AI
 app.post("/ai", (req, res) => {
   try {
     const { active } = req.body;
     if (typeof active !== "boolean") {
-      return res.status(400).json({ error: "active harus boolean (true/false)" });
+      return res
+        .status(400)
+        .json({ error: "active harus boolean (true/false)" });
     }
     settings.ai_active = active;
     saveSettings(settings);
     res.json({ status: "AI status updated", ai_active: settings.ai_active });
-    console.log(`AI status diubah menjadi: ${settings.ai_active ? "aktif" : "nonaktif"}`);
+    console.log(
+      `AI status diubah menjadi: ${settings.ai_active ? "aktif" : "nonaktif"}`,
+    );
   } catch (err) {
     console.error("Error /ai:", err);
     res.status(500).json({ error: "Gagal update AI status" });
@@ -1342,9 +1620,17 @@ app.post("/ai", (req, res) => {
 // Endpoint untuk booking barang
 app.post("/book", async (req, res) => {
   try {
-    const { number, name, start_date, due_date, items, id, purpose, notes } = req.body;
+    const { number, name, start_date, due_date, items, id, purpose, notes } =
+      req.body;
 
-    if (!number || !name || !start_date || !due_date || !Array.isArray(items) || !purpose) {
+    if (
+      !number ||
+      !name ||
+      !start_date ||
+      !due_date ||
+      !Array.isArray(items) ||
+      !purpose
+    ) {
       return res.status(400).json({ error: "Data tidak lengkap" });
     }
 
@@ -1374,11 +1660,14 @@ app.post("/book", async (req, res) => {
       }
     }
 
-    const bookingId = id || `BOOK-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    const bookingId =
+      id || `BOOK-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
     const bookingsPath = path.join(__dirname, "bookings.json");
     let bookings = [];
     if (fs.existsSync(bookingsPath)) {
-      try { bookings = JSON.parse(fs.readFileSync(bookingsPath, "utf8")); } catch { }
+      try {
+        bookings = JSON.parse(fs.readFileSync(bookingsPath, "utf8"));
+      } catch {}
     }
 
     const bookingRecord = {
@@ -1391,7 +1680,7 @@ app.post("/book", async (req, res) => {
       purpose,
       notes: notes || "",
       status: 0, // 0 = booking, 1 = aktif (peminjaman)
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
     };
     bookings.push(bookingRecord);
     try {
@@ -1404,7 +1693,7 @@ app.post("/book", async (req, res) => {
     console.log(
       `[${new Date().toLocaleString("en-US", {
         timeZone: "Asia/Jakarta",
-      })}] ✅ Booking baru dicatat dengan ID ${bookingId}`
+      })}] ✅ Booking baru dicatat dengan ID ${bookingId}`,
     );
   } catch (err) {
     console.error("Error /book:", err);
@@ -1423,7 +1712,10 @@ const server = app.listen(PORT, () => {
 });
 
 server.on("error", (err) => {
-  console.error(`Gagal membuka port ${PORT}. Pastikan hanya satu bot yang berjalan.`, err.message);
+  console.error(
+    `Gagal membuka port ${PORT}. Pastikan hanya satu bot yang berjalan.`,
+    err.message,
+  );
   process.exitCode = 1;
   process.exit(1);
 });

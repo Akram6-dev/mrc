@@ -3,12 +3,21 @@ import { promises as fs } from "fs";
 import path from "path";
 
 const DATABASE_PATH = path.join(process.cwd(), "database");
-const DATA_FILES = ["items.json", "borrowers.json", "loans.json", "loan-history.json", "bookings.json", "notifications.json"];
+const DATA_FILES = [
+  "items.json",
+  "borrowers.json",
+  "loans.json",
+  "loan-history.json",
+  "bookings.json",
+  "notifications.json",
+];
 
 export async function POST() {
   try {
     await Promise.all(
-      DATA_FILES.map((file) => fs.writeFile(path.join(DATABASE_PATH, file), "[]", "utf-8")),
+      DATA_FILES.map((file) =>
+        fs.writeFile(path.join(DATABASE_PATH, file), "[]", "utf-8"),
+      ),
     );
 
     return NextResponse.json({ success: true });

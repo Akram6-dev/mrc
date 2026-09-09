@@ -4,7 +4,10 @@ const BOT_URL = process.env.MRC_BOT_URL || "http://127.0.0.1:3000";
 
 export async function GET(req: NextRequest) {
   if (req.headers.get("x-user-role") !== "super_admin") {
-    return NextResponse.json({ error: "Akses hanya untuk super admin" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Akses hanya untuk super admin" },
+      { status: 403 },
+    );
   }
 
   try {
@@ -12,6 +15,9 @@ export async function GET(req: NextRequest) {
     const data = await response.json();
     return NextResponse.json(data, { status: response.status });
   } catch {
-    return NextResponse.json({ status: "offline", hasQr: false, chats: 0 }, { status: 503 });
+    return NextResponse.json(
+      { status: "offline", hasQr: false, chats: 0 },
+      { status: 503 },
+    );
   }
 }
