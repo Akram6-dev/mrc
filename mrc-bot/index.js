@@ -14,6 +14,7 @@ const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { execFile } = require("child_process");
+const readline = require("readline");
 const PORT = Number(process.env.PORT || 3000);
 const AUTH_DIR = path.join(__dirname, "auth_info");
 const GS_CMD = process.env.GHOSTSCRIPT_PATH || findGhostscript();
@@ -56,6 +57,8 @@ const PINJAMAN_FILE = path.join(__dirname, "pinjaman.json");
 const SETTINGS_FILE = path.join(__dirname, "settings.json");
 const NOTIFICATION_LOG_FILE = path.join(__dirname, "notification-log.json");
 const CHAT_MESSAGES_FILE = path.join(__dirname, "chat-messages.json");
+const CHAT_MESSAGES_NDJSON_FILE = path.join(__dirname, "chat-messages.ndjson");
+const CHAT_INDEX_FILE = path.join(__dirname, "chat-index.json");
 const MRC_DATABASE_PATH =
   process.env.MRC_DATABASE_PATH || path.resolve(__dirname, "..", "database");
 const MAX_HISTORY_ITEMS = 10;
@@ -109,18 +112,26 @@ function logNotification(
   }
 }
 
-function loadChatMessages() {
+function loadChatIndex() {
   try {
-    if (!fs.existsSync(CHAT_MESSAGES_FILE)) return [];
-    const data = JSON.parse(fs.readFileSync(CHAT_MESSAGES_FILE, "utf8"));
-    return Array.isArray(data) ? data : [];
+    if (!fs.existsSync(CHAT_INDEX_FILE)) return {};
+    const data = JSON.parse(fs.readFileSync(CHAT_INDEX_FILE, "utf8"));
+    return data && typeof data === "object" ? data : {};
   } catch (error) {
-    console.error("Gagal membaca chat-messages.json:", error.message);
-    return [];
+    console.error("Gagal membaca chat-index.json:", error.message);
+    return {};
   }
 }
 
-let chatMessages = loadChatMessages();
+let chatIndex = loadChatIndex();
+
+function saveChatIndex() {
+  try {
+    fs.writeFileSync(CHAT_INDEX_FILE, JSON.stringify(chatIndex, null, 2));
+  } catch (error) {
+    console.error("Gagal menyimpan chat-index.json:", error.message);
+  }
+}
 
 function extractText(message) {
   return (
@@ -134,20 +145,61 @@ function extractText(message) {
 
 function recordChatMessage(jid, direction, text) {
   if (!jid || !text) return;
-  chatMessages.push({
+  const message = {
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     jid,
     direction,
     content: text,
     timestamp: new Date().toISOString(),
-  });
-  chatMessages = chatMessages.slice(-5000);
+  };
   try {
-    fs.writeFileSync(CHAT_MESSAGES_FILE, JSON.stringify(chatMessages, null, 2));
+    fs.appendFileSync(CHAT_MESSAGES_NDJSON_FILE, `${JSON.stringify(message)}\n`);
+    const current = chatIndex[jid] || { messageCount: 0 };
+    chatIndex[jid] = {
+      number: jid.replace("@s.whatsapp.net", ""),
+      messageCount: current.messageCount + 1,
+      lastMessage: text,
+      lastTimestamp: message.timestamp,
+    };
+    saveChatIndex();
   } catch (error) {
-    console.error("Gagal menyimpan chat-messages.json:", error.message);
+    console.error("Gagal menyimpan pesan chat:", error.message);
   }
 }
+
+function migrateLegacyChatStore() {
+  if (fs.existsSync(CHAT_MESSAGES_NDJSON_FILE) || !fs.existsSync(CHAT_MESSAGES_FILE)) return;
+  try {
+    const legacyMessages = JSON.parse(fs.readFileSync(CHAT_MESSAGES_FILE, "utf8"));
+    if (!Array.isArray(legacyMessages)) return;
+    const lines = legacyMessages
+      .filter((message) => message?.jid && message?.content)
+      .map((message) => {
+        const migrated = {
+          id: message.id || `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+          jid: message.jid,
+          direction: message.direction || "outgoing",
+          content: message.content,
+          timestamp: message.timestamp || new Date().toISOString(),
+        };
+        const current = chatIndex[migrated.jid] || { messageCount: 0 };
+        chatIndex[migrated.jid] = {
+          number: migrated.jid.replace("@s.whatsapp.net", ""),
+          messageCount: current.messageCount + 1,
+          lastMessage: migrated.content,
+          lastTimestamp: migrated.timestamp,
+        };
+        return JSON.stringify(migrated);
+      });
+    if (lines.length) fs.writeFileSync(CHAT_MESSAGES_NDJSON_FILE, `${lines.join("\n")}\n`);
+    saveChatIndex();
+    console.log(`Migrated ${lines.length} legacy chat messages to JSONL.`);
+  } catch (error) {
+    console.error("Gagal migrasi chat-messages.json:", error.message);
+  }
+}
+
+migrateLegacyChatStore();
 
 function captureOutgoingMessages(sock) {
   const originalSendMessage = sock.sendMessage.bind(sock);
@@ -206,41 +258,57 @@ function normalizeJid(value) {
   return number ? `${number}@s.whatsapp.net` : "";
 }
 
-function getVisibleChatMessages(jid) {
-  return chatMessages
-    .filter((message) => message.jid === jid)
-    .map((message) => ({
-      id: message.id,
-      role: message.direction === "incoming" ? "user" : "assistant",
-      content: message.content,
-      timestamp: message.timestamp,
-    }));
+async function getVisibleChatMessages(jid, limit = 7) {
+  const recent = [];
+  if (!fs.existsSync(CHAT_MESSAGES_NDJSON_FILE)) return recent;
+  const input = fs.createReadStream(CHAT_MESSAGES_NDJSON_FILE, "utf8");
+  const lines = readline.createInterface({ input, crlfDelay: Infinity });
+  try {
+    for await (const line of lines) {
+      if (!line) continue;
+      try {
+        const message = JSON.parse(line);
+        if (message.jid !== jid) continue;
+        recent.push({
+          id: message.id,
+          role: message.direction === "incoming" ? "user" : "assistant",
+          content: message.content,
+          timestamp: message.timestamp,
+        });
+        if (recent.length > limit) recent.shift();
+      } catch {
+        // Ignore incomplete/corrupt lines so one message cannot break the thread.
+      }
+    }
+  } finally {
+    lines.close();
+  }
+  return recent;
 }
 
-app.get("/chat/conversations", (_req, res) => {
-  const conversations = [...new Set(chatMessages.map((message) => message.jid))]
-    .map((jid) => {
-      const messages = chatMessages.filter((message) => message.jid === jid);
-      const lastMessage = messages[messages.length - 1];
-      return {
-        jid,
-        number: jid.replace("@s.whatsapp.net", ""),
-        messageCount: messages.length,
-        lastMessage: lastMessage?.content || "",
-        lastTimestamp: lastMessage?.timestamp || null,
-      };
+app.get("/chat/conversations", (req, res) => {
+  const query = String(req.query.q || "").trim().toLowerCase();
+  const limit = Math.min(Math.max(Number(req.query.limit) || 30, 1), 100);
+  const conversations = Object.entries(chatIndex)
+    .map(([jid, data]) => ({ jid, ...data }))
+    .filter((conversation) => {
+      if (!query) return true;
+      return `${conversation.number} ${conversation.lastMessage}`
+        .toLowerCase()
+        .includes(query);
     })
     .sort((a, b) =>
       String(b.lastTimestamp).localeCompare(String(a.lastTimestamp)),
-    );
+    )
+    .slice(0, limit);
   res.json(conversations);
 });
 
-app.get("/chat/messages", (req, res) => {
+app.get("/chat/messages", async (req, res) => {
   const jid = normalizeJid(req.query.jid);
   if (!jid)
     return res.status(400).json({ error: "Nomor WhatsApp wajib diisi" });
-  res.json({ jid, messages: getVisibleChatMessages(jid) });
+  res.json({ jid, messages: await getVisibleChatMessages(jid, 7) });
 });
 
 app.post("/chat/send", async (req, res) => {

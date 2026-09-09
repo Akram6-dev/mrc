@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 const BOT_URL = process.env.MRC_BOT_URL || "http://127.0.0.1:3000";
 
 function isSuperAdmin(req: NextRequest) {
-  return ["admin", "super_admin"].includes(req.headers.get("x-user-role") || "");
+  return ["admin", "super_admin"].includes(
+    req.headers.get("x-user-role") || "",
+  );
 }
 
 export async function GET(req: NextRequest) {
@@ -15,9 +17,14 @@ export async function GET(req: NextRequest) {
   }
 
   const jid = new URL(req.url).searchParams.get("jid");
+  const search = new URL(req.url).searchParams.get("q");
+  const limit = new URL(req.url).searchParams.get("limit");
   const endpoint = jid
     ? `${BOT_URL}/chat/messages?jid=${encodeURIComponent(jid)}`
-    : `${BOT_URL}/chat/conversations`;
+    : `${BOT_URL}/chat/conversations?${new URLSearchParams({
+        ...(search ? { q: search } : {}),
+        ...(limit ? { limit } : {}),
+      }).toString()}`;
 
   try {
     const response = await fetch(endpoint, { cache: "no-store" });

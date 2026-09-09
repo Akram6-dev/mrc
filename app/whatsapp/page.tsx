@@ -110,21 +110,20 @@ export default function WhatsAppPage() {
     }
   };
 
-  const loadConversations = async () => {
+  const loadConversations = async (query = "") => {
     try {
       const headers = auth.getAuthHeaders();
-      const [chatResponse, borrowersResponse] = await Promise.all([
-        fetch("/api/whatsapp/chat", { cache: "no-store", headers }),
-        fetch("/api/borrowers?includeDeleted=true", {
-          cache: "no-store",
-          headers,
-        }),
-      ]);
+      const chatUrl = query
+        ? `/api/whatsapp/chat?q=${encodeURIComponent(query)}&limit=50`
+        : "/api/whatsapp/chat?limit=30";
+      const chatResponse = await fetch(chatUrl, { cache: "no-store", headers });
       if (!chatResponse.ok) return;
       const data = await chatResponse.json();
-      const borrowers = borrowersResponse.ok
-        ? await borrowersResponse.json()
-        : [];
+      const borrowerUrl = query
+        ? `/api/borrowers?search=${encodeURIComponent(query)}`
+        : data.map((conversation: { number: string }) => `phone=${encodeURIComponent(conversation.number)}`).join("&");
+      const borrowersResponse = await fetch(`/api/borrowers${borrowerUrl ? `?${borrowerUrl}` : ""}`, { cache: "no-store", headers });
+      const borrowers = borrowersResponse?.ok ? await borrowersResponse.json() : [];
       const normalizePhone = (value: unknown) => {
         let number = String(value || "").replace(/\D/g, "");
         if (number.startsWith("0")) number = `62${number.slice(1)}`;
@@ -172,11 +171,9 @@ export default function WhatsAppPage() {
           (conversation: { number: string }) =>
             !knownNumbers.has(normalizePhone(conversation.number)),
         );
-      const allContacts = [...namedConversations, ...newContacts];
+      const allContacts = query ? [...namedConversations, ...newContacts] : namedConversations;
       setConversations(allContacts);
-      setSelectedJid(
-        (current) => current || namedConversations[0]?.jid || null,
-      );
+      setSelectedJid((current) => current || namedConversations[0]?.jid || null);
     } catch {
       setConversations([]);
     }
@@ -219,7 +216,7 @@ export default function WhatsAppPage() {
       if (!response.ok) throw new Error(data.error || "Gagal mengirim pesan");
       setMessageDraft("");
       await loadChatMessages(selectedJid);
-      await loadConversations();
+      await loadConversations(conversationSearch.trim());
     } catch (sendError) {
       setError(
         sendError instanceof Error ? sendError.message : "Gagal mengirim pesan",
@@ -233,12 +230,20 @@ export default function WhatsAppPage() {
     loadWhatsApp();
     loadConversations();
     const timer = window.setInterval(loadWhatsApp, 3000);
-    const chatTimer = window.setInterval(loadConversations, 5000);
+    const chatTimer = window.setInterval(() => {
+      if (!conversationSearch.trim()) loadConversations();
+    }, 5000);
     return () => {
       window.clearInterval(timer);
       window.clearInterval(chatTimer);
     };
   }, []);
+
+  useEffect(() => {
+    const query = conversationSearch.trim();
+    const timer = window.setTimeout(() => loadConversations(query), query ? 250 : 0);
+    return () => window.clearTimeout(timer);
+  }, [conversationSearch]);
 
   useEffect(() => {
     if (selectedJid) loadChatMessages(selectedJid);
@@ -387,7 +392,8 @@ export default function WhatsAppPage() {
             </section>
           </div>
 
-          <section className="flex min-h-[560px] flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          {status === "connected" && (
+            <section className="flex min-h-[560px] flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <div className="border-b p-5 dark:border-gray-700">
               <h2 className="font-semibold text-gray-900 dark:text-white">
                 Chat WhatsApp
@@ -515,7 +521,8 @@ export default function WhatsAppPage() {
                 </form>
               </div>
             </div>
-          </section>
+            </section>
+          )}
         </div>
       </div>
     </div>

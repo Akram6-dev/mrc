@@ -22,17 +22,24 @@ async function writeBorrowers(borrowers: Borrower[]) {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const idParams = searchParams.getAll("id");
+  const phoneParams = searchParams.getAll("phone");
   const borrowers = await readBorrowers();
   const includeDeleted = searchParams.get("includeDeleted") === "true";
+  const search = searchParams.get("search")?.trim().toLowerCase() || "";
   const visibleBorrowers = includeDeleted
     ? borrowers
     : borrowers.filter((borrower) => !borrower.deletedAt);
+  const searchedBorrowers = visibleBorrowers.filter((borrower) =>
+    (!phoneParams.length || phoneParams.includes(String(borrower.phone || ""))) &&
+    (!search || [borrower.name, borrower.phone, borrower.nip, borrower.officerId]
+      .some((value) => String(value || "").toLowerCase().includes(search)))
+  );
   if (idParams.length === 0) {
-    return NextResponse.json(visibleBorrowers);
+    return NextResponse.json(searchedBorrowers);
   }
   // idParams bisa array atau satuan, filter borrowers
   const idSet = new Set(idParams);
-  const filtered = visibleBorrowers.filter((b) => idSet.has(b.id));
+  const filtered = searchedBorrowers.filter((b) => idSet.has(b.id));
   return NextResponse.json(filtered);
 }
 
